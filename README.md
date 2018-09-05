@@ -19,4 +19,5 @@
     *   [Bootstrap](./bootstrap/link.md)
     *   [jQuery](./jquery/link.md)
 	*   [Sass](./sass/link.md)
+	*   [Resource](./resource/link.md)
 
