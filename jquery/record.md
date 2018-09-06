@@ -55,8 +55,4 @@ $("#body").css({
 	border: "1px solid green",
 	height: "40px"
 });
-
-
-
-
 ```

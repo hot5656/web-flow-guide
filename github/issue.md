@@ -5,8 +5,9 @@
 
 <h2 id="a1">1. A dependency defined in package-lock.json has known security vulnerabilities and should be updated</h2>
 
-package-lock.json hoek known security vulnerabilities 2.16.3
-### npm ls hoek
+>	package-lock.json hoek known security vulnerabilities 2.16.3  
+
+**npm ls hoek**
 ```
 C:\work\git\html\github\bootstrap-custom-build>npm ls hoek
 customize@1.0.0 C:\work\git\html\github\bootstrap-custom-build
@@ -20,7 +21,7 @@ customize@1.0.0 C:\work\git\html\github\bootstrap-custom-build
         `-- sntp@1.0.9
           `-- hoek@2.16.3  deduped
 ```
-### npm install node-sass@latest
+**npm install node-sass@latest**
 
 
 
