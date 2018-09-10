@@ -1,4 +1,4 @@
-# GitHub flow
+# GitHub record
 
 *   [Root](../README.md)
 *   [1. Add new repository](#a1)

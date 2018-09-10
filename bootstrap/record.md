@@ -9,6 +9,7 @@
 *	[6. Color](#a6)
 *	[7. Border](#a7)
 *	[8. Grid](#a8)
+*   [9. Overwrite](#a9)
 
 <h2 id="a1">1. Viewport</h2>
 
@@ -187,3 +188,30 @@ Max container width|None (auto)|540px|	720px|960px|1140px
 Class prefix|.col-|.col-sm-|.col-md-|.col-lg-|.col-xl-
 
 Gutter width : 30px (15px on each side of a column)
+
+
+<h2 id="a9">9. Overwrite</h2>
+
+### Color
+```
+$theme-colors: (
+  "primary": #0074d9,
+  "danger": #ff4136
+);
+```
+
+### Grid Breakpoints
+```
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+$container-max-widths: (
+  lg: 1050px,
+  xl: 1400px
+);
+```

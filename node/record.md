@@ -1,9 +1,10 @@
-﻿# Node.js flow
+﻿# Node.js record
 
 *   [Root](../README.md)
 *   [1. SASS compile](#a1)
 *   [2. npm command](#a2)
 *   [3. mini-web server](#a3)
+*   [4. 解釋名詞](#a4)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -85,7 +86,12 @@ UI網址     http://localhost:3001 (沒多大作用)
 
 --files     : 參數宣告Browser-Sync要去監聽那些檔案的異動,當那些檔案變動時,則執行瀏覽器頁面刷新的動作
 --no-notify : no notify web link
+```
 
+<h2 id="a4">4. 解釋名詞</h2>
+
+```
+NVM : 多版本控制
 ```
 
 
