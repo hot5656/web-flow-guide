@@ -19,6 +19,7 @@
     *   [Resource](./resource/record.md)
 *   [tool]
     *   [sublime](./tool/sublime.md)
+    *   [git](./tool/git.md)
 *   [Reference Site]
     *   [Bootstrap](./bootstrap/link.md)
     *   [jQuery](./jquery/link.md)
