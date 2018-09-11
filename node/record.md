@@ -5,6 +5,7 @@
 *   [2. npm command](#a2)
 *   [3. mini-web server](#a3)
 *   [4. 解釋名詞](#a4)
+*   [5. Ajax](#a5)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -95,4 +96,62 @@ NVM : 多版本控制
 ```
 
 
+<h2 id="a5">5. Ajax</h2>
 	
+```javascript
+// ajax site and id
+var kcgSearchSite = "https://data.kcg.gov.tw/api/action/datastore_search";
+var kcgTripId = "92290ee5-6e61-456f-80c0-249eae2fcc97";
+// prepare save data
+var tripList = [] ;
+// wait for complete
+var run = true ;
+// ajax data object
+var data = {
+    resource_id: kcgTripId,
+    offset: 0
+};
+
+$(document).ready(function() {
+	// get trip data
+	data.offset = 0 ;
+	while(true) {
+		getTripDat(data, tripList);
+		data.offset += 100 ;
+		if (!run) {
+			break;
+		}
+	}
+
+	// show trip data
+	console.log(tripList);
+});
+
+function getTripDat(data, tripList) {
+	var next ;
+
+	$.ajax({
+		url: kcgSearchSite,
+		data: data,
+		datatype:"json",
+		async: false, // set sync (default async)
+		error: function (xhr, ajaxOptions, thrownError) {
+			// console.log(xhr);
+			run = false ;
+		},
+		success:  function (respData, textStatus) {
+			next = respData.result._links.next;
+
+			if (respData.result.records.length > 0 ) {
+				for(var j=0 ; j<respData.result.records.length ; j++) {
+					tripList.push(respData.result.records[j]);
+				}
+			}
+			else {
+				run = false ;
+			}
+		},
+	});
+}
+
+```

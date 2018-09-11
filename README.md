@@ -3,13 +3,15 @@
 > Record some web design flow or issue
 
 *   [Issue]
-    *   [GitHub](./github/issue.md)  
+	*   [JavaScript](./javascript/issue.md)
     *   [Node.js](./node/issue.md)
+    ***
+    *   [GitHub](./github/issue.md)  
 *   [Record]
 	*   [Css](./css/record.md)
 	*   [Sass](./sass/record.md)
 	***
-    *   [JavaScript](./javascript/record.md)	
+    *   [JavaScript](./javascript/record.md)
     *   [Bootstrap](./bootstrap/record.md)
     *   [jQuery](./jquery/record.md)
     *   [Node.js](./node/record.md)
@@ -21,8 +23,10 @@
     *   [sublime](./tool/sublime.md)
     *   [git](./tool/git.md)
 *   [Reference Site]
+	*   [Sass](./sass/link.md)
+	***
     *   [Bootstrap](./bootstrap/link.md)
     *   [jQuery](./jquery/link.md)
-	*   [Sass](./sass/link.md)
+    ***
 	*   [Resource](./resource/link.md)
 
