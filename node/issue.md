@@ -1,4 +1,4 @@
-# GitHub issue
+# Node.js issue
 
 *   [Root](../README.md)
 *   [1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}](#a1)
@@ -12,7 +12,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"})
 ```
 
-**­ì¦]¬O¦]¬°¡G fsevent¬Omac osx¨t?ªº¡A¦bwin©ÎªÌLinux¤U¨Ï¥Î¤F ©Ò¥H?¦³Äµ§i¡A©¿²¤§Y¥i**
+**fseventæ˜¯mac osxç³»çµ±çš„æ±è¥¿ï¼Œåœ¨winæˆ–è€…Linuxä¸‹ä½¿ç”¨äº†æœƒæœ‰è­¦å‘Šï¼Œå¿½ç•¥å³å¯ã€‚æ„æ€å°±æ˜¯ä½ å·²ç¶“å®‰è£æˆåŠŸäº†...**
 
 
 

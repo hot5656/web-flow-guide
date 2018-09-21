@@ -3,6 +3,7 @@
 *   [Root](../README.md)
 *	[1. Load Ready](#a1)
 *	[2. Get parameter from url string](#a2)
+*	[3. String process](#a3)
 
 <h2 id="a1">1. Load Ready</h2>
 
@@ -26,4 +27,17 @@ function getParameterString(url, name)
      var r = url.substr(1).match(reg);
      if(r!=null)return  unescape(r[2]); return null;
 }
+```
+
+<h2 id="a3">3. String process</h2>
+
+```javascript
+// check on string in another string
+if (item.Name.indexOf(event.target.value) != -1) {
+	return true;
+}
+else {
+	return false;
+}
+
 ```

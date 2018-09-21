@@ -4,6 +4,7 @@
 
 *   [Issue]
 	*   [JavaScript](./javascript/issue.md)
+    *   [jQuery](./jquery/issue.md)
     *   [Node.js](./node/issue.md)
     ***
     *   [GitHub](./github/issue.md)  
