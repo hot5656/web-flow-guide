@@ -3,6 +3,7 @@
 *   [Root](../README.md)
 *   [1. font-size](#a1)
 *   [2. flex](#a2)
+*   [3. 中文直排](#a3)
 
 
 <h2 id="a1">1. font-size</h2>
@@ -88,5 +89,12 @@ rem 也是相對的文字尺寸，和 em 使用方法接近，不同的是他僅
 		對單一item
 		```
 
+<h2 id="a3">3. 中文直排</h2>
 
+```
+// 由右至左
+writing-mode: vertical-rl;
 
+// 由左至右
+writing-mode: vertical-lr;
+```

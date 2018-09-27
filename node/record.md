@@ -6,6 +6,7 @@
 *   [3. mini-web server](#a3)
 *   [4. 解釋名詞](#a4)
 *   [5. Ajax](#a5)
+*   [6. package](#a6)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -71,11 +72,19 @@ npm update <package>
 // generate package.json
 npm init
 
+// package.json script add  comments
+"scripts": {
+    "//x": "build css for bootstrap",
+    "start": "./node_modules/.bin/browser-sync start --server --no-notify --files=`index.html, *.js, stylesheets/*.css`"
+},
 ```
 
 <h2 id="a3">3. mini-web server</h2>
 
 ```
+// need module 
+browser-sync
+
 // start mini-web server
 node_modules\.bin\browser-sync start --server --files="index.html, *.js, stylesheets\*.css"
 
@@ -153,5 +162,14 @@ function getTripDat(data, tripList) {
 		},
 	});
 }
+
+```
+
+<h2 id="a6">6. package</h2>
+
+```
+// browser-sync
+啟動 BrowserSync 的服務時，監看我們任何網頁的 html 或 css 檔案做異動的時候，自動重新讀取頁面
+
 
 ```

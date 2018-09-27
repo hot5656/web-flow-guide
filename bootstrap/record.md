@@ -1,7 +1,7 @@
 # Bootstrap record
 
-*   [Root](../README.md)
-*   [1. Viewport](#a1)
+* [Root](../README.md)
+* [1. Viewport](#a1)
 *	[2. Basic](#a2)
 *	[3. Class](#a3)
 *	[4. Space](#a4)
@@ -9,7 +9,11 @@
 *	[6. Color](#a6)
 *	[7. Border](#a7)
 *	[8. Grid](#a8)
-*   [9. Overwrite](#a9)
+* [9. Overwrite bootstrap(customize)](#a9)
+* [10. Basic Body](#a10)
+* [11. nav/navbar](#a11)
+* [12. RWD simple](#a12)
+* [13. flex](#a13)
 
 <h2 id="a1">1. Viewport</h2>
 
@@ -104,12 +108,12 @@ auto - 這個 class 會設定 margin 為 auto
 w-25 Width 25%
 w-50 Width 55%
 w-75 Width 75%
-w-105 Width 100%
+w-100 Width 100%
 
 h-25 Height  25%
 h-50 Height  55%
 h-75 Height  75%
-h-105 Height  100%
+h-100 Height  100%
 
 mw-100 max-width
 mh-100 max-height
@@ -214,4 +218,288 @@ $container-max-widths: (
   lg: 1050px,
   xl: 1400px
 );
+```
+
+<h2 id="a10">10. Basic Body</h2>
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<body>
+  <div class="wrap container">
+    <header>
+    </header>
+    <div class="content container">
+    </div>
+    <footer class="bg-gray1 pb-1 pt-3">
+    </footer>
+  </div>
+</body>   
+```
+
+<h2 id="a11">11. nav bar</h2>
+
+### nav
+```html
+<nav class="nav nav-pills nav-fill">
+  <a class="nav-item nav-link" href="#">Active</a>
+  <a class="nav-item nav-link active" href="#">Longer nav link</a>
+  <a class="nav-item nav-link" href="#">Link</a>
+  <a class="nav-item nav-link disabled" href="#">Disabled</a>
+</nav
+justify-content-center : 置中
+justify-content-end : 靠右對齊
+flex-column/flex-sm-column : 垂直
+nav-tabs : 分頁標籤
+nav-pills : 填滿背景 (add nav-justified also same)
+nav-fill : 照比例分配空間
+
+// support flex class
+
+// 帶下拉選單的分頁標籤
+ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a class="nav-link active" href="#">Active</a>
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+    <div class="dropdown-menu">
+      <a class="dropdown-item" href="#">Action</a>
+      <a class="dropdown-item" href="#">Another action</a>
+      <a class="dropdown-item" href="#">Something else here</a>
+      <div class="dropdown-divider"></div>
+      <a class="dropdown-item" href="#">Separated link</a>
+    </div>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="#">Link</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+  </li>
+</ul>
+
+//動態頁籤介面
+// data-toggle="tab"
+// data-toggle="pill" 
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+    <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+  </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">...</div>
+  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">...</div>
+  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">...</div>
+</div>
+```
+
+### navbar
+```html
+// basic
+使用 navbar
+navbar-expand{-sm|-md|-lg|-xl} navbar 展開
+navbar-light 
+bg-light
+// other 
+navbar-brand 為您的公司，產品或專案名稱。
+navbar-nav : nav item block
+navbar-toggler 用於我們的折疊插件和其他 navigation toggling 行為。
+form-inline : set form inline-block。
+navbar-text : navbar 顯示文字
+navbar-toggler-icon : 漢堡 icon
+collapse : 摺疊
+navbar-collapse : navbar 摺疊
+// aria 旋律,盲人使用資料
+aria-controls="navbarSupportedContent" : control map id
+aria-expanded="false" : 未展開
+aria-label="Toggle navigation"> : 說明
+<span class="sr-only">(current)</span> : bootstrap for 螢幕閱讀器(隱藏)
+
+// navbar-brand
+<!-- As a link -->
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+</nav>
+
+<!-- As a heading -->
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-brand mb-0 h1">Navbar</span>
+</nav>
+
+
+<!-- navbar 垂直 -->
+<nav class="navbar">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="">首頁</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">甜點</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">登入</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">Buy</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- navbar 水平(navbar-expand) -->
+<nav class="navbar navbar-expand">
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="">首頁</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">甜點</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">登入</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">Buy</a>
+    </li>
+  </ul>
+</nav>
+
+<!-- navbar add brand(navbar-brand) + 中間空白(justify-content-between)-->
+<nav class="navbar navbar-expand justify-content-between">
+  <a href="#" class="navbar-brand">
+    <img src="img/logo.svg" alt="" style="height:40px">
+    <img src="img/logotype-sm-dark.svg" alt="" style="height:30px">
+  </a>
+  <ul class="navbar-nav">
+    <li class="nav-item">
+      <a class="nav-link" href="">首頁</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">甜點</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">登入</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="">Buy</a>
+    </li>
+  </ul>
+</nav>
+```
+
+```html
+// sample
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <!-- 漢堡式選單按鈕,摺疊時顯示 -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="navbar-nav mr-auto"">
+      <a class="nav-item nav-link active" href="#">Home</a>
+      <a class="nav-item nav-link" href="#">Features</a>
+      <a class="nav-item nav-link" href="#">Pricing</a>
+      <a class="nav-item nav-link disabled" href="#">Disabled</a>
+    </div>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+```
+
+
+
+<h2 id="a12">12. RWD simple]</h2>
+
+```html
+// col-sm-x 分一階 >=576
+// col-sm-x col-md-x 分二階 >=576 >=768
+
+
+
+```
+
+
+<h2 id="a13">13. flex]</h2>
+
+### also support RWD
+```
+d-flex
+d-inline-flex
+
+flex-row : 設定水平的方向
+flex-row-reverse : 水平方向的反轉
+flex-column : 設置垂直方向
+flex-column-reverse : 垂直方向的反轉
+
+// justify-content 通用類別改變 flex 物件在主軸上的對齊（x軸開始，如果 flex-direction: column，則為 y 軸）
+justify-content-start
+justify-content-end
+justify-content-center
+justify-content-between
+justify-content-around
+
+// align-items 工具改變橫軸上 flex 物件的對齊（y 軸開始，如果 flex-direction: column，則為 x 軸）
+align-items-start
+align-items-end
+align-items-center
+align-items-baseline
+align-items-stretch : 瀏覽器預設
+
+// align-self 通用類別單獨改變在橫軸上的對齊（y 軸開始，如果 flex-direction: column，則為 x 軸）。與 align-items 相同的選項
+align-self-start
+align-self-end
+align-self-center
+align-self-baseline
+align-self-stretch : 瀏覽器預設
+
+//強制它們在相同的寬度上分配所有可用的水平空間
+flex-fill
+
+// 索取剩餘空間比例 default = 0
+flex-grow-*
+flex-grow-1 : 佔一份
+
+// 縮小比例 default = 0
+flex-shrink-*
+flex-shrink-1 : 縮小比例 1
+flex-shrink-2 : 縮小比例 2
+flex-shrink-3 : 縮小比例 3
+
+// 容器超過處理
+flex-nowrap : 不顯示往下
+flex-wrap : 顯示往下
+flex-wrap-reverse : 反轉顯示
+
+// 順序調整
+order-0~12
+
+// 多行控制 align-content(when flex-wrap)
+align-content-start
+align-content-end
+align-content-center
+align-content-between
+align-content-around
+align-content-stretch : 預設值，內容元素全部撐開
+
+```
+
+### margin support
+```
+<div class="d-flex bd-highlight mb-3">
+  <div class="mr-auto p-2 bd-highlight">Flex item</div>
+  <div class="p-2 bd-highlight">Flex item</div>
+  <div class="p-2 bd-highlight">Flex item</div>
+</div>
+
+<div class="d-flex align-items-start flex-column bd-highlight mb-3" style="height: 200px;">
+  <div class="mb-auto p-2 bd-highlight">Flex item</div>
+  <div class="p-2 bd-highlight">Flex item</div>
+  <div class="p-2 bd-highlight">Flex item</div>
+</div>
 ```
