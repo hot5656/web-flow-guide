@@ -316,6 +316,7 @@ aria-controls="navbarSupportedContent" : control map id
 aria-expanded="false" : 未展開
 aria-label="Toggle navigation"> : 說明
 <span class="sr-only">(current)</span> : bootstrap for 螢幕閱讀器(隱藏)
+flex-grow-0 : set flex-group 0
 
 // navbar-brand
 <!-- As a link -->
@@ -393,6 +394,7 @@ aria-label="Toggle navigation"> : 說明
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <a class="navbar-brand" href="#">Navbar</a>
   <!-- 漢堡式選單按鈕,摺疊時顯示 -->
+  <!-- 擺於右邊,若要擺在左邊移植navbar-brand之前 -->
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -414,7 +416,7 @@ aria-label="Toggle navigation"> : 說明
 
 
 
-<h2 id="a12">12. RWD simple]</h2>
+<h2 id="a12">12. RWD simple</h2>
 
 ```html
 // col-sm-x 分一階 >=576
@@ -425,14 +427,14 @@ aria-label="Toggle navigation"> : 說明
 ```
 
 
-<h2 id="a13">13. flex]</h2>
+<h2 id="a13">13. flex</h2>
 
 ### also support RWD
 ```
 d-flex
 d-inline-flex
 
-flex-row : 設定水平的方向
+flex-row : 設定水平的方向(default)
 flex-row-reverse : 水平方向的反轉
 flex-column : 設置垂直方向
 flex-column-reverse : 垂直方向的反轉
