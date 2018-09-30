@@ -3,6 +3,8 @@
 > Record some web design flow or issue
 
 *   [Issue]
+    *   [Css](./css/issue.md)
+    ***
 	*   [JavaScript](./javascript/issue.md)
     *   [jQuery](./jquery/issue.md)
     *   [Node.js](./node/issue.md)
@@ -31,4 +33,12 @@
     *   [jQuery](./jquery/link.md)
     ***
 	*   [Resource](./resource/link.md)
+
+
+    css background process
+    行內元素特性
+    file to read not found or unreadable node-sass sublime sometimes
+        "atomic_save": true,
+    opacity:1.0;
+    writing-mode: vertical-rl;
 
