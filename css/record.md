@@ -4,6 +4,7 @@
 *   [1. font-size](#a1)
 *   [2. flex](#a2)
 *   [3. 中文直排](#a3)
+*   [4. sector](#a4)
 
 
 <h2 id="a1">1. font-size</h2>
@@ -97,4 +98,26 @@ writing-mode: vertical-rl;
 
 // 由左至右
 writing-mode: vertical-lr;
+```
+
+
+<h2 id="a4">4. sector</h2>
+
+```
+.a1 : class = a1
+#a2 : id = a2
+* : all element
+p : <p> element
+div, p : all element <div> and <p>
+div p : <div> 內的 <p>
+div > p : parent 為 <div> 的 <p>
+div + p : 緊跟在 <div> 後的 <p> 
+p ~ ul  : <p> 之前的 <ul>
+[target] : element 含有 attribute 為 target
+[target=_blank] : element 含有 attribute 為 target=_blank
+[title~=flower] : title attribute 含有 string flower
+[lang|=en] : lang attribute value 開頭為 en
+a[href^="https"] : a element attribute href 開頭為 "https"
+a[href$=".pdf"] :  a element attribute href 結束為 ".pdf"
+a[href*="w3schools"] :  a element attribute href 包含有 "w3schools"
 ```

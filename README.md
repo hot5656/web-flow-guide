@@ -50,6 +50,9 @@
     sass scss\custom\style.scss stylesheets\style.css
     sass --watch scss\custom:stylesheets
 
+    ul no icon - list-style-type: none; 
+    ul 水平 display:inline;
+
 
 
 
