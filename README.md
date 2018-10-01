@@ -41,4 +41,15 @@
         "atomic_save": true,
     opacity:1.0;
     writing-mode: vertical-rl;
+    bootstrap position-relative+position-absolute
+    clip-path: inset(10px 200px 200px 10px)
+    after 
+    before 
+    Alt+Enter to switch cmd full screen
+
+    sass scss\custom\style.scss stylesheets\style.css
+    sass --watch scss\custom:stylesheets
+
+
+
 
