@@ -7,6 +7,7 @@
 *   [4. 解釋名詞](#a4)
 *   [5. Ajax](#a5)
 *   [6. package](#a6)
+*   [7. generate package.json](#a7)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -85,11 +86,14 @@ npm init
 // need module 
 browser-sync
 
+// install develop package and save to package.json file
+npm install  browser-sync -save-dev
+
 // start mini-web server
 node_modules\.bin\browser-sync start --server --files="index.html, *.js, stylesheets\*.css"
 
 // script 
-"start" : "./node_modules/.bin/browser-sync start --server --no-notify --files=`index.html, *.js, stylesheets/*.css`",
+"start" : "./node_modules/.bin/browser-sync start --server --no-notify --files=`index.html, *.js, stylesheets/*.css`"
 
 預設的網址 http://localhost:3000
 UI網址     http://localhost:3001 (沒多大作用)
@@ -172,4 +176,11 @@ function getTripDat(data, tripList) {
 啟動 BrowserSync 的服務時，監看我們任何網頁的 html 或 css 檔案做異動的時候，自動重新讀取頁面
 
 
+```
+
+
+<h2 id="a7">7. generate package.json</h2>
+
+```
+npm init
 ```

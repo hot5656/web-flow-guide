@@ -111,7 +111,7 @@ p : <p> element
 div, p : all element <div> and <p>
 div p : <div> 內的 <p>
 div > p : parent 為 <div> 的 <p>
-div + p : 緊跟在 <div> 後的 <p> 
+div + p : 緊跟在 <div> 後的 <p>  ??? not work chrome
 p ~ ul  : <p> 之前的 <ul>
 [target] : element 含有 attribute 為 target
 [target=_blank] : element 含有 attribute 為 target=_blank
@@ -120,4 +120,7 @@ p ~ ul  : <p> 之前的 <ul>
 a[href^="https"] : a element attribute href 開頭為 "https"
 a[href$=".pdf"] :  a element attribute href 結束為 ".pdf"
 a[href*="w3schools"] :  a element attribute href 包含有 "w3schools"
+p::before : p元素之前生成、插入的內容適用的選擇器。偽元素
+p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽元素
+	
 ```
