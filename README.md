@@ -86,3 +86,11 @@
     vertical-align:%; 以百分比來讓圖片垂直對齊該行文字，可以有負值。
 
 
+結構與樣式
+  結構：margin、padding、display、vertical-align
+  樣式：
+  色彩樣式：color、background-color、border-color
+  尺寸樣式：font-size、height
+
+容器與內容
+

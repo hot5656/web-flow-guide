@@ -35,6 +35,10 @@
 >	pull remote branch to local
 >	>	**git branch develop origin/develop**
 
+>	remove file
+>	>	** git rm xxx.css  
+
+
 
 
 

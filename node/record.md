@@ -8,6 +8,7 @@
 *   [5. Ajax](#a5)
 *   [6. package](#a6)
 *   [7. generate package.json](#a7)
+*   [8. gulp](#a8)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -183,4 +184,17 @@ function getTripDat(data, tripList) {
 
 ```
 npm init
+```
+
+
+<h2 id="a8>7. generate package.json</h2>
+
+```
+// install gulp to globak
+npm install gulp -g
+
+// install 
+npm install
+
+
 ```
