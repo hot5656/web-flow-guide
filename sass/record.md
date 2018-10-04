@@ -150,6 +150,35 @@ codepen --> search steps
 
 
 VsCode 
+	ctrl-p : search file name
+	ctrl-shift-p
+	ctl-enter : add next line
+	shift-alt-f : align code
+	ctl-w : close file
+	ctl-2/ctl-3 : open 2nd window/open 3rd window
+	ctl-` : open termernal/other windows
+	ctl-d : 選擇下一個相同string共同編輯
+	alt-(mouse-l) : select 共同編輯
+	alt+^/alt- : select up/down
+
+
+	ESLint/javascript standard style only enable one
+	ESLint : 檢查程式碼有沒有整齊(??) (node.js need install "npm install -g eslint")
+
+	javascript standard style : 
+		npm install -g eslint
+		npm init
+		eslin init
+			popular-->Airbnb-->javascript
+	Indent-Rainbow : 縮排採紅色條
+	Git History : see git log (??)
+	perview web server : include live server
+		ctr-shift-l : open web side
+		ctl-shift-p : open side
+	Favorites : Favorite directory
+	sublime keymap: plug for sublime key
+
+
 	github extension
 	Live Sass Compiler
 	Live Server

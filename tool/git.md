@@ -36,7 +36,11 @@
 >	>	**git branch develop origin/develop**
 
 >	remove file
->	>	** git rm xxx.css  
+>	>	**git rm xxx.css**
+
+
+>	reset 
+>	>	**git reset --hard**
 
 
 
