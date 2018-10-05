@@ -64,6 +64,10 @@
     <img> 
       垂直置中 : vertical-align:middle;
       clip-path: inset(10% 0 10% 0);
+      ---- need set inline-block ,width and height
+      background-size: cover;
+      background-position: center center;
+      background-image: url("../../img/photo-1473256599800-b48c7c88cd7e.jpg");
     文字
       水平置中 text-align:center;
       垂直置中 line-height as parents height
@@ -84,6 +88,8 @@
     vertical-align:bottom;  圖片垂直對齊該行元素的最低位置。
     vertical-align:text-bottom; 圖片垂直對齊該行文字的最低位置。
     vertical-align:%; 以百分比來讓圖片垂直對齊該行文字，可以有負值。
+
+img:first-child  由 parent 眼光看(first-child)
 
 
 結構與樣式
