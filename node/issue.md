@@ -3,6 +3,7 @@
 *   [Root](../README.md)
 *   [1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}](#a1)
 *   [2. install browser-sync issue](#a2)
+*   [3. run gulp -> Failed to load external module @babel/register](#a3)
 
 <h2 id="a1">1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}</h2>
 
@@ -46,5 +47,12 @@ found 1 low severity vulnerability in 5248 scanned packages
   1 vulnerability requires manual review. See the full report for details.
 ```
 **browser-sync僅為development使用,upgrade debug package 還是會發生故不處理**
+
+
+<h2 id="a3">3. run gulp -> Failed to load external module @babel/register}</h2>
+
+```
+solved it by downgrading the gulp version from 3.9.1 to 3.9.0. Looks like 3.9.1 is buggy.
+```
 
 

@@ -15,7 +15,15 @@
 lorem lorem10
 
 
+### show menu 
+Ctl+shift+P  -> (input menu) view:toggle menu
 
 
-
+### default project 
+edit.sublime-project
 	
+### set space 2
+	1. Preferences --> settings 
+	  "tab_size": 2,
+	  "detect_indentation": false,
+	2. bottom convert indentation to tab

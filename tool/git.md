@@ -42,6 +42,9 @@
 >	reset 
 >	>	**git reset --hard**
 
+Discard all local changes to all files permanently
+> git reset --hard
+
 
 
 
