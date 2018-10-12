@@ -7,19 +7,30 @@
 *   [4. import other scss file](#a4)
 *   [5. mixin - 幫助記住css技巧](#a5)
 *   [6. mixin - RWD](#a6)
+*   [7. 加減乘除](#a7)
 
 
 <h2 id="a1">1. variable</h2>
 
 ```
 // varibale start from $
-$font-stack:    Helvetica, sans-serif;
-$primary-color: #333;
+	$font-stack:    Helvetica, sans-serif;
+	$primary-color: #333;
 
-body {
-  font: 100% $font-stack;
-  color: $primary-color;
-}
+	body {
+	  font: 100% $font-stack;
+	  color: $primary-color;
+	}
+
+// 字串由 #{$name} 取出連接
+	$bg: '../images/'
+	$icon-style: blue
+
+	.header
+		background: url(#{$bg}header.png)
+
+	.icon-#{$icon-style}
+		color: $icon-style
 ```
 
 <h2 id="a2">2. install compile</h2>
@@ -88,7 +99,7 @@ Encoding.default_external = 'utf-8'
   }
 ```
 
-*   [6. mixin - RWD](#a6)
+
 <h2 id="a6">6. mixin - RWD</h2>
 
 ```
@@ -138,6 +149,21 @@ $v-xm:575px;
 ```
 
 
+<h2 id="a7">7. 加減乘除</h2>
+
+```
+$font-size: 16px
+
+.font-big
+	font-size: $font-size*1.5
+
+.font-middle
+	font-size: $font-size - 2px
+
+.font-small
+	font-size: $font-size / 3
+```
+
 --------------------------
 gulp
 webpack
@@ -149,37 +175,6 @@ codepen --> search steps
 
 
 
-VsCode 
-	ctrl-p : search file name
-	ctrl-shift-p
-	ctl-enter : add next line
-	shift-alt-f : align code
-	ctl-w : close file
-	ctl-2/ctl-3 : open 2nd window/open 3rd window
-	ctl-` : open termernal/other windows
-	ctl-d : 選擇下一個相同string共同編輯
-	alt-(mouse-l) : select 共同編輯
-	alt+^/alt- : select up/down
 
 
-	ESLint/javascript standard style only enable one
-	ESLint : 檢查程式碼有沒有整齊(??) (node.js need install "npm install -g eslint")
-
-	javascript standard style : 
-		npm install -g eslint
-		npm init
-		eslin init
-			popular-->Airbnb-->javascript
-	Indent-Rainbow : 縮排採紅色條
-	Git History : see git log (??)
-	perview web server : include live server
-		ctr-shift-l : open web side
-		ctl-shift-p : open side
-	Favorites : Favorite directory
-	sublime keymap: plug for sublime key
-
-
-	github extension
-	Live Sass Compiler
-	Live Server
 
