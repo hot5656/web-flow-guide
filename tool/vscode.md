@@ -37,3 +37,14 @@
 *	sublime keymap: plug for sublime key
 
 
+
+Freference-->setting
+	Window: Title 
+		default :
+			${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}
+		full fath:
+			${activeEditorLong}${separator}${rootName}
+
+VScode Show Full Path in Title Bar
+
+“window.title”: “${activeEditorLong}${separator}${rootName}”,

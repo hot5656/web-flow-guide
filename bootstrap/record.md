@@ -14,6 +14,7 @@
 * [11. nav/navbar](#a11)
 * [12. RWD simple](#a12)
 * [13. flex](#a13)
+* [14. 元件](#a14)
 
 <h2 id="a1">1. Viewport</h2>
 
@@ -504,4 +505,25 @@ align-content-stretch : 預設值，內容元素全部撐開
   <div class="p-2 bd-highlight">Flex item</div>
   <div class="p-2 bd-highlight">Flex item</div>
 </div>
+```
+
+<h2 id="a14">14. 元件</h2>
+
+### btn
+```
+btn-lg/btn-sm : 較大或較小的按鈕
+btn-block : 等同於外元素的寬 
+active : 套用相同的啟用外觀
+-- 透過將 disabled 布林屬性添加到任何 <button> 元素，使按鈕看起來處於停用狀態
+<button type="button" class="btn btn-lg btn-primary" disabled>Primary button</button>
+-- 增加 data-toggle="button" 來切換按鈕 active 狀態。 如果您預先需要切換按鈕，則必須手動將 .active class 和 aria-pressed="true" 添加到 <button> 中
+<button type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+  Single toggle
+</button>
+```
+
+### a
+```
+---不支援 disabled 屬性，所以你必須添加 .disabled 使它在視覺上看起來被禁用
+<a href="#" class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Primary link</a>
 ```

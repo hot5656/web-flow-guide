@@ -91,6 +91,9 @@
 	```
 *	COMPASS、Fire.app
 *	CSS預處理器(css preprocessor)
+*	susy
+* compass : Sass 擴充套件
+ 
 
 ### side project
 *	學會新技術，拿舊專案重寫優化
