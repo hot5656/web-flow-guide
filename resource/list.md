@@ -93,7 +93,8 @@
 *	CSS預處理器(css preprocessor)
 *	susy
 * compass : Sass 擴充套件
- 
+* grid system
+* 960grid 
 
 ### side project
 *	學會新技術，拿舊專案重寫優化
