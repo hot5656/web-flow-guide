@@ -6,13 +6,14 @@
 *   [3. config.rb modify](#a3)
 *   [4. import other scss file](#a4)
 *   [5. mixin - 幫助記住css技巧](#a5)
-*   [6. mixin - RWD](#a6)
+*   [6. RWD](#a6)
 *   [7. 加減乘除](#a7)
 *   [8. sector標誌](#a8)
 *   [9. @extend合併css](#a9)
 *   [10. compass](#a10)
 *   [11. mixin example](#a11)
 *   [12. sass init example](#a12)
+
 
 
 <h2 id="a1">1. variable</h2>
@@ -89,8 +90,17 @@ Encoding.default_external = 'utf-8'
 		@import 'layout'
 		@import 'module'	//btuuon,form,gtable	
 
-// sass
-	@import reset
+// sass - 實際 code 說明加在後面會有問題
+	@import compass/css3  // compass
+	@import mixin					// 放置所有Sass全域變數與Mixin
+	@import normalize			// normalize file
+	@import init					// some modify for normalize
+	@import extnd 	// 拿來合併樣式，都放@extend用的檔案
+	@import layout	// 共同框架
+	@import index		// 首頁
+	@import page		// 內頁 
+	@import xxx			// 各單元CSS
+	@import browser	// if need for RWD
 ```
 
 <h2 id="a5">5. mixin - 幫助記住css技巧</h2>
@@ -127,52 +137,100 @@ $font-size: 13px
 ```
 
 
-<h2 id="a6">6. mixin - RWD</h2>
+<h2 id="a6">6. RWD</h2>
 
 ```
-// screen
+// scss mixin 預設為最小畫面設定
 $v-xl:1200px;
 $v-lg:992px;
 $v-md:768px;
 $v-sm:576px;
 $v-xm:575px;
-	@mixin s-xl{
-		@media (min-width:v-xl) {
-			@content
-		}
-  }
-	@mixin s-lg{
-		@media (min-width:v-lg) {
-			@content
-		}
-  }  
-	@mixin s-md{
-		@media (min-width:v-md) {
-			@content
-		}
-  } 
-	@mixin s-sm{
-		@media (min-width:v-sm) {
-			@content
-		}
-  } 
-	@mixin s-xm{
-		@media (man-width:v-xl) {
-			@content
-		}
-  } 
-
-
-  .header {
-		width: 100px;
-		height:100px;
-		@include s-md {
-			heigh: auto;
-		}
-		@include s-xm {
-			height: 300px;
-		}
+@mixin s-xl{
+	@media (min-width:v-xl) {
+		@content
 	}
+}
+@mixin s-lg{
+	@media (min-width:v-lg) {
+		@content
+	}
+}  
+@mixin s-md{
+	@media (min-width:v-md) {
+		@content
+	}
+} 
+@mixin s-sm{
+	@media (min-width:v-sm) {
+		@content
+	}
+} 
+@mixin s-xm{
+	@media (man-width:v-xl) {
+		@content
+	}
+} 
+
+.header {
+	width: 100px;
+	height:100px;
+	@include s-md {
+		heigh: auto;
+	}
+	@include s-xm {
+		height: 300px;
+	}
+}
+
+// sass 預設為最大畫面設定
+.box
+	width: 500px
+	height: 500px
+	background: #000000
+	a
+		color: #ffffff
+		font-size: 40px
+
+@media only screen and (max-width: 768px)
+	.box
+		background: yellow
+		a 
+			color: red
+
+@media only screen and (max-width: 480px)
+	.box 
+		background: red
+		a 
+			color: #ffffff
+
+// sass mixin 預設為最大畫面設定
+@mixin breakpoint($point)
+	@if $point == pc 
+		@media only screen and (max-width: 1024px)
+			@content
+	@else if $point == pad 
+		@media only screen and (max-width: 768px)
+			@content	
+	@else if $point == mobil 
+		@media only screen and (max-width: 320px)
+			@content		
+	
+.box
+	width: 500px
+	height: 500px
+	background: #000000
+	+breakpoint(pad)
+		background: yellow
+	+breakpoint(mobil)
+		background: red
+	a
+		color: #ffffff
+		font-size: 40px
+		+breakpoint(pad)
+			color: red
+		+breakpoint(mobil)		
+			color: #ffffff
 ```
 
 
@@ -277,6 +335,13 @@ height: image-height("../img/#{$name}.#{$sub}")
   background-image: url("../img/#{$name}.#{$sub}")
   width: image-width("../img/#{$name}.#{$sub}")
   height: image-height("../img/#{$name}.#{$sub}")
++bg(logo,png)
+// background image -2 
+@mixin bg($name)
+  background-image: url("../img/#{$name}")
+  width: image-width("../img/#{$name}")
+  height: image-height("../img/#{$name}")
++bg('logo.png')
 // hide text
 @mixin hide-text
   white-space: nowrap	// 空白的處理方法 連續的空白字會縮減為一個空白，不跳行
@@ -447,6 +512,14 @@ a
   color: black
 ```
 
+
+
+
+
+
+
+### other 
+```
 --------------------------
 gulp
 webpack
@@ -455,7 +528,7 @@ npm install bootstrap
 BME css 命名
 主題化 bootstrap
 codepen --> search steps
-
+```
 
 
 

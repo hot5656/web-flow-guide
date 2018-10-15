@@ -37,14 +37,19 @@
 *	sublime keymap: plug for sublime key
 
 
-
+### configuration setting
 Freference-->setting
+*	VScode Show Full Path in Title Bar
+```
 	Window: Title 
 		default :
 			${dirty}${activeEditorShort}${separator}${rootName}${separator}${appName}
 		full fath:
 			${activeEditorLong}${separator}${rootName}
-
-VScode Show Full Path in Title Bar
-
-“window.title”: “${activeEditorLong}${separator}${rootName}”,
+```
+* show CR/tab/space
+```
+  	Editor: Render Whitespace
+  		none : no show
+  		all  : show
+```

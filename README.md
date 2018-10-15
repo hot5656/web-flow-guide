@@ -4,6 +4,7 @@
 			
 *   [Issue]
 	*   [Css](./css/issue.md)
+	*   [Sass](./sass/issue.md)
 	***
 	*   [JavaScript](./javascript/issue.md)
 	*   [jQuery](./jquery/issue.md)
