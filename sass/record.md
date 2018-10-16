@@ -12,8 +12,9 @@
 *   [9. @extend合併css](#a9)
 *   [10. compass](#a10)
 *   [11. mixin example](#a11)
-*   [12. sass init example](#a12)
-*   [13. add web style select](#a13)
+*   [12. mixin using](#a12)
+*   [13. sass init example](#a13)
+*   [14. add web style select](#a14)
 
 <h2 id="a1">1. variable</h2>
 
@@ -384,9 +385,93 @@ background: nth($bg, $style) : select array variable value
     content: ""
     clear: both
 +clearfix
+// 圓形
+@mixin circle($size, $bg)
+  width: $size
+  height: $size
+  +border-radius($size/2)
+  background: $bg
+// 三角形　ｄefault 正三角形，type=0.86666 為正三角形
+// $direct 箭頭方向
+@mixin triangle ($size, $color, $direct,$type:1)
+  height: 0
+  width: 0
+  @if $direct == top 
+    border-bottom: ($size*$type) solid $color
+    border-left: ($size/2) solid transparent
+    border-right: ($size/2) solid transparent
+  @else if $direct == right 
+    border-left: ($size*$type) solid $color
+    border-top: ($size/2) solid transparent
+    border-bottom: ($size/2) solid transparent
+  @else if $direct == bottom 
+    border-top: ($size*$type) solid $color
+    border-left: ($size/2) solid transparent
+    border-right: ($size/2) solid transparent
+  @else if $direct == left 
+    border-right: ($size*$type) solid $color
+    border-top: ($size/2) solid transparent
+    border-bottom: ($size/2) solid transparent
+  @else if $direct == right-top
+    border-right: $size solid $color
+    border-bottom: $size solid transparent
+  @else if $direct == left-top
+    border-left: $size solid $color
+    border-bottom: $size solid transparent
+  @else if $direct == right-bottom
+    border-right: $size solid $color
+    border-top: $size solid transparent
+  @else if $direct == left-bottom
+    border-left: $size solid $color
+    border-top: $size solid transparent
 ```
 
-<h2 id="a12">12. sass init example</h2>
+
+<h2 id="a12">12. mixin using</h2>
+
+```
+// 對話框
+.one 
+	float: left
+	background: white
+	height: 300px
+	width: 300px
+	padding: 30px
+	margin-left: 50px
+	+border-radius(30px)
+	position: relative
+	&:before
+		+triangle(30px ,white , right)
+		position: absolute
+		content: ""
+		top: 10%
+		left: 100%
+// 對話框 + 外框
+.two 
+	float: left
+	background: white
+	height: 300px
+	width: 300px
+	padding: 30px
+	margin-left: 50px
+	+border-radius(30px)
+	position: relative
+	border: 5px solid #333
+	&:before
+		+triangle(33px ,#333 , right)
+		position: absolute
+		content: ""
+		top: 30px
+		left: 100%
+	&:after
+		+triangle(20px ,white , right)
+		position: absolute
+		content: ""
+		top: 35px
+		left: 100%
+```
+
+<h2 id="a13">13. sass init example</h2>
 
 ```sass
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video
@@ -551,7 +636,7 @@ a
 
 
 
-<h2 id="a13">13. add web style selecte</h2>
+<h2 id="a14">14. add web style selecte</h2>
 
 ```
 $site: coffee kid cat 
