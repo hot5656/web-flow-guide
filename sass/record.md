@@ -13,8 +13,7 @@
 *   [10. compass](#a10)
 *   [11. mixin example](#a11)
 *   [12. sass init example](#a12)
-
-
+*   [13. add web style select](#a13)
 
 <h2 id="a1">1. variable</h2>
 
@@ -79,6 +78,12 @@ compass watch
 
 // sass/scss 允許說明輸入中文問題
 Encoding.default_external = 'utf-8'
+
+// output_style 編譯出來的CSS碼要用哪種方式編譯出來
+expanded = 一般，每行CSS皆會斷行
+nested = 有縮進，較好閱讀
+compact = 簡潔格式，匯出來的ＣＳＳ檔案大小比上面兩個還小。
+compressed = 壓縮過的CSS，所有設定都以一行來進行排列。
 ```
 
 <h2 id="a4">4. import other scss file</h2>
@@ -325,6 +330,18 @@ ul{
 // sass function - runy support but vscode not support   
 width: image-width("../img/#{$name}.#{$sub}")
 height: image-height("../img/#{$name}.#{$sub}")
+index($site, cat) : get index position from variable
+background: nth($bg, $style) : select array variable value
+
+// function for color 
+.page
+	height: 120px
+	background: #ff0000	// 紅色
+	background: darken(#ff0000, 10%)	//調暗 10%
+	background: lighten(#ff0000, 10%)	//調亮 10%
+	background: adjust-hue(#ff0000, 45)	//改變色相 45度
+	background: invert(#ff0000) //反色相
+
 ```
 
 <h2 id="a11">11. mixin example</h2>
@@ -341,12 +358,32 @@ height: image-height("../img/#{$name}.#{$sub}")
   background-image: url("../img/#{$name}")
   width: image-width("../img/#{$name}")
   height: image-height("../img/#{$name}")
+// background image -3 
+@mixin bg2($name)
+  background-image: image-url($name)
+  width: image-width($name)
+  height: image-height($name)
 +bg('logo.png')
 // hide text
 @mixin hide-text
   white-space: nowrap	// 空白的處理方法 連續的空白字會縮減為一個空白，不跳行
   text-indent: 100%		// 讓首行縮排 100%
   overflow: hidden
+// grid
+@mixin grid($width_all, $cloum_number, $cloum_gutter)
+  width: ($width_all - $cloum_gutter*($cloum_number - 1))/$cloum_number
+  margin-right: $cloum_gutter
+  box-sizing: border-box
+  &:nth-child(#{$cloum_number}n)
+    margin-right: 0
++grid($width, 3, 30px)
+// clear fix
+@mixin clearfix
+  &::after
+    display: block
+    content: ""
+    clear: both
++clearfix
 ```
 
 <h2 id="a12">12. sass init example</h2>
@@ -514,6 +551,18 @@ a
 
 
 
+<h2 id="a13">13. add web style selecte</h2>
+
+```
+$site: coffee kid cat 
+$bg: red yellow green 
+$text-color: #fff #ff0000 grey 
+$style: index($site, cat)
+
+.color
+	background: nth($bg, $style)
+	color: nth($text-color, $style)
+```
 
 
 

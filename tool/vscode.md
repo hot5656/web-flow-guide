@@ -4,7 +4,7 @@
 
 ### 快捷鍵-	[hot key](../https://poychang.github.io/vscode-shortcuts/)
 	ctrl-p : search file name
-	ctrl-shift-p
+	ctrl-shift-p : to command line
 	ctl-enter : add next line
 	shift-alt-f : align code
 	ctl-w : close file
@@ -22,6 +22,8 @@
 *	Indent-Rainbow : 縮排採紅色條
 * Sass : Indented Sass syntax highlighting, autocomplete & snippets for VSCode
 *	Favorites : Favorite directory
+* css-auto-prefix : auto insert prefix for css
+* Autoprefixer : ctrl-shift-p "Autoprefix css" add prefix for css 
 
 *	github extension
 *	ESLint/javascript standard style only enable one

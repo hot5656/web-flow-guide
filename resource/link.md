@@ -32,6 +32,8 @@
 ### tool
 *   [線上筆記本](https://trello.com/)
 *   [Todolist](https://todoist.com/)
+*   [Evernote筆記App-include 網頁收錄](https://evernote.com/intl/zh-tw)
+*   [Google Docs](https://www.google.com.tw/intl/zh-TW/docs/about/)
 
 ### slide
 *   [Slideshare](https://www.slideshare.net/)
@@ -47,6 +49,11 @@
 *   [medium部落格](https://medium.com/)
 *   [Hexo部落格框架](https://hexo.io/zh-tw/index.html)
 *   [LinkedIn](https://www.linkedin.com)
+*   [Can I use](https://caniuse.com/#tables)
+*   [Color select #1](https://www.w3schools.com/colors/colors_names.asp)
+*   [Color select #2](https://www.w3schools.com/colors/colors_picker.asp)
+*   [Sass Color alignment](http://jim-nielsen.com/sassme/)
+
 
 ### issue
 *   [stackoverflow](https://stackoverflow.com/)
