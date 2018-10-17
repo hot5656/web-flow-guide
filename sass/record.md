@@ -15,6 +15,7 @@
 *   [12. mixin using](#a12)
 *   [13. sass init example](#a13)
 *   [14. add web style select](#a14)
+*   [15. compass sprite](#a15)
 
 <h2 id="a1">1. variable</h2>
 
@@ -424,6 +425,15 @@ background: nth($bg, $style) : select array variable value
   @else if $direct == left-bottom
     border-left: $size solid $color
     border-top: $size solid transparent
+// 矩形
+@mixin square($width, $height, $bg, $color)
+  box-sizing: border-box
+  -webkit-box-sizing: border-box
+  -moz-box-sizing: border-box
+  width: $width
+  height: $height
+  background: $bg
+  color: $color
 ```
 
 
@@ -469,6 +479,47 @@ background: nth($bg, $style) : select array variable value
 		content: ""
 		top: 35px
 		left: 100%
+// 麵包屑路徑
+.crumb
+	li
+		a
+			margin-top: 5px
+			position: relative
+			float: left
+			margin-right: 10px
+			line-height: 80px
+			padding-left: 70px
+			+square(155px, 80px, pink, red)
+			font-weight: bold
+			font-size: 20px
+			&:before
+				position: absolute
+				left: 100%
+				+triangle(80px ,pink , right,0.5)
+				content: ''	
+				z-index: 20
+			&:after
+				position: absolute
+				left: 0
+				+triangle(80px ,#d4f2ff , right,0.5)
+				content: ''
+				z-index: 10	
+			&:hover
+				background: blue
+				&:before
+					border-left-color: blue
+		&:first-child
+			a
+				border-top-left-radius: 10px
+				border-bottom-left-radius: 10px
+				&:after
+					display: none
+		&:last-child
+			a
+				border-top-right-radius: 10px
+				border-bottom-right-radius: 10px
+				&:before
+					display: none
 ```
 
 <h2 id="a13">13. sass init example</h2>
@@ -649,6 +700,23 @@ $style: index($site, cat)
 	color: nth($text-color, $style)
 ```
 
+
+<h2 id="a15">15. compass sprite</h2>
+
+```
+// 水平排列
+$icon-layout: horizontal 
+// 設定間隔
+$icon-spacing: 20px
+// 轉換檔案(icon目錄放於 img下)
+@import icon/*.png
+@include all-icon-sprites
+
+.fb 
+	@extend .icon-facebook
+	width: image-width('icon/facebook.png')
+	height: image-height("icon/facebook.png")
+```
 
 
 

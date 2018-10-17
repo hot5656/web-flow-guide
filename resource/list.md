@@ -95,6 +95,8 @@
 * compass : Sass 擴充套件
 * grid system
 * 960grid 
+*	CSS Sprite - 張圖片合併
+
 
 ### side project
 *	學會新技術，拿舊專案重寫優化

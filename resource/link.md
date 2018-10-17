@@ -53,6 +53,7 @@
 *   [Color select #1](https://www.w3schools.com/colors/colors_names.asp)
 *   [Color select #2](https://www.w3schools.com/colors/colors_picker.asp)
 *   [Sass Color alignment](http://jim-nielsen.com/sassme/)
+*   [Line25 Web Design Idea](https://line25.com/)
 
 
 ### issue

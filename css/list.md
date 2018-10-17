@@ -17,6 +17,7 @@
   * parent number  
 	&:first-child  由 parent 眼光看(first-child)
 	&:nth-child(3n) 3的倍數
+	* z-index: 10; 數字大的在上層,應該最大值30足夠
 *	< ul >
   *	no icon  
   list-style-type: none;  
@@ -66,8 +67,14 @@
   line-through: 替文字增加刪除線  
   blink       : 替文字增加閃爍效果，已取消  
   inherit     : 繼承自父層的文字效果  
+	*	font-weight  
+	normal - 這是預設值，可以不用設定。  
+	bold - 粗體字。  
+	bolder - 更粗的字型，不過用起來跟 bold 似乎沒什麼差異。  
+	lighter - 細體，不過與 normal 沒什麼差異。  
+	數字 - 可以設定的有 100、200、300、400、500、600、700、800、900。  
 *	CSS3 動畫
-	*	transition -hover, focus(如果不透過 JavaScript 事件處理)
+	*	transition -hover, focus(如果不透過 JavaScript 事件處理)  
 	transition: property duration timing-function delay;  
 	ransition-property 用來定義可以產生 transition 屬性效果的屬性名稱，例如寬度、背景顏色 ...。  
 	transition-duration 用來定義 transition 屬性發生的時間，單位為秒。  
@@ -80,17 +87,21 @@
 		transition: all 1s 
 		&:hover 
 			width: 300px
-	-- 只對單一屬性加入 transition
+	```
+	*	只對單一屬性加入 transition  
+	```
 	.box:hover {
 	  width: 200px;
 	  height: 200px;
 	  transition: height 1s;		
-	}
-	-- 對不同屬性同時做 transition
+	}  
+	```
+	*	對不同屬性同時做 transition
 	transition: 1s height, 2s width;
-	-- 先變換一個屬性，再變換另一個屬性
+	*	先變換一個屬性，再變換另一個屬性
 	transition: height 1s, width 1s 1s;
-	--- 雙向的 transition
+	*	雙向的 transition  
+	```
 	.box
 		height: 50px
 		width: 50px
@@ -99,23 +110,22 @@
 			height: 300px
 			width: 300px
 			transition-timing-function: ease
-			transition: height 1s	
-	--- transition-timing-function
-	// transition-timing-function: ease-in
-	// transition: height 3s ease-in
-	// transition: all 1s cubic-bezier(0.250, 0.250, 0.750, 0.750)　　//平均速度
-	linear: 匀速
-	ease: 急加速後減速 (預設值)
-	ease-in: 加速
-	ease-out: 减速
-	ease-in-out: 較平緩的 ease
-	cubic-bezier: 自定義速度模式
-	--- 無法使用 transition
-	height: auto (不確定的值) 至 height: 100px (具體數值)
-	display: none 至 display: block
-	background: url(foo.jpg) 至 background: url(bar.jpg)
-
-	``` 
+			transition: height 1s	  
+	```
+	*	transition-timing-function  
+	// transition-timing-function: ease-in  
+	// transition: height 3s ease-in  
+	// transition: all 1s cubic-bezier(0.250, 0.250, 0.750, 0.750)　　//平均速度  
+	linear: 匀速  
+	ease: 急加速後減速 (預設值)  
+	ease-in: 加速  
+	ease-out: 减速  
+	ease-in-out: 較平緩的 ease  
+	cubic-bezier: 自定義速度模式  
+	*	無法使用 transition  
+	height: auto (不確定的值) 至 height: 100px (具體數值)  
+	display: none 至 display: block  
+	background: url(foo.jpg) 至 background: url(bar.jpg)  
 *	function  
   calc()
 
