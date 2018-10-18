@@ -4,6 +4,7 @@
 *   [1. emmet](#a1)
 *   [2. lorem 假字](#a2)
 *   [3. 版型思考](#a3)
+*   [4. variable](#a4)
 
 <h2 id="a1">1. emmet</h2>
 
@@ -44,7 +45,7 @@ bd3-s#3  : border: 3s #333333
 
 // html 縮寫
 ! : HTML5 structure
-meat:vp :　<meta name="viewport" content="width=device-width, initial-scale=1.0">
+meta:vp :　<meta name="viewport" content="width=device-width, initial-scale=1.0">
 					　<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"
 
 ```
@@ -73,6 +74,18 @@ lorem10 : 10字
 - png copy to one file
 ```
 
-
+<h2 id="a4">[4. variable</h2>
+```
+$width: 940px
+$body-bg: 
+$text-color:pink→預設文字顏色
+$font-color:    →強調文字顏色
+$link-color:#000→文字連結樣式，多則就再加紹數字
+$link-color-hover:#fff→滑鼠拖曳過後的樣式顏色
+$font-size:13px→全域字型大小，如一網站有多種就下多種字型
+$line-height:1.8→全域行距
+$container-width:960px→ 網站整體寬度
+$font-style："Helvetica Nueue", Arial, Sans Serif; →全域字型
+```
 
 

@@ -344,6 +344,7 @@ $box-len: length($box-bg) : variable array length
 left: random(1000) - 100 + px : random value between 1 to 1000
 cubic-bezier(#{random()}, #{random()}, #{random()}, #{random()}) :　random value between 0 to 1
 background: inline-image("../img/logo.png") : 圖檔轉成css(避免過多網頁請求數)
+background-image: image-url($name) : 自動尋找image路徑
 
 // function for color 
 .page
