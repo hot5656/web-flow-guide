@@ -96,7 +96,7 @@
 * grid system
 * 960grid 
 *	CSS Sprite - 張圖片合併
-
+*	CMS(Content Management System) 內容管理系統
 
 ### side project
 *	學會新技術，拿舊專案重寫優化

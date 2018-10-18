@@ -11,6 +11,7 @@
 *   [8. sector標誌](#a8)
 *   [9. @extend合併css](#a9)
 *   [10. compass](#a10)
+*   [10-2. compass appliaction](#a10-2)
 *   [11. mixin example](#a11)
 *   [12. mixin using](#a12)
 *   [13. sass init example](#a13)
@@ -328,12 +329,21 @@ ul{
   	+opacity(0.8)        // 透明度
   	+box-shadow(red 2px 2px 10px)
 
+// compass mixin
++transition(all 3s cubic-bezier(#{random()}, #{random()}, #{random()}, #{random()}))
++border-radius(50px)
++box-shadow(5px 5px #000)
++box-sizing
 
 // sass function - runy support but vscode not support   
 width: image-width("../img/#{$name}.#{$sub}")
 height: image-height("../img/#{$name}.#{$sub}")
 index($site, cat) : get index position from variable
 background: nth($bg, $style) : select array variable value
+$box-len: length($box-bg) : variable array length
+left: random(1000) - 100 + px : random value between 1 to 1000
+cubic-bezier(#{random()}, #{random()}, #{random()}, #{random()}) :　random value between 0 to 1
+background: inline-image("../img/logo.png") : 圖檔轉成css(避免過多網頁請求數)
 
 // function for color 
 .page
@@ -344,6 +354,59 @@ background: nth($bg, $style) : select array variable value
 	background: adjust-hue(#ff0000, 45)	//改變色相 45度
 	background: invert(#ff0000) //反色相
 
+```
+
+
+<h2 id="a10-2">10-2. compass appliaction</h2>
+
+```
+// for - font-size
+@for $i from 1 through 3
+	font-#{$i}
+		font-size: $i*2em
+
+// for - color class
+$box-bg: blue red pink orange
+$box-len: length($box-bg)
+.color-total
+	color: $box-len
+@for $i from 1 through $box-len
+	.#{nth($box-bg, $i)}
+		color: nth($box-bg, $i)
+		background: invert(nth($box-bg, $i))
+
+// for - color ball
+$boxes: 100
+.box
+	margin: 0 auto
+	border: 1px solid #000
+	height: 1000px
+	width: 1000px
+	position: relative
+	&:hover
+		div
+			margin-left: 2000px
+			// +transition(all 10s) - 不設定即與 div class 設定相同
+
+@for $i from 1 through $boxes
+	.for-#{$i}
+		color: #000 
+		height: 50px
+		width: 50px
+		+box-shadow(5px 5px #000)
+		background: rgb(random(255), random(255),random(255))
+		+border-radius(50px)
+		position: absolute
+		left: random(1000) - 100 + px
+		bottom: random(1000) - 100 + px
+		+transition(all 3s cubic-bezier(#{random()}, #{random()}, #{random()}, #{random()}))
+
+
+// inline-image example
+.box-test2
+	background: inline-image("../img/logo.png")
+	width: image-width("../img/logo.png")
+	height: image-height("../img/logo.png")
 ```
 
 <h2 id="a11">11. mixin example</h2>

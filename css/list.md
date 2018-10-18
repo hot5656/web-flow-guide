@@ -127,7 +127,9 @@
 	display: none 至 display: block  
 	background: url(foo.jpg) 至 background: url(bar.jpg)  
 *	function  
-  calc()
+  *	calc()
+  *	cubic-bezier(0.1, 0.7, 1.0, 0.1);
+
 
 
 

@@ -33,7 +33,9 @@
 	*   [sublime](./tool/sublime.md)
 	*   [git](./tool/git.md)
 	*   [VSCode](./tool/vscode.md)
+	*   [Photopea](./tool/photopea.md)
 *   [Reference Site]
+	*   [Html](./html/link.md)
 	*   [Css](./css/link.md)
 	*   [Sass](./sass/link.md)
 	***

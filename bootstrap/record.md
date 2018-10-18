@@ -20,6 +20,7 @@
 
 ```
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+Gecko 引擎的 Firefox mobile 上，確會讓使用者看到桌面版的網頁 : set shrink-to-fit=no"
 ```
 
 
