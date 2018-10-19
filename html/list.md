@@ -19,4 +19,6 @@
 ### input
 ```
 <input type="button" class="btn" value="hello">
+<input type="button" value="按鍵">
+<input type="text" id="mail" placeholder="請輸入電子郵件" name="mail" >
 ```

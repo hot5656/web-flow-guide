@@ -18,6 +18,7 @@
 	&:first-child  由 parent 眼光看(first-child)
 	&:nth-child(3n) 3的倍數
 	* z-index: 10; 數字大的在上層,應該最大值30足夠
+	*	color: inherit; 繼承
 *	< ul >
   *	no icon  
   list-style-type: none;  

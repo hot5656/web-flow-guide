@@ -2,7 +2,7 @@
 
 *   [Root](../README.md)
 
-### 快捷鍵-	[hot key](../https://poychang.github.io/vscode-shortcuts/)
+### 快捷鍵-	[hot key](https://poychang.github.io/vscode-shortcuts/)
 	ctrl-p : search file name
 	ctrl-shift-p : to command line
 	ctl-enter : add next line
@@ -12,7 +12,19 @@
 	ctl-` : open termernal/other windows
 	ctl-d : 選擇下一個相同string共同編輯
 	alt-(mouse-l) : select 共同編輯
-	alt+^/alt- : select up/down
+	alt+^/alt- : select up/down  
+	F1 : select command  
+	Ctrl +/- : 字型大小
+	Ctrl mouse-left : open reference file
+	Ctrl + W 關閉檔案
+	Ctrl + K Ctrl + W 關閉所有檔案
+
+### issue
+* show manu bar
+	F1 -> toggle manu bar
+	F11 toogle full screen
+
+
 
 
 ### plug package
@@ -24,6 +36,14 @@
 *	Favorites : Favorite directory
 * css-auto-prefix : auto insert prefix for css
 * Autoprefixer : ctrl-shift-p "Autoprefix css" add prefix for css 
+*	git history diff  (F1 selectt command)  
+	GitHD: View History  
+	GitHD: View Branch History  
+	GitHD: View Entire History  
+	GitHD: View Branch Diff  
+	GitHD: View File History  
+	GitHD: View Line History  
+	GitHD: Input Ref  
 
 *	github extension
 *	ESLint/javascript standard style only enable one

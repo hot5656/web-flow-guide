@@ -5,6 +5,9 @@
 *   [2. lorem 假字](#a2)
 *   [3. 版型思考](#a3)
 *   [4. variable](#a4)
+*   [5. basic struct](#a5)
+*   [6. tag](#a6)
+
 
 <h2 id="a1">1. emmet</h2>
 
@@ -75,6 +78,7 @@ lorem10 : 10字
 ```
 
 <h2 id="a4">[4. variable</h2>
+
 ```
 $width: 940px
 $body-bg: 
@@ -86,6 +90,32 @@ $font-size:13px→全域字型大小，如一網站有多種就下多種字型
 $line-height:1.8→全域行距
 $container-width:960px→ 網站整體寬度
 $font-style："Helvetica Nueue", Arial, Sans Serif; →全域字型
+$line-height: 1.6
 ```
 
 
+<h2 id="a5">5. basic struct</h2>
+
+```html
+	<div class="wrap">
+		<header></header>
+		<div class="content"></div>
+		<footer></footer>
+	</div>
+```
+
+<h2 id="a6">6. tag</h2>
+
+```html
+<header>：網頁的標頭，通常放置網站標題。
+<nav>：網頁的選單、導覽。
+<main>：網頁的主要內容。
+<aside>：網頁的側欄、附加內容。
+<article>：一篇文章內容。
+<section>：自訂的區塊，例如數篇摘要組成的空間。
+<footer>：網頁的頁尾，通常放置聯絡方式、著作權宣告等等。
+<mark>：強調一小塊內容。
+<time>：顯示日期時間。
+
+<em>
+```

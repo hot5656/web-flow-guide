@@ -4,6 +4,8 @@
 *   [1. inline-block 不接受 margin-left/margin-right](#a1)
 *   [2. img 放於 div 內都會在底部保留一些間隔](#a2)
 *   [3. CSS inline-block 間空白移除](#a3)
+*   [4. button shows blue outline when clicked](#a4)
+*   [5. ???? 有些地方 clear:both not working ????](#a5)
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
 
@@ -35,4 +37,13 @@ div
 .inline-block {
     margin-right: -4px;
 }
+```
+
+<h2 id="a4">4. button shows blue outline when clicked</h2>
+
+```
+.btn:focus {
+  outline: none;
+}
+
 ```

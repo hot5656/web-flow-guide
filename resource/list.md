@@ -145,6 +145,12 @@
 *	金錢、成就、技術能量
 *	w3c 出了任何的草案、ECMAScript 出了哪些規範時，瀏覽器也會適版本號依序地納入新語法
 
+### name 
+banner : 橫幅
+slide
+introduce
+
+
 ### book
 *	JavaScript & JQuery : 網站互動設計程式進化之道 
 
