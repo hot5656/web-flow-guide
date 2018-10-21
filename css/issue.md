@@ -6,6 +6,7 @@
 *   [3. CSS inline-block 間空白移除](#a3)
 *   [4. button shows blue outline when clicked](#a4)
 *   [5. ???? 有些地方 clear:both not working ????](#a5)
+*   [6. 去除邊框](#a6)
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
 
@@ -46,4 +47,12 @@ div
   outline: none;
 }
 
+```
+
+*   [6. 去除邊框](#a6)
+
+<h2 id="a6">6. 去除邊框</h2>
+
+```
+border-width: 0
 ```

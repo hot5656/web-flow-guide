@@ -97,6 +97,7 @@
 * 960grid 
 *	CSS Sprite - 張圖片合併
 *	CMS(Content Management System) 內容管理系統
+* web-font 雲端字型
 
 ### side project
 *	學會新技術，拿舊專案重寫優化

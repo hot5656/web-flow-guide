@@ -9,6 +9,7 @@
 *   [6. package](#a6)
 *   [7. generate package.json](#a7)
 *   [8. gulp](#a8)
+*   [9. nvm-node.js 管理程式](#a9)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -187,7 +188,7 @@ npm init
 ```
 
 
-<h2 id="a8>7. generate package.json</h2>
+<h2 id="a8">8. gulp</h2>
 
 ```
 // install gulp to globak
@@ -195,6 +196,14 @@ npm install gulp -g
 
 // install 
 npm install
+```
 
+<h2 id="a9">9. nvm-node.js 管理程式</h2>
 
+```
+nvm -v  // version
+nvm list avrible // avarible node.js
+nvm install 8.11.2 // intall node.js 8.11.2
+nvm list // list all install node.js
+nvm use 8.11.2 // switch to node.js 8.11.2
 ```

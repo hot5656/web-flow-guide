@@ -3,8 +3,9 @@
 *   [Root](../README.md)
 
 ### 快捷鍵-	[hot key](https://poychang.github.io/vscode-shortcuts/)
+	ctrl-shift-p(or F1) : to command line
+
 	ctrl-p : search file name
-	ctrl-shift-p : to command line
 	ctl-enter : add next line
 	shift-alt-f : align code
 	ctl-w : close file
@@ -29,13 +30,11 @@
 
 ### plug package
 *	Live Server
-*	Git History : see git log 
-*	Live Sass Compiler
+
+*	Live Sass Compiler : sass watch
 *	Indent-Rainbow : 縮排採紅色條
 * Sass : Indented Sass syntax highlighting, autocomplete & snippets for VSCode
 *	Favorites : Favorite directory
-* css-auto-prefix : auto insert prefix for css
-* Autoprefixer : ctrl-shift-p "Autoprefix css" add prefix for css 
 *	git history diff  (F1 selectt command)  
 	GitHD: View History  
 	GitHD: View Branch History  
@@ -44,7 +43,19 @@
 	GitHD: View File History  
 	GitHD: View Line History  
 	GitHD: Input Ref  
+* Monokai Dark Soda : 程式編輯佈景  
+	檔案 --> 喜好設定 --> 色彩佈景主題 --> Monokai Dark Soda
+*	vscode-icons  
+	Ctrl+shift+p --> icons: activate VScode icons
+*	AutoFileName : auto detect files
+* EaseServer : web server  
+	ctrl+shift+enter 
+* live server : web server	 
 
+* Bracket Pair Colorizer : 可以讓不同縮減的括號顯示不同的顏色
+* css-auto-prefix : auto insert prefix for css
+* Autoprefixer : ctrl-shift-p "Autoprefix css" add prefix for css 
+*	Git History : see git log 
 *	github extension
 *	ESLint/javascript standard style only enable one
 	ESLint : 檢查程式碼有沒有整齊(node.js need install "npm install -g eslint")
@@ -75,3 +86,11 @@ Freference-->setting
   		none : no show
   		all  : show
 ```
+* 切成中文版
+```
+1. install chinese(Traditional) Languale Pacj
+2. ctrl+shift+p --> configure Display Language
+   locale 中的 en 改成 zh-TW
+從新啟動
+```
+

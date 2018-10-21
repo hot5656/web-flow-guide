@@ -74,6 +74,16 @@
 	bolder - 更粗的字型，不過用起來跟 bold 似乎沒什麼差異。  
 	lighter - 細體，不過與 normal 沒什麼差異。  
 	數字 - 可以設定的有 100、200、300、400、500、600、700、800、900。  
+* 字型
+  * serif - 襯線體，是一種字體的裝飾。這類字體的每一個字母都會有一些小小的突起，筆畫的粗細也不相同。一般常見的字型有：Caslon、Courier、Garamond、Lucida、Sabon、Times New Roman…等等 對應到中文有點像是黑體字
+  * Sans-serif - 無襯線體，這類字體有點像麥克筆寫的，沒有多餘的裝飾，有一說是從襯線體的一類演變出來的。通常這類字體看起來會比較現代，因為襯線體是從羅馬時代就有的字體型態，歷史悠久，當然自然就有一種古典的感覺。常見的字型有：Avenir、DIN、Frankin Gothic、Frutiger、Futura、Helvetica、Univers…等等
+  * font-family : 字體的類別 verdana,arial,impact
+  * font-size : 字體的大小  
+    9px, 150%, 0.8cm, 1.2em, 1.2rem,small,large
+  * font-weight : 字體的厚度  
+    100~900, bold(厚體)
+  * font-style 屬性是用來設定字體是否為斜體字 (italic 或 oblique)
+  * font-variant 屬性是用來設定文字是不是要以小型大寫 (small caps) 字體顯現。在小型大寫字體中，所有的字母都是大寫，可是字體是比一般大寫來得小。可能的值為 "small-caps" 和 "normal"。
 *	CSS3 動畫
 	*	transition -hover, focus(如果不透過 JavaScript 事件處理)  
 	transition: property duration timing-function delay;  
