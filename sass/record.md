@@ -17,6 +17,7 @@
 *   [13. sass init example](#a13)
 *   [14. add web style select](#a14)
 *   [15. compass sprite](#a15)
+*   [16. function](#a16)
 
 <h2 id="a1">1. variable</h2>
 
@@ -782,6 +783,18 @@ $icon-spacing: 20px
 	height: image-height("icon/facebook.png")
 ```
 
+
+<h2 id="a16">16. function</h2>
+
+```
+// function define
+@function pxToVw($px)
+  @return $px * 100 / 1366 + vw
+.find-btn
+	// test function
+	// width: 108px
+	width: pxToVw(108)
+```
 
 
 ### other 

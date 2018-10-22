@@ -43,11 +43,19 @@
   *	&:hover
 *	< img > 
   *	垂直置中 : vertical-align:middle;  
+  * 水平置中 :  
+  	display: block
+  	margin: auto
   *	clip-path: inset(10% 0 10% 0);  
   *	need set inline-block ,width and height  
-  background-size: cover;  
-  background-position: center center;  
-  background-image: url("../../img/photo-1473256599800-b48c7c88cd7e.jpg");  
+  *	background-size: cover;  
+		auto	預設值，維持背景圖片原本的大小。  
+		length	自訂背景圖片的大小，可以用兩個數字表示，先是設定寬度，再來是設定高度，不可為負數，如果只寫一個數字，第二個數字則會自動設為 auto 的效果，背景圖片自動縮放。  
+		percentage	自訂背景圖片的大小，用兩個數字百分比表示，第一個數字百分比是設定寬度，第二個數字百分比是設定高度，如果只寫一個，則第二個將自動設為 auto 的效果，背景圖片自動縮放。  
+		cover	使用於背景圖片小於容器時，將背景圖片的大小放大至容器的大小並填滿，缺點是如果容器的長寬比例與背景圖片的長寬比例不吻合，會出現背景圖片失真的情況。  
+		contain	使用於背景圖片大於容器時，將背景圖片縮小至可以在容器內呈現。  
+  *	background-position: center center;  
+  *	background-image: url("../../img/photo-1473256599800-b48c7c88cd7e.jpg");  
   *	white-space: 空白的處理方法  
     normal(default)   連續的空白字都縮減為一個空白，長行遇到右邊界會跳行分為兩行 
     nowrap 連續的空白字會縮減為一個空白，不跳行  

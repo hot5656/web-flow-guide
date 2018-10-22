@@ -4,6 +4,7 @@
 
 ### 快捷鍵-	[hot key](https://poychang.github.io/vscode-shortcuts/)
 	ctrl-shift-p(or F1) : to command line
+	F11 : 全螢幕切換
 
 	ctrl-p : search file name
 	ctl-enter : add next line
@@ -51,7 +52,9 @@
 * EaseServer : web server  
 	ctrl+shift+enter 
 * live server : web server	 
+*	colorize : look color(scss/sass/color)
 
+***
 * Bracket Pair Colorizer : 可以讓不同縮減的括號顯示不同的顏色
 * css-auto-prefix : auto insert prefix for css
 * Autoprefixer : ctrl-shift-p "Autoprefix css" add prefix for css 
@@ -86,11 +89,22 @@ Freference-->setting
   		none : no show
   		all  : show
 ```
-* 切成中文版
+* 切成中文版  
 ```
-1. install chinese(Traditional) Languale Pacj
-2. ctrl+shift+p --> configure Display Language
+install chinese(Traditional) Languale Pack
+ctrl+shift+p --> configure Display Language
    locale 中的 en 改成 zh-TW
 從新啟動
+```
+* liveSassCompile settings autoprefix
+```
+    "liveSassCompile.settings.autoprefix": [
+      "> 1%",
+      "last 5 versions",
+      "Firefox >= 45",
+      "iOS >=8",
+      "Safari >=8",
+      "ie >= 10"
+    ]
 ```
 
