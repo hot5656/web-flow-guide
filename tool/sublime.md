@@ -27,3 +27,6 @@ edit.sublime-project
 	  "tab_size": 2,
 	  "detect_indentation": false,
 	2. bottom convert indentation to tab
+
+### 單檔分割
+File --> new view into file

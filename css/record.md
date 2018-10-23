@@ -82,7 +82,7 @@ rem 也是相對的文字尺寸，和 em 使用方法接近，不同的是他僅
 	```
 *	order
 	```
-	default order value is 0
+	default order value is 0(定義element可改變位置)
 	order: -1;
 	```
 *	align-self : auto | flex-start | flex-end | center | baseline | stretch

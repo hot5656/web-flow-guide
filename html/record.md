@@ -7,7 +7,9 @@
 *   [4. variable](#a4)
 *   [5. basic struct](#a5)
 *   [6. tag](#a6)
+*   [7. 模板庫](#a7)
 
+EJS是一個JavaScript模板庫，用來從JSON數據中生成HTML字符串。
 
 <h2 id="a1">1. emmet</h2>
 
@@ -118,4 +120,17 @@ $line-height: 1.6
 <time>：顯示日期時間。
 
 <em>
+```
+
+
+<h2 id="a1">7. 模板庫/h2>
+
+```
+// EJS是一個JavaScript模板庫，用來從JSON數據中生成HTML字符串
+// Jade 樣板引擎
+// Gulp 是一個前端任務管理工具
+	編譯 SASS、Coffeescript
+	壓縮 .CSS, .JS, 甚至圖檔
+	web server with Livereload
+	享受自己動手做Task工具的快感
 ```
