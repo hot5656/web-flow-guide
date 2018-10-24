@@ -4,6 +4,7 @@
 *   [1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}](#a1)
 *   [2. install browser-sync issue](#a2)
 *   [3. run gulp -> Failed to load external module @babel/register](#a3)
+*   [4. run gulp -> some WARN](#a4)
 
 <h2 id="a1">1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}</h2>
 
@@ -53,6 +54,35 @@ found 1 low severity vulnerability in 5248 scanned packages
 
 ```
 solved it by downgrading the gulp version from 3.9.1 to 3.9.0. Looks like 3.9.1 is buggy.
+```
+
+<h2 id="a4">4. run gulp -> some WARN}</h2>
+
+```
+* npm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it,following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
+* npm WARN deprecated graceful-fs@3.0.11: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+* npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+* npm WARN deprecated minimatch@0.2.14: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
+* npm WARN deprecated graceful-fs@1.2.3: please upgrade to graceful-fs 4 for compatibility with current and future versions of Node.js
+
+WARN 1 : not use gulp-util and use below API
+	gutil.File => https://www.npmjs.com/package/vinyl
+	gutil.replaceExtension => The .extname property on Vinyl objects or https://www.npmjs.com/package/replace-ext
+	gutil.colors => https://www.npmjs.com/package/ansi-colors
+	gutil.date => https://www.npmjs.com/package/date-format
+	gutil.log => https://www.npmjs.com/package/fancy-log
+	gutil.template => https://www.npmjs.com/package/lodash.template
+	gutil.env => https://www.npmjs.com/package/minimist
+	gutil.beep => https://www.npmjs.com/package/beeper
+	gutil.noop => https://www.npmjs.com/package/through2
+	gutil.isStream => Use the .isStream() method on Vinyl objects
+	gutil.isBuffer => Use the .isBuffer() method on Vinyl objects
+	gutil.isNull => Use the .isNull() method on Vinyl objects
+	gutil.linefeed => Use the string '\n' in your code
+	gutil.combine => https://www.npmjs.com/package/multipipe
+	gutil.buffer => https://www.npmjs.com/package/list-stream
+	gutil.PluginError => https://www.npmjs.com/package/plugin-error
+WARN 2~5 僅為提示且在其他module內,不處理
 ```
 
 

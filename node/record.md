@@ -63,6 +63,11 @@ npm view browser-sync version
 npm list --depth 1 -g npm
 node -v
 
+// show gulp-util global version
+npm ls gulp-util -g
+// show gulp-util local version
+npm ls gulp-util
+
 // npm install to local(reference package.json file)
 npm install
 
@@ -80,6 +85,11 @@ npm init
     "//x": "build css for bootstrap",
     "start": "./node_modules/.bin/browser-sync start --server --no-notify --files=`index.html, *.js, stylesheets/*.css`"
 },
+
+// install npm-check-updates
+npm install npm-check-updates
+// Show any new dependencies for the project in the current directory
+node_modules\.bin\ncu
 ```
 
 <h2 id="a3">3. mini-web server</h2>
@@ -191,11 +201,76 @@ npm init
 <h2 id="a8">8. gulp</h2>
 
 ```
-// install gulp to globak
+// install gulp to global
 npm install gulp -g
 
-// install 
-npm install
+// generate package.json
+npm init
+
+// install gulp for develp at local
+npm install gulp --save-dev
+
+// add gulpfile.js - gulp flow
+	//定義一個任務名稱，來指定任務的工作內容
+	gulp.task(name, fn)
+	// 關注特定檔案是否更動
+	gulp.watch(glob, cb)
+	// 運行指定的任務
+	gulp.run(task) 
+	// 指定檔案來源
+	gulp.src(glob)
+	// 檔案的存檔位置
+	gulp.dest(folder)
+
+// 建立 task
+// 載入 gulp
+var gulp = require('gulp');
+
+// 系統預設直接執行
+gulp.task('default', function(){
+	gulp.run('lint','sass','scripts');
+
+  //監視JS檔案变化   
+  gulp.watch('./js/*.js',function(){
+      gulp.run('lint','scripts');
+  });
+
+  //監視sass檔案变化
+  gulp.watch('./sass/*.sass',function(){
+      gulp.run('sass');
+  });
+});
+
+
+// install module
+npm install jshint gulp-jshint gulp-sass gulp-concat gulp-uglify gulp-rename --save-dev
+
+//lint task  
+// 可由default載入執行
+gulp.task('jshint',function(){
+    gulp.src('./js/*.js')
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
+//編譯 sass  
+gulp.task('sass',function(){
+    gulp.src('./scss/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('./css'));
+});  
+
+// 檢查JavaScript代碼錯誤
+gulp.task('scripts',function(){
+    gulp.src('./js/*/js')
+    .pipe(concat('all.js'))
+    .pipe(gulp.dest('./dist'))
+    .pipe(rename('all.min.js'))
+    .pipe(uglify())
+    .pipe(gulp.dest('./dist'));
+});
+
+
 ```
 
 <h2 id="a9">9. nvm-node.js 管理程式</h2>
