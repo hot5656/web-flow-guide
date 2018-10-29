@@ -200,7 +200,7 @@ npm init
 
 <h2 id="a8">8. gulp</h2>
 
-```
+``` javascript
 // install gulp to global
 npm install gulp -g
 
@@ -210,6 +210,127 @@ npm init
 // install gulp for develp at local
 npm install gulp --save-dev
 
+// gulp plugin
+gulp-plumber : 錯誤處理(提示) - Prevent pipe breaking caused by errors from gulp plugins
+gulp-load-plugins : 自動加載 gulp plugin from package.json
+gulp-sourcemaps : 用來生成sourcemap 文件。用於當less 或sass 文件中有各種引入關係
+gulp-sass : 編譯 sass/scss 檔案
+	// Sass 編譯的風格總共有四種：
+	nested (預設的樣式) : 巢狀顯示
+	expanded : 不要巢狀
+	compact : 簡潔樣式，縮進成一行
+	compressed ：壓縮模式
+gulp-postcss : plugin to pipe CSS through several plugins, but parse CSS only once.
+autoprefixer : add prefix for scss
+gulp-concat：合併檔案
+gulp-minify-css：壓縮 CSS
+gulp-uglify：混淆並壓縮 JS
+gulp-rename：重新命名檔案
+gulp-front-matter : 模板設置
+
+
+
+// 加載
+	// 載入 gulp
+	var gulp = require('gulp');
+	// 載入所有 gulp plugin
+	const $ = require('gulp-load-plugins')();
+
+
+// add gulpfile.js - gulp flow
+	//定義一個任務名稱，來指定任務的工作內容
+	gulp.task(name, fn)
+	// 指定檔案來源
+	gulp.src(glob)
+	// 檔案的存檔位置
+	gulp.dest(folder)
+
+// add gulpfile.js - example
+	// default task run 哪幾個 task
+	gulp.task('default', ['copy', 'sass', 'vendorJs', 'browserSync', 'layout', 'watch']);
+
+	// copy file : 包含那些檔案 --> load to --> copy 
+	gulp.task('copy', () => {
+	  gulp
+	    .src(['./source/**/**', '!source/stylesheets/**/**', '!source/**/*.ejs', '!source/**/*.html'])
+	    .pipe(gulp.dest('./public/'))
+	    .pipe(
+	      browserSync.reload({
+	        stream: true,
+	      }),
+	    );
+	});
+
+	// sass process --> plumber --> init sourcemap for sass --> add fprefix
+	gulp.task('sass', () => {
+	  // PostCSS AutoPrefixer
+	  const processors = [
+	    autoprefixer({
+	      browsers: ['last 5 version'],
+	    }),
+	  ];
+
+	  return gulp
+	    .src(['./source/stylesheets/**/*.sass', './source/stylesheets/**/*.scss'])
+	    .pipe($.plumber())
+	    .pipe($.sourcemaps.init())
+	    .pipe(
+	      $.sass({
+	        outputStyle: 'nested',
+	        includePaths: ['./node_modules/bootstrap/scss'],
+	      }).on('error', $.sass.logError),
+	    )
+	    .pipe($.postcss(processors))
+	    .pipe($.if(options.env === 'production', $.minifyCss())) // 假設開發環境則壓縮 CSS
+	    .pipe($.sourcemaps.write('.'))
+	    .pipe(gulp.dest('./public/stylesheets'))
+	    .pipe(
+	      browserSync.reload({
+	        stream: true,
+	      }),
+	    );
+	});
+
+	// merge vender JS
+	gulp.task('vendorJs', () => {
+	  return gulp
+	    .src([
+	      './node_modules/jquery/dist/jquery.slim.min.js',
+	      './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+	    ])
+	    .pipe($.concat('vendor.js'))
+	    .pipe(gulp.dest('./public/javascripts'));
+	});
+
+	// run browser sync - debounce 2s
+	gulp.task('browserSync', () => {
+	  browserSync.init({
+	    server: { baseDir: './public' },
+	    reloadDebounce: 2000,
+	  });
+	});	
+
+	// layout 
+	gulp.task('layout', () => {
+	  return gulp
+	    .src(['./source/**/*.ejs', './source/**/*.html'])
+	    .pipe($.plumber())
+	    .pipe($.frontMatter())
+	    .pipe(
+	      $.layout((file) => {
+	        return file.frontMatter;
+	      }),
+	    )
+	    .pipe(gulp.dest('./public'))
+	    .pipe(
+	      browserSync.reload({
+	        stream: true,
+	      }),
+	    );
+	});	
+```
+
+```
 // add gulpfile.js - gulp flow
 	//定義一個任務名稱，來指定任務的工作內容
 	gulp.task(name, fn)
