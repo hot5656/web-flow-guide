@@ -5,6 +5,7 @@
 *   [2. install browser-sync issue](#a2)
 *   [3. run gulp -> Failed to load external module @babel/register](#a3)
 *   [4. run gulp -> some WARN](#a4)
+*   [5. Failed to load external module @babel/register](#a5)
 
 <h2 id="a1">1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}</h2>
 
@@ -18,7 +19,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 **fsevent是mac osx系統的東西，在win或者Linux下使用了會有警告，忽略即可。意思就是你已經安裝成功了...**
 
 
-<h2 id="a2">install browser-sync issue}</h2>
+<h2 id="a2">2. install browser-sync issu</h2>
 
 ```
 npm audit
@@ -50,13 +51,13 @@ found 1 low severity vulnerability in 5248 scanned packages
 **browser-sync僅為development使用,upgrade debug package 還是會發生故不處理**
 
 
-<h2 id="a3">3. run gulp -> Failed to load external module @babel/register}</h2>
+<h2 id="a3">3. run gulp -> Failed to load external module @babel/register</h2>
 
 ```
 solved it by downgrading the gulp version from 3.9.1 to 3.9.0. Looks like 3.9.1 is buggy.
 ```
 
-<h2 id="a4">4. run gulp -> some WARN}</h2>
+<h2 id="a4">4. run gulp -> some WARN</h2>
 
 ```
 * npm WARN deprecated gulp-util@3.0.8: gulp-util is deprecated - replace it,following the guidelines at https://medium.com/gulpjs/gulp-util-ca3b1f9f9ac5
@@ -85,4 +86,12 @@ WARN 1 : not use gulp-util and use below API
 WARN 2~5 僅為提示且在其他module內,不處理
 ```
 
+<h2 id="a5">5. Failed to load external module @babel/register</h2>
 
+```
+// [17:06:58] Failed to load external module @babel/register
+// [17:06:58] Requiring external module babel-register
+This is just a warning that Gulp failed to load @babel/register but on the next line it successfully loaded the fallback module: babel-register
+https://github.com/gulpjs/gulp/issues/1631
+You could install the babel-core/register module to remove the warning, but it's not necessary.
+```

@@ -184,12 +184,45 @@ function getTripDat(data, tripList) {
 <h2 id="a6">6. package</h2>
 
 ```
-// browser-sync
+// browser-sync - Live CSS Reload & Browser Syncin
 啟動 BrowserSync 的服務時，監看我們任何網頁的 html 或 css 檔案做異動的時候，自動重新讀取頁面
+// ejs : Embedded JavaScript templates
+// minimist : parse argument options
 
-
+// gulp plugin
+gulp-plumber : 錯誤處理(提示) - Prevent pipe breaking caused by errors from gulp plugins
+gulp-load-plugins : 自動加載 gulp plugin from package.json
+gulp-sourcemaps : 用來生成sourcemap 文件。用於當less 或sass 文件中有各種引入關係
+gulp-sass : 編譯 sass/scss 檔案
+	// Sass 編譯的風格總共有四種：
+	nested (預設的樣式) : 巢狀顯示
+	expanded : 不要巢狀
+	compact : 簡潔樣式，縮進成一行
+	compressed ：壓縮模式
+gulp-postcss : plugin to pipe CSS through several plugins, but parse CSS only once.
+autoprefixer : add prefix for scss
+gulp-concat：合併檔案
+gulp-uglify：混淆並壓縮 JS(Minify JavaScript with UglifyJS3.)
+gulp-rename：重新命名檔案
+gulp-front-matter : 模板設置
+gulp-clean : gulp-clean
+gulpSequence : Run a series of gulp tasks in order
+gulp-sequence : Run a series of gulp tasks in order.
+gulp-gh-pages : publish contents to Github pages
+gulp-if : conditionally control the flow of vinyl objects.
+gulp-clean-css(instead gulp-minify-css) :  壓縮 CSS, using clean-css
+gulp-uglify : JSHint plugin for gulp
+gulp-babel : Use next generation JavaScript, today, with Babel
+// js use
+eslint : ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
+eslint-config-airbnb-base : This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
+eslint-plugin-import : This plugin intends to support linting of ES2015+ (ES6+) import/export syntax, and prevent issues with misspelling of file paths and import names.
+browserify(instead gulp-browserify) : Use a node-style require() to organize your browser code and load modules installed by npm.
+lodash : The Lodash library exported as Node.js modules.
+// package
+bootstrap : 
+jquery : 
 ```
-
 
 <h2 id="a7">7. generate package.json</h2>
 
@@ -210,32 +243,19 @@ npm init
 // install gulp for develp at local
 npm install gulp --save-dev
 
-// gulp plugin
-gulp-plumber : 錯誤處理(提示) - Prevent pipe breaking caused by errors from gulp plugins
-gulp-load-plugins : 自動加載 gulp plugin from package.json
-gulp-sourcemaps : 用來生成sourcemap 文件。用於當less 或sass 文件中有各種引入關係
-gulp-sass : 編譯 sass/scss 檔案
-	// Sass 編譯的風格總共有四種：
-	nested (預設的樣式) : 巢狀顯示
-	expanded : 不要巢狀
-	compact : 簡潔樣式，縮進成一行
-	compressed ：壓縮模式
-gulp-postcss : plugin to pipe CSS through several plugins, but parse CSS only once.
-autoprefixer : add prefix for scss
-gulp-concat：合併檔案
-gulp-minify-css：壓縮 CSS
-gulp-uglify：混淆並壓縮 JS
-gulp-rename：重新命名檔案
-gulp-front-matter : 模板設置
-
-
-
 // 加載
 	// 載入 gulp
 	var gulp = require('gulp');
-	// 載入所有 gulp plugin
+	// 載入 gulp-load-plugins
 	const $ = require('gulp-load-plugins')();
-
+	// 載入 browser-sync
+	const browserSync = require('browser-sync');
+	// 載入 autoprefixer
+	const autoprefixer = require('autoprefixer');
+	// 載入 minimist - parse argument options
+	const minimist = require('minimist'); // 用來讀取指令轉成變數
+	// 載入 gulp-sequence
+	const gulpSequence = require('gulp-sequence');
 
 // add gulpfile.js - gulp flow
 	//定義一個任務名稱，來指定任務的工作內容
@@ -244,10 +264,29 @@ gulp-front-matter : 模板設置
 	gulp.src(glob)
 	// 檔案的存檔位置
 	gulp.dest(folder)
+	// 關注特定檔案是否更動
+	gulp.watch(glob, cb)
+	// 運行指定的任務
+	gulp.run(task) 
 
 // add gulpfile.js - example
+	// parse argument example 
+	// # gulp sass --env production
+	// # gulp --env production
+	const minimist = require('minimist'); 
+	const envOptions = {
+	  string: 'env',
+	  default: { env: 'development' },
+	};
+	var options = minimist(process.argv.slice(2), envOptions);
+	console.log(options);
+	.pipe($.if(options.env === 'production', $.cleanCss())) // 假設開發環境則壓縮 CSS
+
 	// default task run 哪幾個 task
 	gulp.task('default', ['copy', 'sass', 'vendorJs', 'browserSync', 'layout', 'watch']);
+	
+	// gulp-sequence example
+	gulp.task('sequence', gulpSequence('clean', 'copy', 'sass', 'vendorJs', 'layout', 'sass'));
 
 	// copy file : 包含那些檔案 --> load to --> copy 
 	gulp.task('copy', () => {
@@ -281,7 +320,7 @@ gulp-front-matter : 模板設置
 	      }).on('error', $.sass.logError),
 	    )
 	    .pipe($.postcss(processors))
-	    .pipe($.if(options.env === 'production', $.minifyCss())) // 假設開發環境則壓縮 CSS
+	    .pipe($.if(options.env === 'production', $.cleanCss())) // 假設開發環境則壓縮 CSS
 	    .pipe($.sourcemaps.write('.'))
 	    .pipe(gulp.dest('./public/stylesheets'))
 	    .pipe(
@@ -328,70 +367,36 @@ gulp-front-matter : 模板設置
 	      }),
 	    );
 	});	
-```
 
-```
-// add gulpfile.js - gulp flow
-	//定義一個任務名稱，來指定任務的工作內容
-	gulp.task(name, fn)
-	// 關注特定檔案是否更動
-	gulp.watch(glob, cb)
-	// 運行指定的任務
-	gulp.run(task) 
-	// 指定檔案來源
-	gulp.src(glob)
-	// 檔案的存檔位置
-	gulp.dest(folder)
+	// run browseSync
+	gulp.task('browserSync', () => {
+	  browserSync.init({
+	    server: { baseDir: './public' },
+	    reloadDebounce: 2000,
+	  });
+	});
 
-// 建立 task
-// 載入 gulp
-var gulp = require('gulp');
+	// watch 
+	gulp.task('watch', () => {
+	  gulp.watch(['./source/stylesheets/**/*.sass', './source/stylesheets/**/*.scss'], ['sass']);
+	  gulp.watch(['./source/**/**', '!/source/stylesheets/**/**'], ['copy']);
+	  gulp.watch(['./source/**/*.ejs', './source/**/*.html'], ['layout']);
+	});
 
-// 系統預設直接執行
-gulp.task('default', function(){
-	gulp.run('lint','sass','scripts');
+	// deploy to gihub
+	gulp.task('deploy', () => {
+	  return gulp.src('./public/**/*').pipe($.ghPages());
+	});
 
-  //監視JS檔案变化   
-  gulp.watch('./js/*.js',function(){
-      gulp.run('lint','scripts');
-  });
-
-  //監視sass檔案变化
-  gulp.watch('./sass/*.sass',function(){
-      gulp.run('sass');
-  });
-});
-
-
-// install module
-npm install jshint gulp-jshint gulp-sass gulp-concat gulp-uglify gulp-rename --save-dev
-
-//lint task  
-// 可由default載入執行
-gulp.task('jshint',function(){
-    gulp.src('./js/*.js')
-    .pipe(jshint())
-    .pipe(jshint.reporter('default'));
-});
-
-//編譯 sass  
-gulp.task('sass',function(){
-    gulp.src('./scss/*.scss')
-    .pipe(sass())
-    .pipe(gulp.dest('./css'));
-});  
-
-// 檢查JavaScript代碼錯誤
-gulp.task('scripts',function(){
-    gulp.src('./js/*/js')
-    .pipe(concat('all.js'))
-    .pipe(gulp.dest('./dist'))
-    .pipe(rename('all.min.js'))
-    .pipe(uglify())
-    .pipe(gulp.dest('./dist'));
-});
-
-
+	// 檢查JavaScript代碼錯誤
+	gulp.task('scripts',function(){
+	    gulp.src('./js/*/js')
+	    .pipe(concat('all.js'))
+	    .pipe(gulp.dest('./dist'))
+	    .pipe(rename('all.min.js'))
+	    .pipe(uglify())
+	    .pipe(gulp.dest('./dist'));
+	});
 ```
 
 <h2 id="a9">9. nvm-node.js 管理程式</h2>
