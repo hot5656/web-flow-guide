@@ -5,6 +5,7 @@
 *   [2. flex](#a2)
 *   [3. 中文直排](#a3)
 *   [4. sector](#a4)
+*   [5. grid](#a5)
 
 
 <h2 id="a1">1. font-size</h2>
@@ -124,4 +125,41 @@ p::before : p元素之前生成、插入的內容適用的選擇器。偽元素
 p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽元素
 
 	
+```
+
+<h2 id="a5">5. grid</h2>
+
+[reference](https://wcc723.github.io/css/2017/03/22/css-grid-layout/)
+### 外部容器
+*	display: grid | inline-grid | subgrid  
+	分別由 column 及 row 定義出直排與橫列的格線，內容再依隔線作安排
+	*	---
+*	grid-template-rows: <track-size> ... | <line-name> <track-size> ...; 
+track-size: 可使用彈性的長度、百分比或分數 (分數的部分需使用 fr 單位)  
+line-name: 可自行命名的名稱  
+``` CSS
+.wrapper {
+  display: grid;
+  grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end];
+  grid-template-rows: [main-start] 100px [content-start] 100px [content-end] 100px [main-end];
+}
+```
+
+
+*	grid-template-columns: <track-size> ... | <line-name> <track-size> ...;  
+*	example  
+``` css
+.wrap {
+  display: grid;
+  grid-template-columns: 200px 50px auto 50px 200px;
+  grid-template-rows: 25% 100px auto;
+  height: 100vh;
+  width: 940px;
+  margin: 0 auto;
+}
+```
+
+### 內部容器
+
+```
 ```
