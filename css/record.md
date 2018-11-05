@@ -1,4 +1,4 @@
-﻿# CSS record
+# CSS record
 
 *   [Root](../README.md)
 *   [1. font-size](#a1)
@@ -133,31 +133,81 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 ### 外部容器
 *	display: grid | inline-grid | subgrid  
 	分別由 column 及 row 定義出直排與橫列的格線，內容再依隔線作安排
-	*	---
-*	grid-template-rows: <track-size> ... | <line-name> <track-size> ...; 
-track-size: 可使用彈性的長度、百分比或分數 (分數的部分需使用 fr 單位)  
-line-name: 可自行命名的名稱  
-``` CSS
-.wrapper {
-  display: grid;
-  grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end];
-  grid-template-rows: [main-start] 100px [content-start] 100px [content-end] 100px [main-end];
-}
-```
+*	grid-template-rows: < track-size > ... | < line-name > < track-size > ...;  
+	track-size: 可使用彈性的長度、百分比或分數 (分數的部分需使用 fr 單位)
+	fr 單位就是為了格線布局而生  
+	
+	line-name: 可自行命名的名稱  
+	``` CSS
+	.wrapper {
+	  display: grid;
+	  grid-template-columns: [main-start] 1fr [content-start] 1fr [content-end] 1fr [main-end];
+	  grid-template-rows: [main-start] 100px [content-start] 100px [content-end] 100px [main-end];
+	}
+	```
+*	grid-template-columns: < track-size > ... | < line-name > < track-size > ...;  
+
+	example :  
+	``` css
+	.wrap {
+	  display: grid;
+	  grid-template-columns: 200px 50px auto 50px 200px;
+	  grid-template-rows: 25% 100px auto;
+	  grid-template-areas:
+    	"header header header header header"
+    	"side  main main main main"
+    	"side footer footer footer footer";
+
+	  height: 100vh;
+	  width: 940px;
+	  margin: 0 auto;
+	}
+	.item-a {
+	  grid-area: header;
+	  background-color: purple;
+	}
+	.item-b {
+	  grid-area: main;
+	  background-color: orange;
+	}
+	.item-c {
+	  grid-area: side;
+	  background-color: green;
+	}
+	.item-d {
+	  grid-area: footer;
+	  background-color: gray;
+	}
 
 
-*	grid-template-columns: <track-size> ... | <line-name> <track-size> ...;  
-*	example  
-``` css
-.wrap {
-  display: grid;
-  grid-template-columns: 200px 50px auto 50px 200px;
-  grid-template-rows: 25% 100px auto;
-  height: 100vh;
-  width: 940px;
-  margin: 0 auto;
-}
-```
+	.wrap {
+		grid-template-columns: repeat(2, 1fr 2fr) 100px;  
+		/* grid-template-columns: repeat({次數}, {格線...} | {格線...}) | {格線...}; */
+	}
+	```
+*	grid-column-gap: 10px; /* 設定左右間距 */
+*	grid-row-gap: 20px; /* 設定上下間距 */
+	* grid-column-gap 以及 grid-row-gap 可以合併為 grid-gap：  
+		grid-gap: 20px 10px;
+	*	可以用grid-auto-rows設定 auto-height 的最小高度
+*	grid-column-start: 2; column start 位置(from 1,也接受負值)
+*	grid-column-end: 5; column end 位置(opsition not include)
+	* grid-column-start: span 3(include block)
+	* grid-column-end: span 2(include block)
+	*	grid-column: 4 / 6 --> include start and end
+*	grid-row-start: 3
+	* grid-row: 3/6 --> include start and end
+*	grid-area --> grid-row-start/ grid-column-start/ grid-row-end/grid-column-end.
+	* grid-area: 1/2/4/6
+* order: 排列順序,如z-index可為負值
+	```css
+	.water {
+	  order: 0;
+	}
+	#poison {
+	order: -1
+	}
+	```
 
 ### 內部容器
 
