@@ -1,4 +1,4 @@
-# CSS record
+﻿SS record
 
 *   [Root](../README.md)
 *   [1. font-size](#a1)
@@ -148,7 +148,7 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 *	grid-template-columns: < track-size > ... | < line-name > < track-size > ...;  
 
 	example :  
-	``` css
+	```
 	.wrap {
 	  display: grid;
 	  grid-template-columns: 200px 50px auto 50px 200px;
@@ -178,27 +178,17 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 	  grid-area: footer;
 	  background-color: gray;
 	}
-
-
 	.wrap {
 		grid-template-columns: repeat(2, 1fr 2fr) 100px;  
 		/* grid-template-columns: repeat({次數}, {格線...} | {格線...}) | {格線...}; */
 	}
 	```
+* grid-template: 60% 40% / 200px auto; --> row column
 *	grid-column-gap: 10px; /* 設定左右間距 */
 *	grid-row-gap: 20px; /* 設定上下間距 */
 	* grid-column-gap 以及 grid-row-gap 可以合併為 grid-gap：  
 		grid-gap: 20px 10px;
 	*	可以用grid-auto-rows設定 auto-height 的最小高度
-*	grid-column-start: 2; column start 位置(from 1,也接受負值)
-*	grid-column-end: 5; column end 位置(opsition not include)
-	* grid-column-start: span 3(include block)
-	* grid-column-end: span 2(include block)
-	*	grid-column: 4 / 6 --> include start and end
-*	grid-row-start: 3
-	* grid-row: 3/6 --> include start and end
-*	grid-area --> grid-row-start/ grid-column-start/ grid-row-end/grid-column-end.
-	* grid-area: 1/2/4/6
 * order: 排列順序,如z-index可為負值
 	```css
 	.water {
@@ -208,8 +198,21 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 	order: -1
 	}
 	```
+* grid-auto-columns: 60px;
+*	grid-auto-flow
+	```
+	grid-auto-flow: row | column | row dense | column dense
+	```
+*	justify-items, justify-content, align-content --> 與 flex 的使用方法一樣
 
 ### 內部容器
-
-```
-```
+*	grid-column-start: 2; column start 位置(from 1,也接受負值)
+*	grid-column-end: 5; column end 位置(opsition not include)
+	* grid-column-start: span 3(include block)
+	* grid-column-end: span 2(include block)
+	*	grid-column: 4 / 6 --> include start and end
+*	grid-row-start: 3
+	* grid-row: 3/6 --> include start and end
+*	grid-area --> grid-row-start/ grid-column-start/ grid-row-end/grid-column-end.
+	* grid-area: 1/2/4/6
+* justify-self, align-self -->  與 flex 的使用方法一樣
