@@ -6,6 +6,7 @@
 *   [3. 中文直排](#a3)
 *   [4. sector](#a4)
 *   [5. grid](#a5)
+*   [6. susy 3](#a6)
 
 
 <h2 id="a1">1. font-size</h2>
@@ -216,3 +217,15 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 *	grid-area --> grid-row-start/ grid-column-start/ grid-row-end/grid-column-end.
 	* grid-area: 1/2/4/6
 * justify-self, align-self -->  與 flex 的使用方法一樣
+
+
+<h2 id="a6">6. susy 3</h2>
+
+[susy doc](http://oddbird.net/susy/docs/)
+[example](https://codepen.io/yisenliu/pen/wqevwR)
+*	 box-model setting a global box-sizing
+	```css
+	* { box-sizing: border-box; }
+	```
+
+```
