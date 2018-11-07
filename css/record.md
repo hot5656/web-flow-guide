@@ -23,7 +23,7 @@ rem 也是相對的文字尺寸，和 em 使用方法接近，不同的是他僅
 
 <h2 id="a2">2. flex</h2>
 
-[reference](https://wcc723.github.io/css/2017/07/21/css-flex/)
+[reference](https://wcc723.github.io/css/2017/07/21/css-flex/)  
 [reference2](https://cythilya.github.io/2017/04/06/flexbox-advance/)
 ### Flex 外容器屬性
 *	display : flex / inline-flex
@@ -221,11 +221,29 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 
 <h2 id="a6">6. susy 3</h2>
 
-[susy doc](http://oddbird.net/susy/docs/)
-[example](https://codepen.io/yisenliu/pen/wqevwR)
+[susy doc](http://oddbird.net/susy/docs/)  
+[example1](https://codepen.io/yisenliu/pen/wqevwR)  
+[example2](https://codepen.io/qtgye/pen/VWxrVQ)
+[example3](https://codepen.io/mirisuzanne/pen/VWzwXj)
 *	 box-model setting a global box-sizing
-	```css
+	```scss
+	// import susy
+	@import "../node_modules/susy/sass/susy";
+	@import "../node_modules/susy/sass/plugins/svg-grid";
+
+	// Settings
+	$susy: (
+		'columns': susy-repeat(8),	// 幾格
+		//'columns': 1 1 2 2 1 1 2 2,	// 幾格
+		//'columns': susy-repeat(6, 180px), // 6格 180px - gutter auto count
+		//'columns': 120px susy-repeat(4) 120px, // 6column include 2 120px - gutter auto count
+		'svg-grid-colors': hsla(180, 50%, 50%, 0.25),	// 測試格顏色
+		//'gutters': 1/3,	// 間隔(1/3:相對格寬, %:相對vw, 1em,  )
+		//'spread': 'wider'  // every element extend gutter : narrow (none), wide (one), or wider (two)
+		//'container-spread':  'wider' // 增加最前及的後 guttter :　narrow (none), wide (one), or wider (two)
+	);
+
+	// box-sizing
 	* { box-sizing: border-box; }
 	```
 
-```
