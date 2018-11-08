@@ -213,6 +213,8 @@ gulp-if : conditionally control the flow of vinyl objects.
 gulp-clean-css(instead gulp-minify-css) :  壓縮 CSS, using clean-css
 gulp-uglify : JSHint plugin for gulp
 gulp-babel : Use next generation JavaScript, today, with Babel
+gulp-layout : 
+
 // js use
 eslint : ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
 eslint-config-airbnb-base : This package provides Airbnb's base JS .eslintrc (without React plugins) as an extensible shared config.
@@ -232,6 +234,113 @@ npm init
 
 
 <h2 id="a8">8. gulp</h2>
+
+*	a example  
+
+```javascript
+// install gulp to global
+npm install gulp -g
+
+// generate package.json
+npm init
+
+// install susy - if need
+npm install susy --save-dev
+
+// install gulp for develp at local
+npm install gulp --save-dev
+npm install browser-sync --save-dev
+npm install gulp-load-plugins --save-dev
+npm install autoprefixer --save-dev
+npm install gulp-plumber --save-dev
+npm install gulp-sourcemaps --save-dev
+npm install gulp-sass --save-dev
+npm install gulp-postcss --save-dev
+npm install gulp-if --save-dev
+npm install gulp-clean-css --save-dev
+npm install minimist --save-dev
+npm install gulp-clean --save-dev
+
+// add file gulpfile.js
+// variabel 
+const gulp = require('gulp');
+const $ = require('gulp-load-plugins')();
+const browserSync = require('browser-sync');
+const autoprefixer = require('autoprefixer');
+const minimist = require('minimist'); // 用來讀取指令轉成變數
+
+// env process
+// production || development
+// # gulp --env production
+const envOptions = {
+  string: 'env',
+  default: { env: 'development' },
+};
+
+var options = minimist(process.argv.slice(2), envOptions);
+console.log(options);
+// --- env process
+
+// load browser-sync
+gulp.task('browserSync', () => {
+  browserSync.init({
+    server: { baseDir: './public' },
+    reloadDebounce: 2000,
+  });
+});
+
+// copy file to public (not include sass,ejs and html  )
+gulp.task('copy', () => {
+  gulp
+    .src(['./source/**/**', '!source/sass/**/**', '!source/**/*.ejs', '!source/**/*.html'])
+    .pipe(gulp.dest('./public/'))
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      }),
+    );
+});
+
+// sass process
+gulp.task('sass', () => {
+  // PostCSS AutoPrefixer
+  const processors = [
+    autoprefixer({
+      browsers: ['last 5 version'],
+    }),
+  ];
+
+  return gulp
+    .src(['./source/sass/**/*.sass', './source/sass/**/*.scss'])
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe(
+      $.sass({
+        outputStyle: 'nested',
+        includePaths: ['./node_modules/susy/sass'],		// addition include sass
+      }).on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    .pipe($.if(options.env === 'production', $.cleanCss())) // 假設開發環境則壓縮 CSS
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('./public/css'))
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      }),
+    );
+});
+
+// clear pubic file 
+gulp.task('clean', () => {
+  return gulp.src(['./public', './.tmp'], { read: false }).pipe($.clean());
+});
+
+// default task
+gulp.task('default', ['copy', 'sass', 'vendorJs', 'browserSync', 'layout', 'watch']);
+```
+
+*	flow register 
 
 ``` javascript
 // install gulp to global

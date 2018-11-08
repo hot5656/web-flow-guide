@@ -147,7 +147,8 @@
 *	w3c 出了任何的草案、ECMAScript 出了哪些規範時，瀏覽器也會適版本號依序地納入新語法
 
 ### name 
-banner : 橫幅
+banner/hero : 橫幅(版頭)
+
 slide
 introduce
 
@@ -196,5 +197,37 @@ introduce
 	    	"email": "kyp001@yahoo.com.tw"
 	  	}
 	```
+
+### record
+	1. BEM(Block Element Modifier) : 一種 CSS class 命名的設計模式，將介面切割成許多獨立的區塊，以區塊（Block）、元素（Element）和修飾子（Modifier）來命名
+		__ 區塊
+		_ 狀態
+	2. prefix 前綴
+		l - layout
+		e - element (h1, p, ul, button)
+		p - page
+		h - helper
+		col- grid
+		fas、fa - icon
+		m - module (card, pagegrad)
+	3. 斷點
+			pc >= 1024
+			pad 768~1023
+			small pad 569~767
+			mobil 320~568
+	4. 書 - 使用者介面
+	5. 文字
+		//font
+		$font-title: Helvetica Neue, Regular
+		$font-Neue: Helvetica Neue, Regular
+		$font-times: Times, Regular
+	6. flexbox
+	7. bs4-utility
+	8. airbnb(JavaScript Style Guide)
+
+
+
+
+
 
 
