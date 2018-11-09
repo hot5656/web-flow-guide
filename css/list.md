@@ -149,8 +149,23 @@
   *	calc()
   *	cubic-bezier(0.1, 0.7, 1.0, 0.1);
 
+*	img 水平置中
+	* margin: 0 auto 
+	```css
+		width: 240px;		// set width
+		margin: 0 auto
+		display: block	// set display = block
+	```
+* text 水平置中
+	*	text-align: center
 
+	
+*	img 垂直置中
+	*
 
+* text 垂直置中
+	* 單行
+		line-height: 400px (set as block height)
 
 
 ### vertical-align 常用參數表(配合display: table-cell)

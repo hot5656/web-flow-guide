@@ -204,7 +204,7 @@ autoprefixer : add prefix for scss
 gulp-concat：合併檔案
 gulp-uglify：混淆並壓縮 JS(Minify JavaScript with UglifyJS3.)
 gulp-rename：重新命名檔案
-gulp-front-matter : 模板設置
+gulp-front-matter : 模板設置 frontMatter
 gulp-clean : gulp-clean
 gulpSequence : Run a series of gulp tasks in order
 gulp-sequence : Run a series of gulp tasks in order.
@@ -213,7 +213,7 @@ gulp-if : conditionally control the flow of vinyl objects.
 gulp-clean-css(instead gulp-minify-css) :  壓縮 CSS, using clean-css
 gulp-uglify : JSHint plugin for gulp
 gulp-babel : Use next generation JavaScript, today, with Babel
-gulp-layout : 
+gulp-layout : Gulp plugin to switch layout files for each content
 
 // js use
 eslint : ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
@@ -260,6 +260,12 @@ npm install gulp-if --save-dev
 npm install gulp-clean-css --save-dev
 npm install minimist --save-dev
 npm install gulp-clean --save-dev
+
+// layout using ejs format
+npm install gulp-front-matter --save-dev
+npm install gulp-layout --save-dev
+npm install ejs --save-dev
+
 
 // add file gulpfile.js
 // variabel 
@@ -333,11 +339,81 @@ gulp.task('sass', () => {
 
 // clear pubic file 
 gulp.task('clean', () => {
-  return gulp.src(['./public', './.tmp'], { read: false }).pipe($.clean());
+  return gulp.src(['./public'], { read: false }).pipe($.clean());
+});
+
+// layout process
+gulp.task('layout', () => {
+  return gulp
+    .src(['./source/**/*.html'])
+    .pipe($.plumber())
+    .pipe($.frontMatter())  // 模板設置
+    .pipe(
+      $.layout((file) => {  // ejs 模板設置
+        return file.frontMatter;
+      }),
+    )
+    .pipe(gulp.dest('./public'))
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      }),
+    );
+});
+
+// watch process
+gulp.task('watch', () => {
+  gulp.watch(['./source/sass/**/*.sass', './source/sass/**/*.scss'], ['sass']);
+  gulp.watch(['./source/**/**', '!source/sass/**/**', '!source/**/*.ejs', 'source/**/*.html'], ['copy']);
+  gulp.watch(['./source/**/*.ejs', './source/**/*.html'], ['layout']);
 });
 
 // default task
+gulp.task('default', ['copy', 'sass', 'layout', 'browserSync', 'watch']);
 gulp.task('default', ['copy', 'sass', 'vendorJs', 'browserSync', 'layout', 'watch']);
+
+// layout.ejs example
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document <%- title %></title>
+	<link rel="stylesheet" href="css/all.css">
+</head>
+<body>
+	<% if (current === 'index') { %>
+		<h1>INDEX</h1>
+	<%} %>
+	// html content
+	<%- contents %>
+	// html content end
+</body>
+</html>
+
+// html example 
+---
+title: 首頁
+layout: ./source/layout.ejs
+engine: ejs
+current: index
+---
+
+<section>
+	<nav>
+		nav: span 2
+	</nav>
+
+	<main>
+		main: span 6
+	</main>
+
+	<footer>
+		footer: span all
+	</footer>
+</section>	
+
 ```
 
 *	flow register 
@@ -517,3 +593,4 @@ nvm install 8.11.2 // intall node.js 8.11.2
 nvm list // list all install node.js
 nvm use 8.11.2 // switch to node.js 8.11.2
 ```
+
