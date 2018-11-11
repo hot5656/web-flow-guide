@@ -164,8 +164,15 @@
 	*
 
 * text 垂直置中
-	* 單行
+	* 單行(僅對文字有效)
+		height: 400px
 		line-height: 400px (set as block height)
+
+*	inline(內聯) 元素
+	*	inline：span、strong、em
+	*	inline-block：input、button、textarea、select、img
+
+
 
 
 ### vertical-align 常用參數表(配合display: table-cell)
