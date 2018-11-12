@@ -6,6 +6,7 @@
 	ctrl-shift-p(or F1) : to command line
 	F11 : 全螢幕切換
 
+	ctrl+/ : add comment
 	ctrl-p : search file name
 	ctl-enter : add next line
 	shift-alt-f : align code
@@ -14,6 +15,7 @@
 	ctl-` : open termernal/other windows
 	ctl-d : 選擇下一個相同string共同編輯
 	alt-(mouse-l) : select 共同編輯
+	選擇多行-->shift+alt+(mouse-l) : 多行編輯
 	alt+^/alt- : select up/down  
 	F1 : select command  
 	Ctrl +/- : 字型大小

@@ -161,11 +161,61 @@
 
 	
 *	img 垂直置中
-	*
+	* 添加偽元素 ( ::before、::after )  
+	vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)  
+	before 會造成前面有空格  
+
+	```css
+	.div0
+	  width: 200px
+	  height: 150px
+	  border: 5px solid #000
+	  &::after
+	    content: ''
+	    width: 0
+	    height: 100%
+	    display: inline-block
+	    vertical-align: middle
+
+	.redbox
+	  width: 30px
+	  height: 30px
+	  background: #c00
+	  display: inline-block
+	  vertical-align: middle
+
+  <div class="div0">
+		<div class="redbox"></div>
+	</div>
+	```
+	* calc 動態計算 - 要使用position
+
+	```css
+	.div0
+	  position: relative
+	  width: 200px
+	  height: 150px
+	  border: 1px solid red
+
+	.redbox
+	  position: absolute
+	  width: 30px
+	  height: 30px
+	  background: #c00
+	  top: calc(50% - 15px)
+	  margin-left: calc(50% - 15px)
+	```
+
 
 * text 垂直置中
 	* 單行
 		line-height: 400px (set as block height)
+
+### special 
+	* vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)
+	* margin: 0 auto 僅對 block 有效,對 inline-block 無效
+	* text-align: center 對text都有效,但對其他僅 inline-block有效
+	* margin-top: 10% 是對照水平寬度
 
 
 ### vertical-align 常用參數表(配合display: table-cell)
