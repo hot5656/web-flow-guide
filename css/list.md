@@ -145,34 +145,131 @@
 	height: auto (不確定的值) 至 height: 100px (具體數值)  
 	display: none 至 display: block  
 	background: url(foo.jpg) 至 background: url(bar.jpg)  
+* transform: transform-function;
+	* rotate(θ)
+	指定元素以參考點為中心軸 2D 旋轉 θ 度。
+	* skewX(θ)
+	指定元素以參考點為中心軸沿著橫向傾斜 θ 度。
+	* skewY(θ)
+	指定元素以參考點為中心軸沿著縱向傾斜 θ 度。
+	* skew(θx,θy)
+	指定元素以參考點為中心軸沿著橫向傾斜 θx 度、 縱向傾斜 θy 度。參數如果只指定 1 個，省略的第 2 個參數，會視為 0 ，也就是只有沿橫向傾斜。September, 2012 W3C 草書又復原此項
+	* scaleX(m)
+	指定元素由參考點橫向縮放 m 倍。
+	* scaleY(m)
+	指定元素由參考點縱向縮放 m 倍。
+	* scale(mx,my)
+	指定元素由參考點 2D 橫向縮放 mx 倍、縱向縮放 my 倍，等於是結合 scaleX(mx), scaleY(my) 。參數如果只指定 1 個，省略的第 2 個參數，會等於第 1 個，也就是橫向、縱向以相同比例縮放。
+	* translateX(o)
+	指定元素由參考點橫向移動 o 距離。
+	* translateY(o)
+	指定元素由參考點縱向移動 o 距離。
+	* translate(ox,oy)
+	指定元素由參考點 2D 橫向移動 ox 距離、縱向移動 oy 距離，等於是結合 translateX(ox), translateY(oy) 。參數如果只指定 1 個，省略的第 2 個參數，會視為 0 ，也就是只有橫向移動。
+	* matrix(a,b,c,d,e,f)
+	指定元素由參考點依據數學變形矩陣 (transformation matrix) 的 6 個參數值產生 2D 變形。矩陣的目的主要在運算出四邊形四角的座標，屬於數學問題，這裡就不作太多討論了。事實上，前述的各項變形函數都是簡化這個矩陣而拆解出來的，稍後範例會看到對照。有一些線上工具可以比較容易幫我們產生這些參數值。
+
+
 *	function  
   *	calc()
   *	cubic-bezier(0.1, 0.7, 1.0, 0.1);
 
 *	img 水平置中
-	* margin: 0 auto 
+	* margin: 0 auto - need set display = block
 	```css
 		width: 240px;		// set width
 		margin: 0 auto
-		display: block	// set display = block
+		display: block;	// set display = block
 	```
 * text 水平置中
 	*	text-align: center
 
 	
 *	img 垂直置中
-	*
+	* 添加偽元素 ( ::before、::after )  
+	vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)  
+	before 會造成前面有空格  
+
+	```css
+	.div0
+	  width: 200px
+	  height: 150px
+	  border: 5px solid #000
+	  &::after
+	    content: ''
+	    width: 0
+	    height: 100%
+	    display: inline-block
+	    vertical-align: middle
+
+	.redbox
+	  width: 30px
+	  height: 30px
+	  background: #c00
+	  display: inline-block
+	  vertical-align: middle
+
+  <div class="div0">
+		<div class="redbox"></div>
+	</div>
+	```
+	* calc 動態計算 - 要使用position relative 
+
+	```
+	.div0
+	  width: 200px
+	  height: 150px
+	  border: 1px solid blue
+
+	.redbox
+	  position: relative
+	  width: 30px
+	  height: 30px
+	  background: #c00
+	  top: calc(50% - 15px)
+	  margin-left: calc(50% - 15px)
+	```
+
+	* transform - 要使用position relative 
+
+	```
+	.div0
+	  border: 1px solid blue
+	  height: 100px
+	  width: 200px
+
+	.redbox
+	  height: 30px
+	  width: 30px
+	  background: red
+	  position: relative
+	  margin: 0 auto
+	  top: 50%
+	  transform: translateY(-50%)
+
+	<div class="div0">
+		<div class="redbox"></div>
+	</div>
+	``` 
+
 
 * text 垂直置中
 	* 單行(僅對文字有效)
 		height: 400px
 		line-height: 400px (set as block height)
 
+
 *	inline(內聯) 元素
 	*	inline：span、strong、em
 	*	inline-block：input、button、textarea、select、img
 
 
+=======
+### special 
+	* vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)
+	* margin: 0 auto 僅對 block 有效,對 inline-block 無效
+	* text-align: center 對text都有效,但對其他僅 inline-block有效
+	* margin-top: 10% 是對照水平寬度
 
 
 ### vertical-align 常用參數表(配合display: table-cell)
