@@ -5,6 +5,30 @@
 ### Font
 *   [Free Font](http://allfont.net/free/)
 
+### icon
+*   [material.io](https://material.io/tools/icons/)  
+
+```css
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+/* Rules for sizing the icon. */
+.material-icons.md-18 { font-size: 18px; }
+.material-icons.md-24 { font-size: 24px; }
+.material-icons.md-36 { font-size: 36px; }
+.material-icons.md-48 { font-size: 48px; }
+
+/* Rules for using icons as black on a light background. */
+.material-icons.md-dark { color: rgba(0, 0, 0, 0.54); }
+.material-icons.md-dark.md-inactive { color: rgba(0, 0, 0, 0.26); }
+
+/* Rules for using icons as white on a dark background. */
+.material-icons.md-light { color: rgba(255, 255, 255, 1); }
+.material-icons.md-light.md-inactive { color: rgba(255, 255, 255, 0.3); }
+
+<i class="material-icons">face</i>
+```
+
 ### image
 *   [十個常用的UI靈感及工具網站](https://medium.com/as-a-product-designer/%E5%8D%81%E5%80%8B%E5%B8%B8%E7%94%A8%E7%9A%84ui%E9%9D%88%E6%84%9F%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B6%B2%E7%AB%99-4b21d4c0a5ac)
 *   [TemplateMonster(free psd)](https://www.templatemonster.com/free-templates.php)

@@ -169,10 +169,20 @@
 	* matrix(a,b,c,d,e,f)
 	指定元素由參考點依據數學變形矩陣 (transformation matrix) 的 6 個參數值產生 2D 變形。矩陣的目的主要在運算出四邊形四角的座標，屬於數學問題，這裡就不作太多討論了。事實上，前述的各項變形函數都是簡化這個矩陣而拆解出來的，稍後範例會看到對照。有一些線上工具可以比較容易幫我們產生這些參數值。
 
+* ul li 橫向水平
+	```
+	li { display: inline-block; }
+	```
+* flex - 後面item往右靠  
+	第一個item set "margin-right: auto"
+
+---
 
 *	function  
   *	calc()
   *	cubic-bezier(0.1, 0.7, 1.0, 0.1);
+
+---
 
 *	img 水平置中
 	* margin: 0 auto - need set display = block
@@ -184,7 +194,8 @@
 * text 水平置中
 	*	text-align: center
 
-	
+---
+
 *	img 垂直置中
 	* 添加偽元素 ( ::before、::after )  
 	vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)  
@@ -215,7 +226,7 @@
 	```
 	* calc 動態計算 - 要使用position relative 
 
-	```
+	```css
 	.div0
 	  width: 200px
 	  height: 150px
@@ -232,7 +243,7 @@
 
 	* transform - 要使用position relative 
 
-	```
+	```css
 	.div0
 	  border: 1px solid blue
 	  height: 100px
@@ -252,25 +263,75 @@
 	</div>
 	``` 
 
+	*	絕對定位  
+	將上下左右的數值都設為 0，再搭配一個margin:auto
+
+	```css
+	.div0
+	  position: relative
+	  width: 200px
+	  height: 150px
+	  border: 1px solid blue
+
+	.redbox
+	  position: absolute
+	  width: 30px
+	  height: 30px
+	  margin: auto
+	  top: 0
+	  bottom: 0
+	  left: 0
+	  right: 0
+	  background: #c00
+
+	<div class="div0">
+		<div class="redbox"></div>
+	</div>	
+	```
+
+	*	使用 Flexbox  
+	使用 align-items 或 align-content 的屬性，輕輕鬆鬆就可以做到垂直置中的效果喔  
+
+	```css
+	.div0
+	  display: flex
+	  width: 200px
+	  height: 150px
+	  border: 1px solid blue
+	  justify-content : center
+	  align-items : center    
+
+	.redbox
+	  width: 30px
+	  height: 30px
+	  background: #c00
+
+	<div class="div0">
+		<div class="redbox"></div>
+	</div>	
+	```
+
 
 * text 垂直置中
-	* 單行(僅對文字有效)
-		height: 400px
+	* 單行(僅對文字有效)  
+		height: 400px  
 		line-height: 400px (set as block height)
 
+---
 
 *	inline(內聯) 元素
 	*	inline：span、strong、em
 	*	inline-block：input、button、textarea、select、img
 
+---
 
-=======
 ### special 
-	* vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)
-	* margin: 0 auto 僅對 block 有效,對 inline-block 無效
-	* text-align: center 對text都有效,但對其他僅 inline-block有效
-	* margin-top: 10% 是對照水平寬度
+* vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)
+* margin: 0 auto 僅對 block 有效,對 inline-block 無效
+* text-align: center 對text都有效,但對其他僅 inline-block有效
+* margin-top: 10% 是對照水平寬度
 
+---
 
 ### vertical-align 常用參數表(配合display: table-cell)
   vertical-align:baseline;  預設值，元素在該行的基礎線上，大約在文字的中間位置，並不美觀。  

@@ -16,14 +16,16 @@
 
 
 <h2 id="a2">2. img 放於 div 內都會在底部保留一些間隔</h2>
+原因 : image vertical-align: baseline;  
 
-```
-1. img 設定 display: block or vertical-align: middle 即可去除
+```css
+1. img 設定 display: block
 
 div 
 	img 
 		display: block
 
+2. img 設定 vertical-align: middle
 div 
 	img 
 		vertical-align: middle
@@ -49,7 +51,8 @@ div
 
 ```
 
-*   [6. 去除邊框](#a6)
+
+<h2 id="a5">5. ???? 有些地方 clear:both not working ????</h2>
 
 <h2 id="a6">6. 去除邊框</h2>
 
