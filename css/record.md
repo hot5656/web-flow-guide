@@ -225,6 +225,7 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 [example1](https://codepen.io/yisenliu/pen/wqevwR)  
 [example2](https://codepen.io/qtgye/pen/VWxrVQ)  
 [example3](https://codepen.io/mirisuzanne/pen/VWzwXj)  
+[example flexbox+susy3](https://codepen.io/michellebarker/pen/pjWOqV)  
 *	 box-model setting a global box-sizing
 	```scss
 	// import susy
