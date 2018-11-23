@@ -7,6 +7,7 @@
 *   [4. sector](#a4)
 *   [5. grid](#a5)
 *   [6. susy 3](#a6)
+*   [7. 另一背景顏色(應先設 position: relative)](#a7)
 
 
 <h2 id="a1">1. font-size</h2>
@@ -248,3 +249,18 @@ p::after  : 緊跟p元素之後生成、插入的內容適用的選擇器。偽�
 	* { box-sizing: border-box; }
 	```
 
+<h2 id="a7">7. 另一背景顏色(應先設 position: relative)</h2>
+
+
+```
+// 另一背景顏色(應先設 position: relative)
+@mixin second-bg($color, $opacity)
+	&:before
+		background-color: $color
+		opacity: $opacity
+		content: ''
+		display: block
+		position: absolute
+		height: 100%
+		width: 100%
+```

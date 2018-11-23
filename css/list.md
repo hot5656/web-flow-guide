@@ -56,6 +56,25 @@
 		contain	使用於背景圖片大於容器時，將背景圖片縮小至可以在容器內呈現。  
   *	background-position: center center;  
   *	background-image: url("../../img/photo-1473256599800-b48c7c88cd7e.jpg");  
+		```css
+		background-repeat: 
+			no-repeat 背景圖案不重複
+			repeat-x 背景圖案在 x-方向重複
+			repeat-y 背景圖案在 y-方向重複
+			repeat  背景圖案在 x- 及 y-方向重複
+		background-attachment: 
+			fixed 背景圖案永遠是停留
+			scroll 背景圖案將與捲動的動作一起移動
+		background-position: [top,center,bottom,%,x position]  [left,center,right,%,y position] 
+		background-size：bg-size , bg-size
+			auto(預設值)	即背景圖片原始長寬
+			length 				指定圖片具體大小的數值，不允許負值(當只設定一個數值，另一個數值預設值為auto)
+			percentage		以背景圖所在元素的百分比指定背景圖大小，不允許負值(
+			cover					主要用於背景圖小於所在的內容，此時就可以採用cover的方式，使背景圖放大至內容的大小，但此方法容易使背景圖因放大而失真
+			contain				主要用於背景圖大於所在內容，但卻需要將背景圖完整呈現，此時就可採用contain的方式，使背景圖縮小至內容的大小。
+		```
+
+
   *	white-space: 空白的處理方法  
     normal(default)   連續的空白字都縮減為一個空白，長行遇到右邊界會跳行分為兩行 
     nowrap 連續的空白字會縮減為一個空白，不跳行  
