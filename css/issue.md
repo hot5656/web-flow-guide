@@ -7,6 +7,9 @@
 *   [4. button shows blue outline when clicked](#a4)
 *   [5. ???? 有些地方 clear:both not working ????](#a5)
 *   [6. 去除邊框](#a6)
+*   [7. ul li 水平排列中間會有空格](#a7)
+*   [8. material.io icon 置中](#a8)
+
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
 
@@ -58,4 +61,18 @@ div
 
 ```
 border-width: 0
+```
+
+
+<h2 id="a7">7. ul li 水平排列中間會有空格</h2>
+
+```
+在 <ul> 上縮小字體大小到 0並在 <li> 上恢復大小
+```
+
+<h2 id="a8">8. material.io icon 置中</h2>
+
+```css
+    i 
+      vertical-align: middle
 ```

@@ -204,7 +204,7 @@
 ---
 
 *	img 水平置中
-	* margin: 0 auto - need set display = block
+	* margin: 0 auto - need set display = block(相對的寬度應為固定)
 	```css
 		width: 240px;		// set width
 		margin: 0 auto
