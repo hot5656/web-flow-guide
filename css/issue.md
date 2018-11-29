@@ -9,6 +9,7 @@
 *   [6. 去除邊框](#a6)
 *   [7. ul li 水平排列中間會有空格](#a7)
 *   [8. material.io icon 置中](#a8)
+*   [9. checkbox 與文字對齊下標](#a9)
 
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
@@ -75,4 +76,19 @@ border-width: 0
 ```css
     i 
       vertical-align: middle
+```
+
+*   [9. checkbox 與文字對齊下標](#a9)
+
+
+<h2 id="a9">9. checkbox 與文字對齊下標</h2>
+
+```css
+  [type="checkbox"]
+    margin-left: 9%
+    margin-bottom: 22px
+    vertical-align: sub
+
+<input type="checkbox" id="check">
+<label for="check">記住我</label>
 ```

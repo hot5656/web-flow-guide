@@ -39,6 +39,9 @@
 	<input type="checkbox" name="hobby" value="movie"> 看電影
 	<input type="checkbox" name="hobby" value="music"> 聽音樂
 	<input type="checkbox" name="hobby" value="comic"> 看漫畫
+	//--- add label for checkbox (間隔會較寬)
+	<input type="checkbox" id="check">
+	<label for="check">記住我</label>
 	<br>
 	<input type="submit" value="輸入">
 </form>
@@ -54,4 +57,11 @@
 	<input type="button" value="按鍵">
 	<input type="submit" value="輸入">
 </form>
+```
+
+### other
+
+```html
+// button
+<button type="button">我是按鈕</button>
 ```
