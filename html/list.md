@@ -59,6 +59,18 @@
 </form>
 ```
 
+### select option 下拉式選單
+
+```css
+<select name="YourLocation">
+　<option value="Taipei">台北</option>
+　<option value="Taoyuan">桃園</option>
+　<option value="Hsinchu">新竹</option>
+　<option value="Miaoli">苗栗</option>
+　...
+</select>
+```
+
 ### other
 
 ```html

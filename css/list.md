@@ -187,6 +187,14 @@
 	指定元素由參考點 2D 橫向移動 ox 距離、縱向移動 oy 距離，等於是結合 translateX(ox), translateY(oy) 。參數如果只指定 1 個，省略的第 2 個參數，會視為 0 ，也就是只有橫向移動。
 	* matrix(a,b,c,d,e,f)
 	指定元素由參考點依據數學變形矩陣 (transformation matrix) 的 6 個參數值產生 2D 變形。矩陣的目的主要在運算出四邊形四角的座標，屬於數學問題，這裡就不作太多討論了。事實上，前述的各項變形函數都是簡化這個矩陣而拆解出來的，稍後範例會看到對照。有一些線上工具可以比較容易幫我們產生這些參數值。
+	
+* input 
+	*	placeholder color
+	```css
+  ::placeholder
+  	color: $c-info
+	```
+
 
 * ul li 橫向水平
 	```
