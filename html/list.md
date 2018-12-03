@@ -62,9 +62,26 @@
 ### select option 下拉式選單
 
 ```css
+select {
+	// 設定無 icon
+	appearance: none
+	// 更改 icon
+  background-image: url("../img/arrows-up-and-down.png")
+  background-position: 90% 50% 
+  background-repeat: no-repeat
+  padding-left: 20px
+  height: 56px
+  background-color: $c-secondary
+  color: $c-info
+  margin-bottom: 8px
+  border-width: 0
+}
+
 <select name="YourLocation">
+  // 分類
+	<optgroup label="城市"> 
 　<option value="Taipei">台北</option>
-　<option value="Taoyuan">桃園</option>
+　<option value="Taoyuan" SELECTED>桃園</option>
 　<option value="Hsinchu">新竹</option>
 　<option value="Miaoli">苗栗</option>
 　...

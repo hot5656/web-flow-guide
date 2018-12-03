@@ -55,6 +55,8 @@
 	ctrl+shift+enter 
 * live server : web server	 
 *	colorize : look color(scss/sass/color)
+* git history  
+	F1 --> git history(git log) 
 
 ***
 * Bracket Pair Colorizer : 可以讓不同縮減的括號顯示不同的顏色

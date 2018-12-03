@@ -10,6 +10,7 @@
 *   [7. ul li 水平排列中間會有空格](#a7)
 *   [8. material.io icon 置中](#a8)
 *   [9. checkbox 與文字對齊下標](#a9)
+*   [10. select set margin-left 誤差 4px 調整](#a10)
 
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
@@ -91,4 +92,30 @@ border-width: 0
 
 <input type="checkbox" id="check">
 <label for="check">記住我</label>
+```
+
+
+<h2 id="a10">10. select set margin-left 誤差 4px 調整</h2>
+
+```css
+.item-2
+  width: 48.5%
+.item-2-2nd
+  margin-left: 3%
+  width: 48.5%
+.item-2-2nd-s
+  margin-left: calc(3% - 4px)
+
+<select name="city" class="item-2">
+　<option value="Taipei">台北</option>
+　<option value="Taoyuan">桃園</option>
+　<option value="Hsinchu">新竹</option>
+　<option value="Miaoli">苗栗</option>
+</select>
+<select name="area" class="item-2-2nd-s">
+　<option value="Taipei">三民區</option>
+　<option value="Taoyuan">苓雅區</option>
+　<option value="Hsinchu">前鎮區</option>
+　<option value="Miaoli">新興區</option>
+</select>
 ```
