@@ -352,6 +352,59 @@
 
 ---
 
+
+### 字體 font-family)
+* 泛用字 generic-family
+```
+serif 明體(襯線體)
+sans-serif 黑體(無襯線體)
+cursive 捲曲字體
+fantasy 花俏字體
+monospace 等寬字體
+```
+
+* 指定字體 family-name
+```
+Helvetica (Mac內建,無襯線字體一種)
+Times (Mac內建,襯線字體一種)
+PingFang TC (Mac內建,繁中字體)
+Helvetica Neue(新版 Helvetica)
+
+Arial (microsoft內建,無襯線字體一種,近似於 Helvetica) 
+Times New Roman (microsoft內建,襯線字體一種)
+Microsoft JhengHei (microsoft內建 微軟正黑體)
+MingLiU (細明體字型)
+PMingLiU (新細明體字型)
+
+SemiBold (思源宋體)-Google/Adobe
+```
+
+* 字重(weight)
+```css
+css
+font-weight: normal|bold|bolder|lighter|number|initial|inherit
+normal	Defines normal characters. This is default
+bold	  Defines thick characters
+bolder	Defines thicker characters
+lighter	Defines lighter characters
+100~900
+initial	Sets this property to its default value.
+inherit	Inherits this property from its parent element.
+
+是指相對於字高度的筆畫粗細(stroke width),一個字體（typeface）的某個字型(font)的字重常常至少4-6個,其中正常與黑體幾乎是必備的
+	100 - 淡體 Thin ( Hairline )
+	200 - 特細 Extra-light ( ultra-light )
+	300 - 細體 Light
+	350 - 次細 Demi-Light
+	400 - 標準 Regular ( normal / book / plain )
+	500 - 適中 Medium
+	600 - 次粗 Demi-bold/semi-bold
+	700 - 粗體 Bold
+	800 - 特粗 Extra-bold/extra
+	900 - 濃體 Black(Heavy)
+	950 - 特濃 Extra-black(Ultra-black)
+```
+
 ### special 
 * vertical-align: middle (在元素內的所有元素垂直位置互相置中，並不是相對於外框的高度垂直置中)
 * margin: 0 auto 僅對 block 有效,對 inline-block 無效
