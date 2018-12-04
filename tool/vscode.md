@@ -25,9 +25,52 @@
 
 ### issue
 * show manu bar
-	F1 -> toggle manu bar
+	F1 -> toggle manu bar  
 	F11 toogle full screen
+	
+* sass --> css (sometime error, need re-do)
 
+	```
+	<<error message>
+	Error in plugin "sass"
+	Message:
+	    source\sass\all.sass
+	Error: File to import not found or unreadable: page/checkout.
+	        on line 21 of source/sass/all.sass
+	>> @import "page/checkout";
+
+	try add delay at sass flow(.pipe(wait(200)))
+	// sass process
+	gulp.task('sass', () => {
+	  // PostCSS AutoPrefixer
+	  const processors = [
+	    autoprefixer({
+	      browsers: ['last 5 version'],
+	    }),
+	  ];
+
+	  return gulp
+	    .src(['./source/sass/**/*.sass', './source/sass/**/*.scss'])
+	    .pipe(wait(200))  --> add this flow
+	    .pipe($.plumber())
+	    .pipe($.sourcemaps.init())
+	    .pipe(
+	      $.sass({
+	        outputStyle: 'nested',
+	        includePaths: ['./node_modules/susy/sass'],		// addition include sass
+	      }).on('error', $.sass.logError),
+	    )
+	    .pipe($.postcss(processors))
+	    .pipe($.if(options.env === 'production', $.cleanCss())) // 假設開發環境則壓縮 CSS
+	    .pipe($.sourcemaps.write('.'))
+	    .pipe(gulp.dest('./public/css'))
+	    .pipe(
+	      browserSync.reload({
+	        stream: true,
+	      }),
+	    );
+	});
+	```
 
 
 

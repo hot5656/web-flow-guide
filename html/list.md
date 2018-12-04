@@ -93,4 +93,7 @@ select {
 ```html
 // button
 <button type="button">我是按鈕</button>
+// tag a
+<a href="index.html" class="next">繼續逛逛</a>
+<a class="pay" href="checkout_profile.html">結帳</a>
 ```
