@@ -39,7 +39,8 @@
 	        on line 21 of source/sass/all.sass
 	>> @import "page/checkout";
 
-	try add delay at sass flow(.pipe(wait(200)))
+	*** npm install gulp-wait --save-dev ***
+	try add delay at sass flow(.pipe($wait(200)))
 	// sass process
 	gulp.task('sass', () => {
 	  // PostCSS AutoPrefixer
@@ -51,7 +52,7 @@
 
 	  return gulp
 	    .src(['./source/sass/**/*.sass', './source/sass/**/*.scss'])
-	    .pipe(wait(200))  --> add this flow
+	    .pipe($.wait(200))  --> add this flow
 	    .pipe($.plumber())
 	    .pipe($.sourcemaps.init())
 	    .pipe(

@@ -66,6 +66,9 @@
 *   [Todolist](https://todoist.com/)
 *   [Evernote筆記App-include 網頁收錄](https://evernote.com/intl/zh-tw)
 *   [Google Docs](https://www.google.com.tw/intl/zh-TW/docs/about/)
+*   [svg-to-ico](https://www.aconvert.com/icon/svg-to-ico/)
+*   [#3f5d45 互補色](https://encycolorpedia.cn/3f5d45)
+*   [色環](https://www.toolskk.com/color?color=%23123456)
 
 ### slide
 *   [Slideshare](https://www.slideshare.net/)

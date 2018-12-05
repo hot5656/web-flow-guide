@@ -8,8 +8,7 @@
 *   [5. basic struct](#a5)
 *   [6. tag](#a6)
 *   [7. 模板庫](#a7)
-
-EJS是一個JavaScript模板庫，用來從JSON數據中生成HTML字符串。
+*   [8. HTML head example(#a8)
 
 <h2 id="a1">1. emmet</h2>
 
@@ -133,4 +132,48 @@ $line-height: 1.6
 	壓縮 .CSS, .JS, 甚至圖檔
 	web server with Livereload
 	享受自己動手做Task工具的快感
+```
+
+<h2 id="a8">8. HTML head example</h2>
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<!-- Viewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- 什麼版本IE 就用什麼版本的標準模式 -->
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<!-- webpage icon -->
+	<link rel="icon" href="img/favicon_32.ico" type="image/ico" />
+	<!-- Title -->
+	<title>甜點電商 - 購物車</title>
+	<!-- 網頁標題 -->
+	<meta property="og:title" content="甜點電商 - 購物車 "/>
+	<!-- 網站描述 -->
+	<meta property="og:description" content="最好的甜點"/>
+	<!-- 網站名稱 -->
+	<meta property="og:site_name" content="甜點電商"/>
+	<!-- 網站主要的語系 -->
+	<meta property="og:locale" content="zh_TW"/>
+	<!-- 其他說明
+		網址
+		<meta property="og:url" content="網址">
+		縮圖網址
+		<meta property="og:image" content="要顯示的縮圖網址">
+		網頁聲音檔的網址
+		<meta property="og:audio" content="網頁聲音檔的網址"/>
+		網頁影片網址
+		<meta property="og:video" content="網頁影片網址"/>
+	-->
+
+	<link rel="stylesheet" href="css/all.css">
+	<!-- Material icon	 -->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+  rel="stylesheet">
+</head>
+<body>
+</body>
+</html>
 ```

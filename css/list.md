@@ -355,6 +355,7 @@
 
 ### 字體 font-family)
 * 泛用字 generic-family
+
 ```
 serif 明體(襯線體)
 sans-serif 黑體(無襯線體)
@@ -364,6 +365,7 @@ monospace 等寬字體
 ```
 
 * 指定字體 family-name
+
 ```
 Helvetica (Mac內建,無襯線字體一種)
 Times (Mac內建,襯線字體一種)
@@ -380,6 +382,7 @@ SemiBold (思源宋體)-Google/Adobe
 ```
 
 * 字重(weight)
+
 ```css
 css
 font-weight: normal|bold|bolder|lighter|number|initial|inherit
@@ -403,6 +406,21 @@ inherit	Inherits this property from its parent element.
 	800 - 特粗 Extra-bold/extra
 	900 - 濃體 Black(Heavy)
 	950 - 特濃 Extra-black(Ultra-black)
+```
+
+* example
+
+```css
+$font-title: 'PingFang TC','Microsoft JhengHei',sans-serif;
+$font-normal: 'Helvetica Neue',Arial,serif;
+$font-times: Times,'Times New Roma',serif;
+
+$weight-bold: bold;
+$weight-normal: normal;
+$weight-light: lighter; 
+
+font-family: $font-title
+font-weight: $weight-bold
 ```
 
 ### special 

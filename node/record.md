@@ -214,6 +214,7 @@ gulp-clean-css(instead gulp-minify-css) :  壓縮 CSS, using clean-css
 gulp-uglify : JSHint plugin for gulp
 gulp-babel : Use next generation JavaScript, today, with Babel
 gulp-layout : Gulp plugin to switch layout files for each content
+gulp-wait : A gulp task that inserts a delay before calling the next function in a chain
 
 // js use
 eslint : ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
