@@ -226,6 +226,7 @@ lodash : The Lodash library exported as Node.js modules.
 bootstrap : 
 jquery : 
 susy : 
+popper.js : A library used to position poppers in web applications.
 ```
 
 <h2 id="a7">7. generate package.json</h2>

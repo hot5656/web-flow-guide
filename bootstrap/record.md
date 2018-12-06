@@ -200,6 +200,7 @@ Gutter width : 30px (15px on each side of a column)
 
 ### using by node.js 
 ```css
+// install bootstrap css
 npm install bootstrap --save-dev
 
 // sass process
@@ -251,6 +252,40 @@ $info:          $cyan !default;
 <button type="button" class="btn btn-light">Light</button>
 <button type="button" class="btn btn-dark">Dark</button>
 <button type="button" class="btn btn-link">Link</button>
+```
+
+```css
+// install bootstrap js
+npm install gulp-concat --save-dev
+npm install gulp-sequence --save-dev
+npm install jquery --save-dev
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>甜點電商 - <%- title %></title>
+</head>
+<body>
+  ................
+
+  <!-- js -->
+  <script src="js/vendor.js"></script>
+</body>
+</html>
+
+const gulpSequence = require('gulp-sequence').use(gulp);
+gulp.task('vendorJs', () => {
+  return gulp
+    .src([
+      './node_modules/jquery/dist/jquery.slim.min.js',
+      './node_modules/bootstrap/dist/js/bootstrap.bundle.min.js',
+    ])
+    .pipe($.concat('vendor.js'))
+    .pipe(gulp.dest('./public/js'));
+});
+gulp.task('build', gulpSequence('clean', 'copy', 'sass', 'vendorJs', 'layout', 'sass'));
+gulp.task('default', ['copy', 'sass', 'vendorJs', 'layout', 'browserSync', 'watch']);
 ```
 
 ### List
