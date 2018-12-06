@@ -225,6 +225,7 @@ lodash : The Lodash library exported as Node.js modules.
 // package
 bootstrap : 
 jquery : 
+susy : 
 ```
 
 <h2 id="a7">7. generate package.json</h2>

@@ -196,7 +196,80 @@ Class prefix|.col-|.col-sm-|.col-md-|.col-lg-|.col-xl-
 Gutter width : 30px (15px on each side of a column)
 
 
-<h2 id="a9">9. Overwrite</h2>
+<h2 id="a9">9. Overwrite bootstrap(customize)</h2>
+
+### using by node.js 
+```css
+npm install bootstrap --save-dev
+
+// sass process
+gulp.task('sass', () => {
+  // PostCSS AutoPrefixer
+  const processors = [
+    autoprefixer({
+      browsers: ['last 5 version'],
+    }),
+  ];
+
+  return gulp
+    .src(['./source/sass/**/*.sass', './source/sass/**/*.scss'])
+    .pipe($.wait(200))
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe(
+      $.sass({
+        outputStyle: 'nested',
+        includePaths: ['./node_modules/bootstrap/scss'],		// addition include sass
+      }).on('error', $.sass.logError),
+    )
+    .pipe($.postcss(processors))
+    .pipe($.if(options.env === 'production', $.cleanCss())) // 假設開發環境則壓縮 CSS
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('./public/css'))
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      }),
+    );
+});
+
+@import functions
+@import bt_variables
+@import bootstrap
+
+$primary:       red; //$blue !default;
+$secondary:     $gray-600 !default;
+$success:       $green !default;
+$info:          $cyan !default;
+
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+<button type="button" class="btn btn-link">Link</button>
+```
+
+### List
+```css
+// space
+$spacers: map-merge(
+  (
+    30: 30px,
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  ),
+  $spacers
+);
+```
+
 
 ### Color
 ```

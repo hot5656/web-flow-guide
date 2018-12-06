@@ -65,8 +65,8 @@
 		background-attachment: 
 			fixed 背景圖案永遠是停留
 			scroll 背景圖案將與捲動的動作一起移動
-		background-position: [top,center,bottom,%,x position]  [left,center,right,%,y position] 
-		background-size：bg-size , bg-size
+		background-position: [left,center,right,%(靠左百分比,0:由左方開始顯示),y position] [top,center,bottom,%(靠上百分比,0:由上方開始顯示),x position]   
+		background-size：bg-size(寬度,%是表示對容器百分比,auto對應比例自動調整), bg-size(高度,%是表示對容器百分比,auto對應比例自動調整)
 			auto(預設值)	即背景圖片原始長寬
 			length 				指定圖片具體大小的數值，不允許負值(當只設定一個數值，另一個數值預設值為auto)
 			percentage		以背景圖所在元素的百分比指定背景圖大小，不允許負值(
