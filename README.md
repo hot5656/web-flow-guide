@@ -7,6 +7,7 @@
 	*   [Sass](./sass/issue.md)
 	***
 	*   [JavaScript](./javascript/issue.md)
+	*   [Bootstrap](./bootstrap/issue.md)
 	*   [jQuery](./jquery/issue.md)
 	*   [Node.js](./node/issue.md)
 	***

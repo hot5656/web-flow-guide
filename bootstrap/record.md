@@ -15,6 +15,7 @@
 * [12. RWD simple](#a12)
 * [13. flex](#a13)
 * [14. 元件](#a14)
+* [15. list](#a15)
 
 <h2 id="a1">1. Viewport</h2>
 
@@ -635,4 +636,16 @@ active : 套用相同的啟用外觀
 ```
 ---不支援 disabled 屬性，所以你必須添加 .disabled 使它在視覺上看起來被禁用
 <a href="#" class="btn btn-primary btn-lg disabled" role="button" aria-disabled="true">Primary link</a>
+```
+
+<h2 id="a15">15. list</h2>
+
+```
+.navbar + .navbar-light : 設定 navbar 顏色
+navbar-expand-md : 設定 navbar 導覽列折疊點
+.collapse.navbar-collapse : navbar 外層中斷點群組和隱藏導覽列內容
+d-inline-block : 設定為 inline-block 
+mx-5 : set x side margin
+px-5 : set y padding
+navbar-brand: navbar brand
 ```

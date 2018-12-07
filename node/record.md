@@ -587,6 +587,20 @@ npm install gulp --save-dev
 	});
 ```
 
+```
+// gulp modify class
+---
+title: 首頁
+layout: ./source/layout.ejs
+engine: ejs
+current: index
+---
+
+<li class="nav-item">
+	<a class="nav-link mx-30 <% if (current === 'index') { %>active<%} %>" href="#">首頁</a>
+</li>
+```
+
 <h2 id="a9">9. nvm-node.js 管理程式</h2>
 
 ```
