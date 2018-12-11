@@ -235,15 +235,78 @@ gulp.task('sass', () => {
     );
 });
 
+
+
+// include bt
 @import functions
 @import bt_variables
 @import bootstrap
+
+// bareakpoint example for sass
+// xl: 1200px
+// lg: 992px
+// md: 768px
+// sm: 576px
+// xs: 0
+// +media-breakpoint-down(xl)
+// +media-breakpoint-down(lg)
+// +media-breakpoint-down(md)
+// +media-breakpoint-down(sm)
+// +media-breakpoint-down(xs)
 
 $primary:       red; //$blue !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;
 
+// change color
+$primary:       $c-primary;   // $blue !default;
+$secondary:     $c-secondary; // $gray-600 !default;
+$info:          $c-info;      // $cyan !default;
+$warning:       $c-warning;   // $yellow !default;
+
+// add space 
+$spacers: map-merge(
+  (
+    n90: -90px, // add
+    20: 20px,   // add
+    30: 30px,   // add
+    50: 50px,   // add
+    80: 80px,   // add
+    105: 105px, // add
+    0: 0,
+    1: ($spacer * .25),
+    2: ($spacer * .5),
+    3: $spacer,
+    4: ($spacer * 1.5),
+    5: ($spacer * 3)
+  ),
+  $spacers
+);
+
+// modify break point
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
+
+// modify container max width
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 970px, //960px,
+  xl: 1140px
+) !default;
+
+// changr navbar color for light
+$navbar-light-color:                rgba($primary, .5); // rgba($black, .5) !default;
+$navbar-light-hover-color:          rgba($primary, .7); // rgba($black, .7) !default;
+$navbar-light-active-color:         rgba($primary, .9); // rgba($black, .9) !default; 
+
+// button example 
 <button type="button" class="btn btn-primary">Primary</button>
 <button type="button" class="btn btn-secondary">Secondary</button>
 <button type="button" class="btn btn-success">Success</button>
@@ -287,48 +350,6 @@ gulp.task('vendorJs', () => {
 });
 gulp.task('build', gulpSequence('clean', 'copy', 'sass', 'vendorJs', 'layout', 'sass'));
 gulp.task('default', ['copy', 'sass', 'vendorJs', 'layout', 'browserSync', 'watch']);
-```
-
-### List
-```css
-// space
-$spacers: map-merge(
-  (
-    30: 30px,
-    0: 0,
-    1: ($spacer * .25),
-    2: ($spacer * .5),
-    3: $spacer,
-    4: ($spacer * 1.5),
-    5: ($spacer * 3)
-  ),
-  $spacers
-);
-```
-
-
-### Color
-```
-$theme-colors: (
-  "primary": #0074d9,
-  "danger": #ff4136
-);
-```
-
-### Grid Breakpoints
-```
-$grid-breakpoints: (
-  xs: 0,
-  sm: 576px,
-  md: 768px,
-  lg: 992px,
-  xl: 1200px
-);
-
-$container-max-widths: (
-  lg: 1050px,
-  xl: 1400px
-);
 ```
 
 <h2 id="a10">10. Basic Body</h2>
@@ -644,8 +665,13 @@ active : 套用相同的啟用外觀
 .navbar + .navbar-light : 設定 navbar 顏色
 navbar-expand-md : 設定 navbar 導覽列折疊點
 .collapse.navbar-collapse : navbar 外層中斷點群組和隱藏導覽列內容
-d-inline-block : 設定為 inline-block 
+container > row(no-gutters) > col-x : grid  
+offset-md-0 : md col offset #
+col-12.col-md-4 : set col #
+d-inline-block/d-none/d-block/d-flex : 設定為 inline-block/no show/block/flex
+align-items-center/justify-content-center/justify-content-md-end : flax position aligment
 mx-5 : set x side margin
 px-5 : set y padding
 navbar-brand: navbar brand
+ul(pagination) > li(page-item+active) > a(page-link)
 ```

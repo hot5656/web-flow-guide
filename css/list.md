@@ -72,6 +72,9 @@
 			percentage		以背景圖所在元素的百分比指定背景圖大小，不允許負值(
 			cover					主要用於背景圖小於所在的內容，此時就可以採用cover的方式，使背景圖放大至內容的大小，但此方法容易使背景圖因放大而失真
 			contain				主要用於背景圖大於所在內容，但卻需要將背景圖完整呈現，此時就可採用contain的方式，使背景圖縮小至內容的大小。
+		// 常用 image 
+			background-size: cover
+			background-position: center center
 		```
 
 
