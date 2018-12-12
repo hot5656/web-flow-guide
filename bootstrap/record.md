@@ -16,6 +16,7 @@
 * [13. flex](#a13)
 * [14. 元件](#a14)
 * [15. list](#a15)
+* [16. tool plug](#a16)
 
 <h2 id="a1">1. Viewport</h2>
 
@@ -662,16 +663,36 @@ active : 套用相同的啟用外觀
 <h2 id="a15">15. list</h2>
 
 ```
+// container
+container/container-fluid : 固定寬度/滿版寬度
+// row
+container 左右各有 15px padding, default row 會設定 margin -15px 補置對齊 container 
+no-gutters : 從行中移除邊緣 margin(row-container間會有間隔),從欄中移除填充 padding(col data 間無間隔)
+// col
+col-12.col-md-4 : set col #
+col-sm*4 : 均分為4等份
+col-auto : 依內容物調整 
+
 .navbar + .navbar-light : 設定 navbar 顏色
 navbar-expand-md : 設定 navbar 導覽列折疊點
 .collapse.navbar-collapse : navbar 外層中斷點群組和隱藏導覽列內容
 container > row(no-gutters) > col-x : grid  
 offset-md-0 : md col offset #
-col-12.col-md-4 : set col #
+
 d-inline-block/d-none/d-block/d-flex : 設定為 inline-block/no show/block/flex
 align-items-center/justify-content-center/justify-content-md-end : flax position aligment
 mx-5 : set x side margin
 px-5 : set y padding
 navbar-brand: navbar brand
 ul(pagination) > li(page-item+active) > a(page-link)
+```
+
+* [16. tool plug](#a16)
+
+<h2 id="a6">16. tool plug</h2>
+
+```
+sublime : Bootstrap 4 Snippets
+```
+
 ```

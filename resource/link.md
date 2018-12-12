@@ -2,6 +2,12 @@
 
 *   [Root](../README.md)
 
+### issue
+*		[Flex bugs](https://github.com/philipwalton/flexbugs#9-some-html-elements-cant-be-flex-containers)
+		```
+		某些地方不可使用
+		```
+
 ### Font
 *   [Free Font](http://allfont.net/free/)
 

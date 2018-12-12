@@ -8,7 +8,7 @@
 *   [5. basic struct](#a5)
 *   [6. tag](#a6)
 *   [7. 模板庫](#a7)
-*   [8. HTML head example(#a8)
+*   [8. HTML head example](#a8)
 
 <h2 id="a1">1. emmet</h2>
 
@@ -141,8 +141,8 @@ $line-height: 1.6
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<!-- Viewport -->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- Viewport : add set shrink-to-fit=no -->
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	<!-- 什麼版本IE 就用什麼版本的標準模式 -->
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<!-- webpage icon -->
