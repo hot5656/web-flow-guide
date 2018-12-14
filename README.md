@@ -29,6 +29,9 @@
 	*   [Html](./html/list.md)
 	*   [Css](./css/list.md)
 	***
+	*   [JavaScript](./javascript/list.md)	
+	*   [jQuery](./jquery/list.md)
+	***
 	*   [Resource](./resource/list.md)
 *   [tool]
 	*   [sublime](./tool/sublime.md)

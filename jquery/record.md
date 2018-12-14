@@ -1,7 +1,7 @@
 ﻿# jQuery record
 
-*   [Root](../README.md)
-*   [1. sector(選擇器)](#a1)
+* [Root](../README.md)
+* [1. sector(選擇器)](#a1)
 *	[2. Load Ready](#a2)
 *	[3. Control](#a3)
 

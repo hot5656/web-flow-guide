@@ -430,6 +430,11 @@ ul class="nav nav-tabs">
 
 ### navbar
 ```html
+.navbar + .navbar-light : 設定 navbar 顏色
+navbar-expand-md : 設定 navbar 導覽列折疊點
+.collapse.navbar-collapse : navbar 外層中斷點群組和隱藏導覽列內容
+navbar-brand: navbar brand
+
 // basic
 使用 navbar
 navbar-expand{-sm|-md|-lg|-xl} navbar 展開
@@ -641,6 +646,27 @@ align-content-stretch : 預設值，內容元素全部撐開
 
 <h2 id="a14">14. 元件</h2>
 
+### 警報 (Alerts)
+
+```css
+
+```
+
+### 分頁 (Pagination)
+
+```
+ul(pagination) > li(page-item+active/disable) > a(page-link)
+
+<ul class="pagination justify-content-center pagination-lg">
+	<li class="page-item disabled"><a href="#" class="page-link"><</a></li>
+	<li class="page-item active"><a href="#" class="page-link">1</a></li>
+	<li class="page-item"><a href="#" class="page-link">2</a></li>
+	<li class="page-item"><a href="#" class="page-link">3</a></li>
+	<li class="page-item"><a href="#" class="page-link">4</a></li>
+	<li class="page-item"><a href="#" class="page-link">></a></li>
+</ul>
+```
+
 ### btn
 ```
 btn-lg/btn-sm : 較大或較小的按鈕
@@ -663,7 +689,7 @@ active : 套用相同的啟用外觀
 <h2 id="a15">15. list</h2>
 
 ```css
-// container
+// container : container > row(no-gutters) > col-x : grid  
 container/container-fluid : 固定寬度/滿版寬度
 	// row
 	container 左右各有 15px padding, default row 會設定 margin -15px 補置對齊 container 
@@ -804,25 +830,69 @@ container/container-fluid : 固定寬度/滿版寬度
 		<footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
 	</blockquote>
 // 文字 (Text)
-	.text-justify 文件與元件對齊 ??
+	.text-justify : 文件與元件對齊 ??
 	.text-xx-left
-	text-xx-cente
-	text-xx-right
-
-
-
-.navbar + .navbar-light : 設定 navbar 顏色
-navbar-expand-md : 設定 navbar 導覽列折疊點
-.collapse.navbar-collapse : navbar 外層中斷點群組和隱藏導覽列內容
-container > row(no-gutters) > col-x : grid  
-offset-md-0 : md col offset #
-
- aligment
-mx-5 : set x side margin
-px-5 : set y padding
-mx-auto : 置中
-navbar-brand: navbar brand
-ul(pagination) > li(page-item+active) > a(page-link)
+	.text-xx-cente
+	.text-xx-right
+	.text-nowrap : 防止換行
+	.text-lowercase
+	.text-uppercase
+	.text-capitalize : 第一個字大寫
+	.font-weight-bold
+	.font-weight-normal
+	.font-weight-light
+	.font-italic
+	.text-monospace : 將選擇區域改為等寬字體
+		<p class="text-monospace">This is in monospace</p>
+// img
+	.img-fluid : 讓圖片可依父元素屬性進行縮放(set max-width)
+	.img-thumbnail : 讓圖片有1px邊框的顯示 and 4px padding
+	.rounded : 圓角
+	.float-left : 靠左
+	.float-right : 靠右
+// table
+	.table : 基本樣式
+	.table-dark : 設定為深色表格
+	.thead-light/.thead-dark : <thead> head background color
+  .table-striped(<table>) : 加入斑馬紋
+	.table-bordered(<table>) : 加入外框
+ 	.table-borderless(<table>) : 無分隔線
+ 	.table-hover(<table>) : hover 列,會更改被景色
+	.table-sm(<table>) : 縮小table之padding(table 高度會較小)
+	--> table color (table-dark not support, you can use bg-primary ....)
+		table-active,table-dark,table-light,table-primary ... 
+	.table-responsive-sm : table 在 sm 且過長時,會有水平滾動條
+		<div class="table-responsive-sm">
+		  <table class="table">
+		    ...
+		  </table>
+		</div>
+	<caption> : 表格標題(可以協助螢幕閱讀器的用戶找到表格，並了解它的內容，且決定是否要閱讀它)
+		<table class="table">
+		  <caption>List of users</caption>
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">First</th>
+		      <th scope="col">Last</th>
+		      <th scope="col">Handle</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		    <tr>
+		      <th scope="row">1</th>
+		      <td>Mark</td>
+		      <td>Otto</td>
+		      <td>@mdo</td>
+		    </tr>
+		  </tbody>
+		</table>
+// set background 
+	bg-primary,bg-succes, ....
+// aligment
+	mx-5 : set x side margin
+	px-5 : set y padding
+	mx-auto : 置中
 ```
 
 ### mixin
@@ -839,7 +909,6 @@ ul(pagination) > li(page-item+active) > a(page-link)
 +invisible(hidden)
 ```
 
-* [16. tool plug](#a16)
 
 <h2 id="a6">16. tool plug</h2>
 
