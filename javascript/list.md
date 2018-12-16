@@ -55,8 +55,13 @@
 	var myVariable = document.querySelector('h1');
 	// 基本上，JavaScript 內的所有東西都可以視為一個物件
 	```
+
 * function 
 	* alert 
 	```javascript
 		alert("test in an external file");
+		// sizeof -"string"/"number"
+		var age=30;
+		sizeof age;
+		"string"
 	```
