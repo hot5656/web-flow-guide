@@ -8,7 +8,7 @@
 
 
 ### basic
-*	html include js - <script> ... </script>
+*	html include js - < script > ... </ script >
 	```javascript
 	<!DOCTYPE html>
 	<html lang="en">
@@ -21,7 +21,7 @@
 	</head>
 	<body>
 		<h1>Title</h1>
-
+		<!-- js script -->
 		<script>
 			alert("test");
 		</script>
@@ -37,9 +37,8 @@
 	var age;			// undefined
 	var age2=null // set to empty
 	age = 40;
-
 	var counter = 20;
-
+	--------------------
 	/* variable type
 		String : \',\\,\",\t,\n,"David "+ "Wang"
 		Number : 1, 2.34
@@ -55,13 +54,51 @@
 	var myVariable = document.querySelector('h1');
 	// 基本上，JavaScript 內的所有東西都可以視為一個物件
 	```
+* object
+	```
+	var object;
+	object = {
+		name: "Mickey",
+		lastName: "Mouse",
+		age: 40,
+		getFullName: function() {
+			return "Mickey Mouse";
+		}
+	};
+	object.name
+	object.age=60;
+	object.getFullName();
+	-----------
+	var usetr;
+	user = {	
+		login: "",
+		password: "",
+		firstName: "",
+		lastName: "",
+		"full name": ""
+	};
+	user["login"]
+	user["full name"]
+	--> var propertyToAccess = "firstName";
+	    user.propertyToAccess
+	    user[propertyToAccess]
+	```
 
-* function 
+
+* function
+	* define
+	```javascript
+	function fun_name(para1, para2) {
+		....
+		return;
+	}
+	``` 
 	* alert 
 	```javascript
-		alert("test in an external file");
-		// sizeof -"string"/"number"
-		var age=30;
-		sizeof age;
-		"string"
+	alert("test in an external file");  
+	```
+	*	sizeof -"string"/"number"
+	```javascript
+	var age=30;
+	sizeof age;
 	```
