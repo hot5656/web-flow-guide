@@ -3,6 +3,8 @@
 *   [Root](../README.md)
 *   [JavaScript 基礎](https://developer.mozilla.org/zh-TW/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
 *   [w3schools JavaScript](https://www.w3schools.com/js/default.asp)
+*   [jsbin - onlie run js JavaScript](https://jsbin.com/?html,output)
+*   [MDN chinese string](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String)
 
 
 
@@ -38,7 +40,8 @@
 	var age2=null // set to empty
 	age = 40;
 	var counter = 20;
-	--------------------
+	var isSunnyday = true;
+	// --------------------
 	/* variable type
 		String : \',\\,\",\t,\n,"David "+ "Wang"
 		Number : 1, 2.34
@@ -53,8 +56,70 @@
 	// 呼叫陣列的每一個成員：myVariable[0]、myVariable[1]
 	var myVariable = document.querySelector('h1');
 	// 基本上，JavaScript 內的所有東西都可以視為一個物件
+	// ----------------
+	// variable value copy
+	var firstName = "John";
+	var referenceToName = firstName; 
+	firstName = "Joe";
+		--> referenceToName
+				Joe
+	// variable reference copy
+	var user = {firestName: "John", LastName="Doe"};
+	var refernceToUser = user;
+	user.firstName = "Joe"
+		--> refernceToUser
+			firestName: "Joe"
+			LastName="Doe"
 	```
+* string
+	```
+	// function for string
+	var sentence = "This is sentence";
+	sentence.length
+	sentence.toUpperCase()
+	sentence.charAt(0)
+	sentence.charAt(3)
+	sentence.charAt(sentence.length-1)
+	```
+* arrays and implicit iteration
+	```javascript
+	// define
+	var myArray = [];
+	var webCategories = ["Front End Developer", "Background Developer", "Fullstack Developer"];
+	var myObject = {
+		name: "David"
+	};
+	var numberValue = 10;
+	var mixedArray = [numberValue, "I'm a string", true, myObject];
+	// array length
+	mixedArray.length
+	// set centain item - not set item "undefined"
+	myArray[10] = " test string"
+	// link 2 array - just link, must set to another array
+	webCategories.concat(mixedArray);
+	// add new element
+	mixedArray.push("another string");
+	// remove last element
+	mixedArray.pop();
+	//remove 1st element
+	mixedArray.shift();
+	// implicit iteration
+	var uppercaseCategories = [];
+	//                        --> source element
+	//                                        --> source array
+	function uppercaseElement(element, index, array) {
+        uppercaseCategories.push( element.toUpperCase())
+		console.log(element);
+		console.log(index);
+		console.log(array);
+	}
+	// call ...
+	// --> source array
+	//                   --> function
+	webCategories.forEach(uppercaseElement);
+	``` 
 * object
+	* normal
 	```
 	var object;
 	object = {
@@ -68,14 +133,17 @@
 	object.name
 	object.age=60;
 	object.getFullName();
-	-----------
+	// -----------
 	var usetr;
 	user = {	
 		login: "",
 		password: "",
 		firstName: "",
 		lastName: "",
-		"full name": ""
+		"full name": "",
+		getFullName: function() {
+			return this.firstName+ " " + this.lastName;
+		}
 	};
 	user["login"]
 	user["full name"]
@@ -83,7 +151,39 @@
 	    user.propertyToAccess
 	    user[propertyToAccess]
 	```
-
+	* another way create object
+	```
+	// function for object
+	function Car() {
+		this.namberOfDoors = 4;
+		this.brand = "Nissan";
+	}
+	// create object
+	var myNewCard = new Car();
+		--> myNewCard
+			namberOfDoors: 4;
+			brand: "Nissan"
+	// check myNewCard's construtor
+	myNewCard.construtor 
+		Car() {
+			this.namberOfDoors = 4;
+			this.brand = "Nissan";
+		}
+	// -------------
+	// add parameter input
+	function Car(numberDoors, brand) {
+		this.namberOfDoors = numberDoors;
+		this.brand = brand;
+	}	
+	// create object
+	var myNewCard = new Car(5, "Toyota");	
+		--> myNewCard
+			namberOfDoors: 5
+			brand: "Toyota"	
+	// create other 
+	var luxuryCard = new Car(2, "luxury");	
+	var ludicrousCar = new Car(0, "ludicrous");	
+	```
 
 * function
 	* define
@@ -92,11 +192,71 @@
 		....
 		return;
 	}
+	//--------------------
+	// variable for function
+	var referenceToFun = fun_name() ;
+		--> run referenceToFun()
+	// ----------------
+	// function protype
+	function Car() {
+		this.namberOfDoors = 4;
+		this.brand = "Nissan";
+	}
+	var luxuryCar = new Car();
+	var cheapCar = new Car();
+  // add property var for Car - give default 
+	Car.prototype.author = "David";
+	// add function 
+	function Car() {
+		this.namberOfDoors = 4;
+		this.brand = "Nissan";
+		// 每次 new 會佔不同的mempry
+		//this.start = function(){};
+		//this.stop = function(){};
+	}
+	// add function by prototype
+	// 每次 new 會佔相同的mempry
+	// 但若為變數,設定個別值後就會佔不同的memory
+	Car.prototype.start = function() {};
+	Car.prototype.stop = function() {};
+	// ----------------
+	// callbacks function example
+	function add(num1, num2) {
+		var result;
+		result = num1 + num2;
+		return result;
+	}
+	function substract(num1, num2) {
+		var result;
+		result = num1 - num2;
+		return result;
+	}
+	function multiply(num1, num2) {
+		var result;
+		result = num1 * num2;
+		return result;
+	}
+	function calculate(num1, num2, operation) {
+		var result;
+		result = operation(num1,num2);
+		return result;
+	}
+	// run 
+	calculate(10, 20, add);
+	calculate(10, 20, substract);
+	calculate(10, 20, multiply);
 	``` 
+
 	* alert 
 	```javascript
 	alert("test in an external file");  
 	```
+
+	*	consloe.log()
+	```	
+		console.log("let's go");
+	```
+
 	*	sizeof -"string"/"number"
 	```javascript
 	var age=30;
