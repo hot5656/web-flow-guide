@@ -4,12 +4,21 @@
 *   [JavaScript 基礎](https://developer.mozilla.org/zh-TW/docs/Learn/Getting_started_with_the_web/JavaScript_basics)
 *   [w3schools JavaScript](https://www.w3schools.com/js/default.asp)
 *   [jsbin - onlie run js JavaScript](https://jsbin.com/?html,output)
-*   [MDN chinese string](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String)
+*   [MDN(Mozilla Developer Cente) chinese string](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String)
+*   [DOM spec](https://dom.spec.whatwg.org/)
 
 
 
 
 ### basic
+*	HTML inline
+```javascript
+// button direct call
+<button onclick="alert('hello')">Press</button>
+
+```
+
+
 *	html include js - < script > ... </ script >
 	```javascript
 	<!DOCTYPE html>
@@ -117,6 +126,20 @@
 	// --> source array
 	//                   --> function
 	webCategories.forEach(uppercaseElement);
+	// ---------------------
+	// explicit iteration
+	var webCategories = ["Front End Developer", "Background Developer", "Fullstack Developer"];
+	var uppercaseCategories = [];
+	webCategories[4] = "last element";
+	for (i=0 ; i<webCategories.length ; i++ ) {
+		if ( webCategories[i] !== undefined) {
+			// string start "last"
+			if (webCategories[i].indexOf("last") === 0) {
+				break;
+			}
+			uppercaseCategories.push(webCategories[i].toUpperCase());
+		}
+	}
 	``` 
 * object
 	* normal
@@ -262,3 +285,153 @@
 	var age=30;
 	sizeof age;
 	```
+
+### DOM(Document Object Model - 文件物件模型
+*	basic
+	* querySector
+	```javascript
+	// method
+		document.getElementById("")
+	// action
+		.onclick
+	// property(屬性)
+		.innertHTML
+		.value (input type="text")
+	// set css
+		.style.display
+	// example
+	//  innerHTML
+		alert(document.getElementById("text").innerHTML);
+		document.getElementById("text").innerHTML = "chane text";
+	// onclick
+		<button id="myButton">Press</button>
+		document.getElementById("myButton").onclick = function(){
+			alert("hello js");
+	// set css
+		document.getElementById("circle").onclick = function() {
+			document.getElementById("circle").style.display = "none";
+		}
+	// get input type="text" value
+		document.getElementById("text").innerHTML = document.getElementById("myInput").value;
+	// -------------------------
+	// > 下一層
+	document.querySelector("div.img_box2 > img");
+	var heroImage = document.querySelector("div.img_box2 > img");
+	heroImage.getAttribute("src");
+	heroImage.setAttribute("src", "https://images.pexels.com/photos/990826/pexels-photo-990826.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
+	```
+
+	* create Element
+	```javascript
+	var technologies = ["HTML", "CSS", "JS", "DOM"];
+	function createMenu(items) {
+	  var menu = document.createElement("ul");
+	    items.forEach(function(element, index, array){
+	    var item = document.createElement("li");
+	    var textNode = document.createTextNode(element);
+	    item.appendChild(textNode);
+	    menu.appendChild(item);
+	  });
+	  document.body.appendChild(menu);
+	}
+	// run create menu
+	createMenu(technologies);
+	```
+
+* event process
+	```javascript
+	// HTML
+	<body>
+	  <ul class="menu">
+	    <li class="menu-item">
+	      <a href="#">Home</a>
+	      <div class="menu-item-info">
+	        This is the Home menu
+	      </div>
+	    </li>
+	    <li class="menu-item">
+	      <a href="#">About us</a>
+	      <div class="menu-item-info">
+	        This is the About us menu
+	      </div>
+	    </li>
+	    <li class="menu-item">
+	      <a href="#">Contract us</a>
+	      <div class="menu-item-info">
+	        This is the Contract us menu
+	      </div>
+	    </li>
+	    
+	    <div class="clearfix"></div>
+	  </ul>
+	</body>
+	// CSS
+	body, * {
+	  font-family: "Arial", sans-serif;
+	  box-sizing: border-box;
+	}
+	.clearfix {
+	  clear: both;
+	}
+
+	.menu {
+	  background-color: #000;
+	  list-style: none;
+	  margin: 0;
+	  position: relative
+	}
+
+	.menu-item {
+	  float: left;
+	}
+
+	.menu-item a {
+	  display: block;
+	  color: white;
+	  text-decoration: none;
+	  padding: 1rem;
+	}
+	.menu-item a:hover {
+	  color: #000;
+	  background-color: #fff;
+	}
+
+	.menu-item-info {
+	  display: none;
+	  position: absolute;
+	  left: 0;
+	  width: 100%;
+	  border: 1px solid #ddd;
+	  border-top: none;
+	  color: #333;
+	  padding: 0.3rem;
+	}
+
+	.is-visible {
+	  display: block
+	}
+	// JS
+	var menuLinks = document.querySelectorAll(".menu-item > a");
+
+	function displayInfoforMenu(event) {
+	  var archor = event.target ;
+	  var info = archor.parentNode.querySelector(".menu-item-info");
+	  
+	  info.classList.add("is-visible");
+	}
+
+	function hideInfoforMenu(event) {
+	  var archor = event.target ;
+	  var info = archor.parentNode.querySelector(".menu-item-info");
+	  console.log(archor);
+	  
+	  info.classList.remove("is-visible");
+	}
+
+	for(var i=0 ; i<menuLinks.length ; i++) {
+	  var archor = menuLinks[i];
+	  archor.addEventListener("mouseover", displayInfoforMenu);
+	  archor.addEventListener("mouseout", hideInfoforMenu);
+	}
+	```
+	

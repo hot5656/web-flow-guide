@@ -30,3 +30,10 @@ edit.sublime-project
 
 ### 單檔分割
 File --> new view into file
+
+### some setting 
+*	Show all characters (spaces, TABs, CR, LF, etc.)
+	```
+	Preferences -> Settings - User
+	"draw_white_space": "all",
+	```
