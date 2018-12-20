@@ -128,14 +128,15 @@ select {
 
 ```html
 // button
-<button type="button">我是按鈕</button>
+	<button type="button">我是按鈕</button>
 // tag a
-<a href="index.html" class="next">繼續逛逛</a>
-<a class="pay" href="checkout_profile.html">結帳</a>
+	<a href="index.html" class="next">繼續逛逛</a>
+	<a class="pay" href="checkout_profile.html">結帳</a>
 // icon 語法
-.ico語法1：
-<link rel="shortcut icon" href="圖示網址/favicon.ico" />
-.ico語法2：
-<link rel="icon" href="圖示網址/favicon.ico" type="image/ico" />
-
+	.ico語法1：
+	<link rel="shortcut icon" href="圖示網址/favicon.ico" />
+	.ico語法2：
+	<link rel="icon" href="圖示網址/favicon.ico" type="image/ico" />
+// hr - 分隔線
+	<hr>
 ```

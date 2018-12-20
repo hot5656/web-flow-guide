@@ -89,7 +89,16 @@
 	sentence.charAt(0)
 	sentence.charAt(3)
 	sentence.charAt(sentence.length-1)
+	// -- add str and number
+	"abc " + number + " end"
 	```
+* Math 
+	Math.pow(x, y) - x y 次方
+	Math.random() - random 0 to 1 (not include 1)
+	Math.floor(x) - 轉成整數,無條件捨去
+	Math.round(x) - 轉成整數,無條件進入
+* color 
+	rgba(a,b,c,d) : d - 透明度 1:不透明
 * arrays and implicit iteration
 	```javascript
 	// define
@@ -112,6 +121,11 @@
 	mixedArray.pop();
 	//remove 1st element
 	mixedArray.shift();
+	// remove range array - remove from position 1 , 1 item
+	// just return result, not change array
+	mixedArray.splice(1,1);
+	--> add item : mixedArray.splice(1,0,"embedded"); - add item at position 1
+	// ------------------------
 	// implicit iteration
 	var uppercaseCategories = [];
 	//                        --> source element
@@ -207,6 +221,14 @@
 	var luxuryCard = new Car(2, "luxury");	
 	var ludicrousCar = new Car(0, "ludicrous");	
 	```
+* global variable
+	// normal use
+	window.innerWidth: 視窗寬度 
+	window.innerHeight: 視窗高度
+			or 
+	// document.documentElement - root element of the document
+	document.documentElement.clientWidth: 視窗寬度(can use not include padding,margin,scoll...)
+	document.documentElement.clientHeight:  視窗高度
 
 * function
 	* define
@@ -280,6 +302,18 @@
 		console.log("let's go");
 	```
 
+	*	setTimeout
+	```
+	setTimeout(function(){
+			alart("hello")
+		}, 3000);
+	```
+
+	* Date
+	```
+	Date.now() - from 1970 ms time
+	```
+
 	*	sizeof -"string"/"number"
 	```javascript
 	var age=30;
@@ -299,6 +333,22 @@
 		.value (input type="text")
 	// set css
 		.style.display
+	// set css varibale 
+		// define
+		:root {
+			--circle-width: 100px;
+		}	
+		// use variable
+		#circle	{
+			width: var(--circle-width);
+			height: var(--circle-width);
+			border-radius: 50%;
+			background-color: pink;
+		}	
+		// set css variable value
+		var circleWidth = window.innerWidth/8 + "px" ;
+		document.documentElement.style.setProperty("--circle-width", circleWidth);
+		document.getElementById("circle").style.display = "block";
 	// example
 	//  innerHTML
 		alert(document.getElementById("text").innerHTML);

@@ -2,6 +2,46 @@
 
 *   [Root](../README.md)
 
+*	css variable 
+	```
+	// define 
+	:root {
+		--circle-width: 100px;
+	}
+	// HTML
+	<div id="circle"></div>
+	// use variable
+	#circle	{
+		width: var(--circle-width);
+		height: var(--circle-width);
+		border-radius: 50%;
+		background-color: pink;
+	}	
+	```
+*	position
+	```css
+	// css 
+		// 對所有元素
+		p:nth-child(odd) {
+			background-color: pink;
+		}
+		// 僅對P元素
+		p:nth-of-type(odd) {
+			color: blue;
+		}	
+	// html
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+		<hr>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nisi, praesentium.</p>
+	```
 *	block
 	* border  
 	border: 5px solid red  
