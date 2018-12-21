@@ -128,6 +128,7 @@
 * 網頁爬蟲
 * 瀏覽器的渲染原理
 *	Google的SpeedTracer
+WordPress : 是一個以PHP和MySQL為平台的自由開源的部落格軟體和內容管理系統
 
 ### some information
 *	謎戀貓

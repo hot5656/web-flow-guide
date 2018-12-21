@@ -226,8 +226,9 @@
 	指定元素由參考點橫向移動 o 距離。
 	* translateY(o)
 	指定元素由參考點縱向移動 o 距離。
-	* translate(ox,oy)
+	* translate(ox,oy) - 移至座標(ox,oy)
 	指定元素由參考點 2D 橫向移動 ox 距離、縱向移動 oy 距離，等於是結合 translateX(ox), translateY(oy) 。參數如果只指定 1 個，省略的第 2 個參數，會視為 0 ，也就是只有橫向移動。
+	transform:translate(180px) rotate(-5deg) scale(0.8);
 	* matrix(a,b,c,d,e,f)
 	指定元素由參考點依據數學變形矩陣 (transformation matrix) 的 6 個參數值產生 2D 變形。矩陣的目的主要在運算出四邊形四角的座標，屬於數學問題，這裡就不作太多討論了。事實上，前述的各項變形函數都是簡化這個矩陣而拆解出來的，稍後範例會看到對照。有一些線上工具可以比較容易幫我們產生這些參數值。
 	
@@ -471,6 +472,7 @@ font-weight: $weight-bold
 * margin: 0 auto 僅對 block 有效,對 inline-block 無效
 * text-align: center 對text都有效,但對其他僅 inline-block有效
 * margin-top: 10% 是對照水平寬度
+* opacity : 透明效果,1不透明
 
 ---
 

@@ -13,9 +13,8 @@
 ### basic
 *	HTML inline
 ```javascript
-// button direct call
-<button onclick="alert('hello')">Press</button>
-
+	// button direct call
+	<button onclick="alert('hello')">Press</button>
 ```
 
 
@@ -83,26 +82,42 @@
 * string
 	```
 	// function for string
-	var sentence = "This is sentence";
-	sentence.length
-	sentence.toUpperCase()
-	sentence.charAt(0)
-	sentence.charAt(3)
-	sentence.charAt(sentence.length-1)
+		var sentence = "This is sentence";
+		sentence.length
+		sentence.toUpperCase()
+		sentence.toLowerCase()
+		sentence.charAt(0)
+		sentence.charAt(3)
+		sentence.charAt(sentence.length-1)
 	// -- add str and number
-	"abc " + number + " end"
+		"abc " + number + " end"
+	// split string to array
+		var myString = "The quick brown fox jumps over th laxy dog";
+		var arrayString = myString.split(" ");
+	// substr
+		myString.substr(0,7) - from position 0 ,7 char
+		myString.substr(7) - from position 7 to end
 	```
 * Math 
+	```
 	Math.pow(x, y) - x y 次方
 	Math.random() - random 0 to 1 (not include 1)
 	Math.floor(x) - 轉成整數,無條件捨去
 	Math.round(x) - 轉成整數,無條件進入
+	```
+
 * color 
+	```
 	rgba(a,b,c,d) : d - 透明度 1:不透明
+	```
+
 * arrays and implicit iteration
 	```javascript
 	// define
+	var myArray = new Array();
+	var myArray = new Array("a1","a2", "a3");
 	var myArray = [];
+	var myArray = [["Bill","David","Mary"],[22, 32, 40]];
 	var webCategories = ["Front End Developer", "Background Developer", "Fullstack Developer"];
 	var myObject = {
 		name: "David"
@@ -222,14 +237,21 @@
 	var ludicrousCar = new Car(0, "ludicrous");	
 	```
 * global variable
+	```javascript
 	// normal use
-	window.innerWidth: 視窗寬度 
-	window.innerHeight: 視窗高度
-			or 
-	// document.documentElement - root element of the document
-	document.documentElement.clientWidth: 視窗寬度(can use not include padding,margin,scoll...)
-	document.documentElement.clientHeight:  視窗高度
-
+		window.innerWidth: 視窗寬度 
+		window.innerHeight: 視窗高度
+				or 
+		// document.documentElement - root element of the document
+		document.documentElement.clientWidth: 視窗寬度(can use not include padding,margin,scoll...)
+		document.documentElement.clientHeight:  視窗高度
+	// event variable
+		event.clientX): mouse X
+		event.clientX): mouse Y
+	// other
+		// window.location - 導向網頁
+		window.location = "https://shopping.pchome.com.tw/" ;
+	```
 * function
 	* define
 	```javascript
@@ -237,6 +259,8 @@
 		....
 		return;
 	}
+	// simple
+	(para1, para2) => {}
 	//--------------------
 	// variable for function
 	var referenceToFun = fun_name() ;
@@ -297,9 +321,34 @@
 	alert("test in an external file");  
 	```
 
+	* prompt - 跳出輸入視窗(含標題)
+	```javascript
+	var p = prompt("How old are you?" ,"12 ?")
+	if (p) {
+		alert(p+ " is your age.")
+	}
+	else {
+		alert("No input ant thing.")
+	}
+	```
+
+	* window.open
+	```
+	window.open("https://tw.yahoo.com/", "_blank", "height=200, width=200");
+		target: _blank(另開視窗)..
+	```
+
 	*	consloe.log()
 	```	
 		console.log("let's go");
+		console.log("%s has %d points", "Sam", 100);
+		console.log("%cThis will be formatted with large, blue text", "color: blue; font-size: x-large");
+	```
+
+	*	requestAnimationFrame
+	```javascript
+	// 要求瀏覽器在刷新畫面前呼叫特定函數刷新動畫
+
 	```
 
 	*	setTimeout
@@ -307,6 +356,15 @@
 	setTimeout(function(){
 			alart("hello")
 		}, 3000);
+	```
+
+	* escape()/unescape()
+	```
+	對string編碼/解碼(非數字,字母編為16進制)
+	"The escape test." --> The escape test.The%20escape%20test.
+
+	在 JavaScript 1.5 及其後版本中，可以改用 encodeURI、decodeURI、
+	encodeURIComponent、decodeURIComponent - 含功能性字元
 	```
 
 	* Date
@@ -371,6 +429,11 @@
 	heroImage.setAttribute("src", "https://images.pexels.com/photos/990826/pexels-photo-990826.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
 	```
 
+	* some function
+	```javascript
+		document.write("<h1>Title</h1>");
+	```
+
 	* create Element
 	```javascript
 	var technologies = ["HTML", "CSS", "JS", "DOM"];
@@ -389,6 +452,13 @@
 	```
 
 * event process
+	*	event list
+	```javascript
+	document.addEventListener("mousemove", fun_name);
+
+	```
+
+	*	example 
 	```javascript
 	// HTML
 	<body>
@@ -484,4 +554,149 @@
 	  archor.addEventListener("mouseout", hideInfoforMenu);
 	}
 	```
-	
+
+* flow
+	* for in array
+	```javascript
+		var myArray = ["Bill", "David", "Mary"];
+		for (var n in myArray) {
+			document.write(n+"<br/>");	//0,1,..
+			document.write(myArray[n]+"<br/>");	// Bill..
+	```
+
+* example 
+	*	mouse 追蹤滑鼠軌跡  
+	simple 
+	```css
+		// htlm
+		<div id="ball">
+			<div class="halo"></div>
+			<div class="halo"></div>
+			<div class="halo"></div>
+		</div>		
+		// css
+		* {
+			margin: 0;
+		}
+		:root {
+			--mouse-x;
+			--mouse-y;
+			--radius: 40px;
+		}
+		#ball {
+			width: var(--radius);
+			height: var(--radius);
+			background-color: #ffe13d;
+			border-radius: 50%;
+			position: absolute;
+			transform: translate(calc(var(--mouse-x)*1px - var(--radius)/2 ), calc(var(--mouse-y)*1px - var(--radius)/2));
+		}
+		// js
+		var mouse_x=0, mouse_y=0;
+		document.addEventListener("mousemove", (event) => {
+			mouse_x = event.clientX;
+			mouse_y = event.clientY;
+		});
+		function delayMotion() {
+			document.documentElement.style.setProperty("--mouse-x", mouse_x);
+			document.documentElement.style.setProperty("--mouse-y", mouse_y);
+			requestAnimationFrame(delayMotion);
+		}
+		delayMotion();
+	```
+
+	add delay 
+	```css
+		// js
+		var mouse_x=0, mouse_y=0;
+		var ball_x=0, ball_y=0;
+		var distent_x=0, distent_y = 0; 
+		const strength = 0.3;
+		document.addEventListener("mousemove", (event) => {
+			mouse_x = event.clientX;
+			mouse_y = event.clientY;
+		});
+
+		function delayMotion() {
+			distent_x = mouse_x - ball_x;
+			distent_y = mouse_y - ball_y;
+
+			ball_x += distent_x*strength;
+			ball_y += distent_y*strength;
+			document.documentElement.style.setProperty("--mouse-x", ball_x);
+			document.documentElement.style.setProperty("--mouse-y", ball_y);
+			requestAnimationFrame(delayMotion);
+		}
+
+		delayMotion();
+	```
+
+	add 光環
+	```css
+		// css
+		* {
+			margin: 0;
+		}
+
+		:root {
+			--mouse-x;
+			--mouse-y;
+			--radius: 40px;
+			--factor: 1;
+			--scare;
+		}
+		#ball {
+			width: var(--radius);
+			height: var(--radius);
+			background-color: #ffe13d;
+			border-radius: 50%;
+			position: absolute;
+			transform: translate(calc(var(--mouse-x)*1px - var(--radius)/2 ), calc(var(--mouse-y)*1px - var(--radius)/2));
+		}
+
+		.halo {
+			width: var(--radius);
+			height: var(--radius);
+			background-color: #ffe13d;
+			border-radius: 50%;
+			opacity: 0.15;
+			position: absolute;
+			transform: scale(calc(var(--factor)*var(--scare)));
+		}
+		.halo:nth-child(1) {
+			--factor: 0.3;
+		}
+		.halo:nth-child(2) {
+			--factor: 0.5;
+		}
+		.halo:nth-child(3) {
+			--factor: 0.9;
+		}
+		// js
+		var mouse_x=0, mouse_y=0;
+		var ball_x=0, ball_y=0;
+		var distent_x=0, distent_y = 0; 
+		const strength = 0.3;
+		var vel_x=0, vel_y=0;
+		const drop=0.15;
+
+		document.addEventListener("mousemove", (event) => {
+			mouse_x = event.clientX;
+			mouse_y = event.clientY;
+		});
+
+		function delayMotion() {
+			distent_x = mouse_x - ball_x;
+			distent_y = mouse_y - ball_y;
+
+			ball_x += distent_x*strength;
+			ball_y += distent_y*strength;
+
+			document.documentElement.style.setProperty("--scare", (distent_x+distent_y)*drop);
+			document.documentElement.style.setProperty("--mouse-x", ball_x);
+			document.documentElement.style.setProperty("--mouse-y", ball_y);
+			requestAnimationFrame(delayMotion);
+		}
+
+		delayMotion();
+	```

@@ -139,4 +139,6 @@ select {
 	<link rel="icon" href="圖示網址/favicon.ico" type="image/ico" />
 // hr - 分隔線
 	<hr>
+// a link but no do anything
+	<a href="javascript: void(0)">Link</a>
 ```
