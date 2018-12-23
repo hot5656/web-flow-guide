@@ -98,7 +98,10 @@
 *	CSS Sprite - 張圖片合併
 *	CMS(Content Management System) 內容管理系統
 * web-font 雲端字型
-
+* LAMP: Linux + Apache + MySql + PHP
+* WAMP: Windows + Apache + MySql + PHP
+*	XAMPP: XAMPP是一套幫你把LAMP或WAMP環境整合好的安裝程式
+	[XAMPP](https://www.apachefriends.org/zh_tw/index.html)
 ### side project
 *	學會新技術，拿舊專案重寫優化
 *	臨時需要設計一個平台協助他人時，例如八仙塵爆，那時我也設計一個查詢介面，順便練習從 jQ 轉 NG 。
