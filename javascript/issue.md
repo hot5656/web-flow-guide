@@ -2,19 +2,22 @@
 
 *   [Root](../README.md)
 *   [1. ajax - No 'Access-Control-Allow-Origin' header is present on the requested resource](#a1)
+*   [2. ajax post JSON format issue for chrome](#a2)
 
 <h2 id="a1">1. ajax - No 'Access-Control-Allow-Origin' header is present on the requested resource</h2>
 
->	ÂsÄı¾¹¦]¬°¦w¥ş©Êªº¦Ò¶q¡A¦³¤@­ÓªF¦è¥s°µ¦P·½¬Fµ¦(Same-origin policy)
-
-
+>	ç€è¦½å™¨å› ç‚ºå®‰å…¨æ€§çš„è€ƒé‡ï¼Œæœ‰ä¸€å€‹æ±è¥¿å«åšåŒæºæ”¿ç­–(Same-origin policy)
 ```
-1. ¦³¨Çºô¯¸³]­p¦¨¥u¾×http ¤£¾×https
-2. Server ­n³]¬° Access-Control-Allow-Origin: *
-	CORS(Cross-Origin Resource Sharing)
+1. æœ‰äº›ç¶²ç«™è¨­è¨ˆæˆåªæ“‹http ä¸æ“‹https
+2. Server è¦è¨­ç‚º Access-Control-Allow-Origin: *
+    CORS(Cross-Origin Resource Sharing)
 3. browser disabel "Same-origin policy"
 ```
 
-
+<h2 id="a2">2. ajax post JSON format issue for chrome</h2>
+```
+Ajax åœ¨ chrome åŸ·è¡Œ,è¨­å®šç‚º ajaxHandler.setRequestHeader('Content-type', "application/json")
+é€å‡º ajax command ç¬¬ä¸€æ¬¡ Content-type æœƒæœ‰å•é¡Œ,æœƒè‡ªå‹•é€ç¬¬äºŒæ¬¡å°±æ­£å¸¸ 
+```
 
 

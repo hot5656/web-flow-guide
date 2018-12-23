@@ -102,8 +102,21 @@
 	```
 	Math.pow(x, y) - x y 次方
 	Math.random() - random 0 to 1 (not include 1)
+
+	Math.PI: 3.14159.
+
+	Math.round(): 四捨五入
 	Math.floor(x) - 轉成整數,無條件捨去
 	Math.round(x) - 轉成整數,無條件進入
+	Math.ceil(): 無條件進位
+	Math.min(1,5 ,8)
+	Math.nax(55,10,90)
+
+	sin(x)
+	cos(x)
+	tan(x)
+	log(x): log base e
+	sqrt(x): square
 	```
 
 * color 
@@ -332,7 +345,24 @@
 	}
 	```
 
+	* setInterval
+	```
+	function time() {
+		var d = new Date() ;
+		document.write(d+"<br>");
+	}
+	var initiate = setInterval(function(){
+		time();}, 1000);
+			--> clear by clearInterval(initiate);
+	```
+
+	* setTimeour
+	```
+	var deleayAlert = setTimeout(function(){alert("Delayed")}, 3000);
+	```
+
 	* window.open
+
 	```
 	window.open("https://tw.yahoo.com/", "_blank", "height=200, width=200");
 		target: _blank(另開視窗)..
@@ -348,9 +378,7 @@
 	*	requestAnimationFrame
 	```javascript
 	// 要求瀏覽器在刷新畫面前呼叫特定函數刷新動畫
-
 	```
-
 	*	setTimeout
 	```
 	setTimeout(function(){
@@ -370,12 +398,270 @@
 	* Date
 	```
 	Date.now() - from 1970 ms time
+	// get
+	var d = new Date();
+	d.getDay() : 0~6, 0-sunday, 1-Monday 
+	d.getDate() : 1~31
+	d.getFullYear() : 1912
+	d.getTimezoneOffset(): time offset from UTC minutes
+	d.getTime() : time from 1910 to now(ms)
+	d.getMonth(): 0~11
+	d.getSeconds() : 0~59
+	d.getMilliseconds(() : 0~999
+	d.getMinutes() : 0~59
+	d.gerHours() : 0~23
+	// set
+	var dt = new Date();
+	dt.setFullYear(2008)
+	dt.setMonth(5)
+	dt.setDate(3)
+	dt.setHours(10);
+	dt.setMinutes(30);
+	dt.setSeconds(12);
+	setMilliseconds() 設置毫秒數 0~999
+
+	// 日期中的日固定設為 0。例如 2014 的 2月份天數為。days 即是當月天數
+	var days = new Date(2014,2,0).getDate();
+	// 指定參數，日期時間字串則傳回參數的日期。
+	document.write(new Date("2015/6/30 10:30:12"));
 	```
 
 	*	sizeof -"string"/"number"
 	```javascript
 	var age=30;
 	sizeof age;
+	```
+
+* debug
+	```
+	try {
+		// test code 
+		//fun();
+		var name = prompt("Your Name:");
+		if (name.length > 5) {
+			throw("long name..")
+		}
+	} catch(e) {
+		// erroe event
+		console.log(e);
+		alert(e);
+	} finally {
+		// do correct and error
+		console.log("debug end..");
+	}
+	```
+
+* Regular Expressions(RegExp)
+	* define
+		```
+		var MyRegExp = new RegExp(pattern, modifyers);
+			or 
+		var MyRegExp = /pattern/modifyers;
+
+		// basic
+		[adc]: a,b or c
+		[^xyx]: not x,y or z
+		[0-9]: 0~9
+		[A-Z]: A~Z
+		[a-z]: a~z
+		(box|floor|bed|desk): box,floor,bed or desk
+		yourWord: math YourWord
+		// quantifier 數量
+		g* : 0 to more "g"
+		t? : 0 or 1 "t"
+		z+ : 1 to more "z"
+		a{X,}: a at least X
+		a{X,Y}: a at least X to Y
+		a{X}: match x number a
+		^w: start wiyh "w"
+		q$ : end with "q"
+		// metacharacter 變化 - special character
+		. : siggle character except for newlines
+		\w: a word(leter)
+		\W: not a word
+		\d: a gigital
+		\D: a non-digital character
+		\s: a whitespace
+		\S: a non-whitespace
+		\b: begibning/end of a word
+		\B: not begibning/end of a word
+		\0: a nul
+		\n: a new line LF:linux,CR+LF:window,CR:apple system
+		\f: a line feed(換行)
+		\r: a carriage return
+		\t: a tab
+		\v: a vertical tab (垂直定位)
+		// modifyers
+		i : case Insensitive or ignore-case
+		g: global. It can found all match
+		```
+
+	* example
+		```
+		var myRegExp = /Kalob/g;
+		var test = myRegExp.test("My name is Kalob");
+			--> test is true
+		var test = myRegExp.test("My name is Kallob");
+			--> test is false	
+
+		var myRegExp = /l{2}/g;
+		var test = myRegExp.test("My name is Kallob");
+			--> test is true
+		var myRegExp = /kalob$}/g;
+		var test = myRegExp.test("My name is Kalob");
+			--> test is true
+
+		var myRegExp = /kalob\n}/g;
+		var test = myRegExp.test("My name is Kalob<br> test");
+			--> test is false		
+		var test = myRegExp.test("My name is Kalob\n test");
+			--> test is true
+
+		var myRegExp = /JS/gi;
+		var test = myRegExp.test("This is a js class");
+			--> test is true
+		```
+	
+	*	Using
+	```
+	// test()
+	var myRegExp = /Kalob/g;
+	var test = myRegExp.test("My name is Kalob");
+
+	// replace()
+	var myRegExp = /sentence/gi;
+	var str = "Change this sentence";
+	dpcument.getElementById("demo6").innerHTML = str.replace(myRegExp, "string");
+		--> "Change this string"
+
+	// match()
+	var myRegExp = /string/g;
+	var str = "This is my test string string string".match(myRegExp);
+	var matches = str.length;
+		-->matches 3  (array 3 )
+	var myRegExp = /string\s/g;
+	var str = "This is my test string string string".match(myRegExp);
+	var matches = str.length;
+		-->matches 2
+	```
+
+* Navigator object for platform
+	```
+	platfrom: ie.Win32,..
+	cookieEnabled: 
+	onLine: it true 
+	userAgent: 
+	appName: browser name,ie.Netscape
+	appVersion:browser ver
+	appCodeName: name of you browser, ieMozilla
+
+	// example 
+	var navigationInfo = "platfrom: " + navigator.platfrom + "<br>";
+	navigationInfo += "cookieEnabled: " + navigator.cookieEnabled + "<br>";
+	navigationInfo += "onLine: " + navigator.onLine + "<br>";
+	navigationInfo += "userAgent: " + navigator.userAgent + "<br>";
+	navigationInfo += "appName: " + navigator.appName + "<br>";
+	navigationInfo += "appVersion: " + navigator.appVersion + "<br>";
+	navigationInfo += "appCodeName: " + navigator.appCodeName + "<br>";
+	document.write(navigationInfo);
+
+	// result - it is vary strange 
+	platfrom: undefined
+	cookieEnabled: true
+	onLine: true
+	userAgent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+	appName: Netscape
+	appVersion: 5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+	appCodeName: Mozilla 
+	```
+
+* Ajax
+	* some reference
+	```
+	// onreadystatechange : Defines a function to be called when the readyState property changes
+	//readyState	Holds the status of the XMLHttpRequest. 
+		0: request not initialized 
+		1: server connection established
+		2: request received 
+		3: processing request 
+		4: request finished and response is ready	
+	// status
+		200: "OK"
+		403: "Forbidden"
+		404: "Page not found"
+		--------------------
+		1xx: Information
+		2xx: Successful
+		3xx: Redirection
+		4xx: Client Error
+		5xx: Server Error
+		[ref](https://www.w3schools.com/tags/ref_httpmessages.asp)
+	// post Content-type
+		application/x-www-form-urlencoded : 數據被編碼成以'&'分隔的鍵-值對,同時以'='分隔鍵和值.非字母或數字的字符會被 percent-encoding 
+		application/json : json format
+	```
+
+	* example
+	```
+	// html
+	<div id="getMe"></div>
+	<div id="postMe"></div>
+	// js
+	function newAjax() {
+		var ajax;
+		if (window.XMLHttpRequest) {
+			// this is for IE 7+, Chrome, Safri and fireFox
+			ajax = new XMLHttpRequest();
+		}
+		else {
+			// this is for IE6 and IE 5
+			ajax = new ActiveXobjext("Microsoft.XMLHTTP")
+		}
+		return ajax;
+	}
+
+	function getMe() {
+		var ajaxHandler = newAjax();
+		ajaxHandler.onreadystatechange = function(){
+			console.log("readyState=%d status=%d ", ajaxHandler.readyState, ajaxHandler.status);
+			console.log(ajaxHandler);
+			if (ajaxHandler.readyState==4 && ajaxHandler.status==200) {
+				// json to object
+				var respData = JSON.parse(ajaxHandler.responseText) ;
+				console.log(ajaxHandler.responseText);
+				console.log(respData);
+				document.getElementById("getMe").innerHTML = ajaxHandler.responseText;
+			}
+		}
+		ajaxHandler.open("get", "https://www.thef2e.com/api/signUpTotal", true);
+		ajaxHandler.send();
+	}
+	getMe();
+
+	function postMe() {
+		var ajaxHandler = newAjax();
+		var account = { email: "kyp001@yahoo.com.tw"};
+		// object to JSON
+		var data = JSON.stringify(account);
+		console.log(account);
+		console.log(data);
+
+		ajaxHandler.onreadystatechange = function(){
+			console.log("readyState=%d status=%d ", ajaxHandler.readyState, ajaxHandler.status);
+			console.log(ajaxHandler);
+			if (ajaxHandler.readyState==4 && ajaxHandler.status==200) {
+				// json to object
+				var respData = JSON.parse(ajaxHandler.responseText) ;
+				console.log(ajaxHandler.responseText);
+				console.log(respData);
+				document.getElementById("postMe").innerHTML = ajaxHandler.responseText;
+			}
+		}
+		ajaxHandler.open("post", "https://www.thef2e.com/api/isSignUp", true);
+		ajaxHandler.setRequestHeader('Content-type', "application/json");
+		ajaxHandler.send(data);
+	}
+	postMe();
 	```
 
 ### DOM(Document Object Model - 文件物件模型
@@ -453,12 +739,13 @@
 
 * event process
 	*	event list
+
 	```javascript
 	document.addEventListener("mousemove", fun_name);
-
 	```
 
 	*	example 
+
 	```javascript
 	// HTML
 	<body>
@@ -481,7 +768,6 @@
 	        This is the Contract us menu
 	      </div>
 	    </li>
-	    
 	    <div class="clearfix"></div>
 	  </ul>
 	</body>
