@@ -432,6 +432,21 @@
 	sizeof age;
 	```
 
+	* get HTML5 中的 data-* attribute(\*字號的地方不能包含大寫字母)
+	```javsscript
+	// html
+	<div id="slider" data-type="slideShow">
+		<img class='photo' data-item="1" data-size="xs" src="http://fakeimg.pl/350x200/?text=Hello" />
+		<img class='photo' data-item="2" data-size="lg" src="http://fakeimg.pl/550x200/?text=Welcome" />
+	</div>
+	// js
+	let slider = document.getElementById('slider');
+	console.log(slider.dataset.type);   //  "slideShow
+	let photo = document.querySelectorAll('.photo');
+	console.log(photo[0].dataset.item);   //  "1"
+	console.log(photo[0].dataset.size);   //  "xs"
+	```
+	
 * debug
 	```
 	try {
@@ -711,6 +726,7 @@
 	// > 下一層
 	document.querySelector("div.img_box2 > img");
 	var heroImage = document.querySelector("div.img_box2 > img");
+	// get/set HTML attribute
 	heroImage.getAttribute("src");
 	heroImage.setAttribute("src", "https://images.pexels.com/photos/990826/pexels-photo-990826.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
 	```
