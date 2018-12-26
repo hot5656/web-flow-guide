@@ -6,14 +6,34 @@
 ```html
 <table class="style1">
   <tr>
-    <th>標題</th>
-    <th>標題</th>
+    <th>標題1</th>
+    <th>標題2</th>
   </tr>
   <tr>
-    <td>內容</td>
-    <td>內容</td>
+    <td>內容1-1</td>
+    <td>內容1-2</td>
+  </tr>
+  <tr>
+    <td>內容2-1</td>
+    <td>內容2-2</td>
   </tr>
 </table>
+--> <table> cellspacing="8" : 表格框之寬度
+--><table> cellpadding="8" : 表格內容和邊框之距離
+
+//mergin across table
+<table width="50%" border="1" cellspacing="5" cellpadding="10">
+	<tr>
+		<td colspan="2">&nbsp;</td>
+		<td rowspan="2">&nbsp;</td>
+	</tr>
+	<tr>
+		<td>&nbsp;</td>
+		<td>&nbsp;</td>
+	</tr>
+</table>
+--> colspan="2"
+--> rowspan="2"
 
 <table class="table table-dark">
 	<thead>
@@ -125,6 +145,26 @@ select {
 ```
 
 ### other
+* 名詞
+	*	attribute 屬性
+	```
+	<a href="https://tw.yahoo.com/"></a>
+	href : attribute name
+	"https://tw.yahoo.com/" : sttribute value
+	// title : show when hover 
+	title="test title"
+	border="3" border 3px
+	bordercolor="#f00"
+	width="100"
+	height="200"  
+	style="..." : put css in html
+	```
+
+	* comment
+	```html
+	<!-- HTML comment -->
+	```
+
 *	name (可重複)
 	```
 	1. 作為可與伺服器交互資料的HTML元素的伺服器端的標示，比如input、select、textarea、和button等。我們可以在伺服器端根據其Name通過Request.Params取得元素送出的值。
@@ -135,18 +175,115 @@ select {
 	6. ?? 某些特定元素的屬性，如attribute，和param。例如為Object定義參數<PARAM NAME = "appletParameter" VALUE = "value">。
 	```
 
-* element 
+* element
+	*	page name
+	```
+	banner : 旗幟,橫幅
+	```
+
+	* list
 	```html
+	// unorder list
+	<ul>
+		<li>First item</li>
+		<li>Second item</li>
+		<li>third item</li>
+	</ul>
+	// <ul> type
+			type="square"
+			type="disk"(default)
+			type="circle"
+			type="none"
+	// order list
+	<ol>
+		<li>First item</li>
+		<li>Second item</li>
+		<li>third item</li>		
+	</ol>
+	// <ol> type
+		type="1"(default) --> start="3"
+		type="a"
+		type="A"
+		type="i"
+		type="I"
+	//  <ol> start
+		just support start="3","4"...
+	// difinition list定義
+	<dl>
+		<dt>Title</dt>
+			<dd>Definition goes in here</dd>
+		<dt>Second title</dt>
+			<dd>Another definition</dd>
+	</dl>
+	// tag
+	<dl> = definition list
+	<dt> = definition Title
+	<dd> = definition Descript
+	// show as
+	Title
+			Definition goes in here
+	Second title
+			Another definition
+	```
+
+	* other
+	```html
+	// head
+		<h1></h1>~<h6></h6>
+	// img
+		<<img src="" alt="">
+		alt: if cannot load show message
+	// bold
+		<b></b> : for browser
+		<strong></strong> : for more screen
+	// Italic
+		<em></em> : for emphasize 強調
+		<i></i> : fo decoration 裝飾
+	// under line
+		<u></u>
 	// button
 		<button type="button">我是按鈕</button>
-	// tag a
+	// sub text
+		<sub>xx</sub> : low word
+	// super text
+		<sup></sup> : high word
+	// code text
+		<code>show computer code</code> : show speial font for code
+	// pre text(preformat, block element) : shwo as input, don't need <br> (incluse new line, space...)
+		<pre>My pre
+		Starts    sss
+		end Per</pre>
+	// font tag : 有調整 color ,size, face 的 attribute
+		<font color="顏色" size="大小" face="字型">文字</font>
+	// IFrames : inline frame
+		<iframe src="https://hot5656.github.io/dessertshop_susy/" frameborder="1" height="400px" width="50%" scrolling="yes"></iframe>
+		--> frameborder="0" or "1"(have border)
+		--> some web sise not support
+		--> support width and height
+		--> scrolling
+			scrolling="yes" scroll bar always show up
+			scrolling="no"  scroll bar never show up
+			scrolling="auto" scroll bar auto detect show up or not
+	// tag a(link tag or anchor)
 		<a href="index.html" class="next">繼續逛逛</a>
 		<a class="pay" href="checkout_profile.html">結帳</a>
+		attribute target :
+			_blank  : Opens the linked document in a new window or tab
+			_self   : (defalut)Opens the linked document in the same frame as it was clicked
+			_parent : Opens the linked document in the parent frame
+			_top    : Opens the linked document in the full body of the window
+			framename	: Opens the linked document in a named frame
+		href="#" : goto page top
+		href="#page-middle" : got page position id = page-middle
+	// div
+		<div></div> : dummy element, no real function
 	// icon 語法
 		.ico語法1：
 		<link rel="shortcut icon" href="圖示網址/favicon.ico" />
 		.ico語法2：
 		<link rel="icon" href="圖示網址/favicon.ico" type="image/ico" />
+	// br - break line
+		<br>
 	// hr - 分隔線
 		<hr>
 	// a link but no do anything

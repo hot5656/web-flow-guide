@@ -261,13 +261,51 @@
 	```
 
 	*	ajax
-	```
-	// simple load file
+	```javascript
+	// simple load file -----------
 	// html
 	<div id="ajaxMe">Static text</div>
 	// js
 	$("#ajaxMe").click(function(){
 		$(this).load("https://www.thef2e.com/api/signUpTotal");
+	});
+	// get ------------
+	// html
+	<button>Click me</button>
+	<div id="ajaxDiv">&nbsp;</div>
+	// js
+	// get 
+	$("button").click(function(){
+		$.ajax({
+			dataType: "json",
+			url: "https://www.thef2e.com/api/signUpTotal",
+			success: function(data){
+				console.log(data);
+				console.log(JSON.stringify(data));
+				// JSON.stringify(data) : object to string(mean JSON)
+				$("#ajaxDiv").html("respData:"+JSON.stringify(data));
+			}
+		});
+	});	
+	// post ----------
+	var account = { email: "kyp001@yahoo.com.tw"};
+	$("button").click(function(){
+		$.ajax({
+			// set post
+			type: "post",
+			// set post data, JSON.stringify(data) : object to string(mean JSON)
+			data: JSON.stringify(account),
+			// set data type
+			contentType: "application/json",
+			dataType: "json",
+			url: "https://www.thef2e.com/api/isSignUp",
+			success: function(data){
+				console.log(data);
+				console.log(JSON.stringify(data));
+				// JSON.stringify(data) : object to string(mean JSON)
+				$("#ajaxDiv").html("respData:"+JSON.stringify(data));
+			}
+		});
 	});
 	```
 

@@ -18,6 +18,14 @@
 		background-color: pink;
 	}	
 	```
+*	other 
+	```
+		color:
+		font-size:
+		background-color:
+		padding/padding-top/padding-bottom/padding-left/padding-right
+		margin/margin-top/margin-bottom/marin-left/margin-right
+	```
 *	position
 	```css
 	// css 

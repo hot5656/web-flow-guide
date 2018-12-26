@@ -78,7 +78,7 @@ lorem10 : 10字
 - png copy to one file
 ```
 
-<h2 id="a4">[4. variable</h2>
+<h2 id="a4">4. variable</h2>
 
 ```
 $width: 940px
