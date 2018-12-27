@@ -175,6 +175,38 @@ select {
 	6. ?? 某些特定元素的屬性，如attribute，和param。例如為Object定義參數<PARAM NAME = "appletParameter" VALUE = "value">。
 	```
 
+* head
+	```
+	// title
+	<title>webpage Home</title> : browser tab
+	// link
+	<link rel="stylesheet" href="style.css"> : inclue css file
+	// icon : at top of title(px 為四的倍數 16*16 or 64*64)
+	<link rel="shortcut icon" type="image/x-icon" href="/somewhere/myicon.ico">
+	<link rel="shortcut icon" type="image/gif" href="/somewhere/myicon.gif">
+	<link rel="shortcut icon" type="image/png" href="/somewhere/myicon.png">
+		--> 	<link rel="shortcut icon" type="image/x-icon" href="favicon_32.ico">
+		--> 	<link rel="icon" type="image/x-icon" href="favicon_32.ico">
+	// javascript file 
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	// javascript code
+	<script>
+		............
+	</script>
+	// css code
+	<style> : head
+		............
+	</style>
+	// <meta/> : tags  when write keyword to describe your webside
+		// 說明,不要太長
+		<meta name="description" cntent="this is descript the side" />
+		// keyword
+		<meta name="keywords" content="learn, httml, html5, css, css3" />
+		// refresh page(this is every 5s)
+		<meta http-equiv="refresh" content="5">
+		// redirect to another page		
+		<meta http-equiv="refresh" content="0;URL=index.html">
+	```
 * element
 	*	page name
 	```
@@ -291,3 +323,39 @@ select {
 	// <b>: bold
 		<b></b>
 	```
+
+### DOM(Document Object Model Tree)
+*	HTML element
+	```
+	<html>-<head>-<title>-text
+							 -<meta>
+				-<body>-<h1></h1>-text
+							 -<img>
+							 -<p>-text
+							 		 -<em>
+	```
+
+* show HTML entify
+	```
+	<div><meta/>tags go in your <head>section</div>
+		to
+	<div>&lt;meta/&gt;tags go in your &lt;head&gt;section</div>	
+	```
+
+### HTML5
+	```
+	// new element
+	<header></header> : per page support multi, but not inside
+	<footer></footer> : per page support multi, but not inside
+	<nav></nav> : navigation 
+	<area shape="" coords="" href="" alt=""> : general for group
+	<article></article> : an artical
+	<section></section> : a section of content goes, linke code, artical, etc
+	// spellcheck and contenteditable - applied by <p>,<body>,<div>...
+	// some element need add  contenteditable="true" the ncan do spellcheck
+	<p contenteditable="true" spellcheck="true">splel chekc tihs sentance</p>
+
+	```
+
+
+
