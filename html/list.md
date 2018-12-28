@@ -343,6 +343,83 @@ select {
 	```
 
 ### HTML5
+* video element
+	```
+	// chrome 要設定 muted, autoplay才有作用
+	// post : 影片撥放錢顯示圖片
+	// muted/muted="true" : 靜音
+	// autoplay/autoplay="autoplay" : 網頁載入後自動撥放 (若有問題可加 preload)
+	// controls/controls="controls" : 顯示控制鍵
+	// loop/loop="loop" : 重複播放
+	// width="200"/height="300": 設定寬度/高度
+	<video autoplay poster="photo-1473256599800-b48c7c88cd7e.jpg"  muted >
+			<source src="Christmas - 19940.mp4" type="video/mp4">
+			<!-- if browser not support shoe the text -->
+			Your browser don't suppoer the video tag.
+	</video>
+	<video autoplay muted loop>
+			<source src="SampleVideo_720x480_1mb.mp4" type="video/mp4" >
+			Your browser don't suppoer the video tag.
+	</video>
+	// 另外也有其他撥放檔
+	<video>
+		<source src="SampleVideo_720x480_1mb.mp4" type="video/mp4" >
+		<source src="SampleVideo_720x480_1mb.ogg" type="video/ogg" >
+		<source src="SampleVideo_720x480_1mb.webm" type="video/wem" >
+		Your browser don't suppoer the video tag.
+	</video>
+	// button + js conttrol video
+	// html
+	<button onclick="playOrPause()">Play or Pause</button>
+	<button onclick="bigScreen()">Big screen</button>
+	<button onclick="normalScreen()">Normal screen</button>
+	<br>
+	<video id="lecture">
+			<source src="SampleVideo_720x480_1mb.mp4" type="video/mp4" >
+			Your browser don't suppoer the video tag.
+	</video>	
+	// js
+	<script>
+		var lecture = document.getElementById("lecture");
+		function playOrPause(){
+			if (lecture.paused) {
+				lecture.play();
+			}
+			else {
+				lecture.pause();
+			}
+		}
+		function bigScreen(){
+			lecture.width = 1000 ;
+		}
+		function normalScreen(){
+			lecture.width = 720 ;
+		}
+	</script>
+	```
+
+* audio element
+	```
+	// muted/muted="true" : 靜音
+	// controls/controls="controls" : 顯示控制鍵
+	// loop/loop="loop" : 重複播放
+	<audio controls>
+		<source src="Monplaisir_-_01_-_Hlice.mp3" type="audio/mpeg">
+		Your browser don't support the audio tag
+	</audio>
+	// 另外也有其他撥放檔
+	<audio controls>
+		<source src="Monplaisir_-_01_-_Hlice.mp3" type="audio/mpeg">
+		<source src="Monplaisir_-_01_-_Hlice.ogg" type="audio/ogg">
+		<source src="Monplaisir_-_01_-_Hlice.wav" type="audio/wav">
+		Your browser don't support the audio tag
+	</audio>
+	```
+
+* drag an drop
+
+
+* addition element
 	```
 	// new element
 	<header></header> : per page support multi, but not inside
@@ -354,7 +431,7 @@ select {
 	// spellcheck and contenteditable - applied by <p>,<body>,<div>...
 	// some element need add  contenteditable="true" the ncan do spellcheck
 	<p contenteditable="true" spellcheck="true">splel chekc tihs sentance</p>
-
+	// video 
 	```
 
 

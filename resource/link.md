@@ -39,6 +39,8 @@
 ```
 *   [up-down](https://www.flaticon.com/free-icons/up-down)
 
+### video
+*		[12 Sites to Find High Quality Free Stock Videos](https://superdevresources.com/free-stock-videos-footages/)
 
 ### image
 *   [十個常用的UI靈感及工具網站](https://medium.com/as-a-product-designer/%E5%8D%81%E5%80%8B%E5%B8%B8%E7%94%A8%E7%9A%84ui%E9%9D%88%E6%84%9F%E5%8F%8A%E5%B7%A5%E5%85%B7%E7%B6%B2%E7%AB%99-4b21d4c0a5ac)
