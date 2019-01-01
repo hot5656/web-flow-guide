@@ -37,3 +37,15 @@ File --> new view into file
 	Preferences -> Settings - User
 	"draw_white_space": "all",
 	```
+
+*	install package
+	``
+	Preferences -> Package Control --> press "install package"
+	``
+
+*	Sublime Text 3 Deleting Code when I hit Tab Key
+	```
+	preferences->key bindings
+	{ "keys": ["tab"], "command": "indent" },
+	{ "keys": ["shift+tab"], "command": "unindent" }
+	```

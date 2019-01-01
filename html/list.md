@@ -175,6 +175,14 @@ select {
 	6. ?? 某些特定元素的屬性，如attribute，和param。例如為Object定義參數<PARAM NAME = "appletParameter" VALUE = "value">。
 	```
 
+*	variable
+	```
+	let、const是ES6之後加入的新成員，其作用的範圍跟var有些差異
+	let與const是區塊作用域(block scope)
+	var是函式作用域(function scope)
+	因應ES6的出現，使用上建議大家不要再用var來宣告變數，改用let與const，而且優先使用const。
+	```
+
 * head
 	```
 	// title
@@ -256,6 +264,14 @@ select {
 			Definition goes in here
 	Second title
 			Another definition
+	```
+
+	*	cookie
+	```
+	// Cookie 技術是在瀏覽器儲存資訊的一種方法， 而這些資訊就稱為 Cookie ， 伺服器可以儲存一些資訊到瀏覽器， 到下次瀏覽器再與伺服器溝通時， 這時資訊就會傳到伺服器
+	// Cookies are primarily for server-side reading (can also be read on client-side), localStorage and sessionStorage can only be read on client-side.
+	// Size must be less than 4KB.
+	// Cookies can be made secure by setting the httpOnly flag as true for that cookie. This prevents client-side access to that cookie
 	```
 
 	* other
@@ -416,8 +432,319 @@ select {
 	</audio>
 	```
 
-* drag an drop
+* drag an drop  
+	[good reference](https://pjchender.blogspot.com/2017/08/html5-drag-and-drop-api.html)
+	* simple 
 
+	```css
+	// css
+	/*預防選到 drag source 內部內容 */ 
+	[draggable="true"] {
+	  user-select: none;
+	  -moz-user-select: none;
+	  -webkit-user-select: none;
+	  -ms-user-select: none;
+	}
+	#source-container, #target-container{
+		display: inline-block;
+		margin: 10px;
+		border-width: 1px;
+		height: 200px;
+		width: 45%;
+		background-color: pink;
+	}
+	#drag-source {
+		width: 100px;
+		height: 100px;
+		background-color: blue;
+		border-radius: 50%
+	}
+	// html
+	<div id="source-container">
+		<!-- drag source set draggable="true" -->
+		<div id="drag-source" draggable="true" ondragstart="dragStart(event)"></div>
+	</div>
+	<div id="target-container" ondrop="dropped(event)" ondragover="cancelDefault(event)" ondragenter="cancelDefault(event)"></div>
+	// js
+	// monitor dragover and dragenter not do default 
+	// jQuery 的 event handler 最後加上 return false 來得到 preventDefault() 與 stopPropagation() 的效果
+  // JavaScript 的 addEventListener() 裡，最後面加上 return false 只會有 preventDefault() 的效果，不會有 stopPropagation() 的作用。
+	function cancelDefault(e) {
+		// 終止預設行為(Stop Event Flow)
+		// 以「超連結」為例，瀏覽器看到頁面上有超連結，只要偵測到超連結被點擊到，隨即會幫我做「導向連結」的動作，「導向連結」即是超連結的預設行為
+		e.preventDefault();
+		//終止事件傳導 : 停止傳送trigger至父層
+		e.stopPropagation();
+		return false;
+	}
+
+	// monitor dragstart setData for traget 
+	function dragStart(e) {
+		console.log("dragStart");
+		e.dataTransfer.setData('text/plain', e.target.id);
+	}
+	
+	// monitor drop and getData(need remove default trigger)
+	function dropped(e) {
+		console.log("dropped");
+		cancelDefault(e);
+		let data = e.dataTransfer.getData('text/plain');
+		e.target.appendChild(document.getElementById(data));
+	}
+	```
+
+	* drag and drop 2  block
+
+	```css
+	// css
+	/*預防選到 drag source 內部內容 */ 
+	[draggable="true"] {
+	  user-select: none;
+	  -moz-user-select: none;
+	  -webkit-user-select: none;
+	  -ms-user-select: none;
+	}
+	#source-container, #target-container{
+		display: inline-block;
+		margin: 10px;
+		border-width: 1px;
+		height: 200px;
+		width: 45%;
+		border: 1px solid #000;
+	}
+	#drag-source {
+		width: 100px;
+		height: 100px;
+		background-color: blue;
+		border-radius: 50%
+	}
+	// html
+	<!-- add data-role="drag-drop-container" for two direct -->
+	<div id="source-container" data-role="drag-drop-container" >
+		<div id="drag-source" draggable="true"></div>
+	</div>
+	<div id="target-container" data-role="drag-drop-container"></div>
+	// js
+	// set multi draggable listen 
+	let dragSource = document.querySelectorAll('[draggable="true"]');
+	dragSource.forEach(function(element){
+			element.addEventListener('dragstart', dragStart);
+	}); 
+	// set multi drop target listen 
+	let dropTaret = document.querySelectorAll('[data-role="drag-drop-container"]');
+	dropTaret.forEach(function(element){
+		element.addEventListener('drop', dropped);
+		element.addEventListener('dragenter', cancelDefault);
+		element.addEventListener('dragover', cancelDefault);
+	});
+
+	// monitor dragover and dragenter not do default trigger
+	function cancelDefault(e) {
+		// 終止預設行為(Stop Event Flow)
+		// 以「超連結」為例，瀏覽器看到頁面上有超連結，只要偵測到超連結被點擊到，隨即會幫我做「導向連結」的動作，「導向連結」即是超連結的預設行為
+		e.preventDefault();
+		//終止事件傳導 : 停止傳送trigger至父層
+		e.stopPropagation();
+		return false;
+	}
+
+	// monitor dragstart setData for traget 
+	function dragStart(e) {
+		console.log("dragStart");
+		e.dataTransfer.setData('text/plain', e.target.id);
+	}
+	
+	// monitor drop and getData(need remove default trigger)
+	function dropped(e) {
+		console.log("dropped");
+		cancelDefault(e);
+		let data = e.dataTransfer.getData('text/plain');
+		e.target.appendChild(document.getElementById(data));
+	}
+	```
+
+	* drop change elemnt and other
+	```
+	// css
+	// For drag sources
+	.dragging {
+	  opacity: .25;
+	}
+
+	// For drop target
+	.hover {
+	  background-color: rgba(0,191,165,.04);
+	}
+	// js - drag source
+	// 針對物件本身，我們在開始拖曳時添加樣式，結束拖曳時移除樣式：
+	function dragStart (e) {
+	  this.classList.add('dragging')
+	  e.dataTransfer.setData('text/plain', e.target.id)
+	}
+
+	function dragEnd (e) {
+	  this.classList.remove('dragging')
+	}
+	// js - container
+	// 針對容器，我們在進入容器時添加樣式，在離開或放置後移除樣式：
+	function dropped (e) {
+	  let id = e.dataTransfer.getData('text/plain')
+	  e.target.appendChild(document.querySelector('#' + id))
+	  this.classList.remove('hover')
+	}
+
+	function dragOver (e) {
+	  this.classList.add('hover')
+	}
+
+	function dragLeave (e) {
+	  this.classList.remove('hover')
+	}	
+	```
+
+	*	drag drop llist(include jQuery)
+
+	```
+	// include jQuery
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	// html
+	<ul id="item-list" class="moveable">
+		<li>One</li>
+		<li>Two</li>
+		<li>Three</li>
+		<li>Four</li>
+	</ul>
+	// js+jQuery
+	$(document).ready(function(){
+		let items = document.querySelectorAll('#item-list > li');
+		items.forEach(item => {
+			item.setAttribute("draggable", "true");
+			item.addEventListener('dragstart', dragStart);
+			item.addEventListener('drop', dropped);
+			item.addEventListener('dragenter', cancelDefault);
+			item.addEventListener('dragover', cancelDefault);
+		});
+		// monitor dragover and dragenter not do default trigger
+		function cancelDefault(e) {
+			e.preventDefault();
+			e.stopPropagation();
+			return false;
+		}
+
+		// monitor dragstart setData for traget 
+		function dragStart(e) {
+			let index = $(e.target).index();
+			console.log("dragStart");
+			console.log("index="+index);
+			e.dataTransfer.setData('text/plain', index);
+		}
+		
+		// monitor drop and getData(need remove default trigger)
+		function dropped(e) {
+			console.log("dropped");
+			cancelDefault(e);
+			
+			let oldIndex = e.dataTransfer.getData('text/plain');
+			let target = $(e.target);
+			let newIndex = target.index();
+
+			// remove dropped item at old place
+			let dropped = $(this).parent().children().eq(oldIndex).remove();
+
+			// insert the dropped items at new place
+			if (newIndex < oldIndex) {
+				target.before(dropped);
+			}
+			else {
+				target.after(dropped);
+			}
+		}
+	});
+	```
+
+* Navigator Geolocation(user location)  
+	[Navigator API](https://developer.mozilla.org/en-US/docs/Web/API/Navigator)  
+	[getCurrentPosition() Method](https://www.w3schools.com/html/html5_geolocation.asp)
+	```
+	// GeoLocation API 可以讓您知道使用者所在，但一律要獲得使用者同意
+	// html 
+	<p id="coords"></p>
+	<button onclick="getMyposition()"> find me!</button>
+	// js
+	var myLoc = document.getElementById("coords");
+	function getMyposition() {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(showPosition);
+		}
+		else {
+			myLoc.innerHTML = "Geolocation isn't supported by this browser.";
+		}
+	}
+	function showPosition(position) {
+		//緯度(latitude),經度(longitude),座標(coords-coordinates)
+		myLoc.innerHTML = "Latitude : "+ position.coords.latitude +
+											"<br>Longitude : " + position.coords.longitude;
+	}
+	```
+
+* localStorange(Saving Information)
+	```
+	// 儲存在 localStorage 的資料，關閉瀏覽器依舊會存在
+	// 儲存在 sessionStorage 的資料，在關閉瀏覽器後，就不見了
+	// set 
+	localStorage["test1"]='a'; //儲存資料，方法1
+	localStorage.test2='b'; //儲存資料，方法2
+	localStorage.setItem("test3","c"); //儲存資料，方法3
+	// get
+	alert(localStorage["test1"]); //讀取資料，方法1
+	alert(localStorage.test2); //讀取資料，方法2
+	alert(localStorage.getItem("test3")); //讀取資料，方法3
+	// remove
+	localStorage.removeItem("test1"); //刪除key值為test1這筆資料
+	localStorage.clear(); //刪除localStorage裡所有資料
+	// 若想將整個 Storage 從瀏覽器刪除可以使用 removeItem() 方法，或是直接手動清除瀏覽器中的 cache。
+	// html
+	<p id="coords"></p>
+	<button onclick="getMyposition()"> find me!</button>
+	// check Storage support or not
+	if(typeof(Storage)!=="undefined") {
+		// accept
+		alert("Accepted");
+	}
+	else {
+		// not accept
+		alert("No local Storage accepted");
+	}
+	// save variable to localStorange
+	localStorage.myName = "Robert Kao";
+	localStorage.Son = "Little Robert";
+	alert(localStorage.myName);
+	```
+
+* sessionStorange(Saving Information)
+	```
+	// html
+	<button type button="button" onclick="counter()">Add one!</button>
+	<div id="number"></div>
+	// js 
+	function counter() {
+		if(typeof(Storage)!=="undefined") {
+			if (sessionStorage.counter) {
+				sessionStorage.counter = Number(sessionStorage.counter) + 1;
+			}
+			else {
+				sessionStorage.counter = 1;
+			}
+			document.getElementById("number").innerHTML = sessionStorage.counter;
+			if (sessionStorage.counter>1) {
+				document.getElementById("number").innerHTML += "<p>Reference the page</p>" ;
+			}
+		}
+		else {
+			document.getElementById("number").innerHTML = "The browser doesn't support webv storage";
+		}
+	}
+	```
 
 * addition element
 	```

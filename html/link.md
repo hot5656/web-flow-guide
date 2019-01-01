@@ -11,6 +11,7 @@
 *   [4. html meta基本語法](https://wcc723.github.io/html/2013/08/22/html-meta/)
 *   [5. HTML <meta> Tag](https://www.w3schools.com/tags/tag_meta.asp)
 *		[6. 超文本標示語言的字元代碼(Character Codes in HTML)](http://chukaml.22web.org/linguistics/charCode/index.html)
+*		[7. THML tutorial](https://www.tutorialspoint.com/html5)
 
 
 

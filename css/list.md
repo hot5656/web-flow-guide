@@ -2,6 +2,26 @@
 
 *   [Root](../README.md)
 
+*	write css
+	* inline sheet
+	```
+	<div style="background-color:#000; color:#fff;>Test</div>
+	``` 
+
+	*	internal sheet
+	```
+	<style>
+	body {
+		color: blue;
+	}
+	</style>
+	```
+
+	* external sheet 
+	```
+	<link rel="stylesheet" href="all.css">
+	```
+
 *	css variable 
 	```
 	// define 
@@ -18,11 +38,13 @@
 		background-color: pink;
 	}	
 	```
+*	html attribute vs css property
+
 *	other 
 	```
 		color:
 		font-size:
-		background-color:
+		background-color: red;
 		padding/padding-top/padding-bottom/padding-left/padding-right
 		margin/margin-top/margin-bottom/marin-left/margin-right
 	```
@@ -102,18 +124,21 @@
 		percentage	自訂背景圖片的大小，用兩個數字百分比表示，第一個數字百分比是設定寬度，第二個數字百分比是設定高度，如果只寫一個，則第二個將自動設為 auto 的效果，背景圖片自動縮放。  
 		cover	使用於背景圖片小於容器時，將背景圖片的大小放大至容器的大小並填滿，缺點是如果容器的長寬比例與背景圖片的長寬比例不吻合，會出現背景圖片失真的情況。  
 		contain	使用於背景圖片大於容器時，將背景圖片縮小至可以在容器內呈現。  
-  *	background-position: center center;  
   *	background-image: url("../../img/photo-1473256599800-b48c7c88cd7e.jpg");  
 		```css
+		// url("floe.pgn") , none , inherit
 		background-repeat: 
 			no-repeat 背景圖案不重複
 			repeat-x 背景圖案在 x-方向重複
 			repeat-y 背景圖案在 y-方向重複
-			repeat  背景圖案在 x- 及 y-方向重複
+			repeat  背景圖案在 x- 及 y-方向重複(default)
+			inherit : inherit parent element
 		background-attachment: 
 			fixed 背景圖案永遠是停留
-			scroll 背景圖案將與捲動的動作一起移動
-		background-position: [left,center,right,%(靠左百分比,0:由左方開始顯示),y position] [top,center,bottom,%(靠上百分比,0:由上方開始顯示),x position]   
+			scroll 背景圖案將與捲動的動作一起移動-ex. page down(default)
+			inherit : 
+		background-position: [left,center,right,%(靠左百分比,0:由左方開始顯示),y position] [top,center,bottom,%(靠上百分比,0:由上方開始顯示),x position] 
+			-->1st x, 2nd y 
 		background-size：bg-size(寬度,%是表示對容器百分比,auto對應比例自動調整), bg-size(高度,%是表示對容器百分比,auto對應比例自動調整)
 			auto(預設值)	即背景圖片原始長寬
 			length 				指定圖片具體大小的數值，不允許負值(當只設定一個數值，另一個數值預設值為auto)
@@ -122,7 +147,6 @@
 			contain				主要用於背景圖大於所在內容，但卻需要將背景圖完整呈現，此時就可採用contain的方式，使背景圖縮小至內容的大小。
 		// 常用 image 
 			background-size: cover
-			background-position: center center
 		```
 
 
@@ -131,27 +155,91 @@
     nowrap 連續的空白字會縮減為一個空白，不跳行  
   *	text-indent 首行  
      text-indent : 36px 首行縮排  
-     text-indent : -36px 首行凸出來  
+     text-indent : -36px 首行凸出來
+
 *	text
   *	水平置中 text-align:center;(display: block;)  
+  ```
+		center (x-axis)
+		justify : 使左右對齊本文
+		inherit
+		left
+		right
+  ```
   *	垂直置中 line-height as parents height  
   *	height: 50px  
+  * font-size  
+  	16px
+  	inherit
+  	em
+  	rem
   *	line-height: 50px  
   *	text-align: center  
   *	letter-spacing: 1px; 字間隔
   *	text-decoration 
-  none        : 預設值，不顯示任何文字特效  
-  overline    : 替文字增加上線  
-  underline   : 替文字增加底線  
-  line-through: 替文字增加刪除線  
-  blink       : 替文字增加閃爍效果，已取消  
-  inherit     : 繼承自父層的文字效果  
+	  none        : 預設值，不顯示任何文字特效  
+	  overline    : 替文字增加上線  
+	  underline   : 替文字增加底線  
+	  line-through: 替文字增加刪除線  
+	  blink       : 替文字增加閃爍效果，已取消  
+	  inherit     : 繼承自父層的文字效果  (default)
 	*	font-weight  
-	normal - 這是預設值，可以不用設定。  
-	bold - 粗體字。  
-	bolder - 更粗的字型，不過用起來跟 bold 似乎沒什麼差異。  
-	lighter - 細體，不過與 normal 沒什麼差異。  
-	數字 - 可以設定的有 100、200、300、400、500、600、700、800、900。  
+		inherit (default)
+		normal - 這是預設值，可以不用設定。  
+		bold - 粗體字。  
+		bolder - 更粗的字型，不過用起來跟 bold 似乎沒什麼差異。  
+		lighter - 細體，不過與 normal 沒什麼差異。  
+		數字 - 可以設定的有 100、200、300、400、500、600、700、800、900。  
+	* font-style 屬性是用來設定字體是否為斜體字 (italic 或 oblique)
+		italic (italic)
+		inherit (default)
+		none (link italic)
+		oblique
+	*	text-indent (縮排)
+	```
+		inherit 
+		px
+		% of parent
+	```
+	*	font-family : 字體的類別 verdana,arial,impact(有space要以雙引號標示)
+	* text-overflow(css3)
+		```css
+		clip : 超過截掉
+		ellipsis : 超過 show ...
+		// example 
+		<div style="border: 1px solid black; width:100px; white-space: nowrap; overflow: hidden; text-overflow: clip;">
+			This is a really long sentence
+		</div>
+		<div style="border: 1px solid black; width:100px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+			This is a really long sentence
+		</div>
+		```
+	* text-transform
+			capitalize : 1st letter to capital
+			lowercase : lowercase letter
+			uppercase : uppercase
+			none 
+	*	overflow
+		```
+		auto //預設會自動使用捲軸
+		visible  //顯示的文字或圖片會直接超出範圍，不使用捲軸。
+		hidden   //自動隱藏超出的文字或圖片
+		scroll   //自動產生捲軸(若不需要也會產生垂直卷軸)
+		inherit  //繼承自父元素
+		-------------
+		othet
+		overflow-x : hidden
+		overflow-y: auto
+		```
+	*	white-space
+		```
+		normal // 連續的空白字元會被合併(collapse)
+		nowrap // 對待空白字元的方式跟 normal 一樣，且會強制不換行
+		pre    // 連續的空白字元都會被保留。換行在有換行字元以及<br>時發生
+		pre-wrap // 連續的空白字元都會被保留。換行會在換行字元、有<br>元素以及被文字空間限制時發生
+		pre-line // 連續的空白字元會被合併(collapse)。換行在換行字元、 <br>以及被文字空間限制時發生
+		```
+
 * 字型
   * serif - 襯線體，是一種字體的裝飾。這類字體的每一個字母都會有一些小小的突起，筆畫的粗細也不相同。一般常見的字型有：Caslon、Courier、Garamond、Lucida、Sabon、Times New Roman…等等 對應到中文有點像是黑體字
   * Sans-serif - 無襯線體，這類字體有點像麥克筆寫的，沒有多餘的裝飾，有一說是從襯線體的一類演變出來的。通常這類字體看起來會比較現代，因為襯線體是從羅馬時代就有的字體型態，歷史悠久，當然自然就有一種古典的感覺。常見的字型有：Avenir、DIN、Frankin Gothic、Frutiger、Futura、Helvetica、Univers…等等
