@@ -40,14 +40,177 @@
 	```
 *	html attribute vs css property
 
+*	style link
+	```
+	// LoVe/HAte rule
+	// visited 僅在清除 cash 才會清除
+	:link --> :visited --> :hover --> :active
+	a:link {
+	　//設定還沒瀏覽過的連結樣式
+	}
+	a:visited {
+	　//設定已經瀏覽過的連結樣式
+	}
+	a:hover {
+	　//設定滑鼠移到連結上的樣式
+	}
+	a:active {
+	　//設定正在被點選的連結樣式
+	}
+	// example
+	a:link {
+		color: blue;
+	}
+	a:visited {
+		color: red;
+	}
+	a:hover {
+		color: green;
+	}
+	a:active {
+		color: yellow;
+	}
+	```
+
 *	other 
 	```
-		color:
-		font-size:
-		background-color: red;
-		padding/padding-top/padding-bottom/padding-left/padding-right
-		margin/margin-top/margin-bottom/marin-left/margin-right
+	color:
+	font-size:
+	background-color: red;
+	padding/padding-top/padding-bottom/padding-left/padding-right
+	margin/margin-top/margin-bottom/marin-left/margin-right
+		px,em.cm...
+		margin: 10px 0 10px 85%
+	width 
+		% (parent)
+		auto(default)
+		px,cm,em
+	height
+		% (parent) - not every browser support well
+		auto(default)
+		px,cm,em
+	border
+		border-width
+			px
+		border-color
+		border-style
+			none
+			solid : normal
+			dotted : 點
+			ridge : 3D 立體浮凸框
+			inset : 凹框
+			double : double solid
+			groove : 3D 立體內凸框
+			outset : 凸框
+			dashed : 虛線
+		border-left-width
+		border-right
+	cursor
+		url : image
+		auto : I 字
+		crosshair : 十字
+		default
+		e-resise : <-->
+		help : default + ?
+		move : <--> +^ + v
+		n-resize : ^+|+v
+		ne-resize : 右斜 ^+|+v
+		nw-resize : 左斜 ^+|+v
+		pointer : 手
+		progress : default + 圓圈轉
+		s-resize : some same as n-resize
+		se-resize : some same as nw-resize
+		sw-resize : some same as ne-resize
+		text : | 輸入文字
+		w-resize : some same as e-resize
+		wait : 圓圈轉
+		inherit
+	display :
+		none :hide
+		block : all line
+		inline : 
+		inline-block : inline can set width
+		--------------
+		inline-tabel :
+		list-item
+		table
+		table-caption
+		table cell
+		tabel-column
+		table-row
+		inherit
+	max-width
+	min-width
+	max-height
+	min-height
+		none (no max-width, not applicable min-width)
+		%
+		px,xm,em..;
+	position
+		static (default) 
+		absolute
+			top
+			left
+			bottom
+			right
+		relative : move offset 
+			top
+			left
+			bottom
+			right
+		fixed (reference browser windows)
+	z-index : 
+		large value put top(absolute)
+		default value is 0
+		auto (default and same as parent)
+		+ or - value
+	float 
+		left : move left as it can
+		right : move right as it can
+		inherit 
+		none
+	clear (not float left or right)
+		none
+		left : not allow left
+		right : not allow right
+		both : not allow both
+		inherit
+  vertical-align : 以用來設計網頁中圖片在垂直方向的對齊方式
+		```
+		sub : 圖片垂直對齊該行本文的下標位置
+		super : 圖片垂直對齊該行本文的上標位置
+		baseline : 元素在該行的基礎線上 (default)
+		top : 圖片垂直對齊該行元素的最高位置
+		text-top : 圖片垂直對齊該行文字的最高位置
+		bottom : 圖片垂直對齊該行文字的置中位置
+		text-bottom : 圖片垂直對齊該行元素的最低位置
+		middle : 圖片垂直對齊該行文字的置中位置
+		% : 以百分比來讓圖片垂直對齊該行文字，可以有負值。
+		inherit :
+		```
+	background-position ( for Sprite - 圖片合併)
+	// Pseudo
+	:first-child - 1st item
+		div > u:first-child {border: 1px solid black;}
+	:first-letter - 1st letter
+		p:first-letter {font-size: 32px;}
+	:first-line - 1st line
+		body:first-line {word-spacing: 15px;}
+	:focus - input click
+	:lang
+		// can not have space
+		// some use for language detect , ex. lang(en)
+		div:lang(i-am-waesome) {bord: 1px sold red;} 
+		<div lang="i-am-waesome">Vordered, I am!</div>
+	:before
+		strong:before { content: "NOTICE: ";}
+	:after 
+		span:after { content: " Writeen by me!";}
+	> - 接續 element
 	```
+
+* css Sprite - 圖片合併(png support only)
+
 *	position
 	```css
 	// css 
@@ -159,13 +322,13 @@
 
 *	text
   *	水平置中 text-align:center;(display: block;)  
-  ```
+		```
 		center (x-axis)
 		justify : 使左右對齊本文
 		inherit
 		left
 		right
-  ```
+		```
   *	垂直置中 line-height as parents height  
   *	height: 50px  
   * font-size  
@@ -239,6 +402,11 @@
 		pre-wrap // 連續的空白字元都會被保留。換行會在換行字元、有<br>元素以及被文字空間限制時發生
 		pre-line // 連續的空白字元會被合併(collapse)。換行在換行字元、 <br>以及被文字空間限制時發生
 		```
+	* word-spacing 單字（或段落）水平距離
+	* letter-spacing 文字水平方向間的空白區間(可為負值)
+		normal (default)
+		px,em...
+		inherit (not all browser support)
 
 * 字型
   * serif - 襯線體，是一種字體的裝飾。這類字體的每一個字母都會有一些小小的突起，筆畫的粗細也不相同。一般常見的字型有：Caslon、Courier、Garamond、Lucida、Sabon、Times New Roman…等等 對應到中文有點像是黑體字
