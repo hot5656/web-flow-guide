@@ -38,7 +38,30 @@
 		background-color: pink;
 	}	
 	```
+
+*	sector
+	```
+	body { ...}
+	.myId { ... }
+	#testClass { ... }
+	[lang=my] { ... }// attribute
+	[href] { ... }
+	```
+
 *	html attribute vs css property
+
+*	 !important 
+	```css
+	 p { color: blue !important; }
+	```
+
+* browser Prefix(for olld browser)
+	```
+	-ms- for Microsoft Internet Explorer
+	-moz- for Mozilla Firefox
+	-o- for Opera
+	-webkit- for Chrome and Safari(iOS)
+	```
 
 *	style link
 	```
@@ -175,8 +198,7 @@
 		right : not allow right
 		both : not allow both
 		inherit
-  vertical-align : 以用來設計網頁中圖片在垂直方向的對齊方式
-		```
+	vertical-align : 以用來設計網頁中圖片在垂直方向的對齊方式
 		sub : 圖片垂直對齊該行本文的下標位置
 		super : 圖片垂直對齊該行本文的上標位置
 		baseline : 元素在該行的基礎線上 (default)
@@ -187,8 +209,8 @@
 		middle : 圖片垂直對齊該行文字的置中位置
 		% : 以百分比來讓圖片垂直對齊該行文字，可以有負值。
 		inherit :
-		```
 	background-position ( for Sprite - 圖片合併)
+	opacity : 透明效果(0.8),1不透明
 	// Pseudo
 	:first-child - 1st item
 		div > u:first-child {border: 1px solid black;}
@@ -209,7 +231,106 @@
 	> - 接續 element
 	```
 
-* css Sprite - 圖片合併(png support only)
+* css Sprite - 圖片合併
+	```
+	// 合併的圖檔
+	1. enter --> https://spritegen.website-performance.org/
+	2. clear - remove default .png
+	3. open - select icon png
+	4. setting
+		can select layout : compact/vertical/horizontal
+	5. download
+		png --> spritesheet : download png
+		png --> stylesheet  : css class
+	6. check  download --> HTML for example using
+	// example css
+	.sprite {
+	    background-image: url(spritesheet.png); 
+	    background-repeat: no-repeat;
+	    display: inline-block;
+	}
+	.sprite-approval {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -5px -5px;
+	}
+
+	.sprite-company {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -47px -5px;
+	}
+
+	.sprite-conference {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -89px -5px;
+	}
+
+	.sprite-curriculum {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -5px -47px;
+	}
+
+	.sprite-headhunting {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -47px -47px;
+	}
+
+	.sprite-hiring {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -89px -47px;
+	}
+
+	.sprite-interview {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -5px -89px;
+	}
+
+	.sprite-meeting {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -47px -89px;
+	}
+
+	.sprite-punctuality {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -89px -89px;
+	}
+
+	.sprite-question {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -131px -5px;
+	}
+
+	.sprite-rating {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -131px -47px;
+	}
+
+	.sprite-team {
+	    width: 32px;
+	    height: 32px;
+	    background-position: -131px -89px;
+	}
+	// example HTML
+	<i class="sprite sprite-approval"></i>
+	<i class="sprite sprite-company"></i>
+	<div>Test1<i class="sprite sprite-approval"></i></div>
+	<div>Test2<i class="sprite sprite-company"></i></div>
+	// background-position 
+	top/right : +x +y
+	bottom/right : +x -y
+	bottom/left : -x -y (站在顯示element立場看,利用這個)
+	top/left : -x +y
+	```
 
 *	position
 	```css
@@ -736,7 +857,7 @@ font-weight: $weight-bold
 * margin: 0 auto 僅對 block 有效,對 inline-block 無效
 * text-align: center 對text都有效,但對其他僅 inline-block有效
 * margin-top: 10% 是對照水平寬度
-* opacity : 透明效果,1不透明
+
 
 ---
 
@@ -750,4 +871,29 @@ font-weight: $weight-bold
   vertical-align:bottom;  圖片垂直對齊該行元素的最低位置。  
   vertical-align:text-bottom; 圖片垂直對齊該行文字的最低位置。  
   vertical-align:%; 以百分比來讓圖片垂直對齊該行文字，可以有負值。  
+
+### css3
+*	Border radius
+	```
+	border-radius: 10px; (0r %)
+	border-radius: 10px 0 20px 10px;
+	border-top-left-radius
+	border-top-right-radius
+	border-bottom-left-radius
+	border-bottom-right-radius
+	```
+
+* Border image
+	```
+ border-image: source slice width outset repeat|initial|inherit;
+ 
+border-image-source 圖片來源網址。
+border-image-slice 將要使用的圖片邊框分割為九格，分別抓出四個角的圖片。
+border-image-width 設定圖片邊框的寬度。
+border-image-outset 邊框圖片超出邊框的量。
+border-image-repeat 設定圖片的填滿方式，有三種常用參數。
+	round - 用重複方式填滿，有縮放圖片功能*。
+	repeat - 用重複方式填滿。
+	stretch - 用延展方式填滿。
+	```
 

@@ -38,6 +38,10 @@
 <i class="material-icons">face</i>
 ```
 *   [up-down](https://www.flaticon.com/free-icons/up-down)
+*   [flaticon](https://www.flaticon.com/)
+*   [CSS Sprite](https://spritegen.website-performance.org/)
+*   [spritecow-find icon position](http://www.spritecow.com/)
+*   [free border png](https://www.freeiconspng.com/images/borders-png)
 
 ### video
 *		[12 Sites to Find High Quality Free Stock Videos](https://superdevresources.com/free-stock-videos-footages/)
