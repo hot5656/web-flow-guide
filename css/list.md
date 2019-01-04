@@ -885,15 +885,147 @@ font-weight: $weight-bold
 
 * Border image
 	```
- border-image: source slice width outset repeat|initial|inherit;
- 
-border-image-source 圖片來源網址。
-border-image-slice 將要使用的圖片邊框分割為九格，分別抓出四個角的圖片。
-border-image-width 設定圖片邊框的寬度。
-border-image-outset 邊框圖片超出邊框的量。
-border-image-repeat 設定圖片的填滿方式，有三種常用參數。
-	round - 用重複方式填滿，有縮放圖片功能*。
-	repeat - 用重複方式填滿。
-	stretch - 用延展方式填滿。
+	border-image: source slice width outset repeat|initial|inherit;
+		border-image: url("/images/border.png") 30 30 repeat;
+	border-image-source 圖片來源網址。
+	border-image-slice 將要使用的圖片邊框分割為九格，分別抓出四個角的圖片。
+		/* 所有的边 */
+		border-image-slice: 30%; 
+		/* 垂直方向 | 水平方向 */
+		border-image-slice: 10% 30%;
+		/* 顶部 | 垂直方向 | 底部 */
+		border-image-slice: 30 30% 45;
+		/* 上 右 下 左 */
+		border-image-slice: 7 12 14 5; 
+		/* 使用fill（fill可以放在任意位置） */
+		border-image-slice: 10% fill 7 12;
+		/* Global values */
+		border-image-slice: inherit;
+		border-image-slice: initial;
+		border-image-slice: unset;
+	border-image-width 設定圖片邊框的寬度。
+	border-image-outset 邊框圖片超出邊框的量。
+	border-image-repeat 設定圖片的填滿方式，有三種常用參數。
+		round - 用重複方式填滿，有縮放圖片功能*。(當不能整數次平舖時，根據情況放大或縮小圖像)
+		repeat - 用重複方式填滿。
+		stretch - 用延展方式填滿。
+		space - 用重複方式填滿(當不能整數次平舖時，會用空白間隙填充在圖像周圍)
+	// css 
+		.b-border {
+			width:330px;
+			height: 200px;
+			border:20px solid transparent;
+			border-image:url("border.png") 27 round;
+	  /*border-image-source: url("border.png") ;
+			border-image-slice: 27;
+			border-image-width: 40px;
+			border-image-outset: 20px;
+			border-image-repeat: round;*/
+		}
+	// html
+		<div class="b-border">Test border image</div>
 	```
 
+* Box shdow
+
+	```
+	box-shadow : horisontal-shadow vertical-shadow *blur *spread *color *insert/outset
+		horisontal-shadow x-axis
+		vertical-shadow y-axis
+		blur(how much 模糊)
+		spread(how much 延伸)
+		color(default black)
+		inset/outset(default)
+	// example 
+	.box {
+		height: 100px;
+		width: 100px;
+		background-color: red;
+		box-shadow: 10px 10px 25px 10px blue inset;
+	}
+	<div class="box"></div>
+	```
+
+*	Background Size
+
+	```
+	// use uwit backfround-image 
+	background-size: 40px 40px
+	background-size: 200% 200%
+	background-size: contain (for all container for width)
+	background-size: cover ( for width/height more)
+	// example
+	.contain1 {
+		width: 100px;
+		height: 200px;
+		background-image: url("approval.png");
+		background-repeat: no-repeat;
+		background-size: contain;
+		border: 1px solid red;
+	}
+	```
+
+* Text shadow
+
+	```
+	text-shadow:horizontal-shadow vertical-shadow *blur *color
+	horizontal-shadow  x-axis
+	vertical-shadow y-axis
+	blur (how much 模糊)
+	color(default black)
+	// example
+	.text {
+		font-size: 36px;
+		text-shadow: 2px 2px 10px blue;
+	}
+	<div class="text">Test Shadow</div>
+	```
+
+* Custom Fonts
+	
+	```
+	// 可指定網路字型 or user design 字型
+	@font-face {
+	  font-family: MyHelvetica;
+	  src: local("Helvetica Neue Bold"),
+	    local("HelveticaNeue-Bold"),
+	    url(MgOpenModernaBold.ttf);
+	  font-weight: bold;
+	}
+	p { font-family: MyHelvetica, serif; }
+	```
+
+* Rotate Element
+	
+	```
+	transform: rotate(15deg);
+	transform: rotate(-15deg);
+	// example 
+	.text {
+		font-size: 36px;
+		transform: rotate(15deg);
+		border: 1px solid red;
+		width: 200px;
+	}
+	<div class="text">Test Shadow</div>
+	```
+
+* Resize (not support very well)
+
+	```
+	// 要加入 overflow:auto; 才可 work
+	resize
+		horizontal
+		vertical
+		both
+		none(default)
+	// example 
+	.text {
+		font-size: 36px;
+		border: 1px solid red;
+		width: 200px;
+		resize: both;
+		overflow:auto;
+	}
+	<div class="text">Test Shadow</div>
+	```
