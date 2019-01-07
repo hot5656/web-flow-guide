@@ -9,7 +9,7 @@
 *   [6. tag](#a6)
 *   [7. 模板庫](#a7)
 *   [8. HTML head example](#a8)
-*   [9. Build a web ](#a9)
+*   [9. Build a web](#a9)
 
 <h2 id="a1">1. emmet</h2>
 
@@ -185,100 +185,102 @@ $line-height: 1.6
 
 
 <h2 id="a9">9. Build a web</h2>
+
 *	build directory 
 	```
 	twitch_clone - source - img
-													sass
+	                        sass
 	```
 
-*	add file
+*	add file (dos)
 	```
 	./DOS_CMD
-
 	``` 
 
--- add file
-./DOS_CMD
+*	install node.js
+
+	```
+	// ** generate package.json
+	npm init
+	// ** add autoprefixer for develop
+	npm install autoprefixer --save-dev
+	// ** add browser-syn for develop
+	npm install browser-sync --save-dev
+	// ** add gulp package
+	npm install gulp --save-dev   
+		--> 4.0.0 have issue , chage to 3.9.1
+				AssertionError [ERR_ASSERTION]: Task function must be specified
+					at Gulp.set [as _setTask] 
+	npm install gulp-load-plugins --save-dev
+	npm install gulp-plumber --save-dev
+	npm install gulp-sourcemaps --save-dev
+	npm install gulp-sass --save-dev
+	npm install gulp-postcss --save-dev
+	npm install gulp-if --save-dev
+	npm install gulp-clean-css --save-dev
+	npm install gulp-clean --save-dev
+	npm install gulp-wait --save-dev
+	// ** add gulp-gh-pages for develop
+	// npm install gulp-gh-pages --save-dev
+	// ** add minimist for develop
+	npm install minimist --save-dev
+	// ** add for layout using ejs format
+	// npm install gulp-front-matter --save-dev
+	// npm install gulp-layout --save-dev
+	// npm install ejs --save-dev
+	```
+*	add file (basic)
+
+	```
+	./.gitignore
+		---------
+		node_modules
+		public
+		*.map
+		---------
+	./gulpfile.js
+		---------
+		select use ejs or no use ejs
+		---------
+	./source/sass/all.sass
+		---------
+		@import init/normalize
+		@import init/mixin
+		@import init/function
+		@import init/variable
+		@import init/init
+		// ----------------
+		@import page/index
+		---------
+	./source/sass/page/_index.sass
+		---------
+		---------
+	./source/index.html
+		---------
+		<link rel="stylesheet" href="css/all.css">
+		---------
+	```
+*	copy file(soem sass file)
+	```
+	./source/sass/init/*
+	```
+
+* run gulp
+	```
+	grup
+	```
 
 
---> install node.js
-// ** generate package.json
-npm init
-// ** add autoprefixer for develop
-npm install autoprefixer --save-dev
-// ** add browser-syn for develop
-npm install browser-sync --save-dev
-// ** add gulp package
-npm install gulp --save-dev
-npm install gulp-load-plugins --save-dev
-npm install gulp-plumber --save-dev
-npm install gulp-sourcemaps --save-dev
-npm install gulp-sass --save-dev
-npm install gulp-postcss --save-dev
-npm install gulp-if --save-dev
-npm install gulp-clean-css --save-dev
-npm install gulp-clean --save-dev
-npm install gulp-wait --save-dev
-// ** add gulp-gh-pages for develop
-// npm install gulp-gh-pages --save-dev
-// ** add minimist for develop
-npm install minimist --save-dev
-// ** add for layout using ejs format
-// npm install gulp-front-matter --save-dev
-// npm install gulp-layout --save-dev
-// npm install ejs --save-dev
-
---> add file 
-./.gitignore
-	---------
-	node_modules
-	public
-	*.map
-	---------
-./gulpfile.js
-	---------
-	select use ejs or no use ejs
-	---------
-./source/sass/all.sass
-	---------
-	@import init/normalize
-	@import init/mixin
-	@import init/function
-	@import init/variable
-	@import init/init
-
-	@import page/index
-	---------
-./source/sass/page/_index.sass
-	---------
-	---------
-./source/index.html
-	---------
-	<link rel="stylesheet" href="css/all.css">
-	---------
-
---> copy file
-./source/sass/init/*
-
---> run gulp
 
 
 
-    "gulp": "^3.9.1",
-    "gulp-clean": "^0.4.0",
-    "gulp-clean-css": "^3.10.0",
-    "gulp-if": "^2.0.2",
-    "gulp-load-plugins": "^1.5.0",
-    "gulp-plumber": "^1.2.0",
-    "gulp-postcss": "^8.0.0",
-    "gulp-sass": "^4.0.2",
-    "gulp-sourcemaps": "^2.6.4",
+	background-attachment: fixed
 
-    "gulp-wait": "0.0.2",
-
-    "gulp-gh-pages": "^0.5.4",
-
-    "gulp-front-matter": "^1.3.0",
-    "gulp-layout": "0.0.4",
+	// position: 3(from 1)
+	&:nth-child(3)
+		margin-right: 0px
+	// position: 3,6,9...
+	&:nth-child(3n)
+		margin-right: 0px
 
 

@@ -6,6 +6,7 @@
 *   [3. run gulp -> Failed to load external module @babel/register](#a3)
 *   [4. run gulp -> some WARN](#a4)
 *   [5. Failed to load external module @babel/register](#a5)
+*   [6. run gulp --> AssertionError [ERR_ASSERTION]](#a6)
 
 <h2 id="a1">1. Unsupported platform for fsevents@1.2.4: wanted {"os":"darwin","arch":"any"} (current: {"os":"win32","arch":"x64"}</h2>
 
@@ -94,4 +95,14 @@ WARN 2~5 僅為提示且在其他module內,不處理
 This is just a warning that Gulp failed to load @babel/register but on the next line it successfully loaded the fallback module: babel-register
 https://github.com/gulpjs/gulp/issues/1631
 You could install the babel-core/register module to remove the warning, but it's not necessary.
+```
+
+<h2 id="a6">6. run gulp --> AssertionError [ERR_ASSERTION]</h2>
+
+```
+AssertionError [ERR_ASSERTION]: Task function must be specified
+at Gulp.set [as _setTask] (C:\work\git\html\hexschool_html\clone\twitch_clone\node_modules\undertaker\lib\set-task.js:10:3)  
+
+--> gulp@4.0.0 have this issue ,change to gulp@3.9.1 ok
+npm install gulp@3.9.1 --save-dev
 ```

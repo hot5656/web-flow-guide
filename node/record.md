@@ -27,6 +27,27 @@
 ```
 // install to global  
 npm install node-sass -g
+// 移除全域套件
+npm uninstall <package name> -g
+//列出全域套件
+nmp ls -g
+//列出全域套件詳細資訊
+nmp ls -gl
+// npm install module special version
+// last version
+npm install lodash
+// exact version
+npm install lodash@4.17.4
+// after version
+npm install lodash@^4.0.0
+// update package.json as install already
+npm install -l
+// npm help
+npm <command> -h     quick help on <command>
+npm -l           display full usage info
+
+// 搜尋套件(非指已安裝-include lastest version)
+npm search <package name>
 
 // run script
 npm run css-compile-sw
@@ -40,8 +61,11 @@ npm install  browser-sync -save-dev
 // install package and save to package.json file
 npm install  browser-sync -save
 
-// list all package
+// 列出全域套件
 npm ls -g
+//列出全域套件詳細資訊
+nmp ls -gl
+// 列出專案套件
 npm ls
 
 // install pacjage latest version
