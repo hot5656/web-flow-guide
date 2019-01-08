@@ -182,6 +182,11 @@
 			bottom
 			right
 		fixed (reference browser windows)
+			top
+			left
+			bottom
+			right
+		inherit (follow parent)
 	z-index : 
 		large value put top(absolute)
 		default value is 0
@@ -211,6 +216,18 @@
 		inherit :
 	background-position ( for Sprite - 圖片合併)
 	opacity : 透明效果(0.8),1不透明
+	// inline tag
+		<a href=""></a>
+		<em></em> : marks text that has stress emphasis which traditionally means that the text is displayed in italics by the browser. This tag is also commonly referred to as the <em> element.
+		<span></span>
+		<img src="" alt="">
+	// block tag
+		<div></div>
+		h1~h6
+		<ol><ul><li>
+		<pre> : pre 元素可定義預格式化的文本。被包圍在pre 元素中的文本通常會保留空格和換行符。而文本也會呈現為等寬字體。
+					pre 標籤的一個常見應用就是用來表示計算機的源代碼。
+		<blockquote> 標籤可定義一個塊引用,所有文本都會從常規文本中分離出來，經常會在左、右兩邊進行縮進，而且有時會使用斜體。也就是說，塊引用擁有它們自己的空間。
 	// Pseudo
 	:first-child - 1st item
 		div > u:first-child {border: 1px solid black;}
@@ -370,7 +387,12 @@
   box-sizing: border-box;  
   * parent number  
 	&:first-child  由 parent 眼光看(first-child)
-	&:nth-child(3n) 3的倍數
+	// position: 3(from 1)
+	&:nth-child(3)
+		margin-right: 0px
+	// position: 3,6,9...
+	&:nth-child(3n)
+		margin-right: 0px
 	* z-index: 10; 數字大的在上層,應該最大值30足夠
 	*	color: inherit; 繼承
 *	< ul >
