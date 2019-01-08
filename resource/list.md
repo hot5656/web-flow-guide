@@ -152,7 +152,9 @@ WordPress : 是一個以PHP和MySQL為平台的自由開源的部落格軟體和
 
 ### name 
 banner/hero : 橫幅(版頭)
-
+preview : 縮圖
+avatar : 頭像
+outline : 外型
 slide
 introduce
 

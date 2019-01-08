@@ -221,7 +221,7 @@ $line-height: 1.6
 	npm install gulp-clean --save-dev
 	npm install gulp-wait --save-dev
 	// ** add gulp-gh-pages for develop
-	// npm install gulp-gh-pages --save-dev
+	npm install gulp-gh-pages --save-dev
 	// ** add minimist for develop
 	npm install minimist --save-dev
 	// ** add for layout using ejs format

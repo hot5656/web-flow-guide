@@ -108,10 +108,12 @@
 		% (parent)
 		auto(default)
 		px,cm,em
+		100wh
 	height
 		% (parent) - not every browser support well
 		auto(default)
 		px,cm,em
+		100vh
 	border
 		border-width
 			px
