@@ -250,6 +250,13 @@ lodash : The Lodash library exported as Node.js modules.
 bootstrap : 
 jquery : 
 susy : 
+stylus : Node.js 架構下的 CSS 前處理器
+	npm install stylus -g
+	stylus -h
+	compile : stylus main.styl
+	compile 最小化 : stylus -c main.styl
+	compile 指定目錄 : stylus -o output main.styl
+	compile watch : stylus -w main.styl
 popper.js : A library used to position poppers in web applications.
 ```
 

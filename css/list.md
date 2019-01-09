@@ -571,6 +571,9 @@
 	transition-timing-function 用來定義 transition 效果的發生速度，可說是設定轉場時所依據的貝茲曲線。  
 	transition-delay 用來定義多久之後開始發生 transition 效果。  
 	```
+	// example 
+		transition: filter 3s, box-shadow 3s 2s
+	// --
 	.box  
 		height: 50px 
 		width: 50px 
@@ -578,7 +581,7 @@
 		&:hover 
 			width: 300px
 	```
-	*	只對單一屬性加入 transition  
+	*	只對單一屬性加入 transition  (all 會較浪費時間)
 	```
 	.box:hover {
 	  width: 200px;
@@ -970,6 +973,44 @@ font-weight: $weight-bold
 	<div class="box"></div>
 	```
 
+* Filter 
+
+```
+grayscale灰階
+sepia懷舊
+saturate飽和
+hue-rotate色相旋轉
+invert負片
+opacity不透明
+brightness亮度
+contrast對比
+blur模糊
+drop-shadow下拉陰影
+/* <filter-function> values */
+filter: blur(5px);
+filter: brightness(0.4);
+filter: contrast(200%);
+filter: drop-shadow(16px 16px 20px blue);
+filter: grayscale(50%);
+filter: hue-rotate(90deg);
+filter: invert(75%);
+filter: opacity(25%);
+filter: saturate(30%);
+filter: sepia(60%);
+
+/* Multiple filters */
+filter: contrast(175%) brightness(3%);
+
+/* Use no filter */
+filter: none;
+
+/* Global values */
+filter: inherit;
+filter: initial;
+filter: unset;
+```
+
+
 *	Background Size
 
 	```
@@ -1052,4 +1093,23 @@ font-weight: $weight-bold
 		overflow:auto;
 	}
 	<div class="text">Test Shadow</div>
+	```
+
+* will-change
+	```
+	css3 新增了一個屬性為 will-change，這個屬性用於提示瀏覽器此元素可能有 CSS 的改變(如：transition、transform等等)，讓瀏覽器可以針對 CSS 改變先做處理
+		1. 不要將多個元素都設上 will-change，這樣瀏覽器會嘗試優化所有元素而消耗過多的機器資源，進而使網頁變得更慢。
+		2. 在適當的時機加上 will-change。若我們一開始就在 stylesheet 對元素加上 will-change ，會導致瀏覽器一直對此元素做優化而消耗資源，我們應該適時的使用 script 等方式適當的加入、移除 will-change 屬性。
+		3. 若網頁已非常順暢，就不要再多加 will-change，過多的 will-change 反而會造成記憶體的消耗及衍生效能問題。
+		4. 給予足夠時間預先加入 will-change 屬性
+	// 當 btn 點擊後改變透明度
+	.btn { opacity: 0.5; } 
+	.btn { will-change: opacity; }
+	.btn:active { opacity: 0.8; }
+	// 滑鼠移至按鈕時改變
+	.btn { opacity: 0.5; }
+	.container:hover > .btn { will-change: opacity; }
+	.btn:hover { opacity: 0.8; }
+	// --> 我們也可以使用 javascript 去動態加入及移除 will-change 屬性
+畢竟，大多數的改變通常是有事件觸發
 	```

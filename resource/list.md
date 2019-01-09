@@ -2,6 +2,9 @@
 
 *   [Root](../README.md)
 
+### document
+*	[淺談 CSS 方法論與 Atomic CSS](https://blog.techbridge.cc/2017/04/29/css-methodology-atomiccss/)
+
 ### 1.google key
 *	website template
 *	網頁版型
@@ -192,7 +195,7 @@ introduce
 
 ### chrome plug
 *	Life Is Too Short  
-*	Postman - 測試 API 的好工具
+*	Postman - 測試 API 的好工具 --> need Postman Pro(it's not free)
 	```
 		POST : https://www.thef2e.com/api/isSignUp
 		Params-Headers 

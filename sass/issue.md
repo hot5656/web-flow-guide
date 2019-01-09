@@ -6,7 +6,7 @@
 *   [3. File to import not found or unreadable: mixin		// 放置所有Sass全域變數與Mixin."](#a3)
 *   [4. sass Error: Invalid CSS after "...x solid #000; }": expected 1 selector or at-rule, was "{"](#a4)
 *   [5. sass Error: Undefined variable: "$c-primary", but generate .css](#a5)
-
+*   [6. sass 轉換 兩個 property 連在一起](#a6)
 
 <h2 id="a1">1. compass Inconsistent indentation: 1 tab was used for indentation, but the rest of the document was indented using 2 spaces</h2>
 
@@ -61,4 +61,8 @@ Error: Undefined variable: "$c-primary".
 @import ../init/variable
 ```
 
+<h2 id="a6">6. sass 轉換 兩個 property 連在一起s</h2>
 
+```
+可能前面 tab 打成 space
+```
