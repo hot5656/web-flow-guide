@@ -113,7 +113,13 @@
 *	從自己生活周遭不便來想靈感，例如寫一個 Node.js 爬蟲去抓最便宜的機票，若有釋出則發 Mail 通知
 *	跟朋友組隊參加技術黑客松，將想練的技術在比賽過程中來發揮得淋漓盡致
 *	做自己想做的服務，讓自己具有產品思維來運營它，未來的有一天說不定有機會靠它創業
-
+* JSONP（JSON with Padding)
+	```
+	是資料格式JSON的一種「使用模式」，可以讓網頁從別的網域要資料
+	由於同源策略，一般來說位於server1.example.com的網頁無法與 server2.example.com的伺服器溝通，
+	而HTML的 <script>元素是一個例外。利用 <script>元素的這個開放策略，網頁可以得到從其他來源動態產生的JSON資料，而這種使用模式就是所謂的 JSONP。
+	用JSONP抓到的資料並不是JSON，而是任意的JavaScript，用 JavaScript直譯器執行而不是用JSON解析器解析。
+	```
 ### some target
 *	增加 localstorage 功能，讓代辦事項紀錄起來，打開瀏覽器也看得到  
 *	研究 Firebase database 資料庫功能，用 JS 去設計資料庫邏輯  
@@ -233,6 +239,40 @@ introduce
 	6. flexbox
 	7. bs4-utility
 	8. airbnb(JavaScript Style Guide)
+
+
+### Twitch
+*	Get client Id
+	
+	```
+	1. 登入 Twitch --> 應用程式 
+	2. 註冊應用程式 
+		名稱 : web_test_hot5656 (need unique)
+		OAuth: http://localhost (隨意填)
+		分類 : Website integration (隨意選)
+		--> 建立
+	3. 管理 --> 查 client ID
+	```
+
+* Use TWitch API v5
+	
+	```
+	All data is sent and received as JSON.
+	But support Query String Parameters
+	https://api.twitch.tv/kraken/feed/<feed user ID>/posts?limit=<limit value>&cursor=<cursor value>
+&comments=<comments value>
+	// get user information
+	https://api.twitch.tv/kraken?client_id=xxx
+	// Get Live Streams
+	https://api.twitch.tv/kraken/streams/?client_id=xxx&game=League%20of%20Legends&limit=20
+		_total
+		streams -> _id,name,logo,preview->large
+	```
+
+* Use TWitch API v5 (i try have some problem)
+	```
+	{"error":"Unauthorized","status":401,"message":"Must provide a valid Client-ID or OAuth token"}
+	```
 
 
 

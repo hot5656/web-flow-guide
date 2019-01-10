@@ -123,7 +123,7 @@ $line-height: 1.6
 ```
 
 
-<h2 id="a1">7. 模板庫/h2>
+<h2 id="a7">7. 模板庫</h2>
 
 ```
 // EJS是一個JavaScript模板庫，用來從JSON數據中生成HTML字符串
@@ -270,17 +270,43 @@ $line-height: 1.6
 	grup
 	```
 
+* add jQuery
+	``` css
+	// add module
+		// install jquery
+		npm install jquery --save-dev
+		// for third js
+		npm install gulp-sequence --save-dev
+		npm install gulp-concat --save-dev
+	// gulpfile.js
+		// add third js module
+		const gulpSequence = require('gulp-sequence').use(gulp);
+
+		// add third js module
+		gulp.task('vendorJs', () => {
+		  return gulp
+		    .src([
+		      './node_modules/jquery/dist/jquery.slim.min.js'
+		    ])
+		    .pipe($.concat('vendor.js'))
+		    .pipe(gulp.dest('./public/js'));
+		});
+
+		// add third js module
+		gulp.task('default', ['copy', 'sass', 'vendorJs', 'browserSync', 'watch']);
+
+		// add build for re-build
+		// add third js module
+		gulp.task('build', gulpSequence('clean', 'copy', 'sass', 'vendorJs', 'sass'));
+	// html 
+		<script src="js/vendor.js"></script>
+		<script src="js/all.js"></script>
+	```
 
 
 
 
-	background-attachment: fixed
 
-	// position: 3(from 1)
-	&:nth-child(3)
-		margin-right: 0px
-	// position: 3,6,9...
-	&:nth-child(3n)
-		margin-right: 0px
+
 
 

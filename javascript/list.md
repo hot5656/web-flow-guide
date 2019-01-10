@@ -1002,3 +1002,28 @@
 
 		delayMotion();
 	```
+
+### js vs jQuery
+*	Set
+	*	set text
+		```
+		let chName =	$(".col > .descript > .introduce > .ch-name");
+		let chMaster =	$(".col > .descript > .introduce > .ch-master");
+		let chPreview =	$(".col > .preview");
+		// js
+		chName[0].innerText = "Test1";
+		// jq
+		chName.text("Test1"); // jq set all
+		chName.slice(0,1).text("Test1"); // jq set position 0
+		chName.slice(0,2).text("Test1"); // jq set position 0 to 1
+		```
+	*	set attribute
+		```
+		// js
+		chPreview[0].src = "img/404_preview-300x300.png";
+		// jq
+		chPreview.first().attr( "src", "img/404_preview-300x300.png"); // 1st
+		chPreview.slice(1,4).attr( "src", "img/404_preview-300x300.png"); // 1 to 3(start from 0)
+		chPreview.attr( "src", "img/404_preview-300x300.png"); // all
+		```
+
