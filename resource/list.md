@@ -266,7 +266,7 @@ introduce
 	// Get Live Streams
 	https://api.twitch.tv/kraken/streams/?client_id=xxx&game=League%20of%20Legends&limit=20
 		_total
-		streams -> _id,name,logo,preview->large
+		streams -> channel->_id,channel->name,channel->logo,preview->large
 	```
 
 * Use TWitch API v5 (i try have some problem)

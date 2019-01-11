@@ -1017,6 +1017,7 @@
 		chName.slice(0,1).text("Test1"); // jq set position 0
 		chName.slice(0,2).text("Test1"); // jq set position 0 to 1
 		```
+
 	*	set attribute
 		```
 		// js
@@ -1026,4 +1027,69 @@
 		chPreview.slice(1,4).attr( "src", "img/404_preview-300x300.png"); // 1 to 3(start from 0)
 		chPreview.attr( "src", "img/404_preview-300x300.png"); // all
 		```
+
+	* set css
+		```
+		// js
+		col[i].style.display = "block" ;
+		col[i].style.visibility = "hidden" ;			
+		// jq
+		$("p").css("background-color");
+		$("p").css("background-color", "yellow");
+		```
+
+*	sub
+	*	compare
+	```
+	// compare undefined
+	if (data.streams[i] !== undefined) {
+		console.log(i+" " + data.streams[i] );
+	}
+	```
+
+* css application
+	*	add hover-active class
+	```
+	.hover-active
+		&:hover
+			cursor: pointer
+			filter: brightness(1.4)
+			box-shadow: 5px 5px 10px 5px #333
+	```
+
+*	function
+	* DOM cloneNode
+	```
+	// cloneNode is a method of an HTMLElement, not of a NodeList
+	// need run in array item
+	let row = $(".row");
+	let col = document.getElementsByClassName("col");
+	row.append(col[0].cloneNode(true));
+	```
+
+	* remove class
+	```
+	// jq
+	$(".col").removeClass( "hover-active");
+	let col = $(".col");
+	col.slice(1,2).removeClass( "hover-active");
+	```
+
+	* simple 
+	```
+	// js
+	setTimeout(queryLive, 16);
+	```
+
+
+
+
+
+
+
+
+
+
+
+
 

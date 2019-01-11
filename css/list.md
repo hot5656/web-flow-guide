@@ -155,6 +155,12 @@
 		block : all line
 		inline : 
 		inline-block : inline can set width
+	visibility
+		visible (default)
+		hidden
+		collapse
+		initial
+		inherit
 		--------------
 		inline-tabel :
 		list-item
