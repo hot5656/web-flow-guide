@@ -116,7 +116,7 @@
 * JSONP（JSON with Padding)
 	```
 	是資料格式JSON的一種「使用模式」，可以讓網頁從別的網域要資料
-	由於同源策略，一般來說位於server1.example.com的網頁無法與 server2.example.com的伺服器溝通，
+	由於同源策略(CORS)，一般來說位於server1.example.com的網頁無法與 server2.example.com的伺服器溝通，
 	而HTML的 <script>元素是一個例外。利用 <script>元素的這個開放策略，網頁可以得到從其他來源動態產生的JSON資料，而這種使用模式就是所謂的 JSONP。
 	用JSONP抓到的資料並不是JSON，而是任意的JavaScript，用 JavaScript直譯器執行而不是用JSON解析器解析。
 	```
@@ -269,14 +269,61 @@ introduce
 		streams -> channel->_id,channel->name,channel->logo,preview->large
 	```
 
-* Use TWitch API v5 (i try have some problem)
+*	CORS(同源政策)
+	* access response head
+
 	```
-	{"error":"Unauthorized","status":401,"message":"Must provide a valid Client-ID or OAuth token"}
+	// access message
+	// Request URL: http://odata.tn.edu.tw/ebookapi/api/getOdataJH?level=all
+	Response Headers
+		Access-Control-Allow-Origin: *   (*** This access all***)
+		Cache-Control: no-cache
+		Content-Length: 6921
+		Content-Type: application/json; charset=utf-8
+		Date: Mon, 14 Jan 2019 05:53:24 GMT
+	// not access message
+	// Request URL: https://quality.data.gov.tw/dq_download_json.php?nid=9337&md5_url=70c2a41a47853be2e66eef7f3ad74b6a
+	Response Headers
+	Connection: Keep-Alive
+	Content-Disposition: attachment; filename=70c2a41a47853be2e66eef7f3ad74b6a_export.json
+	Content-Length: 506
+	Content-Type: application/json; charset=utf-8
+	Date: Mon, 14 Jan 2019 05:45:25 GMT
 	```
 
-
-
-
-
-
-
+	* JSON with padding(JSONP) - < script > tag 可以跨網域(server need support JSONP)
+	
+	```
+	// write at script 
+	// html
+	<script src="https://api.twitch.tv/kraken?client_id=qvtuq71csrlv5ipxo1ljzgbzqn1okh&callback=hello"></script>
+	// js
+	function hello(data) {
+		console.log("hello...");
+		console.log(data);
+	}
+	// write as script(all js)
+	sendRequest();
+	var url = "https://api.twitch.tv/kraken?client_id=qvtuq71csrlv5ipxo1ljzgbzqn1okh&callback=hello" ;
+	function sendRequest() {
+	  var scriptTag = document.createElement("script");
+	  scriptTag.src = url;
+	  document.body.appendChild(scriptTag);
+	}
+	// ---------
+	function hello(data) {
+		console.log("hello...");
+		console.log(data);
+	}
+	// jq
+	var url = 'https://api.twitch.tv/kraken?client_id=qvtuq71csrlv5ipxo1ljzgbzqn1okh&callback=hello' ;
+	var script = '<script src="'+ url + '"></script>';
+	function sendRequest() {
+		$('body').append(script);
+	}
+	```
+	*	Preflight  Request
+	```
+	1. 簡單請求
+	2. 需預檢的請求(need Preflight  Request)
+	```
