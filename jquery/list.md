@@ -284,6 +284,9 @@
 				console.log(JSON.stringify(data));
 				// JSON.stringify(data) : object to string(mean JSON)
 				$("#ajaxDiv").html("respData:"+JSON.stringify(data));
+			},
+			error: function(err) {
+				console.log(err);
 			}
 		});
 	});	

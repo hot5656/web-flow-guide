@@ -12,6 +12,7 @@
 *   [9. checkbox 與文字對齊下標](#a9)
 *   [10. select set margin-left 誤差 4px 調整](#a10)
 *   [11. flex justify-content 多行 間隔 issue](#a11)
+*   [12.  img tag can not using ::after ::before](#a12)
 
 
 <h2 id="a1">1. inline-block 不接受 margin-left/margin-right</h2>
@@ -137,4 +138,12 @@ border-width: 0
 	// align-content: flex-start
 	// justify-content: space-around 
 	justify-content: space-between
+```
+
+<h2 id="a12">12. img tag can not using ::after ::before</h2>
+
+```
+An img tag can not have child elements. Because img is a void element and its content model never allows it to have contents under any circumstances.
+::after creates a pseudo element as the last child of its parent.
+So img::after will not work ultimately because the browser will not allow it based on definition.
 ```

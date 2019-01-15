@@ -6,6 +6,8 @@
 *   [jsbin - onlie run js JavaScript](https://jsbin.com/?html,output)
 *   [MDN(Mozilla Developer Cente) chinese string](https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String)
 *   [DOM spec](https://dom.spec.whatwg.org/)
+*   [vanilla js](http://vanilla-js.com/)
+*   [You Don't Need jQuery(jQuery map js)](https://github.com/nefe/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
 
 
 
@@ -758,6 +760,12 @@
 
 	```javascript
 	document.addEventListener("mousemove", fun_name);
+	// onload event
+	<img src="${data.channel.logo}"  onload="this.style.opacity=1" alt="">
+	// scroll event
+	$(window).scroll(function(){
+		console.log("scroll..")
+	}
 	```
 
 	*	example 
@@ -1079,6 +1087,95 @@
 	```
 	// js
 	setTimeout(queryLive, 16);
+	// jq
+	$(window).scrollTop() : scroll to top length - px
+	$(window).height() : window height - px 
+	$(document).height() : document height - px 
+	```
+
+*	appliaction
+	* return HTML + append
+
+	``` javascript
+	// jq : append to .col
+	const streams =  data.streams;
+	const row = $('.row');
+	for (let i=0 ; i<streams.length ; i++ ) {
+		row.append(getColumn(streams[i]));
+	}
+	// return HTML
+	function getColumn(data) {
+		return `
+		<div class="col">
+			<img class="preview" src="${data.preview.large}" alt="">
+			<div class="descript">
+				<img class="avatar" src="${data.channel.logo}" alt="">
+				<div class="introduce">
+					<div class="ch-name">${data.channel.status}</div>
+					<div class="ch-master">${data.channel.name}</div>
+				</div>
+			</div>
+		</div>
+		`;
+	}
+	```
+
+	* image placeholder
+
+	```
+	// css
+	.preview
+		position: relative
+		width: 100%
+		height: 168.75px
+		> img 
+			position: absolute
+			width: 100%
+			height: 100%
+			opacity: 0
+		&:before
+			position: absolute
+			width: 100%
+			height: 100%
+			content: ''
+			background-image: url('../img/404_preview-320x180.jpg')
+	// html
+	<img src="${data.channel.logo}"  onload="this.style.opacity=1" alt="">
+	```
+
+	* infinite scroll
+
+	```
+	// scroll event
+	$(window).scroll(function(){
+		console.log("scroll..")
+	}
+	// scroll function
+	$(window).scrollTop() : scroll to top length - px
+	$(window).height() : window height - px 
+	$(document).height() : document height - px 
+	// -------
+	if scroll to bottom --> $(window).scrollTop()+$(window).height() == $(document).height()
+	// example
+	$(window).scroll(function(){
+		if ($(window).scrollTop()+$(window).height()+200 >= $(document).height()){
+			//console.log("scroll--->bottom");
+
+			if (liveCounter < limitItem) isLoadLastItem = true ;
+
+			if (isLoad &&  !isLoadLastItem){
+				isLoad = false ;
+
+				offset+= limitItem;
+				apiUrl =  "https://api.twitch.tv/kraken/streams/?client_id=" + 
+									clientId +
+									"&game=League%20of%20Legends&limit=" +
+									limitItem + "&offset=" + offset ;
+				queryLive(procesLiveInfo) ;
+				console.log("offset = " + offset);
+			}
+		}
+	});
 	```
 
 
