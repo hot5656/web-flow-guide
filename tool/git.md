@@ -46,6 +46,19 @@ Discard all local changes to all files permanently
 > git reset --hard
 
 
+### issue
+*	"gulp ghpage" --> Error in plugin 'gulp-gh-pages'
+```
+// include below message 
+Details:
+    killed: false
+    code: 129
+    signal: null
+    cmd: git rev-list --pretty=raw --max-count=1
+// ----------
+--> remove floder then redo "gulp ghpage" success
+```
+
 
 
 

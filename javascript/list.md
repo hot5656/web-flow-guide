@@ -428,6 +428,12 @@
 	document.write(new Date("2015/6/30 10:30:12"));
 	```
 
+	* json to object
+	```
+	// json to object
+	var respData = JSON.parse(ajaxHandler.responseText) ;
+	```
+
 	*	sizeof -"string"/"number"
 	```javascript
 	var age=30;
@@ -694,6 +700,7 @@
 		.value (input type="text")
 	// set css
 		.style.display
+		this.style.opacity=1
 	// set css varibale 
 		// define
 		:root {
@@ -1046,6 +1053,37 @@
 		$("p").css("background-color", "yellow");
 		```
 
+*	load and ready
+
+	```
+	//是頁面中的所有元素（包括圖片、flash）等都載入完畢後，才能執行
+	// js
+	window.onload=function(){
+		alert("onload"); 
+	}
+	// jq
+	$(window).load(function(){
+		alert("onload");
+	});
+	// jq
+	$(document).ready(function(){
+		alert("ready");
+	});
+	or 
+	$(function(){
+		alert("ready");
+	});
+	// 應用
+	1、當某一觸發事件，需要頁面的所有元素都載入完畢後才執行，並且元素不是通過ajax回撥填充的情況下，使用$(window).load()即可。
+	2、當某一觸發事件，需要頁面的所有元素都載入完畢後才執行，並且元素是通過ajax回撥填充的情況下，使用$(window).load()會出現有時有效，有時無效的情況。
+	3. 執行時間不同
+	$(document).ready()是在頁面完成HTML的載入並建立了DOM樹之後就開始執行，但這並不代表頁面的所有資料已經全部載入完成，一些大的圖片有會在建立DOM樹之後很長一段時間才行載入完成，而 $(window).load()就是整個頁面已經載入完畢後才執行，包括圖片等一些關聯文件。
+	4. 可以被執行的次數不同
+	$(document).ready()可以在JavaScript程式碼中出現多次，並且裡面的函式或者程式碼都可以執行；而$(window).load()只能在JavaScript程式碼中出現一次，如果有多個$(window).load()，那麼只有最後一個$(window).load()裡面的函式或者程式碼才會執行，之前的$(window).load()都將被覆蓋;
+	5. 執行的效率不同
+	如要在dom的元素節點中新增onclick屬性節點，這時用$(document).ready()就要比用$(window).load()的效率高；但是在某些時候還必須得用$(window).load()才行總結一下就是：$(window).load()在$(document).ready之後執行，且頁面中所有內容全部載入完成後才會執行，兩者的使用時機一目瞭然，大家可以自行決定。
+	```
+
 *	sub
 	*	compare
 	```
@@ -1091,6 +1129,45 @@
 	$(window).scrollTop() : scroll to top length - px
 	$(window).height() : window height - px 
 	$(document).height() : document height - px 
+	// jq
+	$(window).scrollTop()
+	?? document.body.scrollTop
+	// js
+	const documentBodyScrollTop = (document.documentElement && document.documentElement.scrollTop) || document.body.scrollTop;
+	const body = document.body;
+	// jq
+	$(window).height()
+	// js
+	window.innerHeight
+	// jq
+	$(document).height()
+	?? document.documentElement.scrollHeight
+	// js
+	const documentHeight = Math.max(
+		body.offsetHeight,
+		body.scrollHeight,
+		html.clientHeight,
+		html.offsetHeight,
+		html.scrollHeight
+	);
+	// jq - append
+	const row = $('.row');
+	row.append("<h1>test append...</h1>");
+	// js
+	const row = document.querySelectorAll('.row');
+	row[0].insertAdjacentHTML( 'beforeend', "<h1>test append...</h1>");
+	```
+
+	*	event 
+	```
+	//js 
+	window.addEventListener('scroll', function(e) {
+		...
+	});
+	// jq
+	$(window).scroll(function(){
+		....
+	});
 	```
 
 *	appliaction

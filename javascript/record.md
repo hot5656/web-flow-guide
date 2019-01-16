@@ -8,7 +8,7 @@
 <h2 id="a1">1. Load Ready</h2>
 
 ```
-window.load = function() {
+window.onload = function() {
 	.......
 }
 ```
