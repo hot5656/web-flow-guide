@@ -105,11 +105,13 @@
 		px,em.cm...
 		margin: 10px 0 10px 85%
 	width 
+	max-width
 		% (parent)
 		auto(default)
 		px,cm,em
 		100wh
 	height
+	min-height
 		% (parent) - not every browser support well
 		auto(default)
 		px,cm,em

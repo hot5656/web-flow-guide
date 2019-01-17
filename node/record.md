@@ -10,6 +10,8 @@
 *   [7. generate package.json](#a7)
 *   [8. gulp](#a8)
 *   [9. nvm-node.js 管理程式](#a9)
+*   [10. package list](#a10)
+*   [11. exports](#a11)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -640,5 +642,64 @@ nvm list avrible // avarible node.js
 nvm install 8.11.2 // intall node.js 8.11.2
 nvm list // list all install node.js
 nvm use 8.11.2 // switch to node.js 8.11.2
+```
+
+<h2 id="a10">10. package list</h2>
+
+*	webpack  
+	幫我們編譯我們的Preprocess成瀏覽器看得懂的內容然後打包成一包的完成檔案然後拿去server 上傳上去
+
+*	babel  
+	用於將ECMAScript 2015+程式碼轉成支援新舊瀏覽器的向後相容JavaScript
+
+*	minify  
+	把變數跟 code 寫的越短，可以省掉不少瀏覽器 Parse(解析) 的時間
+
+* uglify  
+	雖然這些 code 是公開的，但是如果有人想研究你的前端秘密的話，至少會比較不方便 
+
+<h2 id="a11">11. exports</h2>
+
+```javascript
+// message.js
+module.exports = "Hellw world."; 
+ or 
+exports = "Hello world.";
+// messageMulti.js
+module.exports.simpleMessage = "Hello world... simple"; 
+// moduleObj.js
+module.exports = { 
+	firstName: "July",
+	lastName: "Kao"
+};
+// moduleFun.js
+module.exports = function(msg) {
+	console.log("--" + msg + "--");
+};
+// moduleClassFun.js
+module.exports = function(firstName, lastName) {
+	this.firstName = firstName;
+	this.lastName = lastName;
+	this.fullName = function() {
+		return this.firstName + " " + this.lastName ;
+	}
+};
+// -------------
+// require message
+var msg = require("./message.js");
+console.log(msg);
+// require multi message
+var msgMulti = require("./messageMulti.js");
+console.log(msgMulti.simpleMessage);
+// require obj
+var obj = require("./moduleObj.js");
+console.log(obj.firstName + " " + obj.lastName);
+// require function
+var fun = require("./moduleFun.js");
+fun("test..");
+// require clss function
+var person = require("./moduleClassFun.js");
+var person1 = new person("James", "Bround");
+console.log(person1.fullName());
 ```
 

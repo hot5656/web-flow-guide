@@ -121,6 +121,10 @@
 	用JSONP抓到的資料並不是JSON，而是任意的JavaScript，用 JavaScript直譯器執行而不是用JSON解析器解析。
 	```
 *	Base64是一種基於64個可列印字元來表示二進位資料的表示方法
+*	CSP(Content-Security-Policy 內容安全策略)
+* React 
+*	Webpack
+
 
 ### some target
 *	增加 localstorage 功能，讓代辦事項紀錄起來，打開瀏覽器也看得到  

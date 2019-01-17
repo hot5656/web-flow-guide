@@ -347,6 +347,26 @@
 	}
 	```
 
+	* element
+	```
+	// append
+	row[0].insertAdjacentHTML( 'beforeend', "<h1>test append...</h1>");
+	// remove
+	const col = document.querySelectorAll('.col');
+	col[0].remove();
+	```
+
+	*	href an onclick call
+	```
+	// call by href (need add javascript:)
+	// Putting the onclick within the href would offend those who believe strongly in separation of content from behavior/action.
+	<a href="javascript:language('zh-tw')">中文</a>
+	// call by onclick (prevent browser from following the link)
+	<a href="https://tw.yahoo.com" onclick="language('zh-tw'); return false">中文</a>
+	// call by onclick (it will open the link)
+	<a href="https://tw.yahoo.com" onclick="language('zh-tw')">中文</a>
+	```
+
 	* setInterval
 	```
 	function time() {
@@ -358,7 +378,7 @@
 			--> clear by clearInterval(initiate);
 	```
 
-	* setTimeour
+	* setTimeout
 	```
 	var deleayAlert = setTimeout(function(){alert("Delayed")}, 3000);
 	```
@@ -1253,6 +1273,33 @@
 			}
 		}
 	});
+	```
+	
+	* i18n
+	```
+	// lang-en.js
+	// add i18n
+	if (!window.I18N) window.I18N = {};
+	window.I18N['en'] = {
+	  title: 'The streams in English'
+	}
+	// lamg-zh-tw.js
+	// add i18n
+	if (!window.I18N) window.I18N = {};
+	window.I18N['zh-tw'] = {
+	  title: '用中文直播的頻道'
+	}
+	// html 
+	<a href="#" onclick="language('zh-tw'); return false">中文</a>
+	<a href="#" onclick="language('en'); return false">English</a>
+	// ----
+	<!-- js process -->
+	<script src="js/all.js"></script>
+	<script src="js/lang-en.js"></script>
+	<script src="js/lang-zh-tw.js"></script>
+	// js 
+	// add i18n
+	document.querySelector(".head h1").textContent = window.I18N[lang].title;
 	```
 
 
