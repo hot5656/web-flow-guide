@@ -12,6 +12,8 @@
 *   [9. nvm-node.js 管理程式](#a9)
 *   [10. package list](#a10)
 *   [11. exports](#a11)
+*   [12. simple http server](#a12)
+*   [13. webpack application](#a13)
 
 <h2 id="a1">1. SASS compile</h2>
 
@@ -703,3 +705,69 @@ var person1 = new person("James", "Bround");
 console.log(person1.fullName());
 ```
 
+<h2 id="a12">12. simple http server</h2>
+
+```
+// js
+var http = require("http");
+var server = http.createServer(function(req, res){
+	res.end("hello");
+});
+
+server.listen(3333);
+// run
+node simpleServer.js
+// browser 
+http://127.0.0.1:3333/
+```
+
+<h2 id="a13">13. webpack application</h2>
+
+```
+// install wedpack
+	npm install webpack --save-dev
+// convert webpack 
+	node_modules\.bin\webpack --mode=development
+	node_modules\.bin\webpack --mode=production
+	node_modules\.bin\webpack --mode=none
+// i18n module 
+	module.exports = {
+	  title: '用中文直播的頻道'
+	}
+	module.exports = {
+	  title: 'The streams in English'
+	}
+// require at js
+	var i18n = {
+		en: require("./lang-en"),
+		'zh-tw': require("./lang-zh-tw")
+	};
+	var $ = require("jquery");
+	// ---- change click
+	$(".lang_en").click( function() {
+		language("en");
+	});
+	$(".lang_tw").click( function() {
+		language("zh-tw");
+	});
+	// ---- change lang variable
+	document.querySelector(".head h1").textContent = i18n[lang].title;
+// html changhe 
+	<a href="#" class="lang_tw">中文</a>
+	<a href="#" class="lang_en">English</a>
+	// change script for js
+	<script src="js/boundle.js"></script>
+// add file webpack.config.js
+	const path = require('path');
+
+	module.exports = {
+	  entry: './source/js/all.js',
+	  output: {
+	    filename: 'boundle.js',
+	    path: path.resolve(__dirname, './public/js')
+	  }
+	};
+	```
+
+	babel
+	uglify
