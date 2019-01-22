@@ -17,16 +17,35 @@
 
 <h2 id="a1">1. SASS compile</h2>
 
-### normal compile
+*	normal compile
+```
+node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\
+```
 
-`node-sass --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\`
+*	compile add debug
+```
+node-sass --source-comments --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\
+```
 
-### compile add debug
-`node-sass --source-comments --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\`
-### compile add watch
-`node-sass -w --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\`
+*	compile add watch
+```
+node-sass -w --output-style expanded --source-map true --source-map-contents true --precision 6 scss\bootsrap\4.1.3\ -o stylesheets\bootsrap\4.1.3\
+```
 
 <h2 id="a2">2. npm command</h2>
+
+*	npm script
+
+```
+// package.json
+
+"webpck": "node_modules\\.bin\\webpack --mode=none"
+
+// run npm script
+npm run webpck
+```
+
+*	normal
 
 ```
 // install to global  
@@ -243,6 +262,22 @@ gulp-uglify : JSHint plugin for gulp
 gulp-babel : Use next generation JavaScript, today, with Babel
 gulp-layout : Gulp plugin to switch layout files for each content
 gulp-wait : A gulp task that inserts a delay before calling the next function in a chain
+gulp-uglify : Minify JavaScript with UglifyJS3.
+// gulp debug
+npm install gulp-debug  --save-dev
+// inject js
+npm install gulp-inject-js --save-dev
+// inject css
+npm install  gulp-style-inject --save-dev
+//js minify
+npm install gulp-minify --save-dev
+//css minify
+npm install gulp-clean-css --save-dev
+// html minify
+npm install gulp-htmlmin --save-dev
+
+webpack : webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser
+webpack-stream : Run webpack as a stream to conveniently integrate with gulp.
 
 // js use
 eslint : ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code. In many ways, it is similar to JSLint and JSHint with a few exceptions:
@@ -262,6 +297,9 @@ stylus : Node.js 架構下的 CSS 前處理器
 	compile 指定目錄 : stylus -o output main.styl
 	compile watch : stylus -w main.styl
 popper.js : A library used to position poppers in web applications.
+Babel: The compiler for writing next generation JavaScript.
+	// install babel using with webpack
+	npm install babel-loader @babel/core @babel/preset-env --save-dev
 ```
 
 <h2 id="a7">7. generate package.json</h2>
@@ -730,6 +768,7 @@ http://127.0.0.1:3333/
 	node_modules\.bin\webpack --mode=development
 	node_modules\.bin\webpack --mode=production
 	node_modules\.bin\webpack --mode=none
+
 // i18n module 
 	module.exports = {
 	  title: '用中文直播的頻道'
@@ -767,7 +806,47 @@ http://127.0.0.1:3333/
 	    path: path.resolve(__dirname, './public/js')
 	  }
 	};
-	```
 
-	babel
+// add mode in webpack.config.js
+	module.exports = {
+	  watch: true,  // add watch
+	  mode: 'none', // add mode
+	  entry: './source/js/all.js',
+	  output: {
+	    filename: 'boundle.js',
+	    path: path.resolve(__dirname, './public/js')
+	  }
+	};
+
+// add babel for webpack
+	// install babel using with webpack
+	npm install babel-loader @babel/core @babel/preset-env --save-dev
+	// webpack.config.js
+	gulp.task('webpack', () => {
+	return gulp
+				.src('./source/js/all.js')
+				.pipe(webpack( {
+				watch: true,  // add watch
+				mode: 'none', // add mode
+				output: {
+					filename: 'boundle.js'
+				} ,
+				module: {
+					rules: [
+							{
+								use: {
+									loader: 'babel-loader',
+									options: {
+									  presets: ['@babel/preset-env']
+									}
+								}
+							}
+					]
+				}
+			} ))
+			.pipe(gulp.dest('./public/js'));
+	});
+```
+
+
 	uglify

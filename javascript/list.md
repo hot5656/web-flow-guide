@@ -793,6 +793,10 @@
 	$(window).scroll(function(){
 		console.log("scroll..")
 	}
+	// click event
+	document.querySelector(".lang_en").onclick = function() {
+		language("en");
+	}
 	```
 
 	*	example 
