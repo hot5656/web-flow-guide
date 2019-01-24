@@ -4,6 +4,7 @@
 *	[1. Load Ready](#a1)
 *	[2. Get parameter from url string](#a2)
 *	[3. String process](#a3)
+*	[4. Coding Style check - semistandard](#a4)
 
 <h2 id="a1">1. Load Ready</h2>
 
@@ -40,4 +41,28 @@ else {
 	return false;
 }
 
+```
+
+<h2 id="a4">4. Coding Style check - semistandard</h2>
+
+*	semistandard
+
+```
+1. VSCode install "StandardJS - JavaScript Standard Style"
+2. install semistandard
+	npm install semistandard -g
+3. set VSCode 
+	"javascript.validate.enable": false 
+4. VSCode 終端機 run 
+	semistandard
+	--> 若有錯誤,按 ctrl+mouseLeft 就會打開錯誤程式位置
+5. 自動修正
+	semistandard --fix
+```
+
+* other
+
+```
+ESLint (通常搭配airbnb 的規範一起使用)
+standard (與 ESLint 最大的不同點在於：standard 的規範是死的，所以沒有設定檔，強迫大家都用預設的設定)
 ```

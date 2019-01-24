@@ -228,6 +228,17 @@ $line-height: 1.6
 	// npm install gulp-front-matter --save-dev
 	// npm install gulp-layout --save-dev
 	// npm install ejs --save-dev
+	// ** 
+	// ** Babel - he compiler for writing next generation JavaScript.
+	npm install babel-loader @babel/core @babel/preset-env --save-dev
+	// ** minifi js
+	npm install gulp-minify --save-dev
+	// ** minify css
+	// npm install gulp-clean-css --save-dev
+	// ** minify html
+	npm install gulp-htmlmin --save-dev
+	// ** gulp debug
+	npm install gulp-debug  --save-dev
 	```
 *	add file (basic)
 

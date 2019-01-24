@@ -275,6 +275,10 @@ npm install gulp-minify --save-dev
 npm install gulp-clean-css --save-dev
 // html minify
 npm install gulp-htmlmin --save-dev
+// inject css/js
+npm install gulp-inline --save-dev
+// rename - gulp-rename is a gulp plugin to rename files easily
+npm install gulp-rename --save-dev
 
 webpack : webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser
 webpack-stream : Run webpack as a stream to conveniently integrate with gulp.
@@ -492,6 +496,61 @@ current: index
 
 ```
 
+*	inject and minify example
+
+```
+// html
+<!-- inject-style src="./public/css/all.css" -->
+<!-- inject-js js/boundle.js -->
+// inject-css
+var styleInject = require("gulp-style-inject");
+// add debug
+var debug = require('gulp-debug');
+// inject-js
+const injectJs = require('gulp-inject-js');
+// inject js and css
+gulp.task('inject', function() {
+  return gulp
+  .src("./public/*.html")
+  .pipe(debug())
+  .pipe(styleInject())
+  .pipe(debug())
+  .pipe(injectJs())
+	.pipe(gulp.dest("./public/final"));
+});
+
+// minify css test
+gulp.task('minify-css', () => {
+  return gulp.src('./public/css/*.css')
+    .pipe(debug())
+    .pipe($.cleanCss({compatibility: 'ie8'}))
+    .pipe(gulp.dest('./public/minify-css'));
+});
+// minify js test
+gulp.task('minify-js', function() {
+  gulp.src(['./public/js/*.js'])
+    .pipe($.minify({
+      ext:{
+        src:'-debug.js',
+        min:'.js'
+      }
+    }))
+    .pipe(gulp.dest('./public/minify-js'))
+});
+// html minify test - just test html minify(can not run well)
+gulp.task('minifyhtml', function() {
+  return gulp
+  .src("./public/*.html")
+  .pipe(debug())
+  .pipe($.htmlmin({ 
+    collapseWhitespace: true,
+    removeComments: true
+  }))
+	.pipe(gulp.dest("./public/final"));
+});
+
+```
+
 *	flow register 
 
 ``` javascript
@@ -660,6 +719,8 @@ npm install gulp --save-dev
 	});
 ```
 
+*	gulp modify class
+
 ```
 // gulp modify class
 ---
@@ -761,6 +822,8 @@ http://127.0.0.1:3333/
 
 <h2 id="a13">13. webpack application</h2>
 
+* webpack
+
 ```
 // install wedpack
 	npm install webpack --save-dev
@@ -848,5 +911,59 @@ http://127.0.0.1:3333/
 	});
 ```
 
+* webpack-stream
 
-	uglify
+```
+// add webpack-stream
+const webpack = require('webpack-stream');
+// copy - modify
+gulp.task('copy', () => {
+  gulp
+    .src(['./source/**/**', '!source/sass/**/**', '!source/js/**/**'])
+    .pipe(gulp.dest('./public/'))
+    .pipe(
+      browserSync.reload({
+        stream: true,
+      }),
+    );
+});
+// watch modify
+// add webpack-stream
+gulp.task('watch', () => {
+  gulp.watch(['./source/**/**', '!source/sass/**/*.sass', '!source/sass/**/*.scss', '!source/js/**/*.js'], ['copy']);
+  gulp.watch(['./source/sass/**/*.sass', './source/sass/**/*.scss'], ['sass']);
+});
+// webpack task
+gulp.task('webpack', () => {
+  return gulp
+    .src('./source/js/all.js')
+    .pipe(webpack( {
+      watch: true,  // add watch
+      mode: 'none', // add mode
+      output: {
+        filename: 'boundle.js'
+      } ,
+      module: {
+        rules: [
+            {
+              use: {
+                loader: 'babel-loader',
+                options: {
+                  presets: ['@babel/preset-env']
+                }
+              }
+            }
+        ]
+      }
+    } ))
+    .pipe(gulp.dest('./public/js'));
+});
+// default task
+// add webpack-stream
+gulp.task('default', ['copy', 'sass', 'webpack', 'browserSync', 'watch']);
+// build task
+gulp.task('build', gulpSequence('clean', 'copy', 'sass', 'webpack'));
+```
+
+
+
