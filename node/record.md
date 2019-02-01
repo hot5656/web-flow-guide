@@ -279,6 +279,8 @@ npm install gulp-htmlmin --save-dev
 npm install gulp-inline --save-dev
 // rename - gulp-rename is a gulp plugin to rename files easily
 npm install gulp-rename --save-dev
+// jest - for js test
+npm install jest --save-dev 
 
 webpack : webpack is a module bundler. Its main purpose is to bundle JavaScript files for usage in a browser
 webpack-stream : Run webpack as a stream to conveniently integrate with gulp.

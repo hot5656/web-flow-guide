@@ -8,6 +8,7 @@
 *   [DOM spec](https://dom.spec.whatwg.org/)
 *   [vanilla js](http://vanilla-js.com/)
 *   [You Don't Need jQuery(jQuery map js)](https://github.com/nefe/You-Dont-Need-jQuery/blob/master/README.zh-CN.md)
+*	[Jest(js test)](https://jestjs.io/)
 
 
 

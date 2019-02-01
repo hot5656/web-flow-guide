@@ -126,6 +126,12 @@
 *	Webpack
 *	Axios : Axios 是一个基于 promise 的 HTTP 库，可以用在浏览器和 node.js 中
 * JSP全稱Java Server Pages，是一種動態網頁開發技術。它使用JSP標籤在HTML網頁中插入Java代碼。 標籤通常以<%開頭以%>結束
+* XSS(cross site scripting) : 讓輸入變成程式的一部分
+	```
+	過濾/解析 使用者符號
+	輸入 : <h1>Hi</h1> 
+	```
+
 
 ### some target
 *	增加 localstorage 功能，讓代辦事項紀錄起來，打開瀏覽器也看得到  

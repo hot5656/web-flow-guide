@@ -38,6 +38,8 @@
 	*   [git](./tool/git.md)
 	*   [VSCode](./tool/vscode.md)
 	*   [Photopea](./tool/photopea.md)
+	*   [PHP](./tool/php.md)
+	*   [MySQL](./tool/mySql.md)
 *   [Reference Site]
 	*   [Html](./html/link.md)
 	*   [Css](./css/link.md)
