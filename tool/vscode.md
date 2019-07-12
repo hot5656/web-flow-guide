@@ -3,16 +3,45 @@
 *   [Root](../README.md)
 
 ### 快捷鍵-	[hot key](https://poychang.github.io/vscode-shortcuts/)
-	ctrl-shift-p(or F1) : to command line
-	F11 : 全螢幕切換
+*	ctrl-shift-p(or F1) : to command line
+*	F11 : 全螢幕切換
+*	open git : code ./GitDir
+			   code . : open current directory
+			   code -n : open a new window
+			   code --help :Lsee help option
+			   code --disable-extensions . : disable all extensions
+*	Ctrl+Shift+M : toggle Errors/Warning windows
+				   --> F8/Shift+F8 : cycle through error
+*	Ctrl+B		: toggle side bar
+*	Ctrl+\		: one file slip to two window
+*	Alt+(up/down) : move line up/down
+*	Ctrl+shift+F : search multiple file
+*	Ctrl+K Ctrl+F - Format the selected text.
+*	F7			: show diff
+*	show git output(for git process)
 
+*	change language mode : C, C#....
+	confingure display language : english, chinese
+*	Open Settings (JSON) : for change setting
+	Toggle Side By Side(one/two line)
+
+
+*	Ctl+P : open file -->? :show help
+					  -->[right] open file
+* 	Ctrl+Shift+o : go to symble
+*	Ctrl+G : go to a line
+
+*	Ctl-r : select directory
+*	Ctrl-Shift-N : open new frame
+*	Ctl+\ : open new windows(show the file)
+*	Alt+n : switch file number
 	ctrl+/ : add comment
 	ctrl-p : search file name
 	ctl-enter : add next line
 	shift-alt-f : align code
 	ctl-w : close file
 	ctl-2/ctl-3 : open 2nd window/open 3rd window
-	ctl-` : open termernal/other windows
+*	ctl-` : open termernal/other windows
 	ctl-d : 選擇下一個相同string共同編輯
 	alt-(mouse-l) : select 共同編輯
 	選擇多行-->shift+alt+(mouse-l) : 多行編輯
@@ -76,6 +105,11 @@
 
 
 ### plug package
+*	Git History : see git log 
+	Git: view history
+		 view file history
+		 view line history
+
 *	Live Server
 
 *	Live Sass Compiler : sass watch

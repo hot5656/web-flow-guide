@@ -49,3 +49,6 @@ File --> new view into file
 	{ "keys": ["tab"], "command": "indent" },
 	{ "keys": ["shift+tab"], "command": "unindent" }
 	```
+
+* open folders 
+	File --> open floders
