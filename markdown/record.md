@@ -120,16 +120,32 @@ viverra nec, fringilla in, laoreet vitae, risus.
 ![flower](flower.jpeg "pic title")
 
 ## 表格
+表格的欄位數以標題列的欄位數作為基準，有少則補。有多的，PHP 是直接判斷為文字，GFM 則是隱藏。  
+分隔列每欄至少要有三個 - (dash)，可在 - 的最左最右插入 : 指定文字對齊方式， : 也算在最少三個 - 的數量裡  
+欄位以 | (pipe) 劃分，表格外側可有可不有，但若只有單一欄位，則每欄至少要有一個 |  
+欄位裡，文字與 | 之間的空白符號對程式來說無意義，但對於編寫者能加強可讀性。
 ```
 |奇摩股市提供您當|大盤走勢、類股走及|選擇權分|
 |--|:--:|--:|
 |abc|def|123|
 |eeeeee|eeee|21312|
+
+Age           | Time  | Food | Gold | Requirement
+--------------|:-----:|-----:| ----:|------------------------
+Feudal Age    | 02:10 |  500 |    0 | Dark Age building x 2
+Castle Age    | 02:40 |  800 |  200 | Feudal Age building x 2
+Imperial Age  | 03:30 | 1000 |  800 | Castle Age building x 2 
 ```
 |奇摩股市提供您當|大盤走勢、類股走及|選擇權分|
 |--|:--:|--:|
 |abc|def|123|
 |eeeeee|eeee|21312|
+
+Age           | Time  | Food | Gold | Requirement
+--------------|:-----:|-----:| ----:|------------------------
+Feudal Age    | 02:10 |  500 |    0 | Dark Age building x 2
+Castle Age    | 02:40 |  800 |  200 | Feudal Age building x 2
+Imperial Age  | 03:30 | 1000 |  800 | Castle Age building x 2 
 
 ## 區塊元素(程式碼)
 ``` javascript

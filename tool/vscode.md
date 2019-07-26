@@ -171,6 +171,10 @@ Freference-->setting
   		none : no show
   		all  : show
 ```
+
+* table size : "editor.tabSize": 4,
+* tab to space(no) :  "editor.insertSpaces": false,
+
 * 切成中文版  
 ```
 install chinese(Traditional) Languale Pack
