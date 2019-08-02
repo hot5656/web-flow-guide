@@ -100,7 +100,7 @@ source activate my_env
 // =============================
 
 // show token
-jupyter notebook list
+jupyter notebook list  
 ```
 
 **crontab(環型工作排程)-linux comman**
@@ -314,6 +314,9 @@ jupyter notebook --no-browser
 
 // run
 Ctrl + Enter
+
+// 支援 linlie 繪圖
+%matplotlib inline 
 ```
 
 ## 2. socket
@@ -343,11 +346,19 @@ help(print)
 
 **function**
 ```python
-//type
+# type
 print(type("xy"))
 print(type(12))
 
+# enumerate() 函數同時取得索引與數值
+import numpy as np
+arr = np.array([11, 12, 13, 14, 15])
+for idx, val in enumerate(arr):
+  print("位於索引值 {} 的數字是 {}".format(idx, val))
 
+# print format
+for i in range(nab_salary.shape[0]):
+	print('{0:14}-{1:9}'.format(nab_salary.values[i][1], nab_salary.values[i][2]))
 ```
 
 **variable**
@@ -693,7 +704,18 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 ```
 
 **pandas(資料分析)**  
-Pandas 是 python 的一個數據分析 lib
+Pandas 是 python 的一個數據分析 lib  
+
+function     | 說明
+-------------|------
+df.head()    |查看前五列觀測值，可以加入參數 n 觀看前 n 列觀測值
+df.tail()    |查看末五列觀測值，可以加入參數 n 觀看末 n 列觀測值
+df.info()    |查看資料框的複合資訊，包含型別、外觀與變數型別等
+df.describe()|查看數值變數的描述性統計，包含最小值、最大值、平均數與中位數等
+df.shape     |查看資料框的外觀，以 tuple 的型別回傳，(m, n) 表示 m 列觀測值，n 欄變數
+df.columns   |查看資料框的變數名稱
+df.index     |查看資料框的列索引值
+
 ```python
 # support SSL certificate verify
 from urllib3 import PoolManager
@@ -725,8 +747,119 @@ df.to_csv("aqi.csv", index=False)
 # write json file , ensure_ascii=False(show 中文)
 with open("aqi.json", "w") as f:
     json.dump(aqi_dict, f, ensure_ascii=False)
+
+# 在 Python pandas 中可以使用 df.loc[m, n] 或 df.iloc[m, n] 兩個方法指定觀測值所在位置
+# 兩者用法差在於 df.loc[] 完全憑藉列索引值與欄索引值的標籤；而 df.iloc[] 完全憑藉相對位置
+import pandas as pd
+# ------------
+numbers = [9, 23, 33, 91, 13]
+players = ["Ron Harper", "Michael Jordan", "Scottie Pippen", "Dennis Rodman", "Luc Longley"]
+df = pd.DataFrame()
+df["number"] = numbers
+df["player"] = players
+print(df)
+# ------------
+df.index = ["PG", "SG", "SF", "PF", "C"]
+print(df.loc[["SG", "SF", "PF"], ["number", "player"]]) # 以索引為準
+print(df.iloc[[1, 2, 3], [0, 1]])                       # 以位置為準
+# 排序
+df.sort_index()                # 依照索引遞增排序
+df.sort_index(ascending=False) # 依照索引遞減排序
+df.sort_values(by="year").head()                  # 依照 year 遞增排序
+df.sort_values(by="year", ascending=False).head() # 依照 year 遞減排序
+# 依照 year 遞增排序再依照 continent 遞減排序
+df.sort_values(by=["year", "continent"], ascending=[True, False]).head() 
+
+# Python pandas 選擇資料框中特定變數會面對 Series 這樣的資料結構，而 Series 
+# 就有完整的摘要方法供我們呼叫，像總和、平均或中位數等
+import pandas as pd
+csv_url = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
+df = pd.read_csv(csv_url)
+df[df.year == 2007]["pop"].sum()
+
+# 在 Python pandas 中我們會使用 .groupby() 方法指定用來分組資料框的文字變數，
+# 然後針對變數呼叫摘要方法，分組摘要的結果會以 Series 的型別回傳。
+import pandas as pd
+csv_url = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
+df = pd.read_csv(csv_url)
+grouped = df[df.year == 2007].groupby("continent")
+grouped["pop"].sum()
+
 ```
 
+**pandas-read csv說明**  
+
+參數      |說明
+----------|----
+sep       |預設為 , 因為 CSV 檔案就是以逗號（comma）分隔的檔案格式
+header    |預設會將 CSV 檔案最上方的一列作為變數名稱，如果 CSV 檔案中沒有變數名稱，需指派 header=None
+names     |假如已經指派 header=None 則 names 參數就需要輸入一組變數名稱的 list
+skiprows  |指定在讀取時要略過多少列檔案上方的觀測值
+skipfooter|指定在讀取時要略過多少列檔案下方的觀測值
+nrows     |指定要讀入幾列觀測值
+na_values |除了內建的遺漏值種類，還有哪些額外的字元要被視為遺漏值
+
+```python
+# 如果我們在 pd.read_csv() 中指定了 skiprows=1、header=None、names=[‘number’, ‘player’, ‘pos’, ‘ht’, ‘wt’, ‘birth_date’, ‘college’] 表示略過本來 CSV 中作為變數名稱的一列、資料中沒有變數名稱並且自行為資料的七個變數命名
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+csv_df = pd.read_csv(csv_url, header=None, skiprows=1, names=['number', 'player', 'pos', 'ht', 'wt', 'birth_date', 'college'])
+csv_df
+```
+
+**pandas-read txt說明(將來僅用read_csv代替)**  
+副檔名為 .txt 純文字檔案跟 CSV 檔案的差異就在於分隔符號（separator）  
+在 Python 中我們使用 pandas 的 pd.read_table() 方法；值得注意的參數是 sep 預設為 \t 意即 tab 鍵，  
+因此面對以分號做為變數分隔的 TXT 檔案就要指定為 sep=";"  
+```python
+# pd.read_table() 指定 sep=";"
+import pandas as pd
+
+txt_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.txt"
+txt_df = pd.read_table(txt_url, sep=";")
+txt_df
+```
+
+**pandas-read excel說明( .xlsx or .xls )**  
+在 Python 中我們使用 pandas 的 pd.read_excel() 方法  
+
+參數      |說明
+----------|----
+sheet_name|預設為 0，也就是排序最前面的工作表，可以利用整數來指定載入的工作表，也可以使用工作表名稱來指定
+header    |預設為 0，也就是以最上方的一列作為變數名稱，指定 header=None 假如資料中沒有包含變數名稱
+names     |假如已經指派 header=None 則 names 參數就需要輸入一組變數名稱的 list
+usecols   |選擇哪幾個變數要載入
+skiprows  |指定在讀取時要掠過多少列檔案上方的觀測值
+skipfooter|指定在讀取時要略過多少列檔案下方的觀測值
+
+```python
+# pd.read_excel() 使用預設參數
+import pandas as pd
+
+xlsx_url = "https://storage.googleapis.com/ds_data_import/fav_nba_teams.xlsx"
+chicsgo_bulls = pd.read_excel(xlsx_url)
+chicsgo_bulls
+
+# 例如指定讀取第二個工作表、並選取部分儲存格範圍 A7 至 C16
+
+# pd.read_excel() 指定工作表與讀取範圍
+import pandas as pd
+
+xlsx_url = "https://storage.googleapis.com/ds_data_import/fav_nba_teams.xlsx"
+boston_celtics = pd.read_excel(xlsx_url, sheet_name='boston_celtics_2007_2008', skiprows=6, header=None, names=['number', 'player', 'pos'], usecols=[0, 1, 2])
+boston_celtics
+```
+
+**pandas-read jsdo說明**  
+JSON 檔案若是儲存在雲端，利用 requests 模組的 get() 函數搭配 .json() 方法就可以載入，成功之後會以 dict 型別供後續操作。
+```python
+# JSON 檔案儲存在雲端
+from requests import get
+
+json_url = 'https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.json'
+chicago_bulls_dict = get(json_url).json()
+print(type(chicago_bulls_dict))
+chicago_bulls_dict
+```
 
 **lxml**  
 lxml is the most feature-rich and easy-to-use library for processing XML and HTML in the Python language
@@ -815,6 +948,154 @@ def home():
     
 app.run()
 ```
+
+**firebase_admin**  
+Firebase Admin SDK for Python  
+// install firebase_admin(conda not support  
+pip install firebase_admin  
+
+**Numpy**  
+支援高階大量的維度陣列與矩陣運算，此外也針對陣列運算提供大量的數學函式函式庫  
+```python
+import numpy as np
+
+# array
+np1 = np.array([1, 2, 3])
+np2 = np.array([3, 4, 5])
+# 陣列相加
+print(np1 + np2) # [4 6 8]
+# 顯示相關資訊
+print(np1.ndim, np1.shape, np1.dtype) # 1 (3,) int64 => 一維陣列, 三個元素, 資料型別
+# 從檔案取資料
+# npd = np.genfromtxt('data.csv', delimiter=',')
+# start,endm array number
+np.linspace(2.0, 3.0, num=5)
+# pi
+a = np.linspace(-np.pi, np.pi, 100) 
+print(a)
+# sin
+b = np.sin(a)
+print(b)
+# random : 建立一個 3x3 隨機矩陣
+from numpy.random import rand
+c = rand(3, 3) 
+print(c)
+```
+
+# 基礎視覺化
+
+**matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**
+
+**matplotlib-->pyplot**
+```python
+# 1st sample
+import matplotlib.pyplot as plt
+# plot([x], y, [fmt], *, data=None, **kwargs)
+# plot([x], y, [fmt], [x2], y2, [fmt2], ..., **kwargs)
+# fmt = '[marker][line][color]/[color][marker][line]' format(color,linestyle .. ) -  'ro' for red circles
+# set 畫線座標值, set y , x default auto from 0(offset 1)
+plt.plot([5, 15, 20, 25])
+# set 畫線座標值, set y and x
+plt.plot([1, 2, 3, 4], [1, 4, 9, 16], 'ro')
+plt.ylabel('some numbers')	# set Y軸 標示
+plt.show()	# display a figure
+
+# draw 3 lines
+import matplotlib.pyplot as plt
+import numpy as np 
+# 0 to 5 step 0.2
+t=np.arange(0., 5., 0.2)
+print(t)
+# draw 3 lines
+plt.plot(t, t, 'r--', t, t**2, 'bs', t, t**3, 'g^')
+plt.show()
+
+# pyplot scatter(條件式畫圖)
+import matplotlib.pyplot as plt
+import numpy as np
+# ------------------
+data = {'a': np.arange(50),
+        'c': np.random.randint(0, 50, 50),
+        'd': np.random.randn(50)}
+data['b'] = data['a'] + 10 * np.random.randn(50)
+data['d'] = np.abs(data['d']) * 100
+# ------------------
+# scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None, linewidths=None, verts=None,
+# 		 edgecolors=None, *, plotnonfinite=False, data=None, **kwargs)[source]
+# s : scalar or array_like, shape (n, ), optional - The marker size in points**2. Default is rcParams['lines.markersize'] ** 2.
+# c : color, sequence, or sequence of color, optional
+plt.scatter('a', 'b', c='c', s='d', data=data)
+plt.xlabel('entry a')
+plt.ylabel('entry b')
+plt.show()
+
+# 多圖表(subplot)+統計圖(bar,scatter,plot)
+import matplotlib.pyplot as plt
+names = ['group_a', 'group_b', 'group_c']
+values = [1, 10, 100]
+# create figure : width, height in inches
+plt.figure(figsize=(9, 3)) # 9inchs * 3inches
+# plt.figure() # 640*480
+# Add a subplot to the current figure
+# nrows, ncols, position
+plt.subplot(131)
+# Make a bar plot(長條圖)
+plt.bar(names, values)
+# position #2 畫點
+plt.subplot(132)
+plt.scatter(names, values)
+# position #2 畫折線圖
+plt.subplot(133)
+# plt.plot(names, values, linewidth=2.0) # change line width
+plt.plot(names, values)
+# 畫中間抬頭
+plt.suptitle('Categorical Plotting')
+plt.show()
+
+# 多圖表(subplot)+多lines(plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k'))
+import matplotlib.pyplot as plt
+import numpy as np
+# ---------------
+def f(t):
+    return np.exp(-t) * np.cos(2*np.pi*t)
+# ---------------
+t1 = np.arange(0.0, 5.0, 0.1)
+t2 = np.arange(0.0, 5.0, 0.02)
+# 繪多line
+plt.figure()
+plt.subplot(211)
+# draw 2 line 
+plt.plot(t1, f(t1), 'bo', t2, f(t2), 'k')
+# cosine wave
+plt.subplot(212)
+plt.plot(t2, np.cos(2*np.pi*t2), 'r--')
+plt.show()
+
+# 直方圖(histogram)-hist +  show text at figure
+import matplotlib.pyplot as plt
+import numpy as np
+# ------------------
+mu, sigma = 100, 15
+x = mu + sigma * np.random.randn(10000)
+# hist(x, bins=None, range=None, density=None, weights=None, cumulative=False, bottom=None, 
+#      histtype='bar', align='mid', orientation='vertical', rwidth=None, log=False, color=None, label=None, stacked=False, normed=None, *, data=None, **kwargs)[source]
+# n, bins, patches = plt.hist(x, 50, density=1, facecolor='g', alpha=0.75)
+#  bins = 50 共有幾條條狀圖, facecolor:color, alpha:透明度, density:是否將得到的直方圖向量歸一化
+plt.hist(x, 50, facecolor='g', alpha=0.75)
+# title
+plt.xlabel('Smarts')
+plt.ylabel('Probability')
+plt.title('Histogram of IQ')
+# show text at figure(依座標) 
+plt.text(60, 500, r'$\mu=100,\ \sigma=15$')
+# show 格線
+plt.grid(True)
+plt.show()
+```
+
+**base plotting system**
+
+**ggplot2**
 
 # tool
 
@@ -1130,7 +1411,8 @@ print(price_ranks.shape) # show rows × columns
 price_ranks # middle show ...
 ```
 
-## 7. flask get data
+## 7. flask get data(web api)
+http://127.0.0.1:5000  
 http://127.0.0.1:5000/cities/all  
 ```python
 import flask
@@ -1183,6 +1465,259 @@ def city_all():
 	return jsonify(cities)
 
 app.run()
-for i in range(10):
-	print("...")
+```
+
+## 7. flask get data(web api-get csv file data)
+http://127.0.0.1:5000  
+http://127.0.0.1:5000/gapminder/all  
+```python
+import flask
+from flask import jsonify
+import pandas
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+# show chinese
+app.config["JSON_AS_ASCII"] = False
+
+# get gapminder csv
+pd = pandas.read_csv('./gapminder.csv') 
+gapminder_data = pd.get_values() # get csv data
+
+gapminder_list = []
+row_no = int(pd.shape[0])
+column_no = int(pd.shape[1])
+for i in range(row_no):
+	row_dict = {}
+	for j in range(column_no):
+		row_dict[pd.columns[j]] = gapminder_data[i][j]
+	gapminder_list.append(row_dict)
+
+@app.route('/', methods=['GET'])
+def home():
+	return "<h1>Hello Flash</h1>"
+
+@app.route('/gapminder/all', methods=['GET'])
+def gapminder_all():
+	return jsonify(gapminder_list)
+
+app.run()
+```
+
+## 8. flask get data(web api-get csv file for specific country)
+http://127.0.0.1:5000  
+http://127.0.0.1:5000/gapminder/all  
+http://127.0.0.1:5000/gapminder?country=Taiwan  
+http://127.0.0.1:5000/gapminder?country=Austria  
+```python
+import flask
+# add request for get parameter
+from flask import jsonify,request
+import pandas
+
+app = flask.Flask(__name__)
+app.config["DEBUG"] = True
+# show chinese
+app.config["JSON_AS_ASCII"] = False
+
+# get gapminder csv
+pd = pandas.read_csv('./gapminder.csv') 
+gapminder_data = pd.get_values() # get csv data
+
+gapminder_list = []
+row_no = int(pd.shape[0])
+column_no = int(pd.shape[1])
+for i in range(row_no):
+	row_dict = {}
+	for j in range(column_no):
+		row_dict[pd.columns[j]] = gapminder_data[i][j]
+	gapminder_list.append(row_dict)
+
+@app.route('/', methods=['GET'])
+def home():
+	return "<h1>Hello Flash</h1>"
+
+@app.route('/gapminder/all', methods=['GET'])
+def gapminder_all():
+	return jsonify(gapminder_list)
+
+# get specific country
+@app.route('/gapminder', methods=['GET'])
+def gapminder_country():
+	if 'country' in request.args:
+		country = request.args['country']
+	else:
+		return "Error: No country provided. Please specify a country."
+
+	results = []
+	for elem in gapminder_list:
+		if elem['country'] == country:
+			results.append(elem)
+	return jsonify(results)
+
+app.run()
+```
+
+## 9. firebase test
+// install firebase_admin(conda not support  
+pip install firebase_admin  
+```python
+import firebase_admin
+from firebase_admin import credentials
+
+from firebase_admin import db
+from requests import get
+
+#init firebase
+cred = credentials.Certificate("./my-pythone-test-db-firebase-adminsdk-hshx2-1cad43354a.json")
+firebase_admin.initialize_app(cred, {
+    'databaseURL' : 'https://my-pythone-test-db.firebaseio.com/' # 替換成自己的 Firebase 網址
+})
+
+# get json file
+json_url = 'https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.json'
+chicago_bulls_dict = get(json_url).json()
+
+# add data to DB
+root = db.reference()
+root.child('chicago_bulls').push(chicago_bulls_dict)
+
+# get data from DB
+ref = db.reference('chicago_bulls')
+chicago_bulls = ref.get()
+chicago_bulls
+```
+
+## 10. pandas 模組作圖--長條圖（bar chart）
+plot.bar()
+```python
+# Series show bar
+import pandas as pd
+import matplotlib.pyplot as plt
+# ------------------
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+df = pd.read_csv(csv_url)
+grouped = df.groupby("Pos")
+pos = grouped["Pos"].count()
+# Series show bar
+# Series.plot.bar(self, x=None, y=None, **kwargs)[source]
+pos.plot.bar()
+# show y tick location : yticks(ticks, [labels], **kwargs) 
+plt.yticks([1, 2, 3, 4], [1, 2, 3, 4])
+plt.show()
+
+# show group 平均值圖
+%matplotlib inline 
+import pandas as pd
+import matplotlib.pyplot as plt
+# ------------------
+play_info_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+per_game_url = "https://storage.googleapis.com/ds_data_import/stats_per_game_chicago_bulls_1995_1996.csv"
+play_info = pd.read_csv(play_info_url)
+per_game = pd.read_csv(per_game_url)
+# merge play_info and per_game 
+play_info_mix = play_info.merge(per_game, left_on='Player', right_on='Name' )
+# group by Pos
+grouped = play_info_mix.groupby("Pos")
+# group "PTS/G" mean(平均值)
+# print(grouped["PTS/G"].mean())
+pos_pstg_mean = grouped["PTS/G"].mean()
+print(pos_pstg_mean)
+# plot by bar
+pos_pstg_mean.plot.bar()
+plt.show()
+```
+
+## 11. pandas 模組作圖--直方圖（bar histogram)
+```python
+# NBA 薪水分布圖
+%matplotlib inline 
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def get_nba_salary():
+    # chaget to post + payload get morether 100
+    payload = {
+        "ajax":"true",
+        "mobile":"false"
+    }
+    # r = requests.get("https://www.spotrac.com/nba/rankings/") # only get 100 items
+    r = requests.post("https://www.spotrac.com/nba/rankings/", payload)
+    # get(text format) parser
+    soup = BeautifulSoup(r.text, "html.parser") # parser by html format
+    # select process
+    salarys = [p.text.replace(",", "") for p in soup.select("td.rank-value span.info")]
+    salarys = [int(p.replace("$", "")) for p in salarys]
+    players = [p.text for p in soup.select("td.rank-name h3 a")]
+    positions =  [p.text for p in soup.select("td.rank-name span.rank-position")]
+    # print(salary)
+    # print(player)
+    # print(position)
+    df = pd.DataFrame()
+    df["player"] = players
+    df["position"] = positions
+    df["salary"] = salarys
+    return df
+
+nab_salary = get_nba_salary()
+# print(nab_salary)
+# bins 表 共有幾條條狀圖
+plt.hist(nab_salary["salary"], bins=15)
+plt.show()
+```
+
+## 12. pandas 模組作圖--盒鬚圖（box-and-whisker plot）
+```python
+# NBA 薪水 盒鬚圖（box-and-whisker plot）- 外部的圓圈為離群值
+# %matplotlib inline 
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+import matplotlib.pyplot as plt
+
+def get_nba_salary():
+    # chaget to post + payload get morether 100
+    payload = {
+        "ajax":"true",
+        "mobile":"false"
+    }
+    # r = requests.get("https://www.spotrac.com/nba/rankings/") # only get 100 items
+    r = requests.post("https://www.spotrac.com/nba/rankings/", payload)
+    # get(text format) parser
+    soup = BeautifulSoup(r.text, "html.parser") # parser by html format
+    # select process
+    salarys = [p.text.replace(",", "") for p in soup.select("td.rank-value span.info")]
+    salarys = [int(p.replace("$", "")) for p in salarys]
+    players = [p.text for p in soup.select("td.rank-name h3 a")]
+    positions =  [p.text for p in soup.select("td.rank-name span.rank-position")]
+    # print(salary)
+    # print(player)
+    # print(position)
+    df = pd.DataFrame()
+    df["player"] = players
+    df["position"] = positions
+    df["salary"] = salarys
+    return df
+
+nba_salary = get_nba_salary()
+#show group count
+# grouped = nba_salary.groupby("position").count()
+# print(grouped)
+
+# show all position + salary
+#for i in range(nab_salary.shape[0]):
+#    print('{0:14}-{1:9}'.format(nab_salary.values[i][1], nab_salary.values[i][2]))
+
+# 盒鬚圖（box-and-whisker plot）是資料科學團隊慣常用作探索一組數值資料依類別分組的分佈情況之圖形，
+# 藉著圖形可以觀察不同類別分組數值資料的峰度（kurtosis）以及偏態（skewness）
+# 資料整理 依行填值
+# Return reshaped DataFrame organized by given index / column values
+# DataFrame.pivot(index=None, columns=None, values=None)
+box_df = nba_salary.pivot(index='player', columns='position', values='salary')
+# print(box_df)
+# Make a box plot of the DataFrame columns.
+box_df.plot.box()
+plt.show()
 ```
