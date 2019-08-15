@@ -317,6 +317,9 @@ Ctrl + Enter
 
 // 支援 linlie 繪圖
 %matplotlib inline 
+
+// jupyter run python(在選擇目錄的時候可以按一下tab鍵，會出現提示)
+%run -i 目錄/my_python_file.py
 ```
 
 ## 2. socket
@@ -346,6 +349,11 @@ help(print)
 
 **function**
 ```python
+#function 
+def my_first_func():
+    print('Call this function!')
+my_first_func()
+
 # type
 print(type("xy"))
 print(type(12))
@@ -357,8 +365,34 @@ for idx, val in enumerate(arr):
   print("位於索引值 {} 的數字是 {}".format(idx, val))
 
 # print format
-for i in range(nab_salary.shape[0]):
-	print('{0:14}-{1:9}'.format(nab_salary.values[i][1], nab_salary.values[i][2]))
+for i in range(nba_salary.shape[0]):
+	print('{0:14}-{1:9}'.format(nba_salary.values[i][1], nba_salary.values[i][2]))
+print("位於索引值 {} 的數字是 {}".format(idx, val))
+
+# string function
+"HELLOW WORLD".lower() # 小寫
+"hellow world".upper() # 大寫
+"hellow world".title() # 第一個字母大寫
+len("hellow world") # length
+"Hello world".replace("l","!") # replace some char
+# slipt string
+"Hello my name is jiayi".split(" ")
+
+# shuffle 隨機化代替列表中的項目
+# random.shuffle(list)
+row_indice = list(labeled_df.index)
+random.Random(random_state).shuffle(row_indice)
+shuffled = labeled_df.loc[row_indice, :]
+
+#iolc 列切片及行切片
+# 在 Python pandas 中可以使用 df.loc[m, n] 或 df.iloc[m, n] 兩個方法指定觀測值所在位置
+# loc 基於行標籤和列標籤（x_label、y_label）進行索引
+# iloc 基於行索引和列索引（index，columns） 都是從 0 開始
+
+# reshape()  調整行列資料
+X = np.arange(30).reshape((10, 3))
+
+# dataframe.corr() 算出成對相關性(pairwise correlation)
 ```
 
 **variable**
@@ -488,6 +522,8 @@ int_list.pop() 將 list 最末端的資料拋出
 del int_list(index) 將指定位置的資料刪除
 int_list.sort() 將 list 的資料預設以遞增排序
 int_list.sort(reverse=True) 以遞減排序
+list_data.index('string') 找值的位置
+mylist3.remove('cat') remove
 
 // tuple 多數的特性都與 list 相同，在建立的時候使用小括號 () 將希望儲存的資訊包括起來
 # tuple 在索引與切割與 list 部分完全相同
@@ -535,6 +571,7 @@ print(type(play_set))
 **flow control**
 ```python
 // if
+// and or not (True False)
 height = 175
 if (height<170):
     print("too low")
@@ -545,7 +582,6 @@ else:
 
 // for 
 // continue 
-
 man_list = ["Robert Kao", "Bill Lin", "Jerry Hsu"]
 for man in man_list:
     print(man)
@@ -567,8 +603,10 @@ while (i<3):
 
 **datetime**
 ```python
+# today/now 應該相同
 import datetime
 current_dt = datetime.datetime.now().strftime("%Y-%m-%d %X")
+today = datetime.datetime.today().strftime('%Y%m%d')
 ```
 
 **BeautifulSoup4(selector 分析網頁)**
@@ -705,6 +743,9 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 
 **pandas(資料分析)**  
 Pandas 是 python 的一個數據分析 lib  
+Pandas就是建立在Numpy的基礎延伸的套件呢  
+資料類型DataFrame:就像是我們在使用的excel表格一樣，是一個二維的數據有index和column  
+資料類型Series:是一個類似陣列的物件，裡面可包含陣列的資料  
 
 function     | 說明
 -------------|------
@@ -712,11 +753,217 @@ df.head()    |查看前五列觀測值，可以加入參數 n 觀看前 n 列觀
 df.tail()    |查看末五列觀測值，可以加入參數 n 觀看末 n 列觀測值
 df.info()    |查看資料框的複合資訊，包含型別、外觀與變數型別等
 df.describe()|查看數值變數的描述性統計，包含最小值、最大值、平均數與中位數等
-df.shape     |查看資料框的外觀，以 tuple 的型別回傳，(m, n) 表示 m 列觀測值，n 欄變數
-df.columns   |查看資料框的變數名稱
-df.index     |查看資料框的列索引值
+df.read_csv()   |read csv(accept url)
+df.dropna() |remove include NaN data
+df.fillna(0)    |NaN fill value
+df.sort_values('name') | sort by one field value - 不能改變原變數,要設成另一個變數
+isin()     |check include date : employees["Team"].isin(["Legal","Scales","Product"])
+notnull()  |value not null : mask = employees["Team"].isnull()
+isnull()   |value null : mask = employees["Team"].notnull()
+between()  |value between : employees[employees["Start Date"].between("2009-11-10","2010-01-20")]
+set_index()|change index : df.set_index("Name", inplace=True),df.set_index( keys =["Pos","Player"], inplace=True)
+reset_index() |reset index : df.reset_index(inplace=True)
+df.rename()   |change column/index : df.rename( columns/index={"Rk":"Rk1","Age":"Age2",},inplace=True)
+drop()        |drop some columns/row-不能改變原變數,要設成另一個變數 : df2 = df.drop(labels=["GS", "MP"], axis="columns")
+sort_index()  |sort by index,df.sort_index(inplace=True)
+index.get_level_values()|get index name, df.index.get_level_values(0),df.index.get_level_values("Player")
+index.set_names()       |change index name, df.index.set_names(["Pos","Name"], inplace=True)
+df["Player"].str        |str process, (df["Player"].str.lower(), df["Player"] = df["Player"].str.replace("Ja","Js")
+
+
+variable       | 說明
+---------------|------
+pd.__version__ |version
+df.index       |查看資料框的列索引值
+df.shape       |查看資料框的外觀，以 tuple 的型別回傳，(m, n) 表示 m 列觀測值，n 欄變數
+df.columns     |查看資料框的變數名稱
+df.loc['b']    |index 取出資料,也可取出多個 row : print(df.loc["Michael Jordan"])/print(df.loc[["Michael Jordan", "Dennis Rodman"]])
+df.iloc[[0:4]  |get by index position : print(df.iloc[[0,4]]) # index 0 and 4 / print(df.iloc[0:4])  # index 0 to 3
+
+**groupby() - DataFrameGroupBy**
+
+function     | 說明
+-------------|------
+size()                  |get per grounp counter 
+get_group("group_value")|get group data in Dataframe
 
 ```python
+# Series
+# Series，是一個類似陣列的物件，裡面可包含陣列的資料
+import pandas as pd
+# -----------------------------
+my_obj = pd.Series([4,7,-5,3])
+print(my_obj)
+print(my_obj.values)
+print(my_obj.index)
+#    RangeIndex(start=0, stop=4, step=1)
+# change index not number
+my_obj2 = pd.Series([8,9,10,11], index=['a','b','c','d'])
+print(my_obj2.index, my_obj2["b"])
+#    Index(['a', 'b', 'c', 'd'], dtype='object')
+# chack index in 
+print('a' in my_obj2)
+# change directory to series
+dic_data = {'name':'apple','birthday':'1996-1-1','luckynumber':7 }
+my_obj3 = pd.Series(dic_data)
+my_obj3
+#    dtype: object
+# Bool list to series
+registration = [True,False,True,True]
+registration = pd.Series(registration)
+registration
+#    dtype: bool
+
+# DtatFrame
+# DataFrame就像是我們在使用的excel表格一樣，是一個二維的數據有index和column
+import pandas as pd
+data = {'name': ['Bob', 'Nancy','Amy','Elsa','Jack'],
+        'year': [1996, 1997, 1997, 1996, 1997],
+        'month': [8, 8, 7, 1, 12],
+        'day':[11,23,8,3,11]}
+myframe = pd.DataFrame(data)
+print(myframe)
+# print(myframe["name"][1])
+# change columns index
+myframe2 = pd.DataFrame(data,columns=['name','year', 'day', 'month'])
+print(myframe2)
+# add columns (NaN : Not a Number)
+myframe3 = pd.DataFrame(data,columns=['name','year', 'month', 'day', 'luckynumber'])
+print(myframe3)
+# set value
+luckynumber = ['3','2','1','7','8']
+luckynumber = pd.Series(luckynumber)
+myframe3['luckynumber'] = luckynumber
+print(myframe3)
+# show specific 
+print(myframe3['name'])
+print(myframe3[['name', 'year']])
+print(myframe3['name'][0:4]) # no show index 4
+# insert data 
+myframe3.insert(3,column="sport",value="Basketball")
+print(myframe3)
+# sort by one field value - 不能改變原變數,要設成另一個變數
+print(myframe3.sort_values('name'))
+print(myframe3)
+
+# show some position data
+import pandas as pd
+import numpy as np
+seriesObj = pd.Series(range(10),index=['a', 'a', 'b', 'b', 'b','c','c','c','c','c'])
+seriesObj['c'] 
+df = pd.DataFrame(np.random.randn(4,2),index=['a', 'a', 'b', 'b'])
+print(df.index)
+print(df.loc['b'])
+
+#filter 
+mask1 = employees["Team"] != "Marketing"
+mask2 = employees["Start Date"] < "1980-01-01"
+employees[(mask1 & mask2)] 
+mask = employees["Team"].isin(["Legal","Scales","Product"])
+
+# index aligment
+import pandas as pd
+# ---------------
+csv_url = "https://storage.googleapis.com/ds_data_import/stats_per_game_chicago_bulls_1995_1996.csv"
+# change index with certain field(1ts)
+# df = pd.read_csv(csv_url, index_col="Name")
+# change index with certain field(2nd)
+df = pd.read_csv(csv_url)
+df.set_index("Name", inplace=True)
+print(df)
+# check index
+print(df.index)
+# change column/index
+df.rename( columns={"Rk":"Rk1",
+                  "Age":"Age2",
+                 },inplace=True)
+df.rename( index={"Scottie Pippen":"Scottie Pippen1",
+                  "Luc Longley":"Luc Longley2",
+                 },inplace=True)
+# drop some columns/row - 不能改變原變數,要設成另一個變數
+# axis=1跟axis="columns"是一樣的！axis=0則是和asxis = "row"一樣
+# df2 = df.drop(labels=["GS", "MP"], axis="columns")
+df2 = df.drop(labels=["GS", "MP"], axis=1)
+print(df2)
+# get some row
+print(df.loc["Michael Jordan"])
+print(df.loc[["Michael Jordan", "Dennis Rodman"]])
+# get by index position
+print(df.iloc[[0,4]]) # index 0 and 4
+print(df.iloc[0:4])  # index 0 to 3
+# reset index
+df.reset_index(inplace=True)
+print(df.index)
+
+# groupby() - DataFrameGroupBy
+%matplotlib inline 
+import pandas as pd
+# --------------
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+df = pd.read_csv(csv_url)
+# print(df.columns)
+# type is DataFrameGroupBy
+grouped = df.groupby("Pos")
+# print(grouped)
+# print(type(grouped))
+# get per group size
+print(grouped.size())
+# get group "SF" in pn dtat
+print(grouped.get_group("SF"))
+# grouped.sum() : get number column sum value
+
+# multi index and index function
+%matplotlib inline 
+import pandas as pd
+# --------------
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+df = pd.read_csv(csv_url)
+print(df.columns)
+print(df["Pos"])
+print(df)
+# set multiplex
+df.set_index( keys =["Pos","Player"], inplace=True)
+# sort by index
+df.sort_index(inplace=True)
+print(df)
+print(df["Ht"])
+# get 1st index value
+print(df.index.get_level_values(0))
+# get specific index value
+print(df.index.get_level_values("Player"))
+# change index name
+df.index.set_names(["Pos","Name"], inplace=True)
+print(df)
+#print(df.index)
+
+# process relative str
+%matplotlib inline 
+import pandas as pd
+# --------------
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+df = pd.read_csv(csv_url)
+print(df.columns)
+#print(df)
+#print(df["Pos"])
+# Category 是由固定的且有限數量的變量組成的 故較省空間
+df["Pos"] = df["Pos"].astype("category")
+#print(df["Pos"])
+print(df["Player"])
+print(df["Player"].str.title())
+print(df["Player"].str.lower())
+# replace value
+df["Player"] = df["Player"].str.replace("Ja","Js")
+print(df["Player"])
+# check include string
+print(df["Player"].str.lower().str.contains("ron"))
+# check start string
+print(df["Player"].str.lower().str.startswith("js"))
+# check end string
+print(df["Player"].str.lower().str.endswith("ey"))
+# split daya
+print(df["Player"].str.split(" "))
+print(df["Player"].str.split(" ").get(0))
+
 # support SSL certificate verify
 from urllib3 import PoolManager
 import json
@@ -785,6 +1032,14 @@ df = pd.read_csv(csv_url)
 grouped = df[df.year == 2007].groupby("continent")
 grouped["pop"].sum()
 
+# function iloc
+import pandas as pd
+df = pd.read_csv("https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996_per_game.csv")
+# iloc() 取矩陣範圍資料
+df_numerics = df.iloc[:, 4:]
+
+# set for index(field trading_date)
+df = df.set_index("trading_date")
 ```
 
 **pandas-read csv說明**  
@@ -849,7 +1104,7 @@ boston_celtics = pd.read_excel(xlsx_url, sheet_name='boston_celtics_2007_2008', 
 boston_celtics
 ```
 
-**pandas-read jsdo說明**  
+**pandas-read json說明**  
 JSON 檔案若是儲存在雲端，利用 requests 模組的 get() 函數搭配 .json() 方法就可以載入，成功之後會以 dict 型別供後續操作。
 ```python
 # JSON 檔案儲存在雲端
@@ -889,6 +1144,18 @@ sel = d(".poster img").items()
 print(d(".poster img")) 
 for i in sel:
     print(i.attr("src"))
+
+#get data for some condition
+from pyquery import PyQuery as pq
+# -----------
+stats_url = "https://www.basketball-reference.com/players/p/piercpa01.html"
+html_doc = pq(stats_url)
+pts_css = "#per_game .full_table .right:nth-child(30)"
+ast_css = "#per_game .full_table .right:nth-child(25)"
+reb_css = "#per_game .full_table .right:nth-child(24)"
+pts = [float(p.text) for p in html_doc(pts_css)]
+ast = [float(a.text) for a in html_doc(ast_css)]
+reb = [float(r.text) for r in html_doc(reb_css)]
 ```
 
 **selenium-操控瀏覽器來擷取 HTML**  
@@ -956,9 +1223,124 @@ pip install firebase_admin
 
 **Numpy**  
 支援高階大量的維度陣列與矩陣運算，此外也針對陣列運算提供大量的數學函式函式庫  
-```python
-import numpy as np
+Numpy是一個提供矩陣運算非常非常非常好用的工具  
 
+
+function     | 說明
+-------------|------
+np.array()       |set to ndarry
+np.sin(x\*4\*np.pi)|set to ndarry by sin function
+np.arange(10)  |generate by range
+np.ones(5)     |可以創建任意維度和元素個數的數組，其元素值均為1
+np.zeros(3,int)|創建的數組元素類型是浮點型的，如果要使用其他類型，可以設置dtype參數進行聲明
+np.empty([2,3])|只是它所常見的數組內所有元素均為空，沒有實際意義
+random.randn()  |隨意數+,-,<0,>0...
+random.randint()|整數隨意數
+np.mean()  	|平均值
+np.sum()  	|總和
+np.min()  	|最小值
+np.max()  	|最大值
+np.cumsum() |回傳累積的數值(array)
+np.std()  	|標準差
+np.save('my_array', x)  |save array
+np.load('my_array.npy') |load array
+myArr = np.loadtxt('my_txt.txt', delimiter=',') |load text file
+np.savetxt('txtfile.txt', myArr)                |save text file
+
+
+variable       | 說明
+---------------|------
+ndim			|維度
+shape			|矩陣大小
+dtype			|dtype
+T 				|翻轉維度
+base            |相關
+
+```python
+# numpy ndarray
+import numpy as np
+# direct set vale + set dtype
+arr1 = np.array([[1.2, 2.2 ,0.65], [3.2, 34.2 ,5.65]], dtype=complex)
+print(arr1)
+print(type(arr1[1][2]))
+print(arr1[1][2])
+# set by list
+list1 = [3,7,5]
+arr2 = np.array(list1)
+print(arr2)
+# 維度
+print(arr1.ndim, arr2.ndim)
+# 矩陣大小
+print(arr1.shape, arr2.shape)
+# dtype
+print(arr1.dtype, arr2.dtype)
+
+# array 相乘,改變維度,一維 + 二維, 翻轉維度,base 
+import numpy as np
+x = np.arange(4)
+y = np.arange(5,9)
+# array 相乘
+print(x, y, x*y, x*10)
+# array 改變維度
+x2 = x.reshape(4,1)
+print(x, x2)
+print(x.shape, x2.shape)
+# 一維 + 二維
+y2 = np.ones(5)
+print(type(y2[0]))
+print(y2.shape)
+print(y2+x2)
+# 翻轉維度
+x1 = np.ones([10,2])
+y1 = x1.T
+print(x1,y1)
+# base
+x = np.arange(4)
+xx = x.reshape(4,1)
+print(xx.base in x)
+
+# array 隨意數,平均值,總和,最小值,最大值,累積的數值,標準差
+import numpy as np
+# 產生隨意數+,-,<0,>0...
+print(np.random.randn())
+# 產生整數隨意數
+# (low, high=None, size=None, dtype='l')
+print(np.random.randint(1,10,size=10))
+x = np.random.randn(5,4)
+print(x)
+# print(x.mean(),x.sum(),x.min(),x.max(),x.cumsum(), x.std())
+# ----------------
+print(x.mean()) # 平均值
+print(x.sum())  # 總和
+print(x.min())  # 最小值
+print(x.max())  # 最大值
+print(x.cumsum()) # 回傳累積的數值(array)
+# 標準差 std = sqrt(mean(abs(x - x.mean())**2))
+# 標準差應用於投資上，可作為量度回報穩定性的指標。標準差數值越大，代表回報遠離過去平均數值，
+# 回報較不穩定故風險越高。相反，標準差數值越小，代表回報較為穩定，風險亦較小。
+print(x.std()) # 標準差
+
+# numpy file control
+import numpy as np
+x = np.arange(10)
+print(x)
+# save array and load
+np.save('my_array', x)
+np.load('my_array.npy')
+# save multi array to a file
+y = np.arange(10,20)
+print(y)
+# save multi array and load
+np.savez('my_archive.npz', a=x, b=y)
+load_a = np.load('my_archive.npz')
+print(load_a["a"])
+print(load_a["b"])
+# load/save text 
+myArr = np.loadtxt('my_txt.txt', delimiter=',')
+np.savetxt('txtfile.txt', myArr)
+
+import numpy as np
+# -----------------
 # array
 np1 = np.array([1, 2, 3])
 np2 = np.array([3, 4, 5])
@@ -982,12 +1364,137 @@ c = rand(3, 3)
 print(c)
 ```
 
+**squarify**  
+pip install squarify  
+```python
+# 樹狀圖(treemap)
+%matplotlib inline 
+import pandas as pd
+import matplotlib.pyplot as plt
+import squarify
+
+csv_url = "https://storage.googleapis.com/ds_data_import/chicago_bulls_1995_1996.csv"
+df = pd.read_csv(csv_url)
+grouped = df.groupby("Pos")
+pos = grouped["Pos"].count()
+squarify.plot(sizes=pos.values, label=pos.index, color=["red", "green", "blue", "grey", "yellow"], alpha=0.4)
+plt.axis('off')  #不show座標刻度
+plt.title("1995-1996 Chicago Bulls roster") # 抬頭
+plt.show()
+```
+
+**chart-studio --> plotly**  
+pip install chart-studio  
+api key = "bEtPpStSQgWRADCmGGe9"  
+```python
+import chart_studio.plotly as py
+import plotly.graph_objs as go
+// --------------------------
+tsmc = get_ohlc('2330')
+# -- show Candlestick fig --
+trace = go.Candlestick(x=tsmc.index,
+                       open=tsmc["open"],
+                       high=tsmc["high"],
+                       low=tsmc["low"],
+                       close=tsmc["close"])
+# no show bottom fig
+layout = go.Layout(
+    xaxis = dict(
+        rangeslider = dict(
+            visible = False
+        )
+    )
+)
+fig = go.Figure(data=trace, layout=layout)
+fig.show()
+# update to plotly wibside(need API key)
+py.sign_in('kyp001', 'bEtPpStSQgWRADCmGGe9') # Use your own plotly Username / API Key
+py.iplot(fig, filename='simple_candlestick')
+```
+
+**folium**  
+pip install folium  
+```python
+```
+
+**scipy**  
+SciPy就是以Numpy為基礎做科學、工程的運算處理的package，包含統計、優化、整合、線性代數、傅立葉轉換圖像等較高階的科學運算  
+
 # 基礎視覺化
 
-**matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**
+**matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**  
+Matplotlib是Python繪圖  
+%matplotlib inline  
+
+function     | 說明
+-------------|------
+plt.show()    |最後畫圖
+plt.plot()    |線圖,可同時設多條線, (x,y,color=,marker="o"設定點,linestyle="--" 顯示虛線)
+plt.pie()     |圓餅圖,
+setp(line1, marker="o", linestyle="--")|set some line configure
+plt.title()   |title
+plt.xlabel()  |xlabel
+plt.ylabel()  |yabel
+plt.grid(Tree)|顯示格線
+
+variable       | 說明
+---------------|------
 
 **matplotlib-->pyplot**
 ```python
+# matplotlib pyplot plot(線圖 line plot)
+%matplotlib inline
+import matplotlib.pyplot as plt
+years = [1950,1960,1965,1970,1975,1980,
+        1985,1990,1995,2000,2005,
+        2010,2015]
+pops = [2.5,2.7,3,3.3,3.6,4.0,
+        4.4,4.8,5.3,6.1,6.5,6.9,7.3]
+deaths = [1.2,1.7,1.8,2.2,2.5,2.7,2.9,3,3.1,3.2,3.5,3.6,4]
+# x, y list , color=, "--":顯示虛線
+# 可同時設多條線
+line1 = plt.plot(years, pops, color=(255/255,100/255,100/255))
+plt.plot(years, deaths, "--", color=(100/255,100/255,255/255))
+# set some for line, marker="o"設定點  linestyle="--" 顯示虛線
+plt.setp(line1, marker="o", linestyle="--")
+plt.title("Population Growth") # title
+plt.xlabel("Year")              # xlabel
+plt.ylabel("Population in billions") # yabel
+plt.grid(True) # 顯示格線
+plt.show()
+
+# matplotlib pyplot plot(線圖 line plot) - draw sin
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+# set array for x
+x = np.arange(0, 1, 0.01)
+# get y array by sin function
+y1 = np.sin(x*4*np.pi)
+y2 = np.sin(x*2*np.pi)
+# print(x)
+# print(y1)
+# plot and set configure
+lines=plt.plot(x,y1,x,y2)
+plt.setp(lines,linestyle="--")
+plt.show()
+
+# matplotlib pyplot plot(圓餅圖 pie)
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+# ------------------------
+labels = 'A','B','C','D','E','F'
+size = [33,52,12,17,62,48]
+separated = (.1,0,0,0,.2,0)
+# (size, labels=標示, autopct=顯示百分比, explode=餅分開距離)
+plt.pie(size, labels=labels, autopct="%1.1f%%",explode=separated)
+# axis('equal')避免比例壓縮為橢圓
+plt.axis('equal')
+plt.show()
+
+
+
 # 1st sample
 import matplotlib.pyplot as plt
 # plot([x], y, [fmt], *, data=None, **kwargs)
@@ -1091,11 +1598,202 @@ plt.text(60, 500, r'$\mu=100,\ \sigma=15$')
 # show 格線
 plt.grid(True)
 plt.show()
+
+# ========= set style ========
+# all available style 
+plt_themes = plt.style.available
+print(plt_themes)
+# set style 
+# plt.style.use(plt_themes[2])
+
+# ============ 設定說明 ========
+# 設定中文字型
+from matplotlib.font_manager import FontProperties
+myfont = FontProperties(fname="c:/Windows/Fonts/msjh.ttc") #設定字型位置
+plt.xlabel("鋒衛位置", fontproperties=myfont)   # X 軸說明
+plt.ylabel("球員人數", fontproperties=myfont)   # Y 軸說明
+plt.title("反映當時為了抗衡其他具有主宰力中前鋒的隊伍之現象", fontproperties=myfont) # 主標題
+plt.suptitle("前場球員為芝加哥公牛隊的大宗", fontproperties=myfont) # 次標題
+plt.xticks(range(0, 5), ["中鋒", "大前鋒", "小前鋒", "控球後衛", "得分後衛"], fontproperties=myfont) # 條圖說明
+
+# ====== 加圖上說明 ====== 
+# enumerate參數為可遍歷/可叠代的對象(如列表、字符串)
+# lst = [1,2,3,4,5,6]
+# for index,value in enumerate(lst):
+#   print (‘%s,%s‘ % (index,value))
+for i, v in enumerate(pos):
+  plt.text(i-0.1 , v + 0.4, "{:.1f}".format(v))
+
+# ====== 加入水平線 + 陰影 ====== 
+# 10. pandas 模組作圖--長條圖（bar chart） 2nd --> 1st plot line
+# 設定水平線
+avg_pts = pp_stats["pts"].mean() # 生涯均值
+plt.axhline(y = avg_pts, color="g", ls="--", alpha = 0.5) # 水平線
+# 設定水平線至上方縣 陰影
+plt.fill_between(pp_stats.index, avg_pts, pp_stats["pts"], 
+                 where=pp_stats["pts"] >= avg_pts, color="gray",
+                 alpha=0.5, interpolate=True) # 陰影
+
+# ====== 調整座標軸 =====
+# 10. pandas 模組作圖--長條圖（bar chart） 2nd --> 1st plot line
+# 調整 X,Y 軸顯示範圍
+plt.xlim(pp_stats.index.min(), pp_stats.index[14]) # 調整軸的範圍
+plt.ylim(15, 30) # 調整軸的範圍
+
+# ====== 調整刻度線與刻度線標籤 =====
+plt.xticks(range(0, 5), ["中鋒", "大前鋒", "小前鋒", "控球後衛", "得分後衛"], fontproperties=myfont) # 條圖說明
+plt.yticks(range(1, 5), range(11,15))
+plt.xlabel("Positions")
+plt.ylabel("Number of Players")
+
+# ===== 加入圖例 =====
+# plt.legend 要加在後面,才會 show 出來
+bar_1 = pos.loc[["SG", "PG"]].values
+bar_2 = pos.loc[["SF", "PF", "C"]].values
+# 若包容多內容設定方法
+# bar_1 = pos["Player"].loc[["SG", "PG"]].values
+# bar_2 = pos["Player"].loc[["SF", "PF", "C"]].values
+plt.bar(range(1, 3), bar_1, label="Back Court", alpha=0.6, color="red")
+plt.bar(range(3, 6), bar_2, label="Front Court", alpha=0.6, color="green")
+plt.legend(title = "Court") # 加入圖例
+
+# ==== 繪製重疊的直方圖 ====
+nba_salary = get_nba_salary()
+nba_salary[nba_salary["position"] == "Point Guard"]["salary"].plot.hist(bins = 15, label = "PG")
+nba_salary[nba_salary["position"] == "Shooting Guard"]["salary"].plot.hist(bins = 15, label = "SG")
+nba_salary[nba_salary["position"] == "Guard"]["salary"].plot.hist(bins = 15, label = "G")
+nba_salary[nba_salary["position"] == "Small Forward"]["salary"].plot.hist(bins = 15, label = "SF")
+nba_salary[nba_salary["position"] == "Power Forward"]["salary"].plot.hist(bins = 15, label = "PF")
+nba_salary[nba_salary["position"] == "Center"]["salary"].plot.hist(bins = 15, label = "C")
+plt.legend() # 加入圖例
+
+# ===== 繪製重疊的線圖(line graph) =====
+nba_salary = get_nba_salary()
+nba_salary[nba_salary["position"] == "Point Guard"]["salary"].plot.line(label = "PG")
+nba_salary[nba_salary["position"] == "Shooting Guard"]["salary"].plot.line(label = "SG")
+nba_salary[nba_salary["position"] == "Guard"]["salary"].plot.line(label = "G")
+nba_salary[nba_salary["position"] == "Small Forward"]["salary"].plot.line(label = "SF")
+nba_salary[nba_salary["position"] == "Power Forward"]["salary"].plot.line(label = "PF")
+nba_salary[nba_salary["position"] == "Center"]["salary"].plot.line(label = "C")
+plt.legend() # 加入圖例
+
+# === 棒棒糖圖（Lollipop）===
+# show 點
+plt.plot(pos, range(1, pos.size + 1), 'o')
+# show 線
+# 畫水平線 axhline(y=0, xmin=0, xmax=1, **kwargs)[source]
+plt.hlines(y=range(1, points_per_game.size + 1), xmin=0, xmax=pos, color='skyblue')
+# show y 
+plt.yticks(range(1, pos.size + 1), pos.index)
+# x 軸 範圍
+plt.xlim(0, 5)
+```
+
+**Seaborn**  
+```python
+# 密度圖（Density plot）
+%matplotlib inline 
+import matplotlib.pyplot as plt
+import seaborn as sns
+nba_salary = get_nba_salary()
+sns.kdeplot(nba_salary['salary'], shade=True)
+plt.show()
+
+# 密度圖（Density plot）- 重疊
+# get only top 100 player more clear
+nba_salary = get_nba_salary()
+salary_pos = nba_salary.pivot(index='player', columns='position', values='salary')
+colors = ["r", "g", "b", "c", "m","r" , "g", "b"]
+print(salary_pos)
+# get any position 1 item
+positions = nba_salary["position"].unique()
+print(positions)
+for color, pos in zip(colors, positions):
+    # notna() : not include NaN
+    sns.kdeplot(salary_pos[pos][salary_pos[pos].notna()], shade=True, color=color, alpha = 0.5)
+
+# ====== 小提琴圖 ========
+# get only top 100 player more clear
+nba_salary = get_nba_salary()
+sns.violinplot(x=nba_salary["position"], y=nba_salary["salary"])
+
+# 熱力圖(heatmap)
+%matplotlib inline 
+import numpy as np
+import seaborn as sns
+# ---------------------------
+# rand() 僅正值
+uniform_data = np.random.rand(10, 12)
+# randn() 含正負值
+normal_data = np.random.randn(10, 12)
+# seaborn.heatmap(data, vmin=None, vmax=None, cmap=None, center=None, robust=False, annot=None, fmt='.2g', 
+#   annot_kws=None, linewidths=0, linecolor='white', cbar=True, cbar_kws=None, cbar_ax=None, square=False, 
+#   xticklabels='auto', yticklabels='auto', mask=None, ax=None, **kwargs)
+#  annot = True ,write the data value in each cell.
+#  fmt = string format
+#  linewidths = Width of the lines that will divide each cell
+#  cmap : map to different color
+#  cbar=False Don’t draw a colorbar
+# -- change color range --
+#* ax = sns.heatmap(uniform_data, vmin=0, vmax=1)
+# -- 色系中間為 0 --
+#* ax = sns.heatmap(normal_data, center=0)
+# -- load 1 file for test --
+# load .csv file from https://github.com/mwaskom/seaborn-data
+flights = sns.load_dataset("flights")
+# DataFrame.pivot(index=None, columns=None, values=None)
+# index=month columns=year values=passengers
+flights = flights.pivot("month", "year", "passengers")
+#* ax = sns.heatmap(flights)
+#* ax = sns.heatmap(flights, annot=True, fmt='d')
+#* ax = sns.heatmap(flights,linewidths=.5, cmap="YlGnBu")
+ax = sns.heatmap(flights, center=flights.loc["June", 1955], cbar=False)
 ```
 
 **base plotting system**
 
 **ggplot2**
+
+# 分析
+
+##sklearn##
+```python
+# 取測試資料
+# model_selection中train_test_split()函式
+# X_train, X_test, y_train, y_test = train_test_split(train_data, train_target, test_size, random_state，shuffle)
+# train_data：待劃分的樣本資料
+# train_target：待劃分的對應樣本資料的樣本標籤
+# test_size：1）浮點數，在0 ~ 1之間，表示樣本佔比（test_size = 0.3，則樣本資料中有30%的資料作為測試資料，記入X_test，其餘70%資料記入X_train，同時適用於樣本標籤）；
+#            2）整數，表示樣本資料中有多少資料記入X_test中，其餘資料記入X_train
+# random_state：隨機數種子，種子不同，每次採的樣本不一樣；種子相同，採的樣本不變（random_state不取，取樣資料不同，但random_state等於某個值，取樣資料相同，取0的時候也相同，這可以自己程式設計嘗試下，不過想改變數值也可以設定random_state = int(time.time())）
+# shuffle：洗牌模式，
+#            1）shuffle = False，不打亂樣本資料順序；2）shuffle = True，打亂樣本資料順序
+# --------------
+# from sklearn.model_selection import train_test_split
+# train_df, validation_df = train_test_split(labeled_df, test_size=0.3, random_state=123)
+
+# model_selection中train_test_split 2nd example
+import numpy as np
+from sklearn.model_selection import train_test_split
+X, y = np.arange(30).reshape((10, 3)), range(10) 
+X_train, X_test ,y_train, y_test= train_test_split(X, y,test_size=0.3, random_state = 20, shuffle=True)
+```
+
+##均方誤差（Mean Square Error）##
+
+
+# API or url
+
+## 1.stock information
+```
+// 某月份某檔股票資料
+https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=html&date=20130501&stockNo=1423
+https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20130501&stockNo=1423
+// csv download
+https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=csv&date=20130501&stockNo=1423
+// 上市
+http://www.tpex.org.tw/web/stock/aftertrading/daily_trading_info/st43_result.php?d=107/08&stkno=3105
+```
 
 # tool
 
@@ -1661,10 +2359,10 @@ def get_nba_salary():
     df["salary"] = salarys
     return df
 
-nab_salary = get_nba_salary()
-# print(nab_salary)
+nba_salary = get_nba_salary()
+# print(nba_salary)
 # bins 表 共有幾條條狀圖
-plt.hist(nab_salary["salary"], bins=15)
+plt.hist(nba_salary["salary"], bins=15)
 plt.show()
 ```
 
@@ -1707,8 +2405,8 @@ nba_salary = get_nba_salary()
 # print(grouped)
 
 # show all position + salary
-#for i in range(nab_salary.shape[0]):
-#    print('{0:14}-{1:9}'.format(nab_salary.values[i][1], nab_salary.values[i][2]))
+#for i in range(nba_salary.shape[0]):
+#    print('{0:14}-{1:9}'.format(nba_salary.values[i][1], nba_salary.values[i][2]))
 
 # 盒鬚圖（box-and-whisker plot）是資料科學團隊慣常用作探索一組數值資料依類別分組的分佈情況之圖形，
 # 藉著圖形可以觀察不同類別分組數值資料的峰度（kurtosis）以及偏態（skewness）
@@ -1719,5 +2417,221 @@ box_df = nba_salary.pivot(index='player', columns='position', values='salary')
 # print(box_df)
 # Make a box plot of the DataFrame columns.
 box_df.plot.box()
+plt.show()
+```
+
+## 13. pandas 模組作圖--散佈圖（scatter plot）
+```python
+# NBA 薪水-得分 散佈圖（scatter plot）
+# 因資料的關係,僅有部分球員
+%matplotlib inline 
+from pyquery import PyQuery as pq
+from requests import get
+import pandas as pd
+import matplotlib.pyplot as plt
+import requests
+from bs4 import BeautifulSoup
+# read json
+import json
+
+def get_nba_salary():
+    # chaget to post + payload get morether 100
+    payload = {
+        "ajax":"true",
+        "mobile":"false"
+    }
+    # r = requests.get("https://www.spotrac.com/nba/rankings/") # only get 100 items
+    r = requests.post("https://www.spotrac.com/nba/rankings/", payload)
+    # get(text format) parser
+    soup = BeautifulSoup(r.text, "html.parser") # parser by html format
+    # select process
+    salarys = [p.text.replace(",", "") for p in soup.select("td.rank-value span.info")]
+    salarys = [int(p.replace("$", "")) for p in salarys]
+    players = [p.text for p in soup.select("td.rank-name h3 a")]
+    positions =  [p.text for p in soup.select("td.rank-name span.rank-position")]
+    df = pd.DataFrame()
+    df["player"] = players
+    df["position"] = positions
+    df["salary"] = salarys
+    return df
+
+def get_pts_game():
+  """
+  Get NBA players' PTS/G from NBA.com
+  """
+  # nba_stats_url = "https://stats.nba.com/stats/leagueLeaders?LeagueID=00&PerMode=PerGame&Scope=S&Season=2017-18&SeasonType=Regular+Season&StatCategory=PTS"
+  # pts_game_dict = get(nba_stats_url).json()
+  # read json(sometimes get error --> chaneg to read file)
+  with open("pts_game.json") as json_file:
+    pts_game_dict = json.load(json_file)
+  players = [pts_game_dict["resultSet"]["rowSet"][i][2] for i in range(len(pts_game_dict["resultSet"]["rowSet"]))]
+  pts_game = [pts_game_dict["resultSet"]["rowSet"][i][22] for i in range(len(pts_game_dict["resultSet"]["rowSet"]))]
+  df = pd.DataFrame()
+  df["player"] = players
+  df["pts_game"] = pts_game
+  return df
+
+nba_salary = get_nba_salary()
+pts_game = get_pts_game()
+df = pd.merge(nba_salary, pts_game)
+# matplotlib.pyplot.scatter(x, y, s=None, c=None, marker=None, cmap=None, norm=None, vmin=None, vmax=None, alpha=None,
+# linewidths=None, verts=None, edgecolors=None, *, plotnonfinite=False, data=None, **kwargs)
+plt.scatter(df["pts_game"], df["salary"])
+plt.show()
+```
+
+## 14. pandas 模組作圖--線圖（line graph）
+```python
+# Paul Pierce information - 線圖（line graph）
+%matplotlib inline 
+from pyquery import PyQuery as pq
+import pandas as pd
+import matplotlib.pyplot as plt
+def get_pp_stats():
+  """
+  Get Paul Pierce stats from basketball-reference.com
+  """
+  stats_url = "https://www.basketball-reference.com/players/p/piercpa01.html"
+  # pandas direct query url
+  html_doc = pq(stats_url)
+  # print(html_doc)
+  pts_css = "#per_game .full_table .right:nth-child(30)"
+  ast_css = "#per_game .full_table .right:nth-child(25)"
+  reb_css = "#per_game .full_table .right:nth-child(24)"
+  year = [str(i)+"-01-01" for i in range(1999, 2018)]
+  # 得分,籃板,助攻
+  pts = [float(p.text) for p in html_doc(pts_css)]
+  ast = [float(a.text) for a in html_doc(ast_css)]
+  reb = [float(r.text) for r in html_doc(reb_css)]
+  df = pd.DataFrame()
+  df["year"] = year
+  df["pts"] = pts
+  df["ast"] = ast
+  df["reb"] = reb
+  return df
+
+pp_stats = get_pp_stats()
+# pp_stats["year"] change to datetime mode
+pp_stats["year"] = pd.to_datetime(pp_stats["year"] )
+# change index to year field
+# index 非 datetime 會密密疊在一起
+pp_stats = pp_stats.set_index("year")
+
+# draw line graph
+# plt.plot(pp_stats["pts"])
+# plt.plot(pp_stats["ast"])
+# plt.plot(pp_stats["reb"])
+# 更改為 line 繪圖
+pp_stats.plot.line()
+# 放置圖例說明
+plt.legend(['PTS', 'REB', 'AST'], loc='upper right')
+plt.show()
+```
+
+## 15. stock OHLC Candlestick
+```python
+# K線理論（Candlestick Charts）原意：蠟燭圖；又稱、蠟燭線、日本線、陰陽線、棒線、紅黑線
+%matplotlib inline 
+import requests
+import datetime
+import pandas as pd
+import chart_studio.plotly as py
+import plotly.graph_objs as go
+
+def get_ohlc(twse_ticker):
+  """
+  Get ohlc data for current month
+  """
+  today = datetime.datetime.today().strftime('%Y%m%d')
+  twse_url = "http://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date={}&stockNo={}".format(today, twse_ticker)
+  # 未加.json() 僅是 return value 
+  stock = requests.get(twse_url).json()
+  trading_dates = []
+  dates = []
+  opens = []
+  highs = []
+  lows = []
+  closes = []
+  for i in range(len(stock["data"])):
+    trading_dates.append(stock["data"][i][0])
+    opens.append(float(stock["data"][i][3]))
+    highs.append(float(stock["data"][i][4]))
+    lows.append(float(stock["data"][i][5]))
+    closes.append(float(stock["data"][i][6]))
+
+  # year 108 --> 2019
+  for d in trading_dates:
+    sub = d.split("/")
+    dates.append("{}-{}-{}".format(int(sub[0])+1911, sub[1], sub[2]))
+
+  df = pd.DataFrame()
+  df["trading_date"] = dates
+  df["open"] = opens
+  df["high"] = highs
+  df["low"] = lows
+  df["close"] = closes
+  df = df.set_index("trading_date")
+  return df
+
+tsmc = get_ohlc('2330')
+# -- show Candlestick fig --
+trace = go.Candlestick(x=tsmc.index,
+                       open=tsmc["open"],
+                       high=tsmc["high"],
+                       low=tsmc["low"],
+                       close=tsmc["close"])
+# no show bottom fig
+layout = go.Layout(
+    xaxis = dict(
+        rangeslider = dict(
+            visible = False
+        )
+    )
+)
+fig = go.Figure(data=trace, layout=layout)
+fig.show()
+
+# update to plotly wibside(need API key)
+py.sign_in('kyp001', 'bEtPpStSQgWRADCmGGe9') # Use your own plotly Username / API Key
+py.iplot(fig, filename='simple_candlestick')
+```
+
+## 16. 艾姆斯房價（Imes, Iowa）資料分析  
+https://www.kaggle.com/c/house-prices-advanced-regression-techniques  
+```python
+# get % train/test data 
+import pandas as pd
+from sklearn.model_selection import train_test_split
+# ----------------
+labeled_url = "https://storage.googleapis.com/kaggle_datasets/House-Prices-Advanced-Regression-Techniques/train.csv"
+labeled_df = pd.read_csv(labeled_url)
+train_df, validation_df = train_test_split(labeled_df, test_size=0.3, random_state=123)
+print(train_df.shape)
+print(validation_df.shape)
+
+
+# 單變數的迴歸模型(相關性)
+import pandas as pd
+from sklearn.model_selection import train_test_split
+# ---------------------
+labeled_url = "https://storage.googleapis.com/kaggle_datasets/House-Prices-Advanced-Regression-Techniques/train.csv"
+labeled_df = pd.read_csv(labeled_url)
+df_corr = labeled_df.corr()
+sale_price_corr = df_corr["SalePrice"].abs().sort_values(ascending=False)
+print(sale_price_corr)
+
+# GrLivArea(x) vs SalePrice(y)散佈圖（scatter plot）
+%matplotlib inline
+import pandas as pd
+from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
+# --------------------------
+labeled_url = "https://storage.googleapis.com/kaggle_datasets/House-Prices-Advanced-Regression-Techniques/train.csv"
+labeled_df = pd.read_csv(labeled_url)
+df_corr = labeled_df.corr()
+sale_price_corr = df_corr["SalePrice"].abs().sort_values(ascending=False)
+plt.scatter(labeled_df["GrLivArea"],labeled_df["SalePrice"])
+plt.xlabel('GrLivArea')
+plt.ylabel('SalePrice')
 plt.show()
 ```

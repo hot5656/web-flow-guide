@@ -99,6 +99,20 @@ viverra nec, fringilla in, laoreet vitae, risus.
 	console.log()
 	```
 
+## 無序清單(* + -)-same
+```
+* 1st
+	* the 1-1
+	* the 1-2
+	+ the 1-3
+	- the 1-4
+```
+* 1st
+	* the 1-1
+	* the 1-2
+	+ the 1-3
+	- the 1-4
+
 ## 有序清單
 ```
 1. Yahoo 股市 
@@ -147,6 +161,19 @@ Feudal Age    | 02:10 |  500 |    0 | Dark Age building x 2
 Castle Age    | 02:40 |  800 |  200 | Feudal Age building x 2
 Imperial Age  | 03:30 | 1000 |  800 | Castle Age building x 2 
 
+```
+|預設|靠右對齊|靠左對齊|置中對齊|
+|---|------:|:-----|:-----:|
+|12 |12     |12    |12     |
+|123|123    |123   |123    |
+|1  |1      |1     |1      |
+```
+|預設|靠右對齊|靠左對齊|置中對齊|
+|---|------:|:-----|:-----:|
+|12 |12     |12    |12     |
+|123|123    |123   |123    |
+|1  |1      |1     |1      |
+
 ## 區塊元素(程式碼)
 ``` javascript
 var a = 2;
@@ -178,6 +205,162 @@ console.log()
 > ```
 >     return shell_exec("echo $input | $markdown_script");
 > ```
+
+## 水平分隔線
+```
+第一個水平分隔線：
+***
+第二個水平分隔線：
+---
+第三個水平分隔線：
+___
+```
+第一個水平分隔線：
+***
+第二個水平分隔線：
+---
+第三個水平分隔線：
+___
+
+## 數學公式
+```
+# 行內公式
+質能方程式$E = mc^2$
+# 獨立公式
+質能方程式$$E = mc^2$$
+# ^ 上標, _ 下標
+$$x = a _{1}^n + a_ {2}^n + a_{3}^n$$
+# 分數使用\frac{分母}{分子} 不過推薦使用\cfrac來代替\frac，顯示公式不會太擠
+$$\frac{1}{3} 與\cfrac{1}{3}$$
+# {}因為有特殊作用因此當需要顯示大括號時一般使用\lbrace \rbrace來表示
+$$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$$
+# 開根號 \sqrt[次数]{被开方数}
+$$\sqrt[3]{X} \sqrt{5 - x}$$ 
+# 極限
+$g. \lim\limits_{n \rightarrow a} [f(x)/g(x)]=L/M$
+```
+質能方程式$E = mc^2$  
+質能方程式$$E = mc^2$$  
+$$x = a _{1}^n + a_ {2}^n + a_{3}^n$$  
+$$\frac{1}{3} 與\cfrac{1}{3}$$  
+$$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$$  
+$$\frac{1}{3} 與\cfrac{1}{3}$$  
+$$\sqrt[3]{X} \sqrt{5 - x}$$  
+$\lim\limits_{n \rightarrow a} [f(x)/g(x)]=L/M$
+
+**希臘字母**
+
+代碼          |大寫 |代碼 |小寫
+--------------|-----|-----|----
+A		|$A$		|\alpha		|$\alpha$
+B		|$B$		|\beta		|$\beta$ 
+\Gamma	|$\Gamma$	|\gamma		|$\gamma$ 
+\Delta	|$\Delta$	|\delta		|$\delta$
+E		|$E$		|\epsilon	|$\epsilon$
+Z		|$Z$		|\zeta		|$\zeta$
+H		|$H$		|\eta		|$\eta$
+\Theta	|$\Theta$	|\theta		|$\theta$
+I		|$I$		|\iota		|$\iota$
+K		|$K$		|\kappa		|$\kappa$
+\Lambda	|$\Lambda$	|\lambda	|$\lambda$
+M		|$M$		|\mu		|$\mu$
+N		|$N$		|\nu		|$\nu$
+\Xi		|$\Xi$		|\xi		|$\xi$
+O		|$O$		|\omicron	|$\omicron$
+\Pi		|$\Pi$		|\pi		|$\pi$
+P		|$P$		|\rho		|$\rho$
+\Sigma	|$\Sigma$	|\sigma		|$\sigma$
+T		|$T$		|\tau		|$\tau$
+\Upsilon|$\Upsilon$	|\upsilon	|$\upsilon$
+\Phi	|$\Phi$		|\phi		|$\phi$
+X		|$X$		|\chi		|$\chi$
+\Psi	|$\Psi$		|\psi		|$\psi$
+\Omega	|$\Omega$	|\omega		|$\omega$
+
+
+**關係運算符**
+
+符號		|代碼
+--------	|---
+$\pm$		|\pm
+$\times$	|\times
+$\div$		|\div
+$\mid$		|\mid
+$\nmid$		|\nmid
+$\cdot$		|\cdot
+$\circ$		|\circ
+$\ast$		|\ast
+$\bigodot$	|\bigodot
+$\bigotimes$|\bigotimes
+$\bigoplus$	|\bigoplus
+$\leq$		|\leq
+$\geq$		|\geq
+$\neq$		|\neq
+$\approx$	|\approx
+$\equiv$	|\equiv
+$\sum$		|\sum
+$\prod$		|\prod
+$\coprod$	|\coprod
+
+**集合運算符**
+
+符號		|代碼
+--------	|---
+$\emptyset$	|\emptyset
+$\in$		|\in
+$\notin$	|\notin
+$\subset$	|\subset
+$\supset$	|\supset
+$\subseteq$	|\subseteq
+$\supseteq$	|\supseteq
+$\bigcap$	|\bigcap
+$\bigcup$	|\bigcup
+$\bigvee$	|\bigvee
+$\bigwedge$	|\bigwedge
+$\biguplus$	|\biguplus
+$\bigsqcup$	|\bigsqcup
+
+**對數運算符**
+
+符號	|代碼
+--------|---
+$\log$	|\log
+$\lg$	|\lg
+$\ln$	|\ln
+
+**三角運算符**
+
+符號	|代碼
+--------|---
+$\bot$	|\bot
+$\angle$|\angle
+$\sin$	|\sin
+$\cos$	|\cos
+$\tan$	|\tan
+$\cot$	|\cot
+$\sec$	|\sec
+$\csc$	|\csc
+
+**微積分運算符**
+
+符號		|代碼
+--------	|---
+$\prime$	|\prime
+$\int$		|\int
+$\iint$		|\iint
+$\iiint$	|\iiint
+$\iiiint$	|\iiiint
+$\oint$		|\oint
+$\lim$		|\lim
+$\infty$	|\infty
+$\nabla$	|\nabla
+$\mathrm{d}$|\mathrm{d}
+
+**其他**
+
+符號		|代碼
+--------	|---
+$\rightarrow$  |\rightarrow
 
 ## 自動連結
 ```
