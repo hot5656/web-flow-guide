@@ -603,10 +603,15 @@ while (i<3):
 
 **datetime**
 ```python
+import datetime
+
 # today/now 應該相同
 import datetime
 current_dt = datetime.datetime.now().strftime("%Y-%m-%d %X")
 today = datetime.datetime.today().strftime('%Y%m%d')
+# set date 
+start = datetime.datetime(2018, 1, 1)
+end = datetime.datetime(2018, 8, 1)
 ```
 
 **BeautifulSoup4(selector 分析網頁)**
@@ -769,7 +774,8 @@ sort_index()  |sort by index,df.sort_index(inplace=True)
 index.get_level_values()|get index name, df.index.get_level_values(0),df.index.get_level_values("Player")
 index.set_names()       |change index name, df.index.set_names(["Pos","Name"], inplace=True)
 df["Player"].str        |str process, (df["Player"].str.lower(), df["Player"] = df["Player"].str.replace("Ja","Js")
-
+pd.Series()   |create Series
+pd.DataFrame()|create data frame,pd.DataFrame(np.random.randn(100, 4), index=pd.date_range('12/31/2017', periods=100), columns=list('ABCD'))
 
 variable       | 說明
 ---------------|------
@@ -845,6 +851,14 @@ print(myframe3)
 # sort by one field value - 不能改變原變數,要設成另一個變數
 print(myframe3.sort_values('name'))
 print(myframe3)
+
+# pandas data draw
+%matplotlib inline
+import pandas as pd
+import numpy as np
+df = pd.DataFrame(np.random.randn(100,4), index=pd.date_range('12/31/2017', periods=100), columns=list('ABCD'))
+print(df)
+df.plot()
 
 # show some position data
 import pandas as pd
@@ -1040,6 +1054,13 @@ df_numerics = df.iloc[:, 4:]
 
 # set for index(field trading_date)
 df = df.set_index("trading_date")
+
+# DataFrame only inculde some columns
+data = {'names':['a','b','c','d','e'],
+        'jan':[133,122,101,104,320],
+        'feb':[122,132,144,98,62],
+        'march':[64,99,32,12,65] }
+df2 = pd.DataFrame(data,columns=['names','jan','feb'])
 ```
 
 **pandas-read csv說明**  
@@ -1115,6 +1136,37 @@ chicago_bulls_dict = get(json_url).json()
 print(type(chicago_bulls_dict))
 chicago_bulls_dict
 ```
+
+**pandas_datareader.data(get data from web)**  
+pip install pandas_datareader  
+import pandas_datareader.data as web  
+直接到網路上跟合作的廠商抓資料(無須輸入任何API網址)  
+[Remote Data Access list](https://pandas-datareader.readthedocs.io/en/latest/remote_data.html#remote-data-google)  
+
+function     | 說明
+-------------|------
+DataReader() |read data from seb site, data = web.DataReader("F", 'yahoo', start, end)
+
+
+```python
+# pandas_datareader read and plot
+%matplotlib inline
+import pandas_datareader.data as web
+import datetime
+# ------------------------------
+start = datetime.datetime(2018, 1, 1)
+end = datetime.datetime(2018, 8, 1)
+data = web.DataReader("F", 'yahoo', start, end)
+# show plot
+# print(data)
+# data.plot()
+# show Colse data
+data.plot(y="Close") # also data["Close"].plot() - but if run "data.plot()" no show
+# show 2 items
+print(data.columns)
+data[["High", "Low"]].plot()
+```
+
 
 **lxml**  
 lxml is the most feature-rich and easy-to-use library for processing XML and HTML in the Python language
@@ -1231,6 +1283,7 @@ function     | 說明
 np.array()       |set to ndarry
 np.sin(x\*4\*np.pi)|set to ndarry by sin function
 np.arange(10)  |generate by range
+pd.date_range()|set date for pd, index=pd.date_range('12/31/2017', periods=100)
 np.ones(5)     |可以創建任意維度和元素個數的數組，其元素值均為1
 np.zeros(3,int)|創建的數組元素類型是浮點型的，如果要使用其他類型，可以設置dtype參數進行聲明
 np.empty([2,3])|只是它所常見的數組內所有元素均為空，沒有實際意義
@@ -1430,15 +1483,22 @@ function     | 說明
 -------------|------
 plt.show()    |最後畫圖
 plt.plot()    |線圖,可同時設多條線, (x,y,color=,marker="o"設定點,linestyle="--" 顯示虛線)
-plt.pie()     |圓餅圖,
+plt.pie()     |圓餅圖
+plt.bar()     |長條圖  bar(x, height, width=0.8透明度, bottom=None, *, align='center', data=None, **kwargs)
 setp(line1, marker="o", linestyle="--")|set some line configure
 plt.title()   |title
 plt.xlabel()  |xlabel
-plt.ylabel()  |yabel
-plt.grid(Tree)|顯示格線
-
-variable       | 說明
----------------|------
+plt.ylabel()  |ylabel
+plt.xticks()  |x 標示 plt.xticks(np.arange(0, 3)+0.3, ["Math", "Reading", "Scilent"])
+plt.yticks()  |y 標示
+plt.grid(True)|顯示格線
+plt.text()    |標示文字 text(x, y, s, fontdict=None, withdash=<deprecated parameter>, **kwargs) s=show text
+plt.legend()  |圖例 plt.legend(title = "Court") 
+plt.xlim()    |x 顯示範圍 xlim((left, right), left, right = xlim() - return the current xlim
+plt.ylim()    |y 顯示範圍 ylim(bottom, top), bottom, top = ylim()  - return the current ylim
+plt.title(".")|抬頭
+plt.axis('off')  |不show座標刻度
+for item in data |item data : item.get_height(),item.get_x()
 
 **matplotlib-->pyplot**
 ```python
@@ -1493,6 +1553,98 @@ plt.pie(size, labels=labels, autopct="%1.1f%%",explode=separated)
 plt.axis('equal')
 plt.show()
 
+# matplotlib pyplot plot(圓餅圖 pie 2nd) 
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+import pandas as pd
+
+data = {'names':['a','b','c','d','e'],
+        'jan':[133,122,101,104,320],
+        'feb':[122,132,144,98,62],
+        'march':[64,99,32,12,65] }
+df1 = pd.DataFrame(data)
+df1['total'] = df1['jan']+df1['feb']+df1['march']
+colors = [(1,.4,.4),(1,.6,1),(.5,.3,1),(.7,.7,.2),(.6,.2,.6)]
+# print(df1)
+# (size, labels=標示, colors=顏色, autopct=顯示百分比, explode=餅分開距離)
+plt.pie(
+    df1['total'],
+    labels = df1['names'],
+    colors = colors,
+    autopct='%1.1f%%'
+)
+plt.axis('equal')
+plt.show()
+
+# matplotlib pyplot plot(長條圖 bar) 
+%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+# ------------------
+def createLabel(data):
+    # data include artist
+    # item is patches.Rectangle
+    for item in data:
+        height = item.get_height() # get Rectangle height
+        # text(x, y, s, fontdict=None, withdash=<deprecated parameter>, **kwargs) s=show text
+        plt.text(item.get_x(),height*1.05, height)
+# ------------------
+col_count = 3
+A_scores = (553,536,548)
+B_scores = (518,523,523)
+C_scores = (613,570,588)
+D_scores = (475,505,499)
+
+index = np.arange(col_count)
+bar_width = 0.2
+# (x ,value) simple
+# plt.bar(index, A_socres)
+# bar(x, height, width=0.8透明度, bottom=None, *, align='center', data=None, **kwargs)[source]
+# label:僅為涵義標示(與顯示無關)
+A = plt.bar(index, 
+        A_scores,
+        bar_width,
+        alpha=0.2,
+        label="K1",
+        )
+B = plt.bar(index+0.2, 
+        B_scores,
+        bar_width,
+        alpha=0.2,
+        label="K2",
+        )
+C = plt.bar(index+0.4, 
+        C_scores,
+        bar_width,
+        alpha=0.2,
+        label="K3",
+        )
+D = plt.bar(index+0.6, 
+        D_scores,
+        bar_width,
+        alpha=0.2,
+        label="K4",
+        )
+#print(index)
+createLabel(A)
+createLabel(B)
+createLabel(C)
+createLabel(D)
+# ------------------
+plt.grid(True)
+plt.xlabel("Subjext")     # show x label
+plt.ylabel("Mean score")  # show y label
+#print(np.arange(0, 3)+0.3)
+# x 標示
+plt.xticks(np.arange(0, 3)+0.3, ["Math", "Reading", "Scilent"])
+# 加入圖例 plt.legend(title = "Court") 
+plt.legend()
+# xlim((left, right), left, right = xlim() - return the current xlim
+plt.xlim(right=3.5) # x 顯示範圍
+# ylim(bottom, top), bottom, top = ylim()  - return the current ylim
+plt.ylim(top=700) # y 顯示範圍
+plt.show()
 
 
 # 1st sample
@@ -1748,6 +1900,66 @@ flights = flights.pivot("month", "year", "passengers")
 #* ax = sns.heatmap(flights, annot=True, fmt='d')
 #* ax = sns.heatmap(flights,linewidths=.5, cmap="YlGnBu")
 ax = sns.heatmap(flights, center=flights.loc["June", 1955], cbar=False)
+```
+
+**bokeh(draw by HTML)**  
+conda install bokeh  
+from bokeh.plotting import figure, show  
+> ===== 其他圖形 =====  
+> bokeh.charts.Bar — 製作長條圖  
+> bokeh.charts.BoxPlot — 製作盒鬚圖  
+> bokeh.charts.HeatMap — 製作熱圖  
+> bokeh.charts.Donut — 製作甜甜圈圖  
+> ===== Bokeh 也提供了排版專用的工具 =====  
+> Horiontal Layout / 水平式版面 ( hplot )  
+> Vertical Layout / 垂直式版面 ( vplot )  
+> Grid Layout / 格式排版 ( gridplot )  
+> Form Layout / 表單排版 (formplot )  
+
+function     	| 說明
+-------------	|------
+p = figure() 	|設繪圖板大小
+p.circle() 		|畫圓
+p.line() 		|畫線
+p.multi_line()	|multi line
+p.vbar() 		|bar(長條圖)
+p.patches() 	|patch(多邊形)
+show(p)			|最後畫圖
+
+```python
+# draw by HTML
+from bokeh.plotting import figure, show, output_file
+# 設定輸出檔名
+output_file("out.html")
+# 設繪圖板大小
+p = figure(plot_width=500, plot_height=500)
+x = [1,2,3,4,5,6,7,8,9,10,11]
+y = [6,3,7,2,4,6,1,2,3,5,6]
+# 畫圓
+p.circle(x, y, size=20, color="gray", alpha=0.6)
+# 畫線
+p.line(x, y, line_width=3)
+# multi line
+x1 = [1, 2, 3]
+x2 = [2, 3, 4, 5, 6]
+y1 = [3, 2, 5]
+y2 = [3, 2, 4, 1, 3]
+p.multi_line([x1,x2] , [y1, y2],
+             color=["firebrick", "navy"], alpha=[0.8, 0.3], line_width=5)
+# bar(長條圖)
+p.vbar(x=[1, 2, 3, 4], width=0.5, bottom=0,
+       top=[1.2, 2.5, 3.7, 2.9], color="black",alpha=0.4)
+
+# patch(多邊形)
+x1 = [1, 4, 5, 2]
+x2 = [3, 4, 5, 6]
+x3 = [1,3,2]
+y1 = [2, 3, 5, 6]
+y2 = [4, 7, 7, 5]
+y3 = [7,8,5.5]
+p.patches([x1,x2,x3 ], [y1,y2,y3],
+          color=["black", "navy","firebrick"], alpha=[0.2, 0.2,0.3], line_width=2)
+show(p)
 ```
 
 **base plotting system**
