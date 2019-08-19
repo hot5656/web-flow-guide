@@ -51,6 +51,23 @@ $c. \lim\limits_{x \rightarrow a} f(x) = f(a) $
 > f(x)=多項式 --> 一定是連續函數  
   有理函數 $h(x)=f(x)/g(x)$ ,多項式 h(x) 在 x=a 連續 (if g(x)!=0) --> 一定是連續函數
 
+## 切線-->點+斜率(變化率)  
+斜率m=$\Delta y/\Delta x$  
+    =$tan \theta$  
+    =(y2-y1)/(x2-x1)  
+    水平 m=0  
+    垂直 m不存在
+    正負決定m的方向,絕對值決定m的程度  
+    切線可算出某x點y值-->算出切線方程式   
+    切線存在的點,就是平滑的點  
+f(x)在a點的導數(derviative)$ \lim\limits_{x \rightarrow a} (f(x)-f(a))/(x-a)$ 新符號為 f'(a)  
+f(x) P(a,f(a)) 切線斜率 m=$ \lim\limits_{x \rightarrow a} (f(x)-f(a))/(x-a)$  
+                        f'(a)=$ \lim\limits_{h \rightarrow 0} (f(a+h)-f(a))/h$  
+                        導數公式f'(x)=$ \lim\limits_{h \rightarrow 0} (f(x+h)-f(x))/h$ 
+												微分的符號  
+												y'=f'(x)  
+                        $\cfrac{dy}{dx}  = \cfrac{df(x)}{dx} = \cfrac{d}{dx}f(x)$ 
+
 ## 基本微分法
 1. $\cfrac{d}{dx}c=0$  
 2. $\cfrac{d}{dx}[cf(x)]=c\cfrac{df(x)}{dx}$  
@@ -89,5 +106,7 @@ ex:f(x)=|x| x=0 是否可微
 
 
 ## GeoGebra
-高斯函數 : floor
+高斯函數 : floor  
+x(A) : A點x座標  
+|x| : 絕對值  
 
