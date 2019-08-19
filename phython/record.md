@@ -2,29 +2,56 @@
 
 *   [Root](../README.md)
 
+## reference 
+* **Machine Learning**  
+
+涉及機率論、統計學、逼近論、凸分析、計算複雜性理論
+> 機器學習想做的事情，簡單的說是要從資料中歸納出有用的規則。大數據說的是對大量的資料做分析，而人工智能說的是讓機器看起來更聰明，兩者都可以使用機器學習來做核心的工具  
+
+監督式學習supervised learning(給予數據和標籤讓機器去學習)  
+> 一個監督式學習者的任務在觀察完一些訓練範例（輸入和預期輸出）後，去預測這個函數對任何可能出現的輸入的值的輸出。  
+  監督式學習就像是我們給了機器一堆貓的照片告訴機器說「這個是貓」，再給機器一堆狗的照片告訴它「這是狗」，讓機器自己去學習分辨，接著我們便能給予任何貓或狗的照片問機器讓機器告訴我們這是 貓 或 狗？
+
+非監督式學習unsupervised learning(只給予數據沒有給予標籤)  
+> 非監督式學習是一種機器學習的方式，並不需要人力來輸入標籤。它是監督式學習和強化學習等策略之外的一種選擇。在監督式學習中，典型的任務是分類和迴歸分析，且需要使用到人工預先準備好的範例(base)  
+  非監督式學習就像是我們給了機器一堆貓的照片和一堆狗的照片，可是我們並沒有告訴機器說哪些是貓哪些是狗，要機器自己去學習判斷出分類出圖片的不同之處。
+
+半監督式學習semi-supervised learning(結合監督式和非監督式)  
+> 少部分資料有標準答案，可提供機器學習輸出時判斷誤差使用；大部分資料沒有標準答案，機器必須自己尋找答案。  
+  我們任意選100張貓或狗的照片，在其中的10張告訴機器哪些是貓，哪些是狗，讓機器去學習認識貓與狗的外觀，再自己嘗試把另外90張照片內的特徵取出來進行分類。
+
+增強學習(透過環境和經驗修正)  
+> 人類在進行決策時，常常會根據目前「環境」 的「狀態」執行「動作」，執行動作會造成兩個結果：一是人們會得到「環境」給我們的回饋，也就是人類會得到「報酬」，接著我們所執行的動作也會去改變「環境」，使得「環境」進入到一個新的「狀態」，「觀察到目前的狀態->執行動作->收到報酬與觀察到新的狀態」的步驟，重複非常非常多次，直到某個終止時間。  
+  和前面三種類型不同的地方在於，增強學習並不是一次給予全部資料先讓機器分類，而是不斷餵給機器資料，透過經驗讓機器不斷修正。
+
+
 
 # Install package
 
 ## 1. install by pipe
 
-**upgrade pip**
+* **upgrade pip**
+
 ```
 python -m pip install --upgrade pip
 ```
 
-**jupyter notebook**
+* **jupyter notebook**
+
 coding tool
 ```
 pip install jupyter notebook
 ```
 
-**Python Requests**
+* **Python Requests**
+
 對網路發動請求的套件，可實作對網頁做get、post等HTTP協定的行為
 ```
 pip install requests
 ```
 
-**Python Beautifulsoup4**
+* **Python Beautifulsoup4**
+
 借助網頁的結構特性來解析網頁的工具，只需要簡單的幾條指令就可以提取HTML標籤裡的元素
 ```
 pip install beautifulsoup4
@@ -32,7 +59,8 @@ pip install beautifulsoup4
 
 ## 2. install in linux
 
-**python3**
+* **python3**
+
 ```
 // check install
 apt list --installed | grep phython
@@ -41,7 +69,8 @@ apt list --installed | grep phython
 python3 --version
 ```
 
-**Anaconda**
+* **Anaconda**
+
 ```
 // web side
 https://www.anaconda.com/distribution/
@@ -103,7 +132,7 @@ source activate my_env
 jupyter notebook list  
 ```
 
-**crontab(環型工作排程)-linux comman**
+* **crontab(環型工作排程)-linux comman**
 
 |代表意義|分鐘|小時|日期|月份|週|指令|
 |--------|----|----|----|----|---|----------|
@@ -149,7 +178,7 @@ conda env list
 conda remove --name myenv numpy
 ```
 
-##4. Miniconda(輕量化版本的 Anaconda)
+## 4. Miniconda(輕量化版本的 Anaconda)
 ```
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 bash Miniconda3-latest-Linux-x86_64.sh
@@ -157,9 +186,9 @@ bash Miniconda3-latest-Linux-x86_64.sh
 conda install requests beautifulsoup4 pandas
 ```
 
-##5. Django(創建 Web 應用程式和 Web API 的框架)##
+## 5. Django(創建 Web 應用程式和 Web API 的框架)
 
-##6. VsCode##
+## 6. VsCode
 ```
 // pylint(檢查 Python 程式碼)
 python.exe -m pip install -U pylint --user
@@ -180,7 +209,7 @@ ctrl-shift-p --> Python: Select Interpreter
 
 # format
 
-**HTML**
+## HTML
 ```python
 from bs4 import BeautifulSoup
 html_str = """
@@ -219,7 +248,7 @@ print(type(movie)) # list
 print(movie[0]["href"])
 ```
 
-**XPath-XML Path Language**  
+## XPath-XML Path Language
 單個正斜線 /：用來在樹狀結構中向下移動一層  
 標記名稱：置放於正斜線之間用來定位資料  
 中括號 []：用來指向同一個標記中的特定資料  
@@ -261,7 +290,7 @@ print(tree.xpath("/html/body/div[2]/a/@href")[1])
 print(tree.xpath('//a/@href')[2])
 ```
 
-**CSS Selector**  
+## CSS Selector
 #movie-3 > a {  
   font-size: 28px;  
 }  
@@ -324,19 +353,22 @@ Ctrl + Enter
 
 ## 2. socket
 
-**import pckage**
+* **import pckage**
+
 ```python
 import socket
 ```  
 
 
-**function**
+* **function**
+
 ```python
 socket.socket([family], [type] , [proto] )
 ```
 
-# record
+# python 語法
 
+## common
 ```python
 // del - 將完成賦值的物件自環境中刪除
 hello_msg = "Hello Python!"
@@ -347,7 +379,7 @@ del hello_msg
 help(print)
 ```
 
-**function**
+## function
 ```python
 #function 
 def my_first_func():
@@ -395,7 +427,7 @@ X = np.arange(30).reshape((10, 3))
 # dataframe.corr() 算出成對相關性(pairwise correlation)
 ```
 
-**variable**
+## variable
 ```python
 // type of variable
 my_int = 87
@@ -503,7 +535,7 @@ print("{}的身體質量指數為：{:.2f}".format(player_name, player_bmi))
 // list、tuple、set、dict 
 ```
 
-**collection**
+## collection
 ```python
 // list 列表 - []
 play_list = ["Robert Kao", "Leo lin", "Jerry Hsu"]
@@ -568,7 +600,7 @@ print(type(play_set))
 ```
 
 
-**flow control**
+## flow control
 ```python
 // if
 // and or not (True False)
@@ -601,7 +633,7 @@ while (i<3):
 
 # package
 
-**datetime**
+## datetime
 ```python
 import datetime
 
@@ -614,9 +646,54 @@ start = datetime.datetime(2018, 1, 1)
 end = datetime.datetime(2018, 8, 1)
 ```
 
-**BeautifulSoup4(selector 分析網頁)**
+## beautifulsoup4 - 解析 HTML 資料
+* **BeautifulSoup4(selector 分析網頁)**
 
-**beautifulsoup4 - 解析 HTML 資料**
+function     | 說明
+-------------|------
+prettify()     |美化排版, soup.prettify()
+tag_name       |tag data/nest tag data, soup.head, soup.head.title
+tag_name.string|tag string, soup.head.title.string
+find_all()     |all tag list,  soup.find_all('p')
+link.get()     |get 屬性(attribute),link.get('href'), link.get('class')
+get_text()     |get text, soup.get_text())
+
+```python
+# basic
+html_doc = """
+<html><head><title>The Dormouse's story</title></head>
+<body>
+<p class="title"><b>The Dormouse's story</b></p>
+<p class="story">Once upon a time there were three little sisters; and their names were
+<a href="http://example.com/elsie" class="sister" id="link1">Elsie</a>,
+<a href="http://example.com/lacie" class="sister" id="link2">Lacie</a> and
+<a href="http://example.com/tillie" class="sister" id="link3">Tillie</a>;
+and they lived at the bottom of a well.</p>
+<p class="story">...</p>
+"""
+# ------------
+from bs4 import BeautifulSoup
+soup = BeautifulSoup(html_doc, "html.parser")
+# print(soup)
+# prettify() : 美化排版
+print(soup.prettify())
+# direct get tag data
+# .string --> text string
+print("tag title :", prettify() : 美化排版)
+print("tag head :", soup.head)
+print("tag head.title :", soup.head.title)
+print("tag head.title.string :", soup.head.title.string)
+# find_all() : get all tag
+print("tags p :", soup.find_all('p'))
+# get() : get 屬性（attribute）
+for link in soup.find_all('a'):
+    print(link.get('href'), link.get('class'))
+# find(id='link3') : find id
+print("id link3 :", soup.find(id='link3'))
+# get_text() : get text
+print("all text :", soup.get_text())
+```
+
 ```python
 import requests
 from bs4 import BeautifulSoup
@@ -642,7 +719,8 @@ for i in sel:
     print(i.get("src"))
 ```
 
-**beautifulsoup4 - example**
+* **beautifulsoup4 - example**  
+
 ```python
 from bs4 import BeautifulSoup
 html_str = """
@@ -681,10 +759,11 @@ print(type(movie)) # list
 print(movie[0]["href"])
 ```
 
-**requests(抓網頁)**  
+## requests(抓網頁)
 Requests是一個Python HTTP庫
 
-**requests : disable SSL Warnings - json**
+* **requests : disable SSL Warnings - json**  
+
 ```python
 import requests
 import urllib3
@@ -701,7 +780,8 @@ for u in data_json:
     print(str(i) + " ***** " + str(u))
 ```
 
-**requests : support SSL certificate verify - json**
+* **requests : support SSL certificate verify - json**
+
 ```python
 # support SSL certificate verify
 from urllib3 import PoolManager
@@ -719,7 +799,8 @@ for u in data_json:
     print(str(i),"*****" ,u["County"] , u["SiteName"], u["PM2.5"])
 ```
 
-**requests : html**
+* **requests : html**
+
 ```python
 import requests
 from lxml import etree
@@ -738,7 +819,7 @@ for c, s, p in zip(county, side_name, pm25):
 ```
 
 
-**nbextensions**
+## nbextensions
 ```python
 // 代碼補全 for jupyter notebook(nbextensions) install
 conda install -c conda-forge jupyter_contrib_nbextensions
@@ -746,7 +827,7 @@ conda install -c conda-forge jupyter_contrib_nbextensions
 点开 Nbextensions 的选项，并勾选 Hinterland
 ```
 
-**pandas(資料分析)**  
+## pandas(資料分析)
 Pandas 是 python 的一個數據分析 lib  
 Pandas就是建立在Numpy的基礎延伸的套件呢  
 資料類型DataFrame:就像是我們在使用的excel表格一樣，是一個二維的數據有index和column  
@@ -786,7 +867,7 @@ df.columns     |查看資料框的變數名稱
 df.loc['b']    |index 取出資料,也可取出多個 row : print(df.loc["Michael Jordan"])/print(df.loc[["Michael Jordan", "Dennis Rodman"]])
 df.iloc[[0:4]  |get by index position : print(df.iloc[[0,4]]) # index 0 and 4 / print(df.iloc[0:4])  # index 0 to 3
 
-**groupby() - DataFrameGroupBy**
+* **groupby() - DataFrameGroupBy**
 
 function     | 說明
 -------------|------
@@ -1063,7 +1144,7 @@ data = {'names':['a','b','c','d','e'],
 df2 = pd.DataFrame(data,columns=['names','jan','feb'])
 ```
 
-**pandas-read csv說明**  
+* **pandas-read csv說明**
 
 參數      |說明
 ----------|----
@@ -1082,7 +1163,8 @@ csv_df = pd.read_csv(csv_url, header=None, skiprows=1, names=['number', 'player'
 csv_df
 ```
 
-**pandas-read txt說明(將來僅用read_csv代替)**  
+* **pandas-read txt說明(將來僅用read_csv代替)**
+
 副檔名為 .txt 純文字檔案跟 CSV 檔案的差異就在於分隔符號（separator）  
 在 Python 中我們使用 pandas 的 pd.read_table() 方法；值得注意的參數是 sep 預設為 \t 意即 tab 鍵，  
 因此面對以分號做為變數分隔的 TXT 檔案就要指定為 sep=";"  
@@ -1095,7 +1177,8 @@ txt_df = pd.read_table(txt_url, sep=";")
 txt_df
 ```
 
-**pandas-read excel說明( .xlsx or .xls )**  
+* **pandas-read excel說明( .xlsx or .xls )**  
+
 在 Python 中我們使用 pandas 的 pd.read_excel() 方法  
 
 參數      |說明
@@ -1125,7 +1208,8 @@ boston_celtics = pd.read_excel(xlsx_url, sheet_name='boston_celtics_2007_2008', 
 boston_celtics
 ```
 
-**pandas-read json說明**  
+* **pandas-read json說明**  
+
 JSON 檔案若是儲存在雲端，利用 requests 模組的 get() 函數搭配 .json() 方法就可以載入，成功之後會以 dict 型別供後續操作。
 ```python
 # JSON 檔案儲存在雲端
@@ -1137,7 +1221,7 @@ print(type(chicago_bulls_dict))
 chicago_bulls_dict
 ```
 
-**pandas_datareader.data(get data from web)**  
+## pandas_datareader.data(get data from web)
 pip install pandas_datareader  
 import pandas_datareader.data as web  
 直接到網路上跟合作的廠商抓資料(無須輸入任何API網址)  
@@ -1168,10 +1252,10 @@ data[["High", "Low"]].plot()
 ```
 
 
-**lxml**  
+## lxml
 lxml is the most feature-rich and easy-to-use library for processing XML and HTML in the Python language
 
-**pyquery 解析 HTML 資料**  
+## pyquery 解析 HTML 資料
 conda install pyquery
 ```python
 import requests
@@ -1210,7 +1294,7 @@ ast = [float(a.text) for a in html_doc(ast_css)]
 reb = [float(r.text) for r in html_doc(reb_css)]
 ```
 
-**selenium-操控瀏覽器來擷取 HTML**  
+## selenium-操控瀏覽器來擷取 HTML
 Seleninm: 它能控制你的瀏覽器,有模有樣地學人類”看”網頁  
 conda install selenium  
 function(input): clear(), send_key(), submit(), click()
@@ -1237,7 +1321,7 @@ print(driver.current_url)
 driver.close()
 ```
 
-**flask**
+## flask
 ```
 // create new environment(include flask and panda)
 conda create --name flask python=3 flask pandas
@@ -1254,7 +1338,8 @@ python apy.py
 // open by browser
 http://127.0.0.1:5000
 ```
-**flask-apy.py**
+* **flask-apy.py**
+
 ```python
 import flask
 
@@ -1268,15 +1353,14 @@ def home():
 app.run()
 ```
 
-**firebase_admin**  
+## firebase_admin
 Firebase Admin SDK for Python  
 // install firebase_admin(conda not support  
 pip install firebase_admin  
 
-**Numpy**  
+# Numpy
 支援高階大量的維度陣列與矩陣運算，此外也針對陣列運算提供大量的數學函式函式庫  
 Numpy是一個提供矩陣運算非常非常非常好用的工具  
-
 
 function     | 說明
 -------------|------
@@ -1417,7 +1501,7 @@ c = rand(3, 3)
 print(c)
 ```
 
-**squarify**  
+## squarify
 pip install squarify  
 ```python
 # 樹狀圖(treemap)
@@ -1436,7 +1520,7 @@ plt.title("1995-1996 Chicago Bulls roster") # 抬頭
 plt.show()
 ```
 
-**chart-studio --> plotly**  
+## chart-studio --> plotly
 pip install chart-studio  
 api key = "bEtPpStSQgWRADCmGGe9"  
 ```python
@@ -1465,17 +1549,107 @@ py.sign_in('kyp001', 'bEtPpStSQgWRADCmGGe9') # Use your own plotly Username / AP
 py.iplot(fig, filename='simple_candlestick')
 ```
 
-**folium**  
+## folium
 pip install folium  
 ```python
 ```
 
-**scipy**  
+## scipy
 SciPy就是以Numpy為基礎做科學、工程的運算處理的package，包含統計、優化、整合、線性代數、傅立葉轉換圖像等較高階的科學運算  
 
-# 基礎視覺化
+## sklearn(Scikit-learn)
+* **sklearn.tree**
 
-**matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**  
+function     | 說明
+-------------|------
+DecisionTreeClassifier() |create DecisionTreeClassifier
+fit()                    |傳入資料
+predict()                |預測label
+
+```python
+# sklearn.tree 
+from sklearn import tree
+# 1:皺 0:光滑 
+features = [[150,1],[170,1],[130,0],[140,0]]
+# 0:橘子 1:蘋果
+labels = [0, 0, 1, 1]
+clf =tree.DecisionTreeClassifier()
+clf = clf.fit(features, labels)
+wantPredict = clf.predict([[200,0]])
+# return same as label define
+print(wantPredict) 
+if wantPredict == [1]:
+    print('This is an apple')
+elif wantPredict == [0]:
+    print('This is an orange')
+```
+
+* **sklearn.neighbors.KNeighborsClassifier-K-近鄰演算法(K Nearest Neighbor)**
+
+```python
+# K-近鄰演算法(K Nearest Neighbor)
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+# load 鳶尾花的資料
+iris = datasets.load_iris()
+# set data abd label variable
+iris_data = iris.data
+iris_label = iris.target
+# 劃分 訓練資料與測試資料
+train_data , test_data , train_label , test_label = train_test_split(iris_data,iris_label,test_size=0.2)
+# 算出預估結果
+knn = KNeighborsClassifier()
+knn = knn.fit(train_data,train_label)
+print(knn.predict(test_data))
+# 列出實際答案比較
+print(test_label)
+```
+
+* **sklearn.linear_model.LinearRegression 線性迴歸(linear regression)**
+
+```python
+# sklearn.linear_model.LinearRegression 線性迴歸(linear regression)
+%matplotlib inline
+from sklearn.linear_model import LinearRegression
+from sklearn import datasets
+import matplotlib.pyplot as plt
+# generate random data
+# sample data=200, feature=1 , label=1, noise設為10，這樣資料會比較分散一點
+x,y = datasets.make_regression(n_samples=200, n_features=1, n_targets=1, noise=10)
+model = LinearRegression()
+model = model.fit(x, y)
+predict = model.predict(x[:200,:])
+# draw 線性迴歸線
+plt.plot(x,predict,c="red")
+plt.scatter(x, y)
+plt.show()
+```
+
+* **sklearn.datasets**  
+
+測試資料集  
+```python
+# load 鳶尾花的資料
+iris = datasets.load_iris()
+# generate random data
+# sample data=200, feature=1 , label=1, noise設為10，這樣資料會比較分散一點
+x,y = datasets.make_regression(n_samples=200, n_features=1, n_targets=1, noise=10)
+```
+
+* **sklearn.model_selection.train_test_split**  
+
+測試資料劃分
+```python
+# 劃分 訓練資料與測試資料
+train_data , test_data , train_label , test_label = train_test_split(iris_data,iris_label,test_size=0.2)
+```
+
+
+# 基礎視覺化
+matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**  
+
+## matplotlib
 Matplotlib是Python繪圖  
 %matplotlib inline  
 
@@ -1500,7 +1674,8 @@ plt.title(".")|抬頭
 plt.axis('off')  |不show座標刻度
 for item in data |item data : item.get_height(),item.get_x()
 
-**matplotlib-->pyplot**
+* **matplotlib-->pyplot**
+
 ```python
 # matplotlib pyplot plot(線圖 line plot)
 %matplotlib inline
@@ -1841,7 +2016,7 @@ plt.yticks(range(1, pos.size + 1), pos.index)
 plt.xlim(0, 5)
 ```
 
-**Seaborn**  
+## Seaborn
 ```python
 # 密度圖（Density plot）
 %matplotlib inline 
@@ -1902,7 +2077,7 @@ flights = flights.pivot("month", "year", "passengers")
 ax = sns.heatmap(flights, center=flights.loc["June", 1955], cbar=False)
 ```
 
-**bokeh(draw by HTML)**  
+## bokeh(draw by HTML)
 conda install bokeh  
 from bokeh.plotting import figure, show  
 > ===== 其他圖形 =====  
@@ -1962,13 +2137,13 @@ p.patches([x1,x2,x3 ], [y1,y2,y3],
 show(p)
 ```
 
-**base plotting system**
+## base plotting system
 
-**ggplot2**
+## ggplot2
 
 # 分析
 
-##sklearn##
+## sklearn
 ```python
 # 取測試資料
 # model_selection中train_test_split()函式
@@ -1991,7 +2166,7 @@ X, y = np.arange(30).reshape((10, 3)), range(10)
 X_train, X_test ,y_train, y_test= train_test_split(X, y,test_size=0.3, random_state = 20, shuffle=True)
 ```
 
-##均方誤差（Mean Square Error）##
+## 均方誤差（Mean Square Error）
 
 
 # API or url
