@@ -87,9 +87,9 @@ $[g(f(x))]'=\cfrac{dg(u)}{du}*\cfrac{df(x)}{dx}$
 (red mask only....) ***
 
 ## 高階導數
-f'(x) $\cfrac{dy}{dx} = \cfrac{df(x)}{dx}$ 一階導數  
-f''(x) $\cfrac{d^2y}{dx^2} = \cfrac{d^2f(x)}{dx^2}$ 二階導數  
-$f^{(n)}$ $\cfrac{d^ny}{dx^n} = \cfrac{d^nf(x)}{dx^n}$ n階導數  
+$f'(x)= \cfrac{dy}{dx} = \cfrac{df(x)}{dx}$ 一階導數  
+$f''(x)= \cfrac{d^2y}{dx^2} = \cfrac{d^2f(x)}{dx^2}$ 二階導數  
+$f^{(n)}(x)= \cfrac{d^ny}{dx^n} = \cfrac{d^nf(x)}{dx^n}$ n階導數  
 > s(x) 距離  
 > v(x) = s'(x) 速度  
 > a(x) = s''(x) 加速度  
@@ -109,4 +109,7 @@ ex:f(x)=|x| x=0 是否可微
 高斯函數 : floor  
 x(A) : A點x座標  
 |x| : 絕對值  
+
+## doing
+複習小測驗15-4
 

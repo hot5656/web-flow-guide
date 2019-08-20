@@ -380,11 +380,127 @@ help(print)
 ```
 
 ## function
+
+* **os套件**
+
+名稱			|說明
+--------		|-----
+system()		|	執行系統command
+mkdir(E)		|	建立E目錄，如果E目錄已存在會發生錯誤
+rmdir(E)		|	移除E目錄
+remove(E)		|	移除E檔案，如果E是目錄就會出錯
+getcwd()		|	取得目前所在路徑
+rename(src, dst)|	將 src 改名為 dst
+
+```python
+import os
+print(os.getcwd())
+```
+
+* **os.path有以下常用的函式**
+
+名稱			|說明
+--------		|-----
+isfile(E) 		| E檔案是否存在
+isdir(E) 		| E目錄是否存在
+join(src, dst) 	| 拼接目錄，只有拼接，不會建立目錄
+exists(E)		| 判斷文件或目錄是否存在
+getsize(E) 		| 取得文件大小
+abspath(E) 		| 獲得檔案的絕對路徑
+
+```python
+file = "day06-01.txt"
+print("完整路徑名稱--->",os.path.abspath(file))  # 完整路徑名稱
+print(file," 是否存在--->",os.path.exists(file)) # 是否存在
+print(file," 檔案大小--->",os.path.getsize(file)) #取得檔案大小
+```
+
+* os.walk **取得目錄下所有檔案和目錄**
+
+```python
+import os
+for root, dirs, files in os.walk("day06-dir"):
+    for name in files:
+        print("檔案--->",os.path.join(root, name))
+    for name in dirs:
+        print("目錄--->",os.path.join(root, name))
+    print()
+```
+
+* **file**  
+open(filename, mode)
+
+文字	|說明
+----	|----
+r		|讀取
+w		|寫入。檔案不存在則新增，檔案存在則寫入存在檔案
+X		|寫入。只有當檔案不存在時才可寫入
+a		|在檔案結尾處寫入
+t		|文字
+b		|二進位
+
+
+```python
+content = '''Python first   
+測試中文
+第三行
+'''  # '''...'''  保留原本的格式
+f = open('firstFile.txt','wt') # 寫入模式，檔案如果已經存在會被覆蓋
+f.write(content)
+f.close()
+```
+
 ```python
 #function 
 def my_first_func():
     print('Call this function!')
 my_first_func()
+# 不定數目參數涵式
+def sumNumber(*params):
+    total = 0
+    for param in params:
+        total +=param
+    return total
+# 將function當作參數傳遞
+def run_otherFunc(func):
+    func(7,8)
+run_otherFunc(GetArea)
+
+# 常用內建函數
+example1 = abs(-10)
+print(example1)  #取得絕對值 輸出 10
+example2 = chr(66)
+print(example2)  #取得整數66的字元 輸出 B
+example3 = divmod(33,6)
+print(example3)  #取得33除以6的商數和餘數 輸出 (5, 3)
+example4 = float(33)
+print(example4)  #轉成浮點數 輸出 33.0
+example5 = hex(33)
+print(example5)  #轉成16進位 輸出 0x21
+example6 = int(22.79)
+print(example6)  #轉成整數(無條件捨去) 輸出 22
+example7 = oct(33)
+print(example7) #轉成八進位 輸出 0o41
+example8 = ord("B")
+print(example8) #取得Unicode編碼 輸出 66
+example9 = pow(2,5)
+print(example9) #取得2的5次方 輸出 32
+example10 = round(22.79)
+print(example10)  #轉成整數(四捨五入) 輸出 23
+example11 = sum([11,22,33,44])
+print(example11)  #取得list的總和 輸出 110
+
+
+# 資料型態轉換
+int() 轉換為整數
+float() 轉換為浮點數
+str() 轉換為字串
+
+# 算術運算子
++, -, *, /, %, //(取得整除的商數), ** (次方, 7**2 = 49)
+
+# 邏輯運算子
+not, and, or
 
 # type
 print(type("xy"))
@@ -400,6 +516,14 @@ for idx, val in enumerate(arr):
 for i in range(nba_salary.shape[0]):
 	print('{0:14}-{1:9}'.format(nba_salary.values[i][1], nba_salary.values[i][2]))
 print("位於索引值 {} 的數字是 {}".format(idx, val))
+# sep間隔 ,end結尾
+print(100,200,300,sep="&",end="--")
+# print format 
+print("a=%d b=%d" % (10,20))
+print("%s have %8.2f %s" % ("I", 99.0, "dollars"))
+
+# input
+name = input("Name:")
 
 # string function
 "HELLOW WORLD".lower() # 小寫
@@ -533,6 +657,39 @@ player_bmi = player_weight/(player_height*0.01)**2
 print("{}的身體質量指數為：{:.2f}".format(player_name, player_bmi))
 
 // list、tuple、set、dict 
+# list
+h = list(range(0,10)) # range to list
+h2 = h*2              # douple list
+print(h2)
+print(h2[2:7])
+del h2[1:3]  # del
+print(h2)
+print(len(h2)) # 串列元素數目
+print(min(h2)) # 串列元素最小值
+print(max(h2)) # 串列元素最大值
+print(h2.index(4)) # 元素在串列中第一次出現的index
+print(h2.count(5)) # 元素在串列中出現的次數
+# A.append(E)：在A串列中加入E元素
+# A.extend(B)：在A串列中加入B串列的元素
+# A.insert(B)：在A串列中加入B串列
+# A.pop()：取出串列中最後一個元素，並且移除元素
+# A.remove(E)：移除A串列中第一個出現E元素
+# A.reverse()：反轉串列的順序
+# A.sort()：將串列做排序
+
+# Tuple(元組)：不能修改的List 用括號
+# list和tuple互相轉換
+ironman_tuple = ("中信兄弟", "統一獅", "lamigo", "富邦悍將")
+ironman_list = ["brother","lion","monkey","Guardians"]
+tuple_to_list = list(ironman_tuple)
+list_to_tuple = tuple(ironman_list)
+
+# Dict(字典)：key-map的形式
+ironman_dict = {"team":"中信兄弟","year":"2017","ranking":2}
+print(ironman_dict["team"])
+# del A[key]：刪除元素 A[key]
+# A.clear()：刪除A Dict所有元素
+# del A：刪除A Dict
 ```
 
 ## collection
@@ -626,10 +783,142 @@ i = 0
 while (i<3):
     print(man_list[i].split()[1].upper())
     i+=1
-
-
-
 ```
+
+## 文字檔結構
+* **CSV：純文字的方式儲存檔案資料，已逗號分隔資料，可用Microsoft Excel打開檔案。**  
+
+```python
+import csv
+with open('day06-csv.csv', 'w', newline='') as csvfile:
+    writer = csv.writer(csvfile) # 建立 CSV 檔寫入器
+    writer.writerow(['股票', '收盤價', '單量'])
+    writer.writerow(['台積電', 238, 23])
+    writer.writerow(['大同', 40, 121])
+    writer.writerow(['華新科', 174, 105])
+    
+# ---------------------------------------------------------- read
+
+with open('day06-csv.csv', newline='') as csvfile:
+
+  rows = csv.reader(csvfile)  # 讀取 CSV 檔案內容
+  for row in rows:  # 以迴圈輸出每一列
+    print(row)
+```
+
+* **XML：可延伸標記式語言，是一種標記式語言。**
+
+```python
+import xml.etree.ElementTree as ET
+data = ET.Element('stock') #建立節點stock
+tsmc = ET.SubElement(data, 'tsmc')  # 在stock節點底下建立子節點
+close = ET.SubElement(tsmc, 'close')  
+buy = ET.SubElement(tsmc, 'buy')  
+close.set('name','收盤價') # 設定節點的名稱
+buy.set('name','單量')  
+close.text = '238'  
+buy.text = '23'
+
+mydata = ET.tostring(data)  
+myfile = open("day06-xml.xml", "wb")  
+myfile.write(mydata)  
+myfile.close()
+    
+# ---------------------------------------------------------- read
+
+tree = ET.parse('day06-xml.xml')  
+root = tree.getroot()
+
+for elem in root:  
+    for subelem in elem:
+        print(subelem.get('name'),"----->",subelem.attrib)
+```
+
+* **JSON：輕量級的資料交換語言**
+
+```python
+# JSON example
+{
+  "stock": [
+    {
+      "name": "台積電",
+      "close": "238",
+      "buy": "23"
+    },
+    {
+      "name": "大同",
+      "close": "40",
+      "buy": "121"
+    },
+    {
+      "name": "華新科",
+      "close": "174",
+      "buy": "105"
+    }
+  ]
+}
+# --------------------
+import json
+
+data = {}  
+data['stock'] = []  
+data['stock'].append({  
+    'name': '台積電',
+    'close': '238',
+    'buy': '23'
+})
+data['stock'].append({  
+    'name': '大同',
+    'close': '40',
+    'buy': '121'
+})
+data['stock'].append({  
+    'name': '華新科',
+    'close': '174',
+    'buy': '105'
+})
+
+with open('day06-json.json', 'w') as outfile:  
+    json.dump(data, outfile,ensure_ascii=False,indent=2)
+    
+# ---------------------------------------------------------- read
+
+with open('day06-json.json') as json_file:  
+    data = json.load(json_file)
+    for p in data['stock']:
+        print('股票: ' + p['name'])
+        print('收盤價: ' + p['close'])
+        print('單量: ' + p['buy'])
+        print('')
+```
+
+* **YAML：是一個可讀性高，用來表達資料序列的格式**
+
+```python
+# YAML example 
+stock:
+  buy: '121'
+  close: '238'
+  name: '台積電'
+# ------
+import yaml
+cfg = {
+  "stock": dict(
+      name='台積電',
+      close='238',
+      buy='121'
+   )  
+}
+with open("day06_yml.yml", 'w') as outfile:
+    yaml.dump(cfg, outfile, default_flow_style=False,allow_unicode=True) 
+    
+# ---------------------------------------------------------- read
+
+with open("day06_yml.yml", 'r') as yml:
+    contents = yaml.safe_load(yml)
+    print("取得股票--->",contents['stock'])
+```
+
 
 # package
 
@@ -1371,6 +1660,8 @@ pd.date_range()|set date for pd, index=pd.date_range('12/31/2017', periods=100)
 np.ones(5)     |可以創建任意維度和元素個數的數組，其元素值均為1
 np.zeros(3,int)|創建的數組元素類型是浮點型的，如果要使用其他類型，可以設置dtype參數進行聲明
 np.empty([2,3])|只是它所常見的數組內所有元素均為空，沒有實際意義
+np.full((4,2), 2.2) |建立一個內容為2.2 4x2 的浮點數陣列
+np.linspace()       |建立一個內容介於兩數間的array, np.linspace(-np.pi, np.pi, 100) 
 random.randn()  |隨意數+,-,<0,>0...
 random.randint()|整數隨意數
 np.mean()  	|平均值
@@ -1557,6 +1848,9 @@ pip install folium
 ## scipy
 SciPy就是以Numpy為基礎做科學、工程的運算處理的package，包含統計、優化、整合、線性代數、傅立葉轉換圖像等較高階的科學運算  
 
+## StatsModels
+Statsmodels 是一個 Python 模塊，它為統計數據分析提供了許多機會，例如統計模型估計、執行統計測試等。在它的幫助下，你可以實現許多機器學習方法並探索不同的繪圖可能性。  
+
 ## sklearn(Scikit-learn)
 * **sklearn.tree**
 
@@ -1565,6 +1859,7 @@ function     | 說明
 DecisionTreeClassifier() |create DecisionTreeClassifier
 fit()                    |傳入資料
 predict()                |預測label
+score(X_test,y_test)     |算出準確度
 
 ```python
 # sklearn.tree 
@@ -1626,6 +1921,98 @@ plt.scatter(x, y)
 plt.show()
 ```
 
+* **sklearn.preprocessing-特徵標準化(normalization) for 提高準確度**
+* **sklearn.svm**
+
+```python
+# 特徵標準化(normalization) - 提高準確度
+# sklearn.svm.SVC
+%matplotlib inline
+from sklearn import preprocessing
+from sklearn.datasets.samples_generator import make_classification
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+import warnings
+# mask warn --> base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 
+# to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+#  "avoid this warning.", FutureWarning)
+warnings.filterwarnings("ignore", category=FutureWarning, module="sklearn", lineno=196)
+X,y = make_classification(n_samples=300, n_features=2, n_redundant=0, n_informative=2,
+                         random_state=3, scale=100, n_clusters_per_class=1)
+# 標準化
+X = preprocessing.scale(X)
+# split test data
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2)
+# SVC分類法
+clf = SVC()
+clf.fit(X_train,y_train)
+result = clf.score(X_test,y_test)
+print(result)
+# show plot
+plt.scatter(X[:,0], X[:,1] ,c=y)
+plt.show()
+```
+
+* **sklearn.model_selection.cross_val_score-交叉驗證**
+
+```python
+# 交叉驗證(Cross validation) - 計算多次準確度 - 此為 K-Fold Cross Validation(k交叉驗證)
+# 交叉驗證主要分為以下幾類
+# k-folder cross-vailation
+# kk folder cross-vaildation
+# least-one-out cross-validation
+# 10-fold corss validation
+from sklearn.model_selection import cross_val_score
+from sklearn import datasets
+from sklearn.neighbors import KNeighborsClassifier
+import matplotlib.pyplot as plt
+# load 鳶尾花的資料
+iris = datasets.load_iris()
+# set data abd label variable
+X = iris.data
+y = iris.target
+# change n_neighbors
+k_range = range(1,31)
+k_score = []
+for k_number in k_range:
+    knn = KNeighborsClassifier(n_neighbors=k_number)
+    # 算出精準度  - 計算多次
+    # cv:計算幾次 scoring='accuracy'精準度
+    scores = cross_val_score(knn, X,y, cv=10 , scoring='accuracy')
+    # print(scores)
+    # print(scores.mean())
+    k_score.append(scores.mean())
+# draw 
+plt.plot(k_range, k_score)
+plt.xlabel("Neighbors")
+plt.ylabel("Score")
+plt.show()
+```
+
+* **sklearn.externals.joblib - 將訓練的model儲存起來**
+
+```python
+# sklearn.externals.joblib - 將訓練的model儲存起來
+# load model and save
+from sklearn.externals import joblib
+from sklearn import datasets
+from sklearn.svm import SVC
+# load 鳶尾花的資料
+iris = datasets.load_iris()
+X = iris.data
+y = iris.target
+# SVC分類法
+clf = SVC()
+clf.fit(X,y)
+#save file
+joblib.dump(clf,'clf.pkl')
+#load file
+clf2 = joblib.load('clf.pkl')
+# predict
+print(clf2.predict(X[0:10]))
+```
+
 * **sklearn.datasets**  
 
 測試資料集  
@@ -1645,6 +2032,16 @@ x,y = datasets.make_regression(n_samples=200, n_features=1, n_targets=1, noise=1
 train_data , test_data , train_label , test_label = train_test_split(iris_data,iris_label,test_size=0.2)
 ```
 
+## warnings
+mask warning
+
+```python
+import warnings
+# mask warning --> base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 
+# to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
+#  "avoid this warning.", FutureWarning)
+warnings.filterwarnings("ignore", category=FutureWarning, module="sklearn", lineno=196)
+```
 
 # 基礎視覺化
 matplotlib 中的 pyplot 模組、seaborn 模組、pandas 模組**  
@@ -2017,6 +2414,7 @@ plt.xlim(0, 5)
 ```
 
 ## Seaborn
+Seaborn 本質上是一個基於 matplotlib 庫的高級 API。它包含更適合處理圖表的默認設置。此外，還有豐富的可視化庫，包括一些複雜類型，如時間串行、聯合分佈圖（jointplots）和小提琴圖（violin diagrams）
 ```python
 # 密度圖（Density plot）
 %matplotlib inline 
@@ -2140,6 +2538,16 @@ show(p)
 ## base plotting system
 
 ## ggplot2
+
+
+# Warning 
+
+## No module named 'sklearn.cross_validation'
+```python
+# cross_validatio不再使用了,劃分到 model_selection
+from sklearn.model_selection
+```
+
 
 # 分析
 
