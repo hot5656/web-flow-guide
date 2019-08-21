@@ -104,6 +104,22 @@ ex:f(x)=|x| x=0 是否可微
   $\lim\limits_{x \rightarrow a^-}\cfrac{|x|}{x}=-1$  
   左極限!=右極限 極限不存在 所以在 x=0 點不可微
 
+## 函數繪圖三部曲 
+1. 漸進線   $$y=f(x) \space x\rightarrow \infty \space or \space y\rightarrow \infty$$
+> $f(x)=\frac{1}{x^t}$ t>0 --> $\lim\limits_{x \rightarrow \infty} \frac{1}{x^t}=0$  
+  $\lim\limits_{x \rightarrow \infty} \frac{x^3+2x+6}{7x^3+4x^2-8x+19}$
+  = $\lim\limits_{x \rightarrow \infty} \frac{\frac{x^3}{x^3} + \frac{2x}{x^3} + \frac{6}{x^3}}{ \frac{7x^3}{x^3}+ \frac{4x^2}{x^3}- \frac{8x}{x^3}+ \frac{19}{x^3}}$
+  = $\lim\limits_{x \rightarrow \infty} \frac{1 + \frac{2}{x^2} + \frac{6}{x^3}}{ 7+ \frac{4}{x}- \frac{8}{x^2}+ \frac{19}{x^3}}$ = $\frac{1}{7}$  
+  or $\lim\limits_{x \rightarrow \infty}x^3$  遠大於 $\lim\limits_{x \rightarrow \infty}x^2$  所以
+  $\lim\limits_{x \rightarrow \infty} \frac{x^3+2x+6}{7x^3+4x^2-8x+19}$
+  = $\lim\limits_{x \rightarrow \infty} \frac{x^3}{7x^3}$ = $\lim\limits_{x \rightarrow \infty} \frac{1}{7}$ = $\frac{1}{7}$  
+
+
+2. 局部極值  $$f'(x)$$
+
+
+3. 反曲線(微調)  $$f''(x)$$
+
 
 ## GeoGebra
 高斯函數 : floor  

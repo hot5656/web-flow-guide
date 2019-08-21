@@ -367,7 +367,6 @@ socket.socket([family], [type] , [proto] )
 ```
 
 # python 語法
-
 ## common
 ```python
 // del - 將完成賦值的物件自環境中刪除
@@ -377,6 +376,10 @@ del hello_msg
 
 // help() 函數查詢函數的說明文件
 help(print)
+
+# 計算指令運算時間
+big_array = np.random.random(10000000) #在0到1間亂數值取10000000個
+%timeit min(big_array)
 ```
 
 ## function
@@ -500,7 +503,8 @@ str() 轉換為字串
 +, -, *, /, %, //(取得整除的商數), ** (次方, 7**2 = 49)
 
 # 邏輯運算子
-not, and, or
+not, and, or  
+&,|,^,~  
 
 # type
 print(type("xy"))
@@ -1654,35 +1658,75 @@ Numpy是一個提供矩陣運算非常非常非常好用的工具
 function     | 說明
 -------------|------
 np.array()       |set to ndarry
-np.sin(x\*4\*np.pi)|set to ndarry by sin function
 np.arange(10)  |generate by range
 pd.date_range()|set date for pd, index=pd.date_range('12/31/2017', periods=100)
 np.ones(5)     |可以創建任意維度和元素個數的數組，其元素值均為1
 np.zeros(3,int)|創建的數組元素類型是浮點型的，如果要使用其他類型，可以設置dtype參數進行聲明
+		       |np.zeros(4,dtype={'names':('name','number','team'),'formats':('U10','i2','U10')})
 np.empty([2,3])|只是它所常見的數組內所有元素均為空，沒有實際意義
-np.full((4,2), 2.2) |建立一個內容為2.2 4x2 的浮點數陣列
+np.full((4,2), 2.2) |建立一個arry, 建立一個內容為2.2 4x2 的浮點數陣列
 np.linspace()       |建立一個內容介於兩數間的array, np.linspace(-np.pi, np.pi, 100) 
 random.randn()  |隨意數+,-,<0,>0...
-random.randint()|整數隨意數
+.random.randint()|整數隨意數, .random.randint(low[, high, size, dtype]) - low (inclusive) to high (exclusive)
+.random.random()|隨意數[0,1):>=value<1-,.random.random(size=None),numpy.random.ranf(size=None) also same
+.random.normal()|隨意數 for normal (Gaussian) distribution
+np.sin(x\*4\*np.pi)|set to ndarry by sin function
+np.abs() |絕對值
+np.exp(),exp2(),power()|指數,e^x,2^x,10^x
+np.log(),log2(),log10()|對數
+.multiply.outer(y,y)|外積
 np.mean()  	|平均值
 np.sum()  	|總和
 np.min()  	|最小值
 np.max()  	|最大值
 np.cumsum() |回傳累積的數值(array)
 np.std()  	|標準差
+np.prod		|所有元素的乘積
+np.var		|變異量
+np.argmin	|找出最小值的索引
+np.argmax	|找出最大值的索引
+np.median	|元素的中位數
+np.any		|當陣列中有任一值是True或是非零值時傳回True
+np.all		|當陣列中有所有值是True或是非零值時傳回True
 np.save('my_array', x)  |save array
 np.load('my_array.npy') |load array
 myArr = np.loadtxt('my_txt.txt', delimiter=',') |load text file
 np.savetxt('txtfile.txt', myArr)                |save text file
-
+df.reshape(4,1)|array 改變維度
+np.concatenate([x,y])|concatenate-串接陣列
+np.vstack([x,y])     |vstack-垂直串接
+np.hstack([x,y])     |hstack-水平串接
+np.split(z,[3,5,8])	|split-分割
+np.hsplit(z,[2])	|hsplit-垂直分割
+np.vsplit(n,[2])	|vsplit-水平分割
+np.count_nonzero(x) |no zero number
+df.sort()|排序
+np.argsort(x)|傳回被排序過的索引值
+np.sort(y,axis=0)) |排序依維度 sort by 1st dim
+np.random.randint(0,50,size=10)|部分排序:Partitioning
 
 variable       | 說明
 ---------------|------
 ndim			|維度
 shape			|矩陣大小
 dtype			|dtype
+itemsize		|item bytes
+nbytes 			|total bytes
 T 				|翻轉維度
 base            |相關
+
+**numpy的資料型態有以下幾種***  
+
+字元|說明
+----|------
+b	|位元組
+i	|有號整數
+u	|無號整數
+f	|浮點數
+c	|複數浮點數
+S,a	|字串
+U	|unicode字串
+v	|void
 
 ```python
 # numpy ndarray
@@ -1790,6 +1834,106 @@ print(b)
 from numpy.random import rand
 c = rand(3, 3) 
 print(c)
+
+# numpy - random,串接(concatenate),分割(split)
+import numpy as np
+# .random.random(size=None) [0,1):>=value<1
+# .random.random(size=None),numpy.random.ranf(size=None) also same
+#- print(np.random.random(3))
+#random int : .random.randint(low[, high, size, dtype]) - low (inclusive) to high (exclusive)
+ran_int = np.random.randint(0,10,(3,3))
+#- print(ran_int)
+#- print(ran_int.shape, ran_int.ndim, ran_int.size, ran_int.dtype, ran_int.itemsize, ran_int.nbytes)
+# .random.normal(loc=0.0, scale=1.0, size=None)
+# random samples from a normal (Gaussian) distribution
+# loc Mean (“centre”) of the distribution. - 此概率分佈的均值（對應著整個分佈的中心centre）
+# scale Standard deviation (spread or “width”) of the distribution. - 此概率分佈的標準差（對應於分佈的寬度，scale越大越矮胖，scale越小，越瘦高）
+# size Output shape
+#- print(numpy.random.normal(0,1,(3,3)))
+# 串接(concatenate-串接陣列,vstack-垂直串接,hstack-水平串接)
+x = np.arange(1,4)
+y = np.array([4,5,6])
+#- print(np.concatenate([x,y]))
+#- print(np.vstack([x,y]))
+#- print(np.hstack([x,y]))
+# 分割(split-分割,hsplit-垂直分割,vsplit-水平分割)
+z = np.arange(1,10)
+print(np.split(z,[3,5,8])) # 分割點
+print(np.hsplit(z,[2]))
+n = z.reshape(3,3)
+print(np.vsplit(n,[2]))
+
+# numpy - random,串接(concatenate),分割(split),broadcasting,比較運算子,get some value 
+import numpy as np
+# .random.random(size=None) [0,1):>=value<1
+# .random.random(size=None),numpy.random.ranf(size=None) also same
+#- print(np.random.random(3))
+#random int : .random.randint(low[, high, size, dtype]) - low (inclusive) to high (exclusive)
+ran_int = np.random.randint(0,10,(3,3))
+#- print(ran_int)
+#- print(ran_int.shape, ran_int.ndim, ran_int.size, ran_int.dtype, ran_int.itemsize, ran_int.nbytes)
+# .random.normal(loc=0.0, scale=1.0, size=None)
+# random samples from a normal (Gaussian) distribution
+# loc Mean (“centre”) of the distribution. - 此概率分佈的均值（對應著整個分佈的中心centre）
+# scale Standard deviation (spread or “width”) of the distribution. - 此概率分佈的標準差（對應於分佈的寬度，scale越大越矮胖，scale越小，越瘦高）
+# size Output shape
+#- print(numpy.random.normal(0,1,(3,3)))
+# 串接(concatenate-串接陣列,vstack-垂直串接,hstack-水平串接)
+x = np.arange(1,4)
+y = np.array([4,5,6])
+#- print(np.concatenate([x,y]))
+#- print(np.vstack([x,y]))
+#- print(np.hstack([x,y]))
+# 分割(split-分割,hsplit-垂直分割,vsplit-水平分割)
+z = np.arange(1,10)
+print(np.split(z,[3,5,8])) # 分割點
+print(np.hsplit(z,[2]))
+n = z.reshape(3,3)
+print(np.vsplit(n,[2]))
+# broadcasting
+a = np.array([0,1,2])
+print(a + 5)
+b = np.arange(3)[:, np.newaxis]
+print(b)
+# 比較運算子(==,!=,<,<=,>,>=)
+x = np.array([1,2,3,4,5])
+print(x>2)
+np.count_nonzero(x>2) # false number
+# get some value 
+x = np.random.randint(10, size=(4,5))
+print(x)
+print(x[(x>5) & (x <8)])
+
+# numpy - 排序的索引值,排序,排序依維度,部分排序,建立結構化的資料
+import numpy as np
+x = np.random.randint(0,100, size=5)
+print(x)
+# 傳回被排序過的索引值
+print(np.argsort(x))
+# 排序
+x.sort()
+print(x)
+# 排序依維度
+y = np.random.randint(0,100, (4,4))
+print(y)
+print(np.sort(y,axis=0)) # sort by 1st dim
+print(np.sort(y,axis=1)) # sort by 2nd dim
+# 部分排序:Partitioning - 最小四個元素放在左邊(順序隨意)
+x = np.random.randint(0,50,size=10)
+print('x--------------->',x)
+print(np.partition(x,4))
+# 建立結構化的資料
+team =np.zeros(4, dtype={'names':('name','number','team'),'formats':('U10','i2','U10')})
+# 建立標題name 資料型別是unicode字串 長度10
+# 建立標題number 資料型別是有號整數 長度2
+# 建立標題team 資料型別是unicode字串 長度10
+print(team)
+print(team.dtype)
+team['name'] =['彭政閔','林智勝','蘇偉達','陽耀勳']
+team['number'] = [23,32,96,23]
+team['team'] = ['兄弟象','兄弟象','兄弟象','lamigo']
+print(team)
+print(team['number'])
 ```
 
 ## squarify

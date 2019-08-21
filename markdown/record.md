@@ -238,15 +238,49 @@ $$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$$
 $$\sqrt[3]{X} \sqrt{5 - x}$$ 
 # 極限
 $g. \lim\limits_{n \rightarrow a} [f(x)/g(x)]=L/M$
+# 條件表達式
+\[
+y=
+\begin{cases}
+-x,\quad x\leq 0 \\
+x,\quad x>0
+\end{cases}
+\]
+\begin{equation}
+    f(n) =
+    \begin{cases}
+    n/2, & \text{if $n$ is even} \\
+    3n+1, & \text{if $n$ is odd}
+    \end{cases}
+\end{equation}
 ```
 質能方程式$E = mc^2$  
 質能方程式$$E = mc^2$$  
+上標,下標  
 $$x = a _{1}^n + a_ {2}^n + a_{3}^n$$  
+分數使用  
 $$\frac{1}{3} 與\cfrac{1}{3}$$  
+開根號  
 $$f(x, y) = 100 * \lbrace[(x + y) * 3] - 5\rbrace$$  
 $$\frac{1}{3} 與\cfrac{1}{3}$$  
 $$\sqrt[3]{X} \sqrt{5 - x}$$  
+極限  
 $\lim\limits_{n \rightarrow a} [f(x)/g(x)]=L/M$
+條件表達式  
+\[
+y=
+\begin{cases}
+-x,\quad x\leq 0 \\
+x,\quad x>0
+\end{cases}
+\]
+\begin{equation}
+    f(n) =
+    \begin{cases}
+    n/2, & \text{if $n$ is even} \\
+    3n+1, & \text{if $n$ is odd}
+    \end{cases}
+\end{equation}
 
 **希臘字母**
 
@@ -361,6 +395,8 @@ $\mathrm{d}$|\mathrm{d}
 符號		|代碼
 --------	|---
 $\rightarrow$  |\rightarrow
+空格$\space$   |\space 
+顯示公式較好看$\displaystyle \sum_{n=1}^{10} n^2$ |\displaystyle "\displaystyle \sum_{n=1}^{10} n^2"
 
 ## 自動連結
 ```
