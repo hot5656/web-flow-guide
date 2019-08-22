@@ -384,6 +384,16 @@ big_array = np.random.random(10000000) #在0到1間亂數值取10000000個
 
 ## function
 
+* **lambda**  
+lambda 是種將運算式 (expression) 重複運用的方式，類似函數 (function) ，卻又不像函數需要額外命名函數的識別字 (identifier) ，因此又被稱為無名函數，基本上 lambda 運算式就是函數的簡化，因此某些需要函數的場合可以用 lambda 運算式代替
+
+```python
+a = lambda x: x ** 5 + 2
+print(a)
+print(a(2))
+print(a(12))
+```
+
 * **os套件**
 
 名稱			|說明
@@ -573,10 +583,16 @@ print(type(none_type))
 
 //
 整數（int）
-浮點數（float）
+浮點數（float）-NaN(Not a Number, type=float)
 文字（str）
 布林（bool）
 None（NoneType）
+// test NaN
+// inf : 是無限大,inf-inf或者-inf+inf是nan
+import math
+ a = float('nan')
+print(math.isnan(x))
+
 // 
 + 、 - 、 * 、 / ：加減乘除
 ** ：次方
@@ -1125,6 +1141,7 @@ Pandas 是 python 的一個數據分析 lib
 Pandas就是建立在Numpy的基礎延伸的套件呢  
 資料類型DataFrame:就像是我們在使用的excel表格一樣，是一個二維的數據有index和column  
 資料類型Series:是一個類似陣列的物件，裡面可包含陣列的資料  
+**資料類型MultiIndex:待研究................**  
 
 function     | 說明
 -------------|------
@@ -1150,6 +1167,35 @@ index.set_names()       |change index name, df.index.set_names(["Pos","Name"], i
 df["Player"].str        |str process, (df["Player"].str.lower(), df["Player"] = df["Player"].str.replace("Ja","Js")
 pd.Series()   |create Series
 pd.DataFrame()|create data frame,pd.DataFrame(np.random.randn(100, 4), index=pd.date_range('12/31/2017', periods=100), columns=list('ABCD'))
+np.abs(df)    |abs 計算整個 DataFrame
+se.add(se2)   |+, Searies 相加,對齊不到index都會使用NaN表示, 也可指定特定值　se.add(se2, fill_value = 0)
+Pandas-sub(),subtract()|-
+Pandas-mul(),multiply()|*
+Pandas-truediv(),div(),divide()|/
+Pandas-floordiv()|//取整除 - 返回商的整数部分（向下取整）
+Pandas-mod()|%
+Pandas-pow()|"**",	$a**b 為10的20次方$
+pd.concat() |資料合併, pd.concat([ironman1,ironman2], join='inner'))
+            |join，outer->聯集、inner->交集(如果資料不存在時有NaN時)
+se.append() |append 等同concat只是呼叫更簡單
+pd.merge()  |merge 也是合併資料的一種,但可以有更多的應用.....
+se.mean()  	|平均值
+se.sum()  	|總和
+se.min()  	|最小值
+se.max()  	|最大值
+se.median()	|計算中位數
+df.sum()  			|總和,DataFrame進行運算,預設會用欄做計算,如果要改成用列作計算可使用axis ironman_df.sum(axis='columns')
+df.count()  		|元素總數
+df.first(),last()	|第一個,最後一個元素
+df.mean(),median()	|全部平均,中位數平均
+df.min(),max()		|最小值,最大值
+df.std(),var()		|標準差,變異數
+df.mad()  	    	|平均絕對差
+df.prod()  			|元素的積
+df.groupby("continent").aggregate(['sum', 'max', 'min'])|show 多計算結果
+df.groupby("continent").transform(lambda x: x- x.sum()) |將原始資料和計算後的資料作運算(所有可計算欄位)
+df.groupby("continent").apply(apply_func)  |使用呼叫函式的方式，可以回傳Pandas物件或是純量(指定欄位)
+df.groupby("continent").filter(filter_func)|filter
 
 variable       | 說明
 ---------------|------
@@ -1159,6 +1205,7 @@ df.shape       |查看資料框的外觀，以 tuple 的型別回傳，(m, n) �
 df.columns     |查看資料框的變數名稱
 df.loc['b']    |index 取出資料,也可取出多個 row : print(df.loc["Michael Jordan"])/print(df.loc[["Michael Jordan", "Dennis Rodman"]])
 df.iloc[[0:4]  |get by index position : print(df.iloc[[0,4]]) # index 0 and 4 / print(df.iloc[0:4])  # index 0 to 3
+df.T           |將陣列作轉置
 
 * **groupby() - DataFrameGroupBy**
 
@@ -1225,6 +1272,68 @@ print(myframe3)
 # sort by one field value - 不能改變原變數,要設成另一個變數
 print(myframe3.sort_values('name'))
 print(myframe3)
+
+# pandas Series,DataFrame(多個Series),Index(不可修改的陣列)
+import pandas as pd
+import numpy as np
+# set Series(auto index)
+ironman = pd.Series([0.11, 0.12, 0.13, 0.14])
+print(type(ironman), ironman)
+print(ironman.index, ironman.values)
+# set Series(index by string)
+ironman = pd.Series([0.11, 0.12, 0.13, 0.14], index=['a', 'b', 'c', 'd'])
+print(ironman)
+# dict create Series
+dict_ironman = {
+    'a' : 11,
+    'b' : 22,
+    'c' : 33
+}
+ironman = pd.Series(dict_ironman)
+print(ironman)
+# set DataFrame
+number = pd.Series({'taipei':200, 'taichung':300, 'changhua':400})
+mayor = pd.Series({'taipei': 'Kui', 'taichung': 'Ha', 'changhua': 'Chin'})
+ironman_df = pd.DataFrame({'number':number, 'mayor':mayor})
+print(ironman_df)
+print(ironman_df.index, ironman_df.values, ironman_df.columns)
+# dict create DataFrame
+dict_ironman_df = {
+    'number':{'taipei':201, 'taichung': 301, 'changhua': 401},
+    'mayor': {'taipei':'Kui2', 'taichung': 'Ha2', 'changhua': 'Chin2'}
+}
+ironman_df = pd.DataFrame(dict_ironman_df)
+print(ironman_df)
+# Index(不可修改的陣列)
+ironman_index = pd.Index([0.11, 0.12, 0.13,0.14])
+print(type(ironman_index), ironman_index)
+
+# pandas - groupby, sum(), aggregate(), transform(), apply(), filter() 
+import pandas as pd
+csv_url = "https://storage.googleapis.com/learn_pd_like_tidyverse/gapminder.csv"
+df = pd.read_csv(csv_url)
+# groupby
+# grouped = df[df.year == 2007].groupby("continent")
+grouped = df.groupby("continent")
+# sum() and aggregate
+print(grouped["pop"].sum())
+print(grouped["pop"].aggregate(['sum', 'max', 'min']))
+# transform - 當需要將原始資料和計算後的資料作運算(所有可計算欄位)
+print("----------")
+print(df.groupby("continent").transform(lambda x: x- x.sum()))
+# apply - 使用呼叫函式的方式，可以回傳Pandas物件或是純量(指定欄位)
+print("----------")
+def apply_func(x):
+    x['pop'] = x['pop'] - x['pop'].sum()
+    return x
+print(df.groupby("continent").apply(apply_func))
+# filter 
+print("----------")
+def filter_func(x):
+    return x['pop'].sum()>6181115304
+print(df.groupby("continent").filter(filter_func))
+print("----------")
+print(df)
 
 # pandas data draw
 %matplotlib inline
@@ -1657,7 +1766,7 @@ Numpy是一個提供矩陣運算非常非常非常好用的工具
 
 function     | 說明
 -------------|------
-np.array()       |set to ndarry
+np.array()       |set to ndarray
 np.arange(10)  |generate by range
 pd.date_range()|set date for pd, index=pd.date_range('12/31/2017', periods=100)
 np.ones(5)     |可以創建任意維度和元素個數的數組，其元素值均為1
@@ -1670,7 +1779,7 @@ random.randn()  |隨意數+,-,<0,>0...
 .random.randint()|整數隨意數, .random.randint(low[, high, size, dtype]) - low (inclusive) to high (exclusive)
 .random.random()|隨意數[0,1):>=value<1-,.random.random(size=None),numpy.random.ranf(size=None) also same
 .random.normal()|隨意數 for normal (Gaussian) distribution
-np.sin(x\*4\*np.pi)|set to ndarry by sin function
+np.sin(x\*4\*np.pi)|set to ndarray by sin function
 np.abs() |絕對值
 np.exp(),exp2(),power()|指數,e^x,2^x,10^x
 np.log(),log2(),log10()|對數
@@ -1704,6 +1813,10 @@ df.sort()|排序
 np.argsort(x)|傳回被排序過的索引值
 np.sort(y,axis=0)) |排序依維度 sort by 1st dim
 np.random.randint(0,50,size=10)|部分排序:Partitioning
+isnull() |檢查空值，回傳布林值 (None,nan)
+notnull()|檢查不是空值，回傳布林值
+dropna() |刪除空值
+fillna() |空值填入特定直,ironman.fillna(0)
 
 variable       | 說明
 ---------------|------
@@ -1791,6 +1904,21 @@ print(x.cumsum()) # 回傳累積的數值(array)
 # 標準差應用於投資上，可作為量度回報穩定性的指標。標準差數值越大，代表回報遠離過去平均數值，
 # 回報較不穩定故風險越高。相反，標準差數值越小，代表回報較為穩定，風險亦較小。
 print(x.std()) # 標準差
+
+# numpy- NaN 運算
+import pandas as pd
+import numpy as np
+# ------------------------
+ironman1 = np.array([1,2,3,4])
+ironman2 = np.array([1,None,3,4])
+ironman3 = np.array([1,np.nan,3,4])
+print(type(ironman1), ironman1)
+print(type(ironman2), ironman2)
+print(type(ironman3), ironman3)
+#含 NaN 運算 sum()-->nansum(), min()-->nanmin(), max()-->用nanmax()
+print(ironman1.sum(), np.sum(ironman1))
+print(np.nansum(ironman1))
+print(np.nansum(ironman3)) # not support ironman3.nansum(), not accept None
 
 # numpy file control
 import numpy as np
