@@ -1196,6 +1196,15 @@ df.groupby("continent").aggregate(['sum', 'max', 'min'])|show 多計算結果
 df.groupby("continent").transform(lambda x: x- x.sum()) |將原始資料和計算後的資料作運算(所有可計算欄位)
 df.groupby("continent").apply(apply_func)  |使用呼叫函式的方式，可以回傳Pandas物件或是純量(指定欄位)
 df.groupby("continent").filter(filter_func)|filter
+pd.to_datetime('2019-08-22 17:32:30')|date 變數
+pd.to_timedelta(np.arange(5), 'D')   |date offset
+pd.to_datetime('2019-08-22 17:32:30')|date 變數
+pd.DatetimeIndex(['2018-08-11', ..)  |date for index
+pd.date_range('2018-10-11','2018-10-15') |date range generate
+pd.eval('df1+df2+df3+df4')         |array 加法(較有效率)
+rng=np.random.RandomState(42)      |產生可重現假亂數 依據
+pd.DataFrame(rng.rand(100000, 100) |產生 array by RandomState
+TSMC.index = pd.to_datetime(TSMC.index) |change index format to datetime*(so support simple date format for index)
 
 variable       | 說明
 ---------------|------
@@ -1544,6 +1553,31 @@ data = {'names':['a','b','c','d','e'],
         'feb':[122,132,144,98,62],
         'march':[64,99,32,12,65] }
 df2 = pd.DataFrame(data,columns=['names','jan','feb'])
+
+# pandas - to_datetime, to_timedelta, date_range, eval
+import pandas as pd
+import numpy as np
+# to_datetime
+date = pd.to_datetime('2019-08-22 17:32:30')
+print(type(date), date)
+# to_timedelta
+print(date+pd.to_timedelta(np.arange(5), 'D'))
+print(date+pd.to_timedelta(np.arange(5), 'Y'))
+# date using for index
+date_index = pd.DatetimeIndex(['2018-08-11','2018-08-12','2017-08-11','2017-08-12'])
+print(type(date_index), date_index)
+my_data = pd.Series(np.arange(4),index=date_index)
+print(my_data)
+print(my_data['2017'])
+# create data range
+print(pd.date_range('2018-10-11','2018-10-15'))
+print(pd.date_range('2018-10-11', periods=5, freq='D'))
+# 產生可重現假亂數 依據
+rng = np.random.RandomState(42)
+# gererate 4 100000*100 array - array add(eval 較有效率)
+df1, df2, df3, df4 = (pd.DataFrame(rng.rand(100000, 100)) for i in range(4))
+%timeit df1+df2+df3+df4
+%timeit pd.eval('df1+df2+df3+df4')
 ```
 
 * **pandas-read csv說明**
@@ -2123,6 +2157,19 @@ SciPy就是以Numpy為基礎做科學、工程的運算處理的package，包含
 ## StatsModels
 Statsmodels 是一個 Python 模塊，它為統計數據分析提供了許多機會，例如統計模型估計、執行統計測試等。在它的幫助下，你可以實現許多機器學習方法並探索不同的繪圖可能性。  
 
+## IPython
+Ipython是一個python的交互式shell  
+from IPython.display import Image  
+
+function     | 說明
+-------------|------
+IPython.display() |display something
+```python
+from IPython.display import Image
+# show image
+Image('figure_sample.png')
+```
+
 ## sklearn(Scikit-learn)
 * **sklearn.tree**
 
@@ -2308,11 +2355,19 @@ train_data , test_data , train_label , test_label = train_test_split(iris_data,i
 mask warning
 
 ```python
-import warnings
 # mask warning --> base.py:196: FutureWarning: The default value of gamma will change from 'auto' to 'scale' in version 0.22 
 # to account better for unscaled features. Set gamma explicitly to 'auto' or 'scale' to avoid this warning.
 #  "avoid this warning.", FutureWarning)
+import warnings
 warnings.filterwarnings("ignore", category=FutureWarning, module="sklearn", lineno=196)
+
+# mask warning -->FutureWarning: Using an implicitly registered datetime converter for a matplotlib plotting method. The converter was registered by pandas on import. Future versions of pandas will require you to explicitly register matplotlib converters.
+#To register the converters:
+#	>>> from pandas.plotting import register_matplotlib_converters
+#	>>> register_matplotlib_converters()
+# warnings.warn(msg, FutureWarning)
+import warnings
+warnings.filterwarnings("ignore", category=FutureWarning, module="pandas")
 ```
 
 # 基礎視覺化
@@ -2328,24 +2383,90 @@ plt.show()    |最後畫圖
 plt.plot()    |線圖,可同時設多條線, (x,y,color=,marker="o"設定點,linestyle="--" 顯示虛線)
 plt.pie()     |圓餅圖
 plt.bar()     |長條圖  bar(x, height, width=0.8透明度, bottom=None, *, align='center', data=None, **kwargs)
+plt.bar()     |水平長條圖 bar(y, width, height, *args)
+plt.errorbar()|誤差圖
+plt.hist()    |直方圖
+plt.boxplot() |盒鬚圖 pyplot.boxplot(x, *args)
+plt.subplot(131)|多圖表,(131):1*3 1st,(132):2nd
+plt.subplots()  |準備好多個網格 plt.subplots(2, 3, sharex=True, sharey=True)-sharex->是否共享x軸  sharey->是否共享y軸
 setp(line1, marker="o", linestyle="--")|set some line configure
 plt.title()   |title
 plt.xlabel()  |xlabel
 plt.ylabel()  |ylabel
 plt.xticks()  |x 標示 plt.xticks(np.arange(0, 3)+0.3, ["Math", "Reading", "Scilent"])
 plt.yticks()  |y 標示
-plt.grid(True)|顯示格線
+plt.grid(True)|顯示格線,grid(True, axis='y') only y
 plt.text()    |標示文字 text(x, y, s, fontdict=None, withdash=<deprecated parameter>, **kwargs) s=show text
-plt.legend()  |圖例 plt.legend(title = "Court") 
+plt.legend()  |顯示數據的名稱 plt.legend(title = "Court") ,plt.legend(loc="upper center", shadow=True)
 plt.xlim()    |x 顯示範圍 xlim((left, right), left, right = xlim() - return the current xlim
 plt.ylim()    |y 顯示範圍 ylim(bottom, top), bottom, top = ylim()  - return the current ylim
 plt.title(".")|抬頭
+plt.ases()    |顯示格線
 plt.axis('off')  |不show座標刻度
+plt.axes([0.65, 0.65, 0.2, 0.2])|標準的axes中顯示另外一個自己定義的axes, plt.axes([bottom, left, width, height])
 for item in data |item data : item.get_height(),item.get_x()
+plt.figure(figsize=(9, 3))|畫一個圖框 - 9inchs * 3inches
+
+* **linestyle**
+
+值		|描述	|符號
+--------|-------|------
+solid	|實線	|-
+dashed	|虛線	|--
+dashdot	|線點	|-.
+dotted	|點線	|:
+None	|不畫線	|
+
+* **marker：點的形狀，型態**
+
+值		|描述	|符號
+--------|-------|------
+point			|點			|.
+circle			|圓圈		|o
+triangle_down	|向下三角形	|v
+triangle_up		|向上三角形	|^
+triangle_left	|向左三角形	|<
+triangle_right	|向右三角形	|>
+square		|正方形	|s
+pentagon	|五邊形	|p
+hexagonl	|六邊形	|h
+plus		|加號	|+
+x			|打叉	|x
+diamond		|鑽石	|D
+star		|星號	|*
+vline		|豎線
+
+* **linewidth：線的寬度，可以簡寫成lw**
+
+* **legend(\*args)**
+
+值			|描述	|數字
+--------	|-------|------
+best		|最適宜	|0
+upper right	|右上角	|1
+upper left	|左上角	|2
+lower right	|右下角	|3
+lower left	|左下角	|4
+right		|右側	|5
+center left	|左側中間	|6
+center right|右側中間	|7
+lower center|下方中間	|8
+upper center|上方中間	|9
+center		|最適宜		|10
+
 
 * **matplotlib-->pyplot**
 
 ```python
+# 誤差圖 - plt.errorbar(x,y..)
+%matplotlib inline  
+import matplotlib.pyplot as plt
+ironman_error_x = np.linspace(-10,10,50)
+ironman_error_y = np.random.randint(-10,10,50)
+fig = plt.figure()
+# ecolor->誤差的顏色  elinewidth->誤差的寬度
+plt.errorbar(ironman_error_x, ironman_error_y, yerr=2, fmt='o', color='SteelBlue', ecolor='LightSteelBlue', elinewidth=2)
+
 # matplotlib pyplot plot(線圖 line plot)
 %matplotlib inline
 import matplotlib.pyplot as plt
@@ -2860,6 +2981,21 @@ https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=json&date=20130501&sto
 https://www.twse.com.tw/exchangeReport/STOCK_DAY?response=csv&date=20130501&stockNo=1423
 // 上市
 http://www.tpex.org.tw/web/stock/aftertrading/daily_trading_info/st43_result.php?d=107/08&stkno=3105
+
+# read stock from yahoo
+import requests
+# period1是指起始時間，而period2是指結束時間，其單位為1970的過了n秒
+site = "https://query1.finance.yahoo.com/v7/finance/download/2330.TW?period1=0&period2=1566573921000&interval=1d&events=history"
+response = requests.post(site)
+print(response.text)
+
+# read csv file
+import pandas as pd
+# set index by Date
+TSMC = pd.read_csv('stock_2330_20190823.csv', index_col='Date')
+# change index format to datetime*(so support simple date format for index)
+TSMC.index = pd.to_datetime(TSMC.index)
+# print(TSMC.Open["2016"])
 ```
 
 # tool
@@ -3701,4 +3837,29 @@ plt.scatter(labeled_df["GrLivArea"],labeled_df["SalePrice"])
 plt.xlabel('GrLivArea')
 plt.ylabel('SalePrice')
 plt.show()
+```
+
+## 17. read csv then plot  
+```python
+%matplotlib inline 
+import matplotlib.pyplot as plt
+import pandas as pd
+import warnings
+# mask warning -->FutureWarning: Using an implicitly registered datetime converter for a matplotlib plotting method. The converter was registered by pandas on import. Future versions of pandas will require you to explicitly register matplotlib converters.
+#To register the converters:
+#    >>> from pandas.plotting import register_matplotlib_converters
+#    >>> register_matplotlib_converters()
+# warnings.warn(msg, FutureWarning)
+warnings.filterwarnings("ignore", category=FutureWarning, module="pandas")
+# set index by Date
+TSMC = pd.read_csv('stock_2330_20190823.csv', index_col='Date')
+# change index format to datetime*(so support simple date format for index)
+TSMC.index = pd.to_datetime(TSMC.index)
+# print(TSMC.Open["2016"])
+# print(TSMC)
+fig = plt.figure()
+plt.plot(TSMC.Open["2016"], '-', label='Open' ,marker=">")
+plt.plot(TSMC.Close["2016"], '-', label='Close' ,marker="*")
+plt.grid(True, axis='y')
+plt.legend()
 ```
