@@ -395,6 +395,9 @@ $\mathrm{d}$|\mathrm{d}
 符號		|代碼
 --------	|---
 $\rightarrow$  |\rightarrow
+$\uparrow$  |\uparrow
+$\nearrow$  |\nearrow
+$\searrow$  |\searrow
 空格$\space$   |\space 
 顯示公式較好看$\displaystyle \sum_{n=1}^{10} n^2$ |\displaystyle "\displaystyle \sum_{n=1}^{10} n^2"
 

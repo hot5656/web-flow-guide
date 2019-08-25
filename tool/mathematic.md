@@ -117,22 +117,136 @@ ex:f(x)=|x| x=0 是否可微
 $\lim\limits_{x \rightarrow \infty} f(x)=b$ y=b 為 y=f(x) 之 水平漸近線 ex:f(x)=1/x, f(x)=(2x-3)/(3x+6)  
 $\lim\limits_{x \rightarrow a} f(x)=\infty$ x=a 為 $f(a)=\infty$ 之 x=a 為垂直漸近線 ex:$f(x)=1/x^2, f(x)=1/(fx-3)^3$  
 > $f(x)=\cfrac{x^2-4x}{x^2-4x+3}$  
-  $x \rightarrow +\infty,-\infty \space y=1$  
-  $y \rightarrow 1^-, y \rightarrow -\infty; ,y \rightarrow 1^+, y \rightarrow \infty$  
-  $y \rightarrow 3^-, y \rightarrow \infty; ,y \rightarrow 3^+, y \rightarrow -\infty$  
+  $x \rightarrow +\infty,-\infty \space y=1$ 水平漸近線  
+  $y \rightarrow 1^-, y \rightarrow -\infty; ,y \rightarrow 1^+, y \rightarrow \infty$ 垂直漸近線  
+  $y \rightarrow 3^-, y \rightarrow \infty; ,y \rightarrow 3^+, y \rightarrow -\infty$ 垂直漸近線  
 
 
-2. 局部極值  $$f'(x)$$
+2. 局部極值-相對極值  $$f'(x)$$
+相對極小/大值
 
+3. 反曲線(微調)-臨界點  $$f''(x)$$
+f(x) f(c)=0 or f'(c)不存在 --> (c,f(c)) 為 f(x) 之臨界點(critical point)  
+ex:$f(x)=x^{\cfrac{2}{3}}+1$
+> f'(x)=$\cfrac{2}{3}x^{\cfrac{-1}{3}}$ =$\cfrac{2}{3x^{\cfrac{1}{3}}}$  
+  $x(-\infty,0)$, f'(x)<0 --->  $f(x)\searrow$  
+  $x(0,\infty)$, f'(x)>0 --->  $f(x)\nearrow$  
+  (0,f(0)) 為相對極小值   
 
-3. 反曲線(微調)  $$f''(x)$$
+## 遞增/遞減函數 
+$遞增函數(f(x)\nearrow)$ x1 > x2  --> f(x1) > f(x2)  
+> f'(a)>0 f(x) 在 a 點為 遞增  
+  故 x屬於I區間 f'(x)>0 --> $f(x)\nearrow$  
+     x屬於I區間 f'(x)<0 --> $f(x)\searrow$  
+     x屬於I區間 f'(x)=0 --> f(x)=c  
 
+$遞減函數(f(x)\searrow)$ x1 < x2  --> f(x1) < f(x2)  
+
+ex: $f(x)=x^2$  
+> f'(x)=2x  
+  $x(-\infty,0)$, f'(x)<0 --->  $f(x)\searrow$  
+  $x(0,\infty)$, f'(x)>0 --->  $f(x)\nearrow$  
+
+ex: $f(x)=x^2+2x+5$  
+> f'(x)=2x+2=2(x+1)  
+  f'(-1)=0  
+  $x(-\infty,-1)$, f'(x)<0 --->  $f(x)\searrow$  
+  $x(-1,\infty)$, f'(x)>0 --->  $f(x)\nearrow$  
+
+ex: $f(x)=x^3$  
+> $f'(x)=3x^2$  
+  f'(-1)=0  
+  $x(-\infty,0)$, f'(x)>0 --->  $f(x)\nearrow$  
+  $x(0,\infty)$, f'(x)>0 --->  $f(x)\nearrow$  
+
+## 函數繪圖
+ex: $(fx)=\cfrac{x}{x^2-1}$  
+> 漸進線 $x \rightarrow \infty$  
+  $\lim\limits_{x \rightarrow \infty}(fx)=\cfrac{x}{x^2-1}=0$  
+  $\lim\limits_{x \rightarrow -\infty}(fx)=\cfrac{x}{x^2-1}=0$  
+  --> y=0 有水平漸進線  
+  漸進線 y $\rightarrow \infty$  
+  $(fx)=\cfrac{x}{x^2-1}$
+  =$\cfrac{x}{(x+1)(x-1)}$  
+  x=-1  
+  $\lim\limits_{x \rightarrow -1^-}\cfrac{x}{(x+1)(x-1)}=-\infty$  
+  $\lim\limits_{x \rightarrow -1^+}\cfrac{x}{(x+1)(x-1)}=\infty$  
+  x=1  
+  $\lim\limits_{x \rightarrow 1^-}\cfrac{x}{(x+1)(x-1)}=-\infty$  
+  $\lim\limits_{x \rightarrow 1^+}\cfrac{x}{(x+1)(x-1)}=+\infty$  
+  相對極植  
+  $(fx)=\cfrac{x}{x^2-1}$  
+  $f'(x) = \cfrac{(x^-1)-x 2x)}{(x^2-1)^2}$  
+  $=\cfrac{-x^2-1}{(x^2-1)^2}$  
+  $=\cfrac{-(x^2+1)}{((x+1)(x-1))^2}$  
+  不可能 f'(x)=0  
+  x=1,-1 微分不存在 --> 不是臨界點因不在原函數定義域內  
+
+ex: $(fx)=\cfrac{1}{x^2+1}$  
+> 漸進線 $x \rightarrow \infty$    
+  $\lim\limits_{x \rightarrow \infty}(fx)=\cfrac{1}{x^2+1}=0$  
+  $\lim\limits_{x \rightarrow -\infty}(fx)=\cfrac{1}{x^2+1}=0$  
+  --> y=0 有水平漸進線  
+  $x^2+1$ 永遠不等於0,故無垂直漸進線  
+  相對極植  
+  $(fx)=\cfrac{1}{x^2+1}$  
+  $f'(x) = \cfrac{-2x}{(x^2+1)^2}$  
+  x=0 為臨界點  
+  $x(-\infty,0)$, f'(x)>0 --->  $f(x)\nearrow$  
+  $x(0,\infty)$, f'(x)<0 --->  $f(x)\searrow$  
+  (0,f(0))=(0,1) 為相對極大值  
+
+ex: $(fx)=x^3$  
+> 漸進線 $x \rightarrow \infty$    
+  $\lim\limits_{x \rightarrow \infty}(fx)=x^3=\infty$  
+  $\lim\limits_{x \rightarrow -\infty}(fx)=x^3=-\infty$  
+  --> 無水平漸進線  
+  相對極植  
+  $(fx)=x^3$  
+  $f'(x)=3x^2$  
+  x=0 為臨界點  
+  $x(-\infty,0)$, f'(x)>0 --->  $f(x)\nearrow$  
+  $x(0,\infty)$, f'(x)>0 --->  $f(x)\nearrow$  
+  --> x=0 無極值  
+
+求反曲點  
+f''(x)=6x  
+
+|----|$(-\infty,0)$|$x(0,\infty)$  |  
+|------|:------------:      |:-------:         |  
+|  f'' | -                  |+                 |  
+|  f'  |  $f(x)\searrow$    | $f(x)\nearrow$   |  
+|  f   |凹向下(concave down)|凹向上(concave up)|  
+f(0)=0 所以反曲點為 (0,0)  
+
+## 反曲點
+定理-設 y=f(x)定義在(a,b)開區間  
+> a. (a,b)區間 ,f''(x)>0 --> f(x)圖形凹向上(concave up)  
+  b. (a,b)區間 ,f''(x)<0 --> f(x)圖形凹向下(concave down)  
+
+定理 (c,f(c))為圖形凹性改變之處, -->(c,f(c)) 稱為函數f(x)之反曲點  
+> f''(c)=0 or f''(c) 不存在 有可能有反曲點  
+
+ex: f(x)= x^4-2x^3-12x^2+12x+1
+> f'(x)=4x^3-6x^2-24x+12  
+  f''(x)=12x^2-12x-24=12(x^2-x-2)  
+  =12(x+1)(x-2)=0  
+--> x=-1 or x=2 可能有反曲點  
+
+|----  |$(-\infty,-1)$|(-1,2)|$x(2,\infty)$                       |  
+|------|:------------:    |:--:                |:-------:         |  
+|  f'' |+                 |-                   |+                 |  
+|  f'  |$f(x)\nearrow$    |$f(x)\searrow$      | $f(x)\nearrow$   |  
+|  f   |凹向上(concave up)|凹向下(concave down)|凹向上(concave up)|  
+(-1,f(-1)=(-1,-20),(2,f(2))=(2,-23)為反曲點  
 
 ## GeoGebra
 高斯函數 : floor  
 x(A) : A點x座標  
 |x| : 絕對值  
+h2: x= 5 垂直線   
+Integral[f(x)]:反導函數  
 
 ## doing
-複習小測驗15-4
+runing 35
 
