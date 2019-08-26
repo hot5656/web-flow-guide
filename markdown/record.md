@@ -400,6 +400,10 @@ $\nearrow$  |\nearrow
 $\searrow$  |\searrow
 空格$\space$   |\space 
 顯示公式較好看$\displaystyle \sum_{n=1}^{10} n^2$ |\displaystyle "\displaystyle \sum_{n=1}^{10} n^2"
+$\overline{x+1}$|\overline 能覆蓋所有括號中的文本
+$\bar x$        |\bar 長度只能覆蓋一個字母
+$\displaystyle \sum_{i=1}^n$  |\sum_{i=1}^n 總和
+
 
 ## 自動連結
 ```

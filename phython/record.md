@@ -1189,9 +1189,10 @@ df.count()  		|元素總數
 df.first(),last()	|第一個,最後一個元素
 df.mean(),median()	|全部平均,中位數平均
 df.min(),max()		|最小值,最大值
-df.std(),var()		|標準差,變異數
-df.mad()  	    	|平均絕對差
+df.std(),var()		|標準差(Standard Deviation),變異數(Variance)
+df.mad()  	    	|平均絕對偏差(Mean Absolute Deviation)
 df.prod()  			|元素的積
+df.pivot()  		|Return reshaped DataFrame organized by given index / column values-pivot(index=None, columns=None, values=None)
 df.groupby("continent").aggregate(['sum', 'max', 'min'])|show 多計算結果
 df.groupby("continent").transform(lambda x: x- x.sum()) |將原始資料和計算後的資料作運算(所有可計算欄位)
 df.groupby("continent").apply(apply_func)  |使用呼叫函式的方式，可以回傳Pandas物件或是純量(指定欄位)
@@ -2387,6 +2388,7 @@ plt.bar()     |水平長條圖 bar(y, width, height, *args)
 plt.errorbar()|誤差圖
 plt.hist()    |直方圖
 plt.boxplot() |盒鬚圖 pyplot.boxplot(x, *args)
+s.plot(kind='kde')|密度圖kde s:Series
 plt.subplot(131)|多圖表,(131):1*3 1st,(132):2nd
 plt.subplots()  |準備好多個網格 plt.subplots(2, 3, sharex=True, sharey=True)-sharex->是否共享x軸  sharey->是否共享y軸
 setp(line1, marker="o", linestyle="--")|set some line configure
@@ -2808,7 +2810,48 @@ plt.xlim(0, 5)
 
 ## Seaborn
 Seaborn 本質上是一個基於 matplotlib 庫的高級 API。它包含更適合處理圖表的默認設置。此外，還有豐富的可視化庫，包括一些複雜類型，如時間串行、聯合分佈圖（jointplots）和小提琴圖（violin diagrams）
+
+function     | 說明
+-------------|------
+sns.kdeplot()|密度圖
+sns.violinplot()|小提琴圖
+sns.heatmap()|熱力圖
+sns.distplot()|可同時畫出直方圖(hist)和密度圖(kde)
+sns.barplot()|長條圖
+sns.load_dataset()|load csv file from seaborn
+sns.set_style()    |set style - white, dark, whitegrid, darkgrid, ticks
+sns.set_context()  |set 圖形大小 - paper, notebook, talk, poster
+sns.color_palette()|取得目前調色板的顏色
+sns.set_palette()  |設置調色盤的顏色, sns.set_palette(sns.color_palette('bright'))
+sns.color_palette()|設置自己定義的調色盤(rgb)-sns.color_palette([(0.45,0.72,0),(0.22,0.34,0),(0.62,1,0.32)])
+
+
 ```python
+# seaborn - 直方圖hist + 密度圖kde
+%matplotlib inline  
+import seaborn as sns
+# 直方圖hist + 密度圖kde
+ironman_series = pd.Series(np.random.randn(1000))
+sns.distplot(ironman_series)
+
+# seaborn - load from seaborn,長條圖(bar),style,圖形大小,調色板的顏色
+%matplotlib inline  
+import seaborn as sns
+import pandas as pd 
+import numpy as np
+# load flights.csv from seaborn
+ironman_df = sns.load_dataset('flights')
+# resharped df
+ironman_df = ironman_df.pivot(index='month', columns='year', values='passengers')
+# set style - white, dark, whitegrid, darkgrid, ticks
+sns.set_style('darkgrid')
+# set 圖形大小 - paper, notebook, talk, poster
+sns.set_context('paper')
+# 長條圖 bar(x=index, y=value)
+sns.barplot(ironman_df.sum().index,ironman_df.sum().values)
+# 取得目前調色板的顏色
+sns.palplot(sns.color_palette())
+
 # 密度圖（Density plot）
 %matplotlib inline 
 import matplotlib.pyplot as plt
@@ -2966,6 +3009,51 @@ from sklearn.model_selection import train_test_split
 X, y = np.arange(30).reshape((10, 3)), range(10) 
 X_train, X_test ,y_train, y_test= train_test_split(X, y,test_size=0.3, random_state = 20, shuffle=True)
 ```
+
+## 統計分析
+描述統計(Descriptive Statistics)  
+推論統計(Inferential Statistics)  
+定性數據(Qualiative Data)：對事物性質進行描述數據  
+定量數據(Quantitative Data)：事物數量特徵的數據，由數字所組成。  
+
+### 數據的位置
+* 樣本平均數(Sample Mean)  
+算術平均數(Arithmetic Mean):加總後平均  
+幾何平均數(Geometric Mean)  
+* 中位數(Median)
+將樣本從小到大做排序，如果樣本是奇數個中位數即為最中間的值，如果是偶數個，中位數是中間兩個數值的平均  
+* 眾數(Mode)  
+樣本中出現次數最多的數值  
+* 百分位數(Percentile)  
+統計學中經常將25百分位數、中位數和75百分位數組成四分位數(Quartile)。25百分位數叫做第一四分位數(下四分位數)、中位數為第二四分位數、75百分位數為第三四分位數(上四分位數)  
+
+### 數據的離散度
+* 全距(Range)  
+指的是數據中的最大值和最小值，公式為：  
+全距 = 最大值 - 最小值  
+* 平均絕對偏差(Mean Absolute Deviation)  
+採用的方式是用樣本與平均值(Mean)的差值來計算，當差值越大則表示數據值偏離均值越遠。這邊需要注意到的是平均偏差(Mean Deviation)的相加為0，所以需要加上絕對值來運算。  
+$$M_{D}=\cfrac{1}{n}\sum_{i=1}^n|x_{i}-\bar x|$$
+* 變異數(Variance)  
+變異數也是用來描述數據的離散程度  
+$$s^2=\cfrac{\displaystyle \sum_{i=1}^n(x_{i}-\bar x)^2}{n-1}=\cfrac{\displaystyle \sum_{i=1}^nx^2_i-n\bar x^2}{n-1}$$
+* 標準差(Standard Deviation)  
+標準差就是變異數得平方根  
+$$s=\sqrt{\cfrac{\displaystyle \sum_{i=1}^n(x_{i}-\bar x)^2}{n-1}}$$
+```python
+# 數據的離散度
+import pandas as pd
+ser_data = pd.Series([60,70,80,80,90,100])
+print("平均值", ser_data.mean())
+print("全距", ser_data.max()-ser_data.min())
+print("平均絕對偏差", ser_data.mad())
+print("變異數", ser_data.var())
+print("標準差", ser_data.std())
+```
+
+### 統計學基礎 - 隨機變數(Random Variable)
+離散型隨機變數(Discrete Random Variable)：隨機變數取值的範圍有限個(ex 擲硬幣只有兩種結果，所以取擲的範圍有限制)  
+連續型隨機變數(Continuous Random Variable)：隨機變數可以在一個區間上任意取值(ex 股票中的收益率就是連續型隨機變數)  
 
 ## 均方誤差（Mean Square Error）
 
