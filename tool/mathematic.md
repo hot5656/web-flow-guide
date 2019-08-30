@@ -297,12 +297,142 @@ eg: $f(x)=x^2$ 在[-2,3] 之絕對極值
   f(-2)=4  
   f(3)=9 --> 絕對極大  
 
+## 積分  
+$\int 2x+1 dx=x^2+x+C$  
+求反導函數  
+基本公式(不定積分 include C)  
+> $\int x^r dx=\cfrac{1}{r+1}x^{r+1}+C$  
+  $r!=-1$  
+  故  $\int \cfrac{1}{x} dx$ 未知  
+
+eg: 自由落體(為等加速運動)  
+  $\cfrac{dx}{dt}=-9.8t$ (m/sec)  
+  假設從 1000m 落下,求x(t)的高度(m)  
+  x(10)的高度,幾秒落地  
+> $x=\int \cfrac{dx}{dt}dt=\int -9.8t dt=-4.9t^2+1000$  
+  x(100)=-490+1000=510 (m)  
+  $-4.9t^2+1000=0$  
+  $t^2=/cfrac {1000}{4.9}\approx 204$  
+  $t\approx 14.3$ (sec)  
+
+## (定)積分 --> 數
+$\int^b_a f(x) dx$  f(x)對x從a到b的積分  
+
+eg: $f(x)=\cfrac{dy}{dx}$ 速度  
+> y=F(x) 是某一物體在時間x(sec)的位置(m)  
+  $\cfrac{dy}{dx}=F'(x)=f(x)$ 速度(m/sec)  
+  $\int^b_a f(x) dx$ 表從時間a 到時間 b 的位移  
+  $=F(b)-F(a)$  
+  ps: F(x)為f(x)的反導函數  
+
+## 連續平均值  
+$\mu=\cfrac{1}{b-a}\int^b_a f(x) dx$  
+
+eg: $y=x^2$ x在0與2間的平均值  
+> $\mu=\cfrac{1}{2-0}\int^2_0 x^2 dx$  
+  $=[\cfrac{1}{2-0}\cfrac{1}{3}x^3]^2_0$  
+  $=\cfrac{1}{2-0}\cfrac{8}{3}==\cfrac{4}{3}$  
+
+eg: 平均成本 
+成本模型 $C(t)=0.15t^2+0.2t+400$ (千元)  
+t=0,1....24(月份) 求兩年平均成本  
+> $\mu=\cfrac{1}{24-0}\int^{24}_0 0.15t^2+0.12t+400 dx$  
+   $=\cfrac{1}{24-0}[0.15/3t^3+0.2/2t^2+400t]^{24}_0$
+   $=\cfrac{1}{24-0}(10348.8-0)=431.2$  
+* ... mask red line
+
+## 一次估計
+f(x) 在 a 點可得切線函數 y=mx+b  
+若 x 接近於 a 可直接由 切線函數 算出值 
+
+eg: 本金為P,年利率為r,一年k次計息,利率應為多少?  
+> $P(1+x)^k=P(1+r)$  
+  $(1+x)^k=(1+r)$  
+  $x=\sqrt[k]{1+r}-1$ 太複雜了  
+  求 $f(x)=(1+x)^k$ 切線函數 $f'(x)= k(x+1)^{k-1}$  
+  (0,f(0))=(0,1)  
+  f'(0)=k  
+  $k=\cfrac{y-1}{x-0}$  
+  切線方程式 y=kx+1  
+  當 x 接近-->0  f(x)=f'(x)  
+  $(1+x)^k=(1+r)=kx+1$  
+  $x=\cfrac{r}{k}$  
+
+## 連續微分(複利設為無限多期) 
+$\lim\limits_{k \rightarrow \infty} (1+\cfrac{r}{k})^k$  
+設 k=nr --> n=k/r , 若 $k \rightarrow \infty$ 則 $n \rightarrow \infty$  
+> $\lim\limits_{k \rightarrow \infty} (1+\cfrac{r}{k})^k$  
+  = $\lim\limits_{n \rightarrow \infty} (1+\cfrac{r}{nr})^{nr}$ 因 r為常數  
+  = $(\lim\limits_{n \rightarrow \infty} (1+\cfrac{1}{n})^n)^r$ 因算出  $\lim\limits_{n \rightarrow \infty} (1+\cfrac{1}{n})^n$=e  
+  = $e^r$  
+
+eg:
+> $[e^{2x}]'=e^{2x}[2x]'=2e^{2x}$  
+  $[e^{x/3}]'=e^{x/3}[x/3]'=\cfrac{1}{3}e^{x/3}$  
+  $[e^{-x^2}]'=e^{-x^2}[-x^2]'=-2xe^{-x^2}$  
+
+## 自然數指數微分
+已知 $[e^x]'=e^x$  
+> $[e^u]'=[e^u]'u'$ 依連鎖率  
+  $=u'e^u$ 因 $[e^x]'=e^x$ 故 $[e^u]'=e^u$  
+
+## 標準指數的反導函數
+已知 $\cfrac{d}{dx}[e^x]=e^x$ --> $\int e^xdx=e^x+C$  
+定積分$\int^1_{-1} e^xdx=[e^x]^1_{-1}=e-\cfrac{1}{e}$  
+$\int 3e^xdx=3\int e^xdx=3e^x+C$  
+
+$\int e^{2x}dx$ (u=2x --> du=2dx) 
+> = $\cfrac{1}{2}\int e^u du$  
+  = $\cfrac{1}{2}e^u+C$  
+  = $\cfrac{1}{2}e^{2x}+C$  
+
+$\int e^x - e^{-x} dx$
+> =$\int e^x dx - \int e^{-x} dx$  (-x=u du=-dx)  
+  =$\int e^x dx + \int e^u du$  
+  =$e^x$+$e^u+C$  
+  =$e^x$+$e^{-x}+C$  
+
+## 機率
+* **機率分佈函數**
+> 1. f(x)>=0  
+  2. $\int^{\infty}_{-\infty} f(x) dx=1$  
+* mask red line
+
+## 指數
+* **公式**  
+> $a^{m+n}=a^m a^n$  
+  $a^{m*n}=(a^m)^n$  
+  $a^{m-n}=\cfrac{a^m}{a^n}$  
+  $a^{-n/m}=\cfrac{1}{a^{n/m}}$  
+  $a^{n/m}=(a^{1/m})^n$  
+*** mask red line
+
+eg:a^0 a!=0
+> $a^0=a^{n-n}=\cfrac{a^n}{a^n}=1$  
+
+eg:0^0 a!=0
+> $a^0=0^{n-n}=\cfrac{0^n}{0^n}=\cfrac{0}{0}$  不討論  
+
+eg: 2^{1.6}
+> $2^{1.6}=2^{16/10}=2^{8/5}=(2^8)^{1/5}=\sqrt[5]{256}=3.03$  
+
+
 ## GeoGebra
 高斯函數 : floor  
 x(A) : A點x座標  
 |x| : 絕對值  
 h2: x= 5 垂直線   
 Integral[f(x)]:反導函數  
+sqrt() : 開根號  \sqrt[3]{5} 
+cbrt( ): 立方根  
+Solve() : 求解 
+abs() : 絕對值  
+floor() : 小或等於之最大整數  
+ceil() : 大或等於之最小整數  
+round() : 四捨五入  
+! : 階乘  
+nroot(256,5) : 256 開 5 次方  
+
 
 ## doing
 runing 35
