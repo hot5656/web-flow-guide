@@ -1,3 +1,52 @@
+<style>
+.Maroon { 
+color:Maroon; 
+}
+.Red { 
+color:Red; 
+}
+.Orange { 
+color:Orange; 
+}
+.Yellow { 
+color:Yellow; 
+}
+.Olive { 
+color:Olive; 
+}
+.Green { 
+color:Green; 
+}
+
+.Purple { 
+color:Purple; 
+}
+
+.Fuchsia { 
+color:Fuchsia; 
+}
+.Lime { 
+color:Lime; 
+}
+.Teal { 
+color:Teal; 
+}
+.Aqua { 
+color:Aqua; 
+}
+.Blue { 
+
+color:Blue; 
+}
+.Navy { 
+color:Navy; 
+}
+
+.Fb{
+font-weight:bold;
+}
+</style>
+
 
 # 數學
 
@@ -6,7 +55,7 @@
 
 ## 標準差
 標準差應用於投資上，可作為量度回報穩定性的指標。標準差數值越大，代表回報遠離過去平均數值，回報較不穩定故風險越高。相反，標準差數值越小，代表回報較為穩定，風險亦較小。  
-$\sqrt(mean(abs(x - x*mean())^2))$  
+$\sqrt{mean(abs(x - x*mean())^2)}$  
 (red mask only....) ***
 
 
@@ -375,6 +424,7 @@ eg:
 已知 $[e^x]'=e^x$  
 > $[e^u]'=[e^u]'u'$ 依連鎖率  
   $=u'e^u$ 因 $[e^x]'=e^x$ 故 $[e^u]'=e^u$  
+  <b class="Blue">$[e^u]'=u'e^u$</b>  
 
 ## 標準指數的反導函數
 已知 $\cfrac{d}{dx}[e^x]=e^x$ --> $\int e^xdx=e^x+C$  
@@ -391,6 +441,69 @@ $\int e^x - e^{-x} dx$
   =$\int e^x dx + \int e^u du$  
   =$e^x$+$e^u+C$  
   =$e^x$+$e^{-x}+C$  
+
+## 機率分布函數(正規分布,鐘形曲線)
+f(x)>0 且 $\int^{\infty}_{-\infty} f(x) dx=1$  即為 機率分布曲線  
+$y=n^{-x^2}$ n>0 都為鐘形曲線  
+為方便計算取  $y=e^{-x^2}$   
+計算鐘形曲線的積分要用平方才計算的出來  
+$[\int^{\infty}_{-\infty} e^{-x^2} dx]^2$  
+> = $[\int^{\infty}_{-\infty} e^{-x^2} dx]$ $[\int^{\infty}_{-\infty} e^{-x^2} dx]$  
+  = $[\int^{\infty}_{-\infty} e^{-x^2} dx]$ $[\int^{\infty}_{-\infty} e^{-x^2} dy]$  
+  = $\int^{\infty}_{-\infty} [\int^{\infty}_{-\infty} e^{-(x^2+y^2)} dxdy$  
+  = 曲面 $z=e^{-(x^2+y^2)}$ 與 x y 平面的體積  
+  旋轉體的薄殼積分  
+  = $\int^\infty_0 2 \pi x e^{-x^2} dx$  
+  $\int 2\pi x e^{-x^2} dx$ 令 $u=-x^2$ --> $du=-2x dx$  
+  = $-\pi\int -2x e^u dx$  
+  = $-\pi\int e^u du$  
+  = $-\pi e^u+C$  
+  = $-\pi e^{-x^2}+C$  
+  $\int^\infty_0 2\pi x e^{-x^2} dx$  
+  = $\lim\limits_{n \rightarrow \infty}[-\pi e^{-x^2}]^A_0$  
+  = $\lim\limits_{n \rightarrow \infty}[-\pi e^{-A^2}-(-\pi)]$  
+  = $\pi$  
+  令 f(x)= $\cfrac{1}{\sqrt\pi}e^{-x^2}$  
+  則 f(x)>0 $\int^\infty_{-\infty} f(x) dx=1$  
+  f(x) 是一個 機率分布函數  
+
+## 誤差函數(Error function) 唯一個 鐘形曲線  
+$\int^\infty_{-\infty} e^{-x^2} dx=\sqrt\pi$  
+> $\int^1_{-1} e^{-x^2} dx$  
+  =$\cfrac{-\sqrt\pi erf(-1) + \sqrt\pi erf(1)}{2}$ or $\sqrt\pi erf(1)$  
+  efr(x) = $\cfrac{2}{\sqrt\pi} \int^x_0 e^{-t^2} dt$
+  $\int^1_{-1} e^{-x^2} dx$  
+  =$2\int^1_{0} e^{-x^2} dx$  
+  =$2\int^1_{0} e^{-t^2} dt$  
+  =$\sqrt\pi \cfrac{2}{\sqrt\pi}\int^1_{0} e^{-t^2} dt$  
+  =$\sqrt\pi erf(1)$  
+  $\sqrt\pi erf(1)$ 大約 1.49..   
+
+$\lim\limits_{x \rightarrow \infty} erf(x)$=$\cfrac{2}{\sqrt\pi} \int^\infty_0 e^{-x^2} dx=erf(\infty)$  
+> $\cfrac{2}{\sqrt\pi} \int^\infty_0 e^{-x^2} dx$  
+  = $\cfrac{2}{\sqrt\pi}(\cfrac{1}{2} \int^\infty_{-\infty} e^{-x^2} dx)$  
+  = $\cfrac{2}{\sqrt\pi}(\cfrac{1}{2} \sqrt\pi)=1$  
+
+## 自然對數之積分
+ln(a)是自然指數, log(a)是常用指數  
+
+已知 $[e^x]'=e^x$  其他 $2^x,3^x,4^x$...如何微分?  
+對任意 a>0 存在 k ,使得 $e^k=a$, 也就是$e^k=a$有唯一解  
+
+$a^x=(e^k)^x=e^{kx}$  --> $k=ln(a)$  
+> $[a^x]'$=$[e^{kx}]'$
+  =$[kx]'e^{kx}$ 因 <b class="Maroon">$[e^u]'=u'e^u$</b>  
+  =$ke^{kx}$=$ka^x$ 因 <b class="Maroon">$k=ln(a)$</b>  
+  = $ln(a) \cdot a^x$  
+  <b class="Blue">$[a^x]'=ka^x=ln(a) \cdot a^x$</b> <b class="Blue">$a>0$</b>  
+
+> $\sqrt2$ : 是 $x^2=2$ 的正數解  
+  log2 : 是 $10^x=2$ 的解  
+  ln2 : 是 $e^x=2$ 的解  
+
+
+## 特殊函數  
+erf(n) : 誤差函數(Error function)  
 
 ## 機率
 * **機率分佈函數**
@@ -416,9 +529,33 @@ eg:0^0 a!=0
 eg: 2^{1.6}
 > $2^{1.6}=2^{16/10}=2^{8/5}=(2^8)^{1/5}=\sqrt[5]{256}=3.03$  
 
+## 對數  
+
+* **常用對數公式**  
+log(a \cdot b) = log(a)+log(b)  
+log(a/b) = log(a)-log(b)  
+$log(a^x)$ = $x \cdot log(a)$  
+
+eg: $a^x=b$ 之解  
+> $log(a^x)=log(b)$  
+  x log(a)=log(b)  
+  x=$\cfrac{log(b)}{log(a)}$  
+
+* **自然對數公式**  
+$ln(a \cdot b)$ = $ln(a)+ln(b)$  
+$ln(a/b)$ = $ln(a)-ln(b)$  
+$ln(a^x)$ = $x \cdot ln(a)$  
+
+eg: a^x=b$ 之解
+> ln $a^x$ = ln b  
+  x$\cdot$ln a =ln b  
+  x = $\cfrac{ln(b)}{ln(a)}$
+
+$[log(x)]'=[\cfrac{ln(x)}{ln(10)}]'$  
 
 ## GeoGebra
 高斯函數 : floor  
+f'(x) : f(x) 微分  
 x(A) : A點x座標  
 |x| : 絕對值  
 h2: x= 5 垂直線   
@@ -437,3 +574,31 @@ nroot(256,5) : 256 開 5 次方
 ## doing
 runing 35
 
+
+## color select 
+<table >
+　<tr>
+    <td class="Fb Maroon">Maroon</td>
+    <td class="Fb Red">Red</td>
+    <td class="Fb Orange">Orange</td>
+    <td class="Fb Yellow">Yellow</td>
+    <td class="Fb Olive">Olive</td> 
+　</tr>
+　<tr>
+    <td class="Fb Green">Green</td>
+    <td class="Fb Purple">Purple</td>
+    <td class="Fb Fuchsia">Fuchsia</td>
+    <td class="Fb Lime">Lime</td>
+    <td class="Fb Teal">Teal</td>
+　</tr>
+  <tr>
+    <td class="Fb Aqua">Aqua</td>
+    <td class="Fb Blue">Blue</td>
+    <td class="Fb Navy">Navy</td> 
+  </tr>
+</table>
+
+```
+<p>eg: show <b class="Maroon">Maroon</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
+```
+<p>eg: show <b class="Maroon">Maroon</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
