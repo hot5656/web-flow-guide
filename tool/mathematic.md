@@ -367,7 +367,34 @@ eg: 自由落體(為等加速運動)
 
 $\int \cfrac{1}{x} dx=?$  
 > 因 <b class="Fuchsia">[ln x]'=$\frac{1}{x}$</b> (x>0)  
-  <b class="Blue">$\int \cfrac{1}{x} dx=$ln x</b>  
+  x<0 u=-x du=-dx  
+  $\cfrac{1}{x}dx=\cfrac{-1}{-x}=\cfrac{1}{u}du$  
+  $\int \cfrac{1}{x}dx=\int \cfrac{1}{u}du$ (u>0)  
+  =$ln(u)+C$  
+  =$ln(-x)+C$  
+  =$ln|-x|+C$  
+  <b class="Blue">$\int \cfrac{1}{x} dx=$ln|x|+C </b> (x!=0)  
+  <b class="Fuchsia">$\cfrac{1}{x}$ 的定積分僅能全正或全負,因 0不包含在定義域內 </b>  
+
+eg: $\int^2_1 \cfrac{1}{x}dx$
+> =[ln|x|]^2_1  
+  =ln2-ln1 因 <b class="Fuchsia">ln1=0</b>  
+  =ln2  
+
+eg: $\int^{-1}_{-3} \cfrac{1}{x}dx$
+> =$[ln|x|]^{-1}_{-3}$  
+  =ln1-ln3 因 <b class="Fuchsia">ln1=0</b>  
+  =-ln3  
+
+eg:$\int^1_0 \cfrac{1}{x-2}dx$ 因 <b class="Fuchsia">u=x-2 --> du=dx</b>  
+> =$\int^1_0 \cfrac{1}{u}du$  
+  =$[ln|x-2|]^1_0$  
+  =ln1-ln2=-ln2  
+
+eg:$\int \cfrac{x}{x^2-4}dx$ 因 <b class="Fuchsia">$u=x^2-4 --> du=2xdx$</b>  
+> =$\cfrac{1}{2} \int \cfrac{2x}{x^2-4}dx$  
+  =$\cfrac{1}{2} \int \cfrac{1}{u}du$  
+  =$\cfrac{1}{2}ln|x^2-4|+C$  
 
 ## (定)積分 --> 數
 $\int^b_a f(x) dx$  f(x)對x從a到b的積分  
@@ -548,11 +575,36 @@ $\lim\limits_{x \rightarrow \infty} erf(x)$=$\cfrac{2}{\sqrt\pi} \int^\infty_0 e
 
 ## 指數成長(按比例成長)函數/指數衰退函數
 <b class="Blue">$y=C(e^k)^t=Ce^{kt}$</b> k>0正成長 k<0負成長(衰退)  
+<b class="Blue">$e^k=a=1+r$</b>  
+比例常數:k
+成長率(if r>0)/衰退率(if r<0):r
 > $\frac{dy}{dt}$
   =$Ce^{kt} \cdot [kt]'$  
   =$k \cdot Ce^{kt}$  
   =ky  
   <b class="Blue">y'=ky</b>  
+
+eg:Population Growth族群(無限制)成長  
+$\cfrac{dP}{dt}=kP$ (萬人/年) P=P(t)  
+k=$\cfrac{1}{P}\cfrac{dP}{dt} \approx \cfrac{1}{55年人口} \cdot \cfrac{(59年人口)-(49年人口)}{10}$  
+> if $\cfrac{dP}{dt}=0.05P$  
+  $P(t)=P_0 e^{0.05t}$  (t=0 開始計算那一年) 因 <b class="Fuchsia">y'=ky</b>  
+  翻倍時間  
+  $2P_0=P_0e^{0.05t}$  
+  2=$e^{0.05t}$  
+  ln2=0.05t  
+  t=$\cfrac{ln2}{0.05} \approx 13.86$  
+
+
+eg:$\cfrac{dQ}{dt}$=-0.33Q 求半衰期  
+> $Q=Q_0e^{-0.33t}$  
+  $\cfrac{1}{2}Q_0=Q_0e^{-0.33t}$  
+   $\cfrac{1}{2}=e^{-0.33t}$  
+   $ln\cfrac{1}{2}=-0.33t$  
+   t=$ln\cfrac{1}{2}/-0.33$
+   =$-ln2/-0.33$
+   $\approx 2$  
+
 
 eg:設放射性物質鐳 (radium, Ra226) 的半生期為1620 年, 且滿足指數退化的現象. 試問一克的鐳, 經過1000 年後, 還剩多少?  
 > $y=Ce^{kt}$  C=1  
