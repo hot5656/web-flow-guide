@@ -398,11 +398,19 @@ $\rightarrow$  |\rightarrow
 $\uparrow$  |\uparrow
 $\nearrow$  |\nearrow
 $\searrow$  |\searrow
-空格$\space$   |\space 
+普通空格$\space$空格|\space 
+字符空格$\quad$空格 |\quad
+$\cdot$		|\cdot
 顯示公式較好看$\displaystyle \sum_{n=1}^{10} n^2$ |\displaystyle "\displaystyle \sum_{n=1}^{10} n^2"
 $\overline{x+1}$|\overline 能覆蓋所有括號中的文本
 $\bar x$        |\bar 長度只能覆蓋一個字母
 $\displaystyle \sum_{i=1}^n$  |\sum_{i=1}^n 總和
+$\frac{1}{3}$  |\frac{1}{3}
+$\sqrt[3]{X}$  |\sqrt[3]{X}
+$\sqrt{5 - x}$ |\sqrt{5 - x}
+$\int^1_{-1}$  |\int^1_{-1}
+$\lim\limits_{n \rightarrow \infty}$  |\lim\limits_{n \rightarrow \infty}
+\begin{cases} -x,\quad x\leq 0 \\x,\quad x>0 \end{cases}|
 
 
 ## 自動連結

@@ -350,9 +350,9 @@ eg: $f(x)=x^2$ 在[-2,3] 之絕對極值
 $\int 2x+1 dx=x^2+x+C$  
 求反導函數  
 基本公式(不定積分 include C)  
-> $\int x^r dx=\cfrac{1}{r+1}x^{r+1}+C$  
+> <b class="Blue">$\int x^r dx=\cfrac{1}{r+1}x^{r+1}+C$</b>  
   $r!=-1$  
-  故  $\int \cfrac{1}{x} dx$ 未知  
+  <b class="Fuchsia">故  $\int \cfrac{1}{x} dx$ 未知</b>  
 
 eg: 自由落體(為等加速運動)  
   $\cfrac{dx}{dt}=-9.8t$ (m/sec)  
@@ -363,6 +363,11 @@ eg: 自由落體(為等加速運動)
   $-4.9t^2+1000=0$  
   $t^2=/cfrac {1000}{4.9}\approx 204$  
   $t\approx 14.3$ (sec)  
+
+
+$\int \cfrac{1}{x} dx=?$  
+> 因 <b class="Fuchsia">[ln x]'=$\frac{1}{x}$</b> (x>0)  
+  <b class="Blue">$\int \cfrac{1}{x} dx=$ln x</b>  
 
 ## (定)積分 --> 數
 $\int^b_a f(x) dx$  f(x)對x從a到b的積分  
@@ -426,6 +431,23 @@ eg:
   $=u'e^u$ 因 $[e^x]'=e^x$ 故 $[e^u]'=e^u$  
   <b class="Blue">$[e^u]'=u'e^u$</b>  
 
+## 其他指數之微分
+ln(a)是自然指數, log(a)是常用指數  
+
+已知 $[e^x]'=e^x$  其他 $2^x,3^x,4^x$...如何微分?  
+對任意 a>0 存在 k ,使得 $e^k=a$, 也就是$e^k=a$有唯一解  
+
+$a^x=(e^k)^x=e^{kx}$  --> $k=ln(a)$  
+> $[a^x]'$=$[e^{kx}]'$
+  =$[kx]'e^{kx}$ 因 <b class="Fuchsia">$[e^u]'=u'e^u$</b>  
+  =$ke^{kx}$=$ka^x$ 因 <b class="Fuchsia">$k=ln(a)$</b>  
+  = $ln(a) \cdot a^x$  
+  <b class="Blue">$[a^x]'=ka^x=ln(a) \cdot a^x$</b> <b class="Blue">$(a>0)$</b>  
+
+> $\sqrt2$ : 是 $x^2=2$ 的正數解  
+  log2 : 是 $10^x=2$ 的解  
+  ln2 : 是 $e^x=2$ 的解  
+
 ## 標準指數的反導函數
 已知 $\cfrac{d}{dx}[e^x]=e^x$ --> $\int e^xdx=e^x+C$  
 定積分$\int^1_{-1} e^xdx=[e^x]^1_{-1}=e-\cfrac{1}{e}$  
@@ -441,6 +463,46 @@ $\int e^x - e^{-x} dx$
   =$\int e^x dx + \int e^u du$  
   =$e^x$+$e^u+C$  
   =$e^x$+$e^{-x}+C$  
+
+## 自然對數微分
+
+y=ln x  
+> $e^y = x$  
+  $[e^y]'$ = [x]' 因 <b class="Fuchsia">$[e^u]'=u'e^u$</b>  
+  $y'e^=1$  
+  [ln x]' $\cdot$ x = 1  
+  <b class="Blue">[ln x]'=$\cfrac{1}{x}$</b> (x>0)  
+
+[ln u]'
+> [ln u]'
+  =$\frac{d}{dx}$[ln u]  
+  =$\frac{d}{du}$[ln u]$\cdot$$\frac{du}{dx}$  
+  =$\frac{1}{u}u'$  
+  <b class="Blue">[ln u]'=$\frac{1}{u}u'$</b>  
+
+eg: [ln(2x+1)]'
+> =$\frac{[2x+1]'}{2x+1}$  
+  =$\frac{2}{2x+1}$  
+
+  eg: [ln(x^2+4)]'
+> =$\frac{[x^2+4]'}{x^2+4}$  
+  =$\frac{2x}{x^2+4}$  
+
+## 一般對數微分
+[log x]'=$[\cfrac{ln(x)}{ln(10)}]'$=$\cfrac{[ln(x)]'}{ln(10)}$=$\cfrac{1}{x \cdot ln(10)}$  
+<b class="Blue">[log x]'= $\cfrac{1}{x \cdot ln(10)}$</b>  
+
+$a^x=b$  
+> ln $a^x$ = ln b  
+  x$\cdot$ln a = ln b  
+  x = $\cfrac{ln(b)}{ln(a)}$  
+  if a=10  
+  $10^x=b$  
+  $x=log(b)$  
+  $[log(b)]'=[x]'=[\cfrac{ln(b)}{ln(10)}]'$  
+  <b class="Blue">$[log(b)]'==[\cfrac{ln(b)}{ln(10)}]'$</b>  
+
+
 
 ## 機率分布函數(正規分布,鐘形曲線)
 f(x)>0 且 $\int^{\infty}_{-\infty} f(x) dx=1$  即為 機率分布曲線  
@@ -484,22 +546,44 @@ $\lim\limits_{x \rightarrow \infty} erf(x)$=$\cfrac{2}{\sqrt\pi} \int^\infty_0 e
   = $\cfrac{2}{\sqrt\pi}(\cfrac{1}{2} \int^\infty_{-\infty} e^{-x^2} dx)$  
   = $\cfrac{2}{\sqrt\pi}(\cfrac{1}{2} \sqrt\pi)=1$  
 
-## 自然對數之積分
-ln(a)是自然指數, log(a)是常用指數  
+## 指數成長(按比例成長)函數/指數衰退函數
+<b class="Blue">$y=C(e^k)^t=Ce^{kt}$</b> k>0正成長 k<0負成長(衰退)  
+> $\frac{dy}{dt}$
+  =$Ce^{kt} \cdot [kt]'$  
+  =$k \cdot Ce^{kt}$  
+  =ky  
+  <b class="Blue">y'=ky</b>  
 
-已知 $[e^x]'=e^x$  其他 $2^x,3^x,4^x$...如何微分?  
-對任意 a>0 存在 k ,使得 $e^k=a$, 也就是$e^k=a$有唯一解  
+eg:設放射性物質鐳 (radium, Ra226) 的半生期為1620 年, 且滿足指數退化的現象. 試問一克的鐳, 經過1000 年後, 還剩多少?  
+> $y=Ce^{kt}$  C=1  
+  $\frac{1}{2}=e^{1620k}$  兩邊取 ln   
+  $ln \frac{1}{2}=1620k$  
+  $k=\frac{1}{1620} ln\frac{1}{2}$  
+  $y=e^{\frac{1}{1620} ln\frac{1}{2} \cdot t}$  
+  =$[e^ln\frac{1}{2}]^{\frac{t}{1620}}$  
+  =$\frac{1}{2}^{\frac{1000}{1620}}$  
+  =0.652  
 
-$a^x=(e^k)^x=e^{kx}$  --> $k=ln(a)$  
-> $[a^x]'$=$[e^{kx}]'$
-  =$[kx]'e^{kx}$ 因 <b class="Maroon">$[e^u]'=u'e^u$</b>  
-  =$ke^{kx}$=$ka^x$ 因 <b class="Maroon">$k=ln(a)$</b>  
-  = $ln(a) \cdot a^x$  
-  <b class="Blue">$[a^x]'=ka^x=ln(a) \cdot a^x$</b> <b class="Blue">$a>0$</b>  
 
-> $\sqrt2$ : 是 $x^2=2$ 的正數解  
-  log2 : 是 $10^x=2$ 的解  
-  ln2 : 是 $e^x=2$ 的解  
+eg:設果蠅的數量符合指數成長. 若 2 天後, 有 100隻果蠅; 4 天後, 有 300 隻果蠅, 試問 5 天後, 有幾隻果蠅?
+> $y=Ce^{kt}$  
+  $100=Ce^{k2}$  
+  $300=Ce^{k4}$  
+  $3=e^{2k}$  
+  2k=ln 3  
+  k=$\frac{1}{2} ln(3)$  
+  $Ce^{2 \cdot \frac{1}{2} ln(3)}=100$  
+  $3C=100$  
+  $C=\frac{100}{3}$  
+   -->  
+   y=$\frac{100}{3}e^{kt}$  
+    =$\frac{100}{3}e^{\frac{1}{2} \cdot ln(3) t}$  
+    =$\frac{100}{3}{(e^{ln(3)})}^{\frac{1}{2}t}$  
+    =$\frac{100}{3}3^{\frac{1}{2}t}$  
+  -->t=5  
+  y=$\frac{100}{3}3^{\frac{5}{2}}$  
+   =$\frac{100}{3} 9\sqrt 3$
+   =519  
 
 
 ## 特殊函數  
@@ -513,11 +597,11 @@ erf(n) : 誤差函數(Error function)
 
 ## 指數
 * **公式**  
-> $a^{m+n}=a^m a^n$  
-  $a^{m*n}=(a^m)^n$  
-  $a^{m-n}=\cfrac{a^m}{a^n}$  
-  $a^{-n/m}=\cfrac{1}{a^{n/m}}$  
-  $a^{n/m}=(a^{1/m})^n$  
+> <b class="Blue">$a^{m+n}=a^m a^n$</b>  
+  <b class="Blue">$a^{m*n}=(a^m)^n$</b>  
+  <b class="Blue">$a^{m-n}=\cfrac{a^m}{a^n}$</b>  
+  <b class="Blue">$a^{-n/m}=\cfrac{1}{a^{n/m}}$</b>  
+  <b class="Blue">$a^{n/m}=(a^{1/m})^n$</b>  
 *** mask red line
 
 eg:a^0 a!=0
@@ -532,9 +616,11 @@ eg: 2^{1.6}
 ## 對數  
 
 * **常用對數公式**  
-log(a \cdot b) = log(a)+log(b)  
-log(a/b) = log(a)-log(b)  
-$log(a^x)$ = $x \cdot log(a)$  
+
+<b class="Blue">log(a \cdot b) = log(a)+log(b)</b>  
+<b class="Blue">log(a/b) = log(a)-log(b)</b>  
+<b class="Blue">$log(a^x)$ = $x \cdot log(a)$</b>  
+
 
 eg: $a^x=b$ 之解  
 > $log(a^x)=log(b)$  
@@ -542,9 +628,10 @@ eg: $a^x=b$ 之解
   x=$\cfrac{log(b)}{log(a)}$  
 
 * **自然對數公式**  
-$ln(a \cdot b)$ = $ln(a)+ln(b)$  
-$ln(a/b)$ = $ln(a)-ln(b)$  
-$ln(a^x)$ = $x \cdot ln(a)$  
+<b class="Blue">$ln(a \cdot b)$ = $ln(a)+ln(b)$</b>  
+<b class="Blue">$ln(a/b)$ = $ln(a)-ln(b)$</b>  
+<b class="Blue">$ln(a^x)$ = $x \cdot ln(a)$</b>  
+
 
 eg: a^x=b$ 之解
 > ln $a^x$ = ln b  
@@ -556,6 +643,7 @@ $[log(x)]'=[\cfrac{ln(x)}{ln(10)}]'$
 ## GeoGebra
 高斯函數 : floor  
 f'(x) : f(x) 微分  
+Derivative(f(x)) : f(x) 微分  
 x(A) : A點x座標  
 |x| : 絕對值  
 h2: x= 5 垂直線   
@@ -567,6 +655,10 @@ abs() : 絕對值
 floor() : 小或等於之最大整數  
 ceil() : 大或等於之最小整數  
 round() : 四捨五入  
+exp(n) : $e^n$  
+log(n) : 代表ln(n)  
+ln(a)/ln(10) : 計算log(a)  
+log10(a) : 計算log(a)  
 ! : 階乘  
 nroot(256,5) : 256 開 5 次方  
 
@@ -599,6 +691,6 @@ runing 35
 </table>
 
 ```
-<p>eg: show <b class="Maroon">Maroon</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
+<p>eg: show <b class="Fuchsia">Fuchsia</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
 ```
-<p>eg: show <b class="Maroon">Maroon</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
+<p>eg: show <b class="Fuchsia">Fuchsia</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
