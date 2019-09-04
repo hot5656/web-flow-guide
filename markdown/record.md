@@ -410,6 +410,7 @@ $\frac{1}{3}$  |\frac{1}{3}
 $\sqrt[3]{X}$  |\sqrt[3]{X}
 $\sqrt{5 - x}$ |\sqrt{5 - x}
 $\int^1_{-1}$  |\int^1_{-1}
+$\pm$					 |\pm
 $\lim\limits_{n \rightarrow \infty}$  |\lim\limits_{n \rightarrow \infty}
 \begin{cases} -x,\quad x\leq 0 \\x,\quad x>0 \end{cases}|
 

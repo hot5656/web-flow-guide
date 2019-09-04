@@ -637,6 +637,55 @@ eg:設果蠅的數量符合指數成長. 若 2 天後, 有 100隻果蠅; 4 天�
    =$\frac{100}{3} 9\sqrt 3$
    =519  
 
+## 牛頓冷卻定律(Neuton's law of colling)
+<b class="Blue">$\frac{dT}{dt}=-k(T-H)$</b>  
+$T(0)=T_0$   
+
+eg: $\frac{dT}{dt}=-k(T-25)$ $(^0C/min)$  
+$T_0=200$
+> dT=-k(T-25)dt  
+  $\frac{dT}{T-25}=-kdt$  
+  $\int \frac{1}{T-25}dT=\int -kdt$  
+  $ln|T-25|=-kt+C_1$  
+  $T-25=\pm e^{-kt+C_1}=\pm e^{C_1} \cdot e^{-kt}=C_3e^{-kt}$  
+  $T-25=C_3$ (代入 t=0) --> C_3=175  
+  $T-25=175e^{-kt}$  
+  <b class="Fuchsia">$T=25+175e^{-kt}$</b> k依不同物質有不同值  
+
+eg:測量得知 $T(5)=150 ^0C$ 多久後凉到 $50 ^0C$  
+> $T(5)=150=25+175e^{-5k}$  
+  $e^{-5k}=\frac{125}{175}$  
+  <b class="Fuchsia">$k=\frac{-1}{5}ln(\frac{5}{7})$</b>  
+  $50=25+175e^{-kt}$  t=?  
+  $175e^{-kt}=25$  
+  $e^{-kt}=\frac{1}{7}$  
+  $-kt=ln(\frac{1}{7})$  
+  $t=\frac{1}{k}ln7=\frac{1}{\frac{-1}{5}ln(\frac{5}{7})}ln7 \approx 28.92$  
+
+## 供需模型(以台灣人口變動曲線為例)
+$\frac{dP}{dt}=kP(1-\frac{P}{L})$  
+L:環境承載量  
+無函數,微分的一種方法 $P'(t) \approx  \frac{P(t+1)-P(t-1)}{2}$  
+$\frac{1}{P} \frac{dP}{dt}=aP+...$ 相對成長率(每年百分比)  
+回歸直線 y=k-aP  
+68-100年資料 電腦計算出回歸直線 $k \approx 0.065, a \approx 0.000027$  
+可得$\frac{1}{P} \frac{dP}{dt}=k-aP$  
+$\frac{dP}{dt}=kP-aP^2$  
+若a很小就為指數成長模型, $\frac{dP}{dt}=kP$ (但台灣不符合指數模型,為目前看到的供需模型)  
+=$kP(1-\frac{a}{k}P)$  
+=$kP(1-\frac{P}{k/a})$  所以 <b class="Fuchsia">$L=\frac{k}{a}$</b>  
+L $\approx$ 2438萬
+
+$\frac{dP}{dt}=kP(1-\frac{P}{L})$  
+> $\frac{dP}{dt}=k\frac{P(L-P)}{L}$  
+  $\frac{L}{P(L-P)}dP=kdt$ 分項分式 $\frac{L}{P(L-P)}=\frac{1}{P}\frac{1}{L-P}$  
+  $\int \frac{1}{P}\frac{1}{L-P} dP=kt+C_1$  
+  $ln|P|-ln|L-P|=kt+C_2$  
+  $ln|\frac{P}{L-P}|=kt+C_2$  
+  $\frac{P}{L-P}=Ce^{kt}$  
+  解出 <b class="Fuchsia">P(t)=$\frac{L}{1+Ce^{-kt}}$</b>, 其中 <b class="Fuchsia">$C=\frac{L}{P_0}-1$</b> ??如何解  
+  P(t)=$\frac{2438}{1+0.39e^{-0.065(t-68)}}$ 68因從68年算起  
+
 
 ## 特殊函數  
 erf(n) : 誤差函數(Error function)  
