@@ -683,7 +683,13 @@ $\frac{dP}{dt}=kP(1-\frac{P}{L})$
   $ln|P|-ln|L-P|=kt+C_2$  
   $ln|\frac{P}{L-P}|=kt+C_2$  
   $\frac{P}{L-P}=Ce^{kt}$  
-  解出 <b class="Fuchsia">P(t)=$\frac{L}{1+Ce^{-kt}}$</b>, 其中 <b class="Fuchsia">$C=\frac{L}{P_0}-1$</b> ??如何解  
+  as $P=(L-P)Ce^{kt}=L\cdot Ce^{kt}-P\cdot Ce^{kt}$  
+  $P+P\cdot Ce^{kt}=P(1+Ce^{kt})=L\cdot Ce^{kt}$  
+  $P=\frac {L\cdot Ce^{kt}}{1+Ce^{kt}}=\frac {L}{1/Ce^{kt}+Ce^{kt}/Ce^{kt}}=\frac {L}{1+1/Ce^{kt}}=\frac {L}{1+Ce^{-kt}}$  
+  $P_0=\frac {L}{1+C}$  
+  $P_0(1+C)=P_0+P_0C=L$  
+  $C=\frac {L-P_0}{P_0}=\frac {L}{P_0}-1$  
+  解出 <b class="Fuchsia">P(t)=$\frac{L}{1+Ce^{-kt}}$</b>, 其中 <b class="Fuchsia">$C=\frac{L}{P_0}-1$</b>  
   P(t)=$\frac{2438}{1+0.39e^{-0.065(t-68)}}$ 68因從68年算起  
 
 
@@ -795,3 +801,16 @@ runing 35
 <p>eg: show <b class="Fuchsia">Fuchsia</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
 ```
 <p>eg: show <b class="Fuchsia">Fuchsia</b>,<b class="Red">red</b>,<b class="Blue">blue</b>....</p>
+
+在上述馬爾薩斯模型中,人口增長率是基於一定時間段的結果,例如基於當時的工業農業現有人口現狀是有一定意義的,即是說當時的情況下人口增長率是可以在在短期內保持一個特定的數值
+但是在當今情況下,人口增長率必定是一個關於時間的函數
+$$r(t)=r(P(t))=r(1-\dfrac{P(t)}{K} )$$這裡的K表示我們所研究的生態系統最多可以容納支撐的人口數量(即生物學上所說的最大容納量) 
+則人口數量關於時間的積分有: 
+$$\frac{dN(t) }{dt}=r(1-\frac{N(t)}{K})N(t)$$ $$N(t_0)=N_0$$ 
+則我們取積分後可以得到: 
+$$N(t )=\frac{K}{1+Ce^{-r(t-t_0)}}$$ 
+其中C表示一個參數: 
+$$C=\frac{K-P_0}{P_0}$$ 
+則我們考察$ t$趨近於無窮大時的極限,結果與馬爾薩斯模型完全不同
+我們可以繪製出人口與時間關係的圖形:
+
