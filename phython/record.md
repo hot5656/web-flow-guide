@@ -2,6 +2,55 @@
 
 *   [Root](../README.md)
 
+<style>
+.Maroon { 
+color:Maroon; 
+}
+.Red { 
+color:Red; 
+}
+.Orange { 
+color:Orange; 
+}
+.Yellow { 
+color:Yellow; 
+}
+.Olive { 
+color:Olive; 
+}
+.Green { 
+color:Green; 
+}
+
+.Purple { 
+color:Purple; 
+}
+
+.Fuchsia { 
+color:Fuchsia; 
+}
+.Lime { 
+color:Lime; 
+}
+.Teal { 
+color:Teal; 
+}
+.Aqua { 
+color:Aqua; 
+}
+.Blue { 
+
+color:Blue; 
+}
+.Navy { 
+color:Navy; 
+}
+
+.Fb{
+font-weight:bold;
+}
+</style>
+
 ## reference 
 * **Machine Learning**  
 
@@ -176,6 +225,12 @@ conda deactivate
 conda env list
 // remove environment
 conda remove --name myenv numpy
+
+// install Django
+conda install django
+
+// quit python shell
+Ctrl-D
 ```
 
 ## 4. Miniconda(輕量化版本的 Anaconda)
@@ -186,9 +241,7 @@ bash Miniconda3-latest-Linux-x86_64.sh
 conda install requests beautifulsoup4 pandas
 ```
 
-## 5. Django(創建 Web 應用程式和 Web API 的框架)
-
-## 6. VsCode
+## 5. VsCode
 ```
 // pylint(檢查 Python 程式碼)
 python.exe -m pip install -U pylint --user
@@ -204,6 +257,752 @@ You should consider upgrading via the 'python -m pip install --upgrade pip' comm
 
 // select env
 ctrl-shift-p --> Python: Select Interpreter
+
+```
+
+# Django(創建 Web 應用程式和 Web API 的框架)
+
+## 1. 1st web page  
+https://docs.djangoproject.com/en/2.2/intro/tutorial01/
+
+* **create project**  
+mkdir local  
+cd local  
+django-admin startproject mysite  
+cd mysite  
+```
+mysite  
+	mysite/
+		settings.py
+		urls.py
+		wsgi.py
+		__init__.py
+	manage.py
+```
+
+
+* **run web server**  
+
+manage.py runserver  
+web browse run : http://127.0.0.1:8000/  
+manage.py runserver 8080 - change port number  
+manage.py runserver ip:8080 - set ip for other host access  
+> if found error 
+  modify project_name/settings.py
+  ```
+  ALLOWED_HOSTS = ['*']
+  ```
+
+* **add app(pools)**  
+	* manage.py startapp polls  
+	```python
+	polls
+		migrations/
+			__init__.py
+		admin.py
+		apps.py
+		migrations
+		models.py
+		tests.py
+		views.py
+		__init__.py
+	```
+
+	* Write your app view (polls/views.py)  
+
+	```python
+	from django.http import HttpResponse
+	def index(request):
+	    return HttpResponse("Hello, world. You're at the polls index.")
+	```
+
+	* map view to url(create polls/urls.py)  
+
+	```python
+	from django.urls import path
+
+	from . import views
+
+	urlpatterns = [
+	    path('', views.index, name='index'),
+	]
+	```
+
+	* point polls.urls to root(mysite/urls.py)
+
+	```python
+	from django.contrib import admin
+	from django.urls import include, path
+
+	urlpatterns = [
+	    path('polls/', include('polls.urls')),
+	    # if want to direct access
+	    # path('', include('polls.urls')),
+	    path('admin/', admin.site.urls),
+	]
+	```
+
+* **run web server**  
+manage.py runserver  
+web browse run : http://127.0.0.1:8000/  - Page not found  
+web browse run : http://127.0.0.1:8000/polls/  - hello page  
+web browse run : http://127.0.0.1:8000/admin/  - login page(name, password ??)  
+
+* **create Django super user**  
+	* migrate(1st time if need)  
+	manage.py migrate  
+	* create super user(user:robert passwoed:robert)  
+	manage.py createsuperuser
+
+## 2. girl Django
+https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/django/project_and_app.html  
+
+* **create project**  
+django-admin.py startproject demo_site  
+cd demo_site  
+
+* **run web server**  
+manage.py runserver  
+manage.py migrate - if need  
+
+* **add app**  
+manage.py startapp trips  
+demo_site/settings.py
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'trips',
+]
+```
+
+* Write your app view (trips/views.py)  
+```
+from django.http import HttpResponse
+def hello_world(request):
+    return HttpResponse("Hello World!")
+```
+
+* point root url to trips(demo_site/urls.py)
+```
+from django.contrib import admin
+from django.urls import path
+from trips.views import hello_world
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('hello/', hello_world),
+]
+```
+
+* **run web server**  
+manage.py runserver  
+web browse run : http://127.0.0.1:8000/hello/  - trips Page  
+
+## 2.1 girl Django - add template 
+* **change template directory**  
+mkdir templates  
+demo_site/settings.py  
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        # kyp(2019/09/24) : change templates 
+        #'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates').replace('\\', '/')],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+* **add template file**
+
+templates/hello_world.html  
+```
+  <em>{{ current_time }}</em>  
+  {{<variable_name>}} 是在 Django Template 中顯示變數的語法。  
+```
+```html
+<!-- hello_world.html -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>I come from template!!</title>
+        <style>
+            body {
+               background-color: lightyellow;
+            }
+            em {
+                color: LightSeaGreen;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Hello World!</h1>
+        <em>{{ current_time }}</em>
+    </body>
+</html>
+```
+
+* modify view function(trips/views.py)  
+```python
+# trips/views.py
+from datetime import datetime
+from django.shortcuts import render
+def hello_world(request):
+    return render(request, 'hello_world.html', {
+        'current_time': str(datetime.now()),
+    })
+```
+
+* **run web server**  
+manage.py runserver  
+web browse run : http://127.0.0.1:8000/hello/  - trips Page  
+
+## 2.2 girl Django - models 
+* **database setting**  
+	demo_site/settings.py  
+	```python
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.sqlite3',
+	        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	    }
+	}
+	```
+	ENGINE -- 你要使用的資料庫引擎  
+	> MySQL: django.db.backends.mysql
+	  SQLite 3: django.db.backends.sqlite3
+	  PostgreSQL: django.db.backends.postgresql_psycopg2  
+
+	NAME -- 你的資料庫名稱
+
+* **add models**  
+	trips/models.py  
+	宣告一個 Post 類別，並定義裡面的屬性，而 Django 會依據這個建立資料表，以及資料表裡的欄位設定  
+	```python
+	# trips/models.py
+	from django.db import models
+	# ------------------
+	class Post(models.Model):
+	    title = models.CharField(max_length=100)
+	    content = models.TextField(blank=True)
+	    photo = models.URLField(blank=True)
+	    location = models.CharField(max_length=100)
+	    created_at = models.DateTimeField(auto_now_add=True)
+	```
+	Django 預設會為每一個 Model 加上 id 欄位，並將這個欄位設成 primary key（主鍵），簡稱 pk，讓每一筆資料都會有一個獨一無二的 ID。  
+	為 Post 定義以下屬性：  
+	屬性		|資料型態		|說明		|參數
+	--------	|-----			|-----		|----
+	title		|CharField		|標題		|max_length=100 -- 標題不可以超過 100 個字元
+	content		|TextField		|內文		|blank=True -- 非必填欄位（表單驗證時使用），預設所有欄位都是 blank=False
+	photo		|URLField		|照片網址	|同 content，非必填欄位
+	location	|CharField		|地點		|同 title
+	created_at	|DateTimeField	|建立時間	|auto_now_add=True -- 物件新增的時間。若想設成物件修改時間，則用 auto_now=True
+
+* **sync database**  
+manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
+manage.py migrate - 更新資料庫  
+
+* **後台管理設定**  
+	* demo_site/settings.py(已設定)  
+	```python
+	INSTALLED_APPS = [
+	    'django.contrib.admin',
+		...
+	]
+	```
+	
+	* demo_site/urls.py(已設定)  
+	```python
+	urlpatterns = [
+	    path('admin/', admin.site.urls),
+	]
+	```
+	
+	* create super user  
+	manage.py createsuperuser
+	
+	* register model  
+	trips/admin.py  
+	```python
+	from django.contrib import admin
+	from .models import Post
+	admin.site.register(Post)
+	```
+
+	* enter admin
+	manage.py runserver  
+	http://127.0.0.1:8000/admin  
+
+	* set return title(can see at administration)  
+	trips/models.py  
+	```python
+	class Post(models.Model):
+		.....
+	    created_at = models.DateTimeField(auto_now_add=True)
+	    def __str__(self):
+	    	return self.title
+	```
+	manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
+	manage.py migrate - 更新資料庫  
+	manage.py runserver  
+	http://127.0.0.1:8000/admin  
+
+## 2.3 girl Django - ORM(Object-relational mapping)  
+CRUD 指的是，Create (新增)、Read (讀取)、Update (修改)、Delete (刪除) 等常見的資料庫操作  
+
+* **Django Shell(加強版的 Python shell)**  
+conda install ipython - install if not found  
+manage.py shell
+```python
+# Create 
+from trips.models import Post
+Post.objects.create(title='My First Trip', content='肚子好餓，吃什麼好呢?',  location='台北火車站') 
+Post.objects.create(title='My Second Trip', content='去散散步吧',  location='大安森林公園')
+Post.objects.create(title='Django 大冒險', content='從靜態到動態',  location='台北市大安區復興南路一段293號')
+# ....
+# Raed 
+Post.objects.all()
+# read - add get for filter
+Post.objects.get(pk=1)
+Post.objects.filter(location__contains='台北')
+# ....
+# Update 
+posts = Post.objects.filter(title__contains='Trip')
+posts
+posts[0].location
+posts[1].location
+# update field
+posts.update(location='象山親山步道')
+posts[0].location
+posts[1].location
+# Delete
+posts.delete()
+Post.objects.all()
+```
+> get：返回符合條件的唯一一筆資料。（注意：如果找不到符合條件的資料、或是有多筆資料符合條件，都會產生 exception）  
+  filter：返回符合條件的陣列。如果找不到任何資料則會返回空陣列。
+
+## 2.4 girl Django - show DB at templat  
+* **home page view**  
+trips/views.py  
+```python
+from .models import Post
+def home(request):
+    post_list =  Post.objects.all()
+    return render(request, 'home.html', {
+        'post_list': post_list,
+    })
+```
+
+* **home page url point to root**  
+demo_site/urls.py  
+```python
+from trips.views import hello_world,home
+urlpatterns = [
+	....
+    path('', home),
+]
+```
+
+* **home template**  
+templates/home.html
+```html
+{{ post_list }}
+```
+
+* **home template(show more tetail)**  
+```html
+{% for post in post_list %}
+	<div>
+	{{ post.title }}
+	{{ post.content }}
+	{{ post.photo }}
+	{{ post.created_at }}
+	</div>
+{% endfor %}
+```
+
+* **home template(show photo)**  
+```html
+{% for post in post_list %}
+	<div>
+	{{ post.title }}
+	{{ post.content }}
+	{{ post.created_at }}
+	{% if post.photo %}
+		<div class="thumbnail">
+    		<img src="{{ post.photo }}" alt="">
+		</div>
+	{% else %}
+		<div class="thumbnail thumbnail-default"></div>
+	{% endif %}
+	</div>
+{% endfor %}
+```
+
+* **home template(show time format)**  
+```html
+{% for post in post_list %}
+	<div>
+	{{ post.title }}
+	{{ post.content }}
+	{{ post.created_at|date:"Y/m/d H:i:s" }}
+	{% if post.photo %}
+		<div class="thumbnail">
+    		<img src="{{ post.photo }}" alt="">
+		</div>
+	{% else %}
+		<div class="thumbnail thumbnail-default"></div>
+	{% endif %}
+	</div>
+{% endfor %}
+```
+
+* **home template(complete ccs/html)** 
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>A Django Girl's Adventure</title>
+    <link href="//fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-title text-center">
+            <a href="/">A Django Girl’s Adventure</a>
+        </h1>
+    </div>
+    <div class="container">
+        {% for post in post_list %}
+        <div class="post-wrapper">
+            <div class="post">
+                <div class="post-heading">
+                    <h2 class="title">
+                        <a href="#">{{ post.title }}</a>
+                    </h2>
+                    <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
+                </div>
+                {% if post.photo %}
+                <div class="thumbnail">
+                    <img src="{{ post.photo }}" alt="">
+                </div>
+                {% else %}
+                <div class="thumbnail thumbnail-default"></div>
+                {% endif %}
+                <div class="post-content read-more-block">
+                    {{ post.content }}
+                </div>
+                <div class="post-footer">
+                    <a class="read-more" href="#">
+                        Read More <i class="fa fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
+```
+
+* **template tags**  
+```html
+# --- for --- 
+{% for <element> in <list> %}
+    ...
+{% endfor %}
+# --- if else --- 
+{% if var1 %}
+    {{ var1 }}
+{% elif var2 %}
+    {{ var2 }}
+{% else %}
+    {{ var3 }}
+{% endif %}
+# --- url  ---
+{% url '<url_name>' %} : 根據在 urls.py 中設定的「name」值，找到對應的 URL
+{% url '<url_name>' arg1=<var1> arg2=<var2> ...%} : 傳入參數
+```
+
+* **template filter**  
+```
+{{<variable_name>|<filter_name>:<filter_arguments>}}
+# date example
+{{ value|date:"D d M Y" }}
+# ---
+<variable_name> -- 變數名稱  
+<filter_name> -- filter 名稱，例如 add、cut 等等  
+<filter_arguments> -- 要傳入 filter 的參數  
+```
+
+## 2.5 girl Django - dynamic url  
+* **single article page view**  
+trips/views.py  
+```python
+def post_detail(request,pk):
+    post =  Post.objects.get(pk=pk)
+    return render(request, 'post.html', {'post': post})
+```
+
+* **single article page url point to root**  
+demo_site/urls.py
+```python
+from django.urls import path, re_path
+from trips.views import hello_world, home, post_detail
+urlpatterns = [
+	....
+    re_path(r'^post/(?P<pk>\d+)/$', post_detail),
+]
+```
+
+* **single article page template**  
+templates/post.html
+```html
+{{ post }}
+```
+
+* **single article page template(complete ccs/html)**  
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>{{ post.title }} | A Django Girl’s Adventure</title>
+    <link href="//fonts.googleapis.com/css?family=Lemon" rel="stylesheet" type="text/css">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="//djangogirlstaipei.github.io/assets/css/style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="header">
+        <h1 class="site-title text-center">
+            <a href="/">A Django Girl’s Adventure</a>
+        </h1>
+    </div>
+    <div class="container post post-detail">
+        <div class="post-heading">
+            <h1 class="title">{{ post.title }}</h1>
+            <div class="date">{{ post.created_at|date:'Y / m / d' }}</div>
+        </div>
+        <div class="location">
+            <i class="fa fa-map-marker"></i>
+            <span id="location-content">{{ post.location }}</span>
+        </div>
+        <div id="map-canvas" class="map"></div>
+        <div class="post-content">
+            {{ post.content }}
+        </div>
+        <hr class="fancy-line">
+        <img class="photo" src="{{ post.photo }}" alt="Cover photo for {{ post.title }}">
+    </div>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&libraries=places&sensor=false"></script>
+    <script src="//djangogirlstaipei.github.io/assets/js/map.js"></script>
+</body>
+</html>
+```
+
+* **使用 Regex 提取部份 URL 為參數**  
+Django 的 URL 是一個 regular expression (regex)  
+```
+(?P<pk>\d+)
+```
+	* \d 代表一個阿拉伯數字。
+	* '+' 代表「一個以上」。
+	* 所以 \d+ 代表一個以上的阿拉伯數字，例如「0」、「99」、「12345」。可是像「8a」就不符合，因為「a」不是數字。  
+	(?P<pk>) 代表「把這一串東西抓出來，命名為 pk。
+	* <b class="Red">用 pk 有一些問題,因pk為 DB generate record index,若曾經刪除,pk值為不連續,有些不存在</b>  
+
+* **put url to home page**  
+	* add url name for post_deatil  
+	demo_site/urls.py
+	```python
+	urlpatterns = [
+		....
+	    re_path(r'^post/(?P<pk>\d+)/$', post_detail, name='post_detail'),
+	]
+	```
+
+	* add url to home page(title and read-more)  
+	templates/home.html
+	```html
+    <div class="post-heading">
+        <h2 class="title">
+            <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+        </h2>
+        <div class="date">{{ post.created_at|date:"Y / m / d" }}</div>
+    </div>
+    ....
+    <div class="post-footer">
+        <a class="read-more" href="{% url 'post_detail' pk=post.pk %}">
+            Read More <i class="fa fa-arrow-right"></i>
+        </a>
+    </div>
+	```
+
+## 3. Django - web design(board)  
+django-admin.py startproject board  
+cd board
+
+* **add app**  
+manage.py startapp boardapp  
+board/settings.py
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'boardapp',
+]
+```
+
+* **add models**  
+trips/models.py  
+```python
+	from django.db import models
+	# ------------------
+	class BoaDb(models.Model):
+	    title = models.CharField(max_length=100)
+	    content = models.TextField(blank=True)
+	    photo = models.URLField(blank=True)
+	    location = models.CharField(max_length=100)
+	    created_at = models.DateTimeField(auto_now_add=True)
+```
+manage.py makemigrations
+manage.py migrate
+
+* **point urls to root(board/urls.py)** 
+
+
+## 2. local library
+django-admin startproject local_library
+cd local_library
+manage.py startapp catalog
+
+- 每次模型改變，都需要運行以上命令，來影響需要存放的數據結構（包括添加和刪除整個模型和單個字段）。
+manage.py makemigrations
+manage.py migrate
+
+manage.py runserver
+
+- modify model
+manage.py makemigrations
+manage.py migrate
+
+- create super user
+manage.py createsuperuser
+- run server 
+manage.py runserver
+
+
+* **create directory**  
+mkdir locallibrary  
+cd locallibrary  
+
+* **create project**  
+django-admin startproject locallibrary  
+```
+locallibrary/
+    manage.py
+    locallibrary/
+        __init__.py
+        settings.py
+        urls.py
+        wsgi.py
+```
+	* __init__.py 是一個空文件，指示 Python 將此目錄視為 Python 套件。
+	* settings.py 包含所有的網站設置。這是可以註冊所有創建的應用的地方，也是靜態文件，數據庫配置的地方，等等。
+	* urls.py定義了網站url到view的映射。雖然這裡可以包含所有的url，但是更常見的做法是把應用相關的url包含在相關應用中，你可以在接下來的教程裡看到。
+	* wsgi.py  幫助Django應用和網絡服務器間的通訊。你可以把這個當作模板。
+	* manage.py 腳本可以創建應用，和資料庫通訊，啟動開發用網絡服務器。  
+
+* **create catolog**  
+和您項目的manage.py在同一個文件夾下  
+cd locallibrary  
+manage.py startapp catalog
+```
+locallibrary/
+    manage.py
+    locallibrary/
+    catalog/
+        admin.py
+        apps.py
+        models.py
+        tests.py
+        views.py
+        __init__.py
+        migrations/
+```
+	* catalog/ - 目錄文件夾
+	* views.py 視圖函數
+	* models.py 模型函數
+	* tests.py 測試函數
+	* admin.py 網站管理設置函數
+	* apps.py 註冊應用函數
+	* __init__.py 一個空文件，Django/Python會將這個文件作為Python套件包
+	* migrations/ 用來存放 “migrations” ——當你修改你的數據模型時，這個文件會自動升級你的資料庫
+
+* **註冊catalog應用**  
+
+locallibrary/locallibrary/settings.py找到   INSTALLED_APPS 列表裡的定義。如下所示，在列表的最後添加新的一行。  
+--> 'django.contrib.CatalogConfig',  
+```python
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.CatalogConfig',
+]
+```
+新的這行，詳細說明了應用配置文件在( CatalogConfig) /locallibrary/catalog/apps.py 裡  
+
+* **database setting(as default)**
+```
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+```
+
+* **other setting**
+
+```
+# 時區 - 依需要修改
+TIME_ZONE = 'Asia/Taipei'
+# 這個密匙值，是Django網站安全策略的一部分。如果在開發環境中，沒有保護好這個密匙，把代碼投入生產環境時，最好用不同的密匙代替。（可能從環境變量或文件中讀取）。
+SECRET_KEY = '=b(vf2xry9k65(5k757_miu-ug9s66tq=*^f78-!=7_u$sym1%'
+# debug - 這個會在debug日誌裡輸出錯誤信息，而不是輸入H​​TTP的返回碼。在生產環境中，它應設置為false，因為輸出的錯誤信息，會幫助想要攻擊網站的人。
+DEBUG = True
+```
+
+* **some error**  
+```
+# ModuleNotFoundError: No module named 'sqlparse'
+conda install sqlparse
 
 ```
 
@@ -330,7 +1129,7 @@ print(soup.select('p:nth-of-type(4)')[0].text)
 # run
 
 ## 1. run jupyter notebook
-
+Jupyter是一個非營利組織，旨在「為數十種程式語言的交互式計算開發開源軟體，開放標準和服務」。  
 ```
 // run jupyter notebook (http://localhost:8888)
 jupyter notebook
@@ -393,6 +1192,56 @@ print(a)
 print(a(2))
 print(a(12))
 ```
+
+* **print(python3)**  
+
+```python
+# print format
+print('{0},{1}'.format('zhangk', 32))
+print('{},{},{}'.format('zhangk','boy',32))
+print('{name},{sex},{age}'.format(age=32,sex='male',name='zhangk'))
+
+# 填充與對齊
+# ：號後面帶填充的字符，只能是一個字符，不指定的話默認是用空格填充
+# ^，<，>分別是居中，左對齊，右對齊，後面帶寬度
+print('{:>8}'.format('zhang'))
+print('{:0>8}'.format('zhang'))
+print('{:a<8}'.format('zhang'))
+print('{:p^10}'.format('zhang'))
+	   zhang
+	000zhang
+	zhangaaa
+	ppzhangppp
+
+# 精度与类型f
+print('{:.2f}'.format(31.31412))
+	31.31
+
+# 其他类型 :b、d、o、x分别是二进制、十进制、八进制、十六进制
+print('{:b}'.format(15))
+print('{:d}'.format(15))
+print('{:o}'.format(15))
+print('{:x}'.format(15))
+	1111
+	15
+	17
+	f
+
+# 用逗号还能用来做金额的千位分隔符
+print('{:,}'.format(123456789))
+	123,456,789
+
+#print 帶參數
+print("the length of (%s) is %d" % ('runoob',len('runoob')))
+
+# print 會自動在行末加上回車, 如果不需回車，只需在 print end=''
+print("aa",end='')
+print("bb")
+print("cc","dd")
+	aabb
+	cc dd
+```
+
 
 * **os套件**
 
@@ -1814,6 +2663,7 @@ random.randn()  |隨意數+,-,<0,>0...
 .random.randint()|整數隨意數, .random.randint(low[, high, size, dtype]) - low (inclusive) to high (exclusive)
 .random.random()|隨意數[0,1):>=value<1-,.random.random(size=None),numpy.random.ranf(size=None) also same
 .random.normal()|隨意數 for normal (Gaussian) distribution
+.random.choice()|a given 1-D array, numpy.random.choice(a, size=None, replace=True, p=None)
 np.sin(x\*4\*np.pi)|set to ndarray by sin function
 np.abs() |絕對值
 np.exp(),exp2(),power()|指數,e^x,2^x,10^x
@@ -1829,7 +2679,7 @@ np.prod		|所有元素的乘積
 np.var		|變異量
 np.argmin	|找出最小值的索引
 np.argmax	|找出最大值的索引
-np.median	|元素的中位數
+np.median(x)|元素的中位數
 np.any		|當陣列中有任一值是True或是非零值時傳回True
 np.all		|當陣列中有所有值是True或是非零值時傳回True
 np.save('my_array', x)  |save array
@@ -1852,6 +2702,10 @@ isnull() |檢查空值，回傳布林值 (None,nan)
 notnull()|檢查不是空值，回傳布林值
 dropna() |刪除空值
 fillna() |空值填入特定直,ironman.fillna(0)
+np.sort(x)|sort x array
+np.average(x)|x array average(same value as mean)
+np.percentile(x,25)|百分位數(Percentile)
+
 
 variable       | 說明
 ---------------|------
@@ -2097,6 +2951,28 @@ team['number'] = [23,32,96,23]
 team['team'] = ['兄弟象','兄弟象','兄弟象','lamigo']
 print(team)
 print(team['number'])
+
+# median,percentile
+import numpy as np
+from scipy import stats
+# ------------------
+x =np.random.randint(0,100,size=100)
+print("x-->",x)
+print("x sort-->",np.sort(x))
+print("x mean-->",x.mean())
+print("x average-->",np.average(x))
+print("x median-->",np.median(x))
+print("percentile 25-->", np.percentile(x,25))
+print("percentile 75-->", np.percentile(x,75))
+
+# 離散型隨機變數(Discrete Random Variable)
+import numpy as np
+import pandas as pd
+# numpy.random.choice(a, size=None, p=None)-Generates a random sample from a given 1-D array
+random_list = np.random.choice([1, 2, 3, 4, 5], size=1000, p=[0.25, 0.1, 0.35, 0.2, 0.1])
+# Return a Series containing counts of unique values
+# sort_index() : sort bt index
+print(pd.Series(random_list).value_counts().sort_index())
 ```
 
 ## squarify
@@ -2154,6 +3030,25 @@ pip install folium
 
 ## scipy
 SciPy就是以Numpy為基礎做科學、工程的運算處理的package，包含統計、優化、整合、線性代數、傅立葉轉換圖像等較高階的科學運算  
+
+* *from scipy import stats*  
+
+function     | 說明
+-------------|------
+stats.mode(x)|眾數(Mode)
+
+```python
+# mode 
+import numpy as np
+from scipy import stats
+# ------------------
+x =np.random.randint(0,100,size=100)
+x_mode = stats.mode(x)
+print("x mode-->", x_mode)
+print("x mode-->", x_mode.mode[0])
+	x mode--> ModeResult(mode=array([10]), count=array([3]))
+	x mode--> 10
+```
 
 ## StatsModels
 Statsmodels 是一個 Python 模塊，它為統計數據分析提供了許多機會，例如統計模型估計、執行統計測試等。在它的幫助下，你可以實現許多機器學習方法並探索不同的繪圖可能性。  

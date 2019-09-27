@@ -41,6 +41,8 @@ File --> new view into file
 *	install package
 	``
 	Preferences -> Package Control --> press "install package"
+	or
+	Ctrl + Shift + P  --> press "install package"
 	``
 
 *	Sublime Text 3 Deleting Code when I hit Tab Key
@@ -52,3 +54,6 @@ File --> new view into file
 
 * open folders 
 	File --> open floders
+
+* package  
+
