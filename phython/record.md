@@ -228,6 +228,9 @@ conda remove --name myenv numpy
 
 // install Django
 conda install django
+// check version 
+python -m django --version
+
 
 // quit python shell
 Ctrl-D
@@ -283,10 +286,10 @@ mysite
 
 * **run web server**  
 
-manage.py runserver  
+python manage.py runserver  
 web browse run : http://127.0.0.1:8000/  
-manage.py runserver 8080 - change port number  
-manage.py runserver ip:8080 - set ip for other host access  
+python manage.py runserver 8080 - change port number  
+python manage.py runserver ip:8080 - set ip for other host access  
 > if found error 
   modify project_name/settings.py
   ```
@@ -294,7 +297,7 @@ manage.py runserver ip:8080 - set ip for other host access
   ```
 
 * **add app(pools)**  
-	* manage.py startapp polls  
+	* python manage.py startapp polls  
 	```python
 	polls
 		migrations/
@@ -343,16 +346,16 @@ manage.py runserver ip:8080 - set ip for other host access
 	```
 
 * **run web server**  
-manage.py runserver  
+python manage.py runserver  
 web browse run : http://127.0.0.1:8000/  - Page not found  
 web browse run : http://127.0.0.1:8000/polls/  - hello page  
 web browse run : http://127.0.0.1:8000/admin/  - login page(name, password ??)  
 
 * **create Django super user**  
 	* migrate(1st time if need)  
-	manage.py migrate  
+	python manage.py migrate  
 	* create super user(user:robert passwoed:robert)  
-	manage.py createsuperuser
+	python manage.py createsuperuser
 
 ## 2. girl Django
 https://djangogirlstaipei.gitbooks.io/django-girls-taipei-tutorial/django/project_and_app.html  
@@ -362,11 +365,11 @@ django-admin.py startproject demo_site
 cd demo_site  
 
 * **run web server**  
-manage.py runserver  
-manage.py migrate - if need  
+python manage.py runserver  
+python manage.py migrate - if need  
 
 * **add app**  
-manage.py startapp trips  
+python manage.py startapp trips  
 demo_site/settings.py
 ```python
 INSTALLED_APPS = [
@@ -399,7 +402,7 @@ urlpatterns = [
 ```
 
 * **run web server**  
-manage.py runserver  
+python manage.py runserver  
 web browse run : http://127.0.0.1:8000/hello/  - trips Page  
 
 ## 2.1 girl Django - add template 
@@ -468,7 +471,7 @@ def hello_world(request):
 ```
 
 * **run web server**  
-manage.py runserver  
+python manage.py runserver  
 web browse run : http://127.0.0.1:8000/hello/  - trips Page  
 
 ## 2.2 girl Django - models 
@@ -514,8 +517,8 @@ web browse run : http://127.0.0.1:8000/hello/  - trips Page
 	created_at	|DateTimeField	|建立時間	|auto_now_add=True -- 物件新增的時間。若想設成物件修改時間，則用 auto_now=True
 
 * **sync database**  
-manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
-manage.py migrate - 更新資料庫  
+python manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
+python manage.py migrate - 更新資料庫  
 
 * **後台管理設定**  
 	* demo_site/settings.py(已設定)  
@@ -534,7 +537,7 @@ manage.py migrate - 更新資料庫
 	```
 	
 	* create super user  
-	manage.py createsuperuser
+	python manage.py createsuperuser
 	
 	* register model  
 	trips/admin.py  
@@ -545,7 +548,7 @@ manage.py migrate - 更新資料庫
 	```
 
 	* enter admin
-	manage.py runserver  
+	python manage.py runserver  
 	http://127.0.0.1:8000/admin  
 
 	* set return title(can see at administration)  
@@ -557,9 +560,9 @@ manage.py migrate - 更新資料庫
 	    def __str__(self):
 	    	return self.title
 	```
-	manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
-	manage.py migrate - 更新資料庫  
-	manage.py runserver  
+	python manage.py makemigrations - 這個指令會根據你對 Model 的修改刪除建立一個新的 migration 檔案  
+	python manage.py migrate - 更新資料庫  
+	python manage.py runserver  
 	http://127.0.0.1:8000/admin  
 
 ## 2.3 girl Django - ORM(Object-relational mapping)  
@@ -567,7 +570,7 @@ CRUD 指的是，Create (新增)、Read (讀取)、Update (修改)、Delete (刪
 
 * **Django Shell(加強版的 Python shell)**  
 conda install ipython - install if not found  
-manage.py shell
+python manage.py shell
 ```python
 # Create 
 from trips.models import Post
@@ -856,12 +859,235 @@ Django 的 URL 是一個 regular expression (regex)
     </div>
 	```
 
+## 3. Django - projrct/app create
+* **create project**  
+django-admin startproject mysite  
+cd mysite  
+python manage.py runserver  
+
+* **add app**  
+python manage.py startapp polls  
+
+* **app's view and urls.py**  
+  * polls/views.py  
+  ```python
+  from django.http import HttpResponse
+  # --
+  def index(request):
+    return HttpResponse("Hello, You are at the polls index")
+  ```
+
+  * add polls/urls.py 
+  ```python
+  from django.urls import path
+  # --
+  from . import views
+  urlpatterns = [
+    path('', views.index, name='index')
+  ]
+  ```
+
+* **add app urls to project's url**  
+> mysite/urls.py  
+  The include() function allows referencing other URLconfs.  
+```python
+from django.contrib import admin
+from django.urls import path, include
+# --
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('polls/', include('polls.urls')),
+]
+```
+
+## 3.1 Django - Database 
+> SQLite is included in Python
+
+* **project setting**  
+mysite/settings.py  
+```python
+# --- default Database ----
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+}
+# --- default Time Zone ----
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Taipei'
+# --- installed apps ----
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+```
+> python manage.py migrate - update for databse change  
+
+* **models-database setting**  
+    * set modules  
+    polls/models.py  
+    ```python
+    from django.db import models  
+    # --
+    class Question(models.Model):
+      question_text = models.CharField(max_length=200)
+      pub_date = models.DateTimeField('data published')
+    # --
+    class Choice(models.Model):
+      question = models.ForeignKey(Question, on_delete=models.CASCADE)
+      choice_text = models.CharField(max_length=200)
+      votes = models.IntegerField(default=0)
+    ```
+    > pub_date = models.DateTimeField('data published') - 'data published': human-readable name  
+
+    * add app  
+    mysite/settings.py  
+    ```python
+    INSTALLED_APPS = [
+        'polls.apps.PollsConfig',
+        ....
+    ]
+    ```
+    > The PollsConfig in pools/apps.py  
+
+    * app model makemigrations  
+    python manage.py makemigrations polls  
+    ```python
+    # --> response 
+    Migrations for 'polls':
+      polls\migrations\0001_ini
+        - Create model Question
+        - Create model Choice
+    ```
+
+    * polls sql migrate  
+    python manage.py sqlmigrate polls 0001  
+    ```python
+    # --> respons
+    # BEGIN;
+    # --
+    # -- Create model Question
+    # --
+    # CREATE TABLE "polls_question" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
+    # "question_text" varchar(200) NOT NULL, "pub_date" datetime NOT NULL);
+    # --
+    # -- Create model Choice
+    # --
+    # CREATE TABLE "polls_choice" ("id" integer NOT NULL PRIMARY KEY AUTOINCREMENT, "c
+    # hoice_text" varchar(200) NOT NULL, "votes" integer NOT NULL, "question_id" integ
+    # er NOT NULL REFERENCES "polls_question" ("id") DEFERRABLE INITIALLY DEFERRED);
+    # CREATE INDEX "polls_choice_question_id_c5b4b260" ON "polls_choice" ("question_id
+    # ");
+    # COMMIT;
+    ```
+
+    * check any issue ?(only check)  
+    python manage.py check  
+    ```
+    # --> response
+    System check identified no issues (0 silenced).
+    ```
+
+    * migrate project  
+    python manage.py migrate
+    ```
+    # --> response
+    Operations to perform:
+      Apply all migrations: admin, auth, contenttypes, polls, sessions
+    Running migrations:
+      Applying polls.0001_initial... OK
+    ```
+
+    * python django shell  
+    python manage.py shell  
+    ```
+    >>> from polls.models import Question, Choice
+    >>> Question.objects.all()
+    <QuerySet []>
+
+    >>> from django.utils import timezone
+    >>> q = Question(question_text="What's new?", pub_date=timezone.now())
+    >>> q.save()
+    >>> q.id
+    1
+
+    >>> q.question_text
+    "What's new?"
+    >>> q.pub_date
+    datetime.datetime(2019, 9, 29, 12, 19, 32, 453076, tzinfo=<UTC>)
+    >>> q.question_text = "What's up?"
+    >>> q.save()
+    >>> Question.objects.all()
+    <QuerySet [<Question: Question object (1)>]>
+    ```
+
+    * python DB return string function + addtion function   
+    polls/models.py    
+    ```python
+    import datetime
+    from django.utils import timezone
+    ....
+    class Question(models.Model):
+        ....
+        def __str__(self):
+            return self.question_text
+        def was_published_recently(self):
+            return self.pub_date >= timezone.now() - datetime.timedelta(days=1)
+    class Choice(models.Model):
+        ....
+        def __str__(self):
+            return self.question_text
+    ```
+
+    * migrate  
+    python manage.py migrate  
+
+    * DB access  
+    python manage.py shell  
+    ```
+    >>> from polls.models import Question, Choice
+    >>> Question.objects.all()
+    <QuerySet [<Question: What's up?>]>
+
+    >>> Question.objects.filter(id=1)
+     <QuerySet [<Question: What's up?>]>
+    >>> Question.objects.filter(question_text__startswith='What')
+    <QuerySet [<Question: What's up?>]>
+
+    >>> from django.utils import timezone
+    >>> current_year = timezone.now().year
+    >>> Question.objects.get(pub_date__year=current_year)
+    <Question: What's up?>
+    >>> Question.objects.get(id=1)
+    <Question: What's up?>
+
+    >>> Question.objects.get(id=2)
+    # ---------------------------------------------------------------------------
+    DoesNotExist                              Traceback (most recent call last)
+    ....
+    DoesNotExist: Question matching query does not exist.
+
+    >>> Question.objects.get(pk=1)
+    <Question: What's up?>
+    >>> q = Question.objects.get(pk=1)
+    >>> q.was_published_recently()
+    True
+    ```
+
+
+
+
 ## 3. Django - web design(board)  
 django-admin.py startproject board  
 cd board
 
 * **add app**  
-manage.py startapp boardapp  
+python manage.py startapp boardapp  
 board/settings.py
 ```python
 INSTALLED_APPS = [
@@ -887,8 +1113,8 @@ trips/models.py
 	    location = models.CharField(max_length=100)
 	    created_at = models.DateTimeField(auto_now_add=True)
 ```
-manage.py makemigrations
-manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
 * **point urls to root(board/urls.py)** 
 
@@ -896,22 +1122,22 @@ manage.py migrate
 ## 2. local library
 django-admin startproject local_library
 cd local_library
-manage.py startapp catalog
+python manage.py startapp catalog
 
 - 每次模型改變，都需要運行以上命令，來影響需要存放的數據結構（包括添加和刪除整個模型和單個字段）。
-manage.py makemigrations
-manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
-manage.py runserver
+python manage.py runserver
 
 - modify model
-manage.py makemigrations
-manage.py migrate
+python manage.py makemigrations
+python manage.py migrate
 
 - create super user
-manage.py createsuperuser
+python manage.py createsuperuser
 - run server 
-manage.py runserver
+python manage.py runserver
 
 
 * **create directory**  
@@ -938,7 +1164,7 @@ locallibrary/
 * **create catolog**  
 和您項目的manage.py在同一個文件夾下  
 cd locallibrary  
-manage.py startapp catalog
+python manage.py startapp catalog
 ```
 locallibrary/
     manage.py
