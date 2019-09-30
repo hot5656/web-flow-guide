@@ -230,10 +230,10 @@ conda remove --name myenv numpy
 conda install django
 // check version 
 python -m django --version
-
-
 // quit python shell
-Ctrl-D
+Ctrl-D or exit
+
+
 ```
 
 ## 4. Miniconda(輕量化版本的 Anaconda)
@@ -1011,6 +1011,7 @@ INSTALLED_APPS = [
     <QuerySet []>
 
     >>> from django.utils import timezone
+    // insert record
     >>> q = Question(question_text="What's new?", pub_date=timezone.now())
     >>> q.save()
     >>> q.id
@@ -1022,6 +1023,7 @@ INSTALLED_APPS = [
     datetime.datetime(2019, 9, 29, 12, 19, 32, 453076, tzinfo=<UTC>)
     >>> q.question_text = "What's up?"
     >>> q.save()
+    // show all for Question 
     >>> Question.objects.all()
     <QuerySet [<Question: Question object (1)>]>
     ```
@@ -1041,7 +1043,7 @@ INSTALLED_APPS = [
     class Choice(models.Model):
         ....
         def __str__(self):
-            return self.question_text
+            return self.choice_text
     ```
 
     * migrate  
@@ -1051,36 +1053,268 @@ INSTALLED_APPS = [
     python manage.py shell  
     ```
     >>> from polls.models import Question, Choice
+    // return str 
     >>> Question.objects.all()
     <QuerySet [<Question: What's up?>]>
 
+    // filter by id
     >>> Question.objects.filter(id=1)
      <QuerySet [<Question: What's up?>]>
+    // filter by start stringid
     >>> Question.objects.filter(question_text__startswith='What')
     <QuerySet [<Question: What's up?>]>
 
     >>> from django.utils import timezone
     >>> current_year = timezone.now().year
+    // get for year condition  
     >>> Question.objects.get(pub_date__year=current_year)
     <Question: What's up?>
     >>> Question.objects.get(id=1)
     <Question: What's up?>
 
+    // get not exist is 
     >>> Question.objects.get(id=2)
     # ---------------------------------------------------------------------------
     DoesNotExist                              Traceback (most recent call last)
     ....
     DoesNotExist: Question matching query does not exist.
 
-    >>> Question.objects.get(pk=1)
-    <Question: What's up?>
+    // run addition function - was_published_recently 
+    // pk meaning same as id 
     >>> q = Question.objects.get(pk=1)
     >>> q.was_published_recently()
     True
+
+    >>> q = Question.objects.get(id=1)
+    // display any choice from related object  
+    >>> q.choice_set.all()
+
+    // create choices 
+    >>> q.choice_set.create(choice_text='Not much' ,votes=0)
+    <Choice: Not much>
+    >>> q.choice_set.create(choice_text='The sky' ,votes=0)
+    <Choice: The sky>
+    >>> c = q.choice_set.create(choice_text='Just hacking again' ,votes=0)
+    >>> c.question
+    <Question: What's up?>
+
+    // display choice and counter - I input wrong so have more thern 3 record 
+    >>> q.choice_set.all()
+    <QuerySet [<Choice: Not much>, <Choice: Not much>, <Choice: Not much>, <
+        Choice: The sky>, <Choice: Just hacking again>]>
+    >>> q.choice_set.count()
+    5
+
+    // display year condition for choice 
+    >>> Choice.objects.filter(question__pub_date__year=current_year)
+    <QuerySet [<Choice: Not much>, <Choice: Not much>, <Choice: Not much>,
+    <Choice: The sky>, <Choice: Just hacking again>]>
+
+    // filter by condition then delete 
+    >>> c = q.choice_set.filter(choice_text__startswith='Just hacking')
+    >>> c.delete()
+    (1, {'polls.Choice': 1})
+    >>> Choice.objects.filter(question__pub_date__year=current_year)
+    <QuerySet [<Choice: Not much>, <Choice: Not much>, <Choice: Not much>,
+    <Choice: The sky>]>
     ```
 
+    * create super user  
+    python manage.py createsuperuser  
+    web admin interface : http://127.0.0.1:8000/admin/
 
+    * register poll model to admin  
+    polls/admin.py  
+    ```python 
+    from django.contrib import admin
+    from .models import Question, Choice
+    admin.site.register(Question)
+    admin.site.register(Choice)
+    ```
 
+## 3.2 Django - add more view  
+* **add view**  
+polls/views.py  
+```python
+from django.http import HttpResponse
+def index(request):
+    return HttpResponse("Hello, You are at the polls index")
+def detail(request, question_id):
+    return HttpResponse("you're looking at question %s." % question_id)
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+def vote(request, question_id):
+    return HttpResponse("you're voting on question %s." % question_id)
+```
+
+* **add app url**  
+polls/urls.py  
+```python
+from django.urls import path
+from . import views
+urlpatterns = [
+    # ex : /pools/
+    path('', views.index, name='index'),
+    # ex : /pools/5/
+    path('<int:question_id>/', views.detail, name='detail'),
+    # ex : /pools/5/results/
+    path('<int:question_id>/results/', views.results, name='results'),
+    # ex : /pools/5/vote/
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]
+```
+
+* **try web access**  
+http://127.0.0.1:8000/polls/50/  
+http://127.0.0.1:8000/polls/50/results/  
+http://127.0.0.1:8000/polls/50/vote/  
+> It response success.  
+  It seem caa : detail(request=<HttpRequest object>, question_id=34)  
+
+* **modify index view - show DB**  
+polls/views.py  
+```python
+from .models import Question
+def index(request):
+    # return HttpResponse("Hello, You are at the polls index")
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
+```
+
+* **add template - for HTML template**  
+create templates directory in polls  
+polls/templates/polls/index.html  
+```python
+{% if latest_question_list %}
+    <ul>
+        {% for question in latest_question_list %}
+        <li> 
+            <a href="/polls/{{question.id}}/">{{question.question_text}}/</a>
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+```
+
+* **default TEMPLATES APP_DIRS set true**  
+mysite/settings.py  
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
+* **change view for template**  
+polls/views.py  
+```python
+from django.template import loader
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    template = loader.get_template('polls/index.html')
+    content = {
+        'latest_question_list' : latest_question_list,
+    }
+    return HttpResponse(template.render(content, request))
+```
+
+* **change view to shortcut: render()**  
+polls/views.py  
+```python
+from django.shortcuts import render
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    content = {
+        'latest_question_list' : latest_question_list,
+    }
+    return render(request, 'polls/index.html', content)
+```
+
+* **Raising a 404 error - detail view**  
+polls/views.py  
+```python
+from django.http import Http404
+from django.shortcuts import render
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(id=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist.")
+    return render(request, 'polls/detail.html', {'question': question})
+```
+polls/templates/polls/detail.html  
+```html
+{{ question }}
+```
+
+* **shortcut get_object_or_404()**  
+polls/views.py  
+```python
+from django.shortcuts import get_object_or_404
+def detail(request, question_id):
+    question = get_object_or_404(Question, id=question_id)
+    return render(request, 'polls/detail.html', {'question': question})
+```
+
+* **Use the template system**  
+polls/templates/polls/detail.html  
+```html
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+        <li>{{ choice.choice_text }}</li>
+    {% endfor %}
+</ul>
+```
+> variable :  {{ question.question_text }}  
+  method : {% for.. %} {% endfor %}  
+  DB function :  question.choice_set.all  
+
+* **Removing hardcoded URLs in templates**  
+polls/templates/polls/index.html  
+```html
+<a href="/polls/{{question.id}}/">{{question.question_text}}/</a>
+to 
+<a href="{% url 'detail' question.id %}">{{question.question_text}}/</a>
+```
+template url configurations  
+```
+{% url '<url_name>' arg1=<var1> arg2=<var2> ...%}  
+<url_name> map to urls.py name's url :  
+  path('<int:question_id>/', views.detail, name='detail'),
+```
+
+* **Namespacing URL names**  
+consider mutiple app have same name  
+polls/urls.py   
+```python
+# add app's name for url
+app_name = 'pools'
+urlpatterns = [
+    ....
+]
+```
+polls/templates/polls/index.html  
+```html
+<a href="{% url 'detail' question.id %}">{{question.question_text}}/</a>
+to 
+<a href="{% url 'pools:detail' question.id %}">{{question.question_text}}/</a>
+```
 
 ## 3. Django - web design(board)  
 django-admin.py startproject board  
