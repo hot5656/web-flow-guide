@@ -194,3 +194,6 @@ ctrl+shift+p --> configure Display Language
     ]
 ```
 
+Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼
+選擇多行-->shift+alt+(mouse-l) : 多行編輯
+

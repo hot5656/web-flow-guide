@@ -1316,155 +1316,129 @@ to
 <a href="{% url 'pools:detail' question.id %}">{{question.question_text}}/</a>
 ```
 
-## 3. Django - web design(board)  
-django-admin.py startproject board  
-cd board
+## 3.2 Django - add a simple form  
+* **deatil.html**  
+polls/templates/polls/detail.html  
+```html
+<h1>{{ question.question_text }}</h1>
+{% if error_message %}
+	<p><strong>{{ error_message }}</strong></p>
+{% endif %}
+<!-- -->
+<form action="{% url 'polls:vote' question.id %}" method="post">
+	{% csrf_token %}
+	<!-- -->
+	{% for choice in question.choice_set.all %}
+		<input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+		<label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>	
+		<br>
+	{% endfor %}
+	<input type="submit" value="Vote">
+</form>
+```
+> form action: point tu url  
+  method="post" 資料傳遞時，網址並不會改變  
+  method="get" 網址會帶有 HTML Form 表單的參數與資料  
+  {{ forloop.counter }}: for index  
+  {% csrf_token %}: Django 防止偽造 command 送至 server  
 
-* **add app**  
-python manage.py startapp boardapp  
-board/settings.py
+* **view**  
+polls/views.py  
 ```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'boardapp',
-]
+from django.http import HttpResponse, HttpResponseRedirect
+from django.urls import reverse
+from .models import Question, Choice
+def vote(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    try :
+        selected_choice = question.choice_set.get(pk=request.POST['choice'])
+    except (KeyError, Choice.DoesNotExist):
+        # redisplay the question voting form
+        return render(request, 'polls/detail.html', {
+            'question': question,
+            'error_message': "You didn't select a choice.",
+        })
+    else :
+        selected_choice.votes += 1
+        selected_choice.save()
+        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 ```
+> request.POST['choice']: return choice id, GET 也有相同功能, 但 POST能防止資料直接顯露  
+  (KeyError, Choice.DoesNotExist): triger by request.POST['choice'] not get data  
+  HttpResponseRedirect: run it aftre POST data(Tt only take a single argument)  
+  reverse(): avoid have hardcode URL  
 
-* **add models**  
-trips/models.py  
+* **do results view**  
+polls/views.py  
 ```python
-	from django.db import models
-	# ------------------
-	class BoaDb(models.Model):
-	    title = models.CharField(max_length=100)
-	    content = models.TextField(blank=True)
-	    photo = models.URLField(blank=True)
-	    location = models.CharField(max_length=100)
-	    created_at = models.DateTimeField(auto_now_add=True)
-```
-python manage.py makemigrations
-python manage.py migrate
-
-* **point urls to root(board/urls.py)** 
-
-
-## 2. local library
-django-admin startproject local_library
-cd local_library
-python manage.py startapp catalog
-
-- 每次模型改變，都需要運行以上命令，來影響需要存放的數據結構（包括添加和刪除整個模型和單個字段）。
-python manage.py makemigrations
-python manage.py migrate
-
-python manage.py runserver
-
-- modify model
-python manage.py makemigrations
-python manage.py migrate
-
-- create super user
-python manage.py createsuperuser
-- run server 
-python manage.py runserver
-
-
-* **create directory**  
-mkdir locallibrary  
-cd locallibrary  
-
-* **create project**  
-django-admin startproject locallibrary  
-```
-locallibrary/
-    manage.py
-    locallibrary/
-        __init__.py
-        settings.py
-        urls.py
-        wsgi.py
-```
-	* __init__.py 是一個空文件，指示 Python 將此目錄視為 Python 套件。
-	* settings.py 包含所有的網站設置。這是可以註冊所有創建的應用的地方，也是靜態文件，數據庫配置的地方，等等。
-	* urls.py定義了網站url到view的映射。雖然這裡可以包含所有的url，但是更常見的做法是把應用相關的url包含在相關應用中，你可以在接下來的教程裡看到。
-	* wsgi.py  幫助Django應用和網絡服務器間的通訊。你可以把這個當作模板。
-	* manage.py 腳本可以創建應用，和資料庫通訊，啟動開發用網絡服務器。  
-
-* **create catolog**  
-和您項目的manage.py在同一個文件夾下  
-cd locallibrary  
-python manage.py startapp catalog
-```
-locallibrary/
-    manage.py
-    locallibrary/
-    catalog/
-        admin.py
-        apps.py
-        models.py
-        tests.py
-        views.py
-        __init__.py
-        migrations/
-```
-	* catalog/ - 目錄文件夾
-	* views.py 視圖函數
-	* models.py 模型函數
-	* tests.py 測試函數
-	* admin.py 網站管理設置函數
-	* apps.py 註冊應用函數
-	* __init__.py 一個空文件，Django/Python會將這個文件作為Python套件包
-	* migrations/ 用來存放 “migrations” ——當你修改你的數據模型時，這個文件會自動升級你的資料庫
-
-* **註冊catalog應用**  
-
-locallibrary/locallibrary/settings.py找到   INSTALLED_APPS 列表裡的定義。如下所示，在列表的最後添加新的一行。  
---> 'django.contrib.CatalogConfig',  
-```python
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.CatalogConfig',
-]
-```
-新的這行，詳細說明了應用配置文件在( CatalogConfig) /locallibrary/catalog/apps.py 裡  
-
-* **database setting(as default)**
-```
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+def results(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/results.html', {'question': question})
 ```
 
-* **other setting**
+* **add results template**  
+polls/templates/polls/results.html  
+```html
+<h1>{{ question.question_text }}</h1>
+<!-- -->
+<ul>
+	{% for choice in question.choice_set.all %}
+	<li>
+		{{ choice.choice_text }} -- {{ choice.votes}} vote{{ choice.votes|pluralize }}
+	</li>
+	{% endfor %}
+</ul>
+<!-- -->
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+```
 
-```
-# 時區 - 依需要修改
-TIME_ZONE = 'Asia/Taipei'
-# 這個密匙值，是Django網站安全策略的一部分。如果在開發環境中，沒有保護好這個密匙，把代碼投入生產環境時，最好用不同的密匙代替。（可能從環境變量或文件中讀取）。
-SECRET_KEY = '=b(vf2xry9k65(5k757_miu-ug9s66tq=*^f78-!=7_u$sym1%'
-# debug - 這個會在debug日誌裡輸出錯誤信息，而不是輸入H​​TTP的返回碼。在生產環境中，它應設置為false，因為輸出的錯誤信息，會幫助想要攻擊網站的人。
-DEBUG = True
-```
+
+* **generic view**
+
+
+* **know issue**  
+	* race condition  
+	 If two users of your website try to vote  
+
+## other.  
+* **some setting**  
+	* settings.py  
+	```
+	# 時區 - 依需要修改
+	TIME_ZONE = 'Asia/Taipei'
+	# 這個密匙值，是Django網站安全策略的一部分。如果在開發環境中，沒有保護好這個密匙，把代碼投入生產環境時，最好用不同的密匙代替。（可能從環境變量或文件中讀取）。
+	SECRET_KEY = '=b(vf2xry9k65(5k757_miu-ug9s66tq=*^f78-!=7_u$sym1%'
+	# debug - 這個會在debug日誌裡輸出錯誤信息，而不是輸入H​​TTP的返回碼。在生產環境中，它應設置為false，因為輸出的錯誤信息，會幫助想要攻擊網站的人。
+	DEBUG = True
+	# database setting 
+	DATABASES = {
+	    'default': {
+	        'ENGINE': 'django.db.backends.sqlite3',
+	        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+	    }
+	}
+	```
+	***
+
+* **command**  
+	* python manage.py makemigrations  
+	```
+	add margin  
+	```
+	
+	* python manage.py migrate  
+	```
+	update margin  
+	每次模型改變，都需要運行以上命令，來影響需要存放的數據結構（包括添加和刪除整個模型和單個字段）  
+	```
 
 * **some error**  
-```
-# ModuleNotFoundError: No module named 'sqlparse'
-conda install sqlparse
+	* No module named 'sqlparse'  
+	```
+	# ModuleNotFoundError: No module named 'sqlparse'
+	conda install sqlparse
+	```
 
-```
 
 # format
 
