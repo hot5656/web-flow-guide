@@ -135,6 +135,10 @@
 *	colorize : look color(scss/sass/color)
 * git history  
 	F1 --> git history(git log) 
+* Django
+	python
+	Django
+	Django Template
 
 ***
 * Bracket Pair Colorizer : 可以讓不同縮減的括號顯示不同的顏色
@@ -194,6 +198,21 @@ ctrl+shift+p --> configure Display Language
     ]
 ```
 
-Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼
-選擇多行-->shift+alt+(mouse-l) : 多行編輯
+* run Django  
+	* Python Interpreter  
+	Ctrl+Shift+P -->  Python: Select Interpreter  
+	F5 --> Python --> Django  
+
+* error 
+	* no objects member  
+	settings(vscode)
+	```
+	"python.linting.pylintArgs": [
+        "--load-plugins",
+    ]
+	```
+
+### Edit command  
+Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
+選擇多行-->shift+alt+(mouse-l) : 多行編輯  
 

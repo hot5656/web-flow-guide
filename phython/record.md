@@ -1393,12 +1393,178 @@ polls/templates/polls/results.html
 ```
 
 
-* **generic view**
+* **generic view**  
+change url, view  
+    * polls/urls.py  
+	```python
+	urlpatterns = [
+		# ex : /polls/
+		path('', views.IndexView.as_view(), name='index'),
+		# ex : /polls/5/
+		path('<int:pk>/', views.DetailView.as_view(), name='detail'),
+		# ex : /polls/5/results/
+		path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
+		# ex : /polls/5/vote/
+		path('<int:question_id>/vote/', views.vote, name='vote'),
+	]
+	```
+	> some question_id change to pk  
 
+    polls/views.py  
+	```python
+	from django.views import generic
+	# --
+	class IndexView(generic.ListView):
+	    template_name = 'polls/index.html'
+	    context_object_name = 'latest_question_list'
+		# --
+	    def get_queryset(self):
+	        """　Return the last 5 published question"""
+	        return Question.objects.order_by('-pub_date')[:5]
+	# --
+	class DetailView(generic.DetailView):
+	    model = Question
+	    template_name = 'polls/detail.html'
+	# --
+	class ResultsView(generic.DetailView):
+	    model = Question
+	    template_name = 'polls/results.html'
+	# --
+	def vote(request, question_id):
+	    ...
+	```
+	> generic.ListView : display a list of objects  
+	  generic.DetailView : display a detail page for a particular type of object.  
+	  * The DetailView generic view expects the primary key value captured from the URL to be called "pk"  
 
 * **know issue**  
 	* race condition  
 	 If two users of your website try to vote  
+
+
+## 3.3 Django - automated tests  
+* **test was_published_recently**  
+python manage.py shell  
+```python
+>>> import datetime
+>>> from django.utils import timezone
+>>> from polls.models import Question
+>>> # create a Question instance with pub_date 30 days in the future
+>>> future_question = Question(pub_date=timezone.now() + datetime.timedelta(days=30))
+>>> # was it published recently?
+>>> future_question.was_published_recently()
+True
+```
+> It's not correct.  
+
+* **add test code**  
+polls/tests.py  
+```python
+import datetime
+# --
+from django.test import TestCase
+from django.utils import timezone
+# --
+from .models import Question
+# --
+class QuestionModelTests(TestCase):
+	def test_was_publish_recently_with_future_question(self):
+		"""
+		was_published_recently() returns False for question whose pub_date is in the future 
+		"""
+		time = timezone.now() + datetime.timedelta(days=30)
+		future_question = Question(pub_date=time)
+		self.assertIs(future_question.was_published_recently(), False)
+```
+
+* **run test code**  
+python manage.py test polls  
+```
+ Creating test database for alias 'default'...
+ System check identified no issues (0 silenced).
+ 
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.001s
+ 
+ OK
+ Destroying test database for alias 'default'...
+ PS D:\work\python\django_work\mysite> python manage.py test polls
+ Creating test database for alias 'default'...
+ System check identified no issues (0 silenced).
+ F
+ ======================================================================
+ FAIL: test_was_publish_recently_with_future_question (polls.tests.QuestionModelTests)
+ ----------------------------------------------------------------------
+ Traceback (most recent call last):
+  File "D:\work\python\django_work\mysite\polls\tests.py", line 15, in test_was_publish_recently_with_future_question
+    self.assertIs(future_question.was_published_recently(), False)
+ AssertionError: True is not False
+
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.001s
+
+ FAILED (failures=1)
+ Destroying test database for alias 'default'...
+```
+> It found a subclass of the django.test.TestCase class  
+  It created a special database for the purpose of testing  
+  Using the assertIs() method, it discovered that its was_published_recently() returns True, though we wanted it to return False  
+
+* **fixing the bug**  
+polls/models.py  
+```python
+	def was_published_recently(self):
+		now = timezone.now()
+		return now - datetime.timedelta(days=1) <= self.pub_date <= now
+```
+
+* **run test code**  
+python manage.py test polls  
+```
+ PS D:\work\python\django_work\mysite> python manage.py test polls
+ Creating test database for alias 'default'...
+ System check identified no issues (0 silenced).
+ 
+ ----------------------------------------------------------------------
+ Ran 1 test in 0.001s
+ 
+ OK
+ Destroying test database for alias 'default'...
+```
+
+* **add more test code**  
+polls/tests.py  
+```python
+	def test_was_published_recently_with_old_question(self):
+		"""
+		was_published_recently() returns False for questions whose pub_date
+		is older than 1 day.
+		"""
+		time = timezone.now() - datetime.timedelta(days=1, seconds=1)
+		old_question = Question(pub_date=time)
+		self.assertIs(old_question.was_published_recently(), False)
+	def test_was_published_recently_with_recent_question(self):
+		"""
+		was_published_recently() returns True for questions whose pub_date
+		is within the last day.
+		"""
+		time = timezone.now() - datetime.timedelta(hours=23, minutes=59, seconds=59)
+		recent_question = Question(pub_date=time)
+		self.assertIs(recent_question.was_published_recently(), True)
+```
+
+* **run test code**  
+python manage.py test polls  
+```
+ Creating test database for alias 'default'...
+ System check identified no issues (0 silenced).
+ ...
+ ----------------------------------------------------------------------
+ Ran 3 tests in 0.001s
+ 
+ OK
+ Destroying test database for alias 'default'...
+```
 
 ## other.  
 * **some setting**  
@@ -1439,6 +1605,22 @@ polls/templates/polls/results.html
 	conda install sqlparse
 	```
 
+	* add 'testserver' to ALLOWED_HOSTS.  
+	Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.  
+	mysite/settings.py  
+	```python
+	ALLOWED_HOSTS = ['testserver']
+	# Application definition
+	INSTALLED_APPS = [
+	    'polls.apps.PollsConfig',
+	    'django.contrib.admin',
+	    'django.contrib.auth',
+	    'django.contrib.contenttypes',
+	    'django.contrib.sessions',
+	    'django.contrib.messages',
+	    'django.contrib.staticfiles',
+	]
+	```
 
 # format
 
