@@ -212,6 +212,18 @@ ctrl+shift+p --> configure Display Language
     ]
 	```
 
+	* conda : 無法辨識  
+	```
+	 add path for Anaconda3 - add * point enough  
+	 * C:\Users\win10\Anaconda3
+	 C:\Users\win10\Anaconda3\Library\mingw-w64\bin
+	 C:\Users\win10\Anaconda3\Library\usr\bin
+	 * C:\Users\win10\Anaconda3\Library\bin
+	 * C:\Users\win10\Anaconda3\Scripts
+	 * C:\Users\win10\Anaconda3\bin
+	 * C:\Users\win10\Anaconda3\condabin
+	```
+
 ### Edit command  
 Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
 選擇多行-->shift+alt+(mouse-l) : 多行編輯  

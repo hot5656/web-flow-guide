@@ -1609,7 +1609,7 @@ python manage.py test polls
 	Invalid HTTP_HOST header: 'testserver'. You may need to add 'testserver' to ALLOWED_HOSTS.  
 	mysite/settings.py  
 	```python
-	ALLOWED_HOSTS = ['testserver']
+	ALLOWED_HOSTS = ['127.0.0.1','testserver']
 	# Application definition
 	INSTALLED_APPS = [
 	    'polls.apps.PollsConfig',
