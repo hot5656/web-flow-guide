@@ -1316,7 +1316,7 @@ to
 <a href="{% url 'pools:detail' question.id %}">{{question.question_text}}/</a>
 ```
 
-## 3.2 Django - add a simple form  
+## 3.3 Django - add a simple form  
 * **deatil.html**  
 polls/templates/polls/detail.html  
 ```html
@@ -1442,7 +1442,7 @@ change url, view
 	 If two users of your website try to vote  
 
 
-## 3.3 Django - automated tests  
+## 3.4 Django - automated tests  
 * **test was_published_recently**  
 python manage.py shell  
 ```python
@@ -1565,6 +1565,195 @@ python manage.py test polls
  OK
  Destroying test database for alias 'default'...
 ```
+
+* **test view(client)**  
+	* test by shell  
+	python manage.py shell  
+	```
+	// set test environment
+	>>> from django.test.utils import setup_test_environment
+	>>> setup_test_environment()
+	// import tel client class
+	>>> from django.test import Client
+	>>> # create an instance of the client for our use
+	>>> client = Client()
+	// get a response from '/'
+	>>> response = client.get('/')
+	Not Found: /
+	>>> response.status_code
+	404
+     
+	// reverse(): avoid have hardcode URL  
+	>>> from django.urls import reverse
+	>>> response = client.get( reverse('polls:index'))
+	>>> response.status_code
+	200
+	>>> response.content
+	b'\n\t<ul>\n\t\t\n\t\t<li> \n\t\t\t<a href="/polls/3/">What&#39;s 10-2?/</a>\n\t\t</li>\n\t\t\n\t\t<li> \n\t\t\t<a href="/polls/2/">What&#39;s wrong./</a>\n\t\t</li>\n\t\t\n\t\t<li> \n\t\t\t<a href="/polls/1/">What&#39;s up?/</a>\n\t\t</li>\n\t\t\n\t</ul>\n\n\n'
+	// get 'latest_question_list' context  
+	>>> response.context['latest_question_list']
+	<QuerySet [<Question: What's 10-2?>, <Question: What's wrong.>, <Question: What's up?>]>
+	```
+	* fix index view  
+	fix index page retuen future date data  
+	polls/views.py
+	```python
+	from django.utils import timezone
+	class IndexView(generic.ListView):
+	    template_name = 'polls/index.html'
+	    context_object_name = 'latest_question_list'
+	    def get_queryset(self):
+	        """　Return the last 5 published question"""
+	        return Question.objects.filter( pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+	```
+
+	* add index page test to test.py  
+	polls/tests.py
+	```python
+	from django.urls import reverse
+	def create_question(question_text, days):
+	    """
+	    Create a question with the given `question_text` and published the
+	    given number of `days` offset to now (negative for questions published
+	    in the past, positive for questions that have yet to be published).
+	    """
+	    time = timezone.now() + datetime.timedelta(days=days)
+	    return Question.objects.create(question_text=question_text, pub_date=time)
+	# --
+	class QuestionIndexViewTests(TestCase):
+	    def test_no_questions(self):
+	        """
+	        If no questions exist, an appropriate message is displayed.
+	        """
+	        response = self.client.get(reverse('polls:index'))
+	        self.assertEqual(response.status_code, 200)
+	        self.assertContains(response, "No polls are available.")
+	        self.assertQuerysetEqual(response.context['latest_question_list'], [])
+	# --
+	    def test_past_question(self):
+	        """
+	        Questions with a pub_date in the past are displayed on the
+	        index page.
+	        """
+	        create_question(question_text="Past question.", days=-30)
+	        response = self.client.get(reverse('polls:index'))
+	        self.assertQuerysetEqual(
+	            response.context['latest_question_list'],
+	            ['<Question: Past question.>']
+	        )
+	# --			
+	    def test_future_question(self):
+	        """
+	        Questions with a pub_date in the future aren't displayed on
+	        the index page.
+	        """
+	        create_question(question_text="Future question.", days=30)
+	        response = self.client.get(reverse('polls:index'))
+	        self.assertContains(response, "No polls are available.")
+	        self.assertQuerysetEqual(response.context['latest_question_list'], [])
+	# --
+	    def test_future_question_and_past_question(self):
+	        """
+	        Even if both past and future questions exist, only past questions
+	        are displayed.
+	        """
+	        create_question(question_text="Past question.", days=-30)
+	        create_question(question_text="Future question.", days=30)
+	        response = self.client.get(reverse('polls:index'))
+	        self.assertQuerysetEqual(
+	            response.context['latest_question_list'],
+	            ['<Question: Past question.>']
+	        )
+	# --
+	    def test_two_past_questions(self):
+	        """
+	        The questions index page may display multiple questions.
+	        """
+	        create_question(question_text="Past question 1.", days=-30)
+	        create_question(question_text="Past question 2.", days=-5)
+	        response = self.client.get(reverse('polls:index'))
+	        self.assertQuerysetEqual(
+	            response.context['latest_question_list'],
+	            ['<Question: Past question 2.>', '<Question: Past question 1.>']
+	        )
+	```
+	> create_question() : for create question record function  
+	  django.test.TestCase support some test assertion methods, assertEqual(). assertQuerysetEqual()..   
+	  The database is reset for each test method  
+
+	* run test code  
+	python manage.py test polls
+
+	* fix detail view  
+	fix detail page retuen future date data  
+	polls/views.py  
+	```python
+	class DetailView(generic.DetailView):
+		....
+	    def get_queryset(self):
+	        """
+	        Excludes any questions that aren't published yet.
+	        """
+	        return Question.objects.filter( pub_date__lte=timezone.now())
+	```
+
+	* add detail page test to test.py  
+	polls/tests.py  
+	```python
+	class QuestionDetailViewTests(TestCase):
+	    def test_future_question(self):
+	        """
+	        The detail view of a question with a pub_date in the future
+	        returns a 404 not found.
+	        """
+	        future_question = create_question(question_text='Future question.', days=5)
+	        url = reverse('polls:detail', args=(future_question.id,))
+	        response = self.client.get(url)
+	        self.assertEqual(response.status_code, 404)
+	    def test_past_question(self):
+	        """
+	        The detail view of a question with a pub_date in the past
+	        displays the question's text.
+	        """
+	        past_question = create_question(question_text='Past Question.', days=-5)
+	        url = reverse('polls:detail', args=(past_question.id,))
+	        response = self.client.get(url)
+	        self.assertContains(response, past_question.question_text)
+	```
+
+
+## 3.4 Django - customize admin form  
+* **put static file** 
+	* create directory for static files  
+	polls/static  
+
+	* add css 
+	polls/static/polls/style.css
+	```html
+	li a {
+		color: orange
+	}
+	``` 
+
+	* modify template  
+	polls/templates/polls/index.html  
+	```html
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+	```
+	> The index page's show orange for link  
+
+	* add background image  
+	polls/static/polls/images/background.jpg  
+
+	* add image to background  
+	polls/static/polls/style.css
+	```html
+	body {
+		background: url("images/background.jpg") no-repeat;
+	}
+	``` 
+
 
 ## other.  
 * **some setting**  
