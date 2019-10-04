@@ -1722,7 +1722,7 @@ python manage.py test polls
 	```
 
 
-## 3.4 Django - customize admin form  
+## 3.6 Django - add static files  
 * **put static file** 
 	* create directory for static files  
 	polls/static  
@@ -1754,6 +1754,124 @@ python manage.py test polls
 	}
 	``` 
 
+## 3.5 Django - customize admin form  
+* **change Question input** 
+	* add Question admin page function  
+	polls/admin.py  
+	```python
+	class QuestionAdmin(admin.ModelAdmin):
+		fields = ['pub_date', 'question_text']
+	# admin.site.register(Question)
+	admin.site.register(Question, QuestionAdmin)
+	```
+	* add fieled title  
+	polls/admin.py  
+	```python
+	class QuestionAdmin(admin.ModelAdmin):
+		fieldsets = [
+			(None, { "fields": ['question_text']}),
+			('Date information', { "fields": ['pub_date']}),
+		]
+	```
+	* admin Question add Choice - link by ForeignKey  
+	polls/admin.py  
+	```python
+	class ChoiceInLine(admin.StackedInline):
+		model =  Choice
+		extra = 3
+	class QuestionAdmin(admin.ModelAdmin):
+		fieldsets = [
+			(None, { "fields": ['question_text']}),
+			('Date information', { "fields": ['pub_date']}),
+		]
+		inlines = [ChoiceInLine]
+	```
+	> extra : reserve input items 
+
+	* Choice change to tabular - save space  
+	polls/admin.py  
+	```python
+	class ChoiceInLine(admin.TabularInline):
+		model =  Choice
+		extra = 3
+	```
+
+	* add Question show field and models function  
+	polls/admin.py  
+	```python
+	class QuestionAdmin(admin.ModelAdmin):
+		list_display = ('question_text', 'pub_date', 'was_published_recently')
+		....
+	```
+	> default just show str() of each object  
+
+	* change models function display attributes   
+	polls/models.py  
+	```python
+	def was_published_recently(self):
+		now = timezone.now()
+		return now - datetime.timedelta(days=1) <= self.pub_date <= now
+	was_published_recently.admin_order_field = 'pub_date'
+	was_published_recently.short_description = 'Published recent?'
+	was_published_recently.boolean = True
+	```
+	> boolean : change to show icon  
+
+	* add filter/search field  
+	polls/admin.py  
+	```python
+	class QuestionAdmin(admin.ModelAdmin):
+		list_filter = ['pub_date']
+		search_fields = ['question_text']
+	```
+* **Customizing your project’s admin templates** 
+	* add template directory  
+	mysite/settings.py  
+	```python
+	TEMPLATES = [
+	    {
+	        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+	        # 'DIRS': [],
+	        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+	        'APP_DIRS': True,
+	        'OPTIONS': {
+	            'context_processors': [
+	                'django.template.context_processors.debug',
+	                'django.template.context_processors.request',
+	                'django.contrib.auth.context_processors.auth',
+	                'django.contrib.messages.context_processors.messages',
+	            ],
+	        },
+	    },
+	]
+	```
+
+	* check Django source files position  
+	python -c "import django; print(django.__path__)"  
+
+	* copy defult teplate then modify  
+	creste directory : templates/admin  
+	copy template file from : django/contrib/admin/templates/base_site.html  
+	modify as bellow  
+	```html
+	<h1 id="site-name"><a href="{% url 'admin:index' %}">{{ site_header|default:_('Head Django administration') }}</a></h1>
+	to 
+	<h1 id="site-name"><a href="{% url 'admin:index' %}">Polls Administration</a></h1>
+	```
+
+	* if need modify other template file  
+	index.html...  
+
+## 3.6 Django - Packaging your app  
+* **put static file**
+django_polls
+copy /polls to django_polls  
+add README.rst  
+add LICENSE  
+add setup.py  
+add MANIFEST.in - for include additional files  
+add docs directory - if need  
+python setup.py sdist - build your package  
 
 ## other.  
 * **some setting**  
@@ -1787,6 +1905,10 @@ python manage.py test polls
 	每次模型改變，都需要運行以上命令，來影響需要存放的數據結構（包括添加和刪除整個模型和單個字段）  
 	```
 
+* **some site for python** 
+	* [The Python Package Index(PyPI)](https://pypi.org) : some python library  
+	* [Virtualenv](https://virtualenv.pypa.io/en/latest/#) : A tool to create isolated Python environments  
+
 * **some error**  
 	* No module named 'sqlparse'  
 	```
@@ -1810,6 +1932,9 @@ python manage.py test polls
 	    'django.contrib.staticfiles',
 	]
 	```
+
+django-xx : Django's app
+
 
 # format
 

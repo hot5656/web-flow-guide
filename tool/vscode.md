@@ -212,6 +212,12 @@ ctrl+shift+p --> configure Display Language
     ]
 	```
 
+	* Django template 不能自動偵測HTML輸入  
+	settings(vscode)
+	```
+	"emmet.includeLanguages": {"django-html": "html"},
+	```
+
 	* conda : 無法辨識  
 	```
 	 add path for Anaconda3 - add * point enough  
