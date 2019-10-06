@@ -1722,7 +1722,7 @@ python manage.py test polls
 	```
 
 
-## 3.6 Django - add static files  
+## 3.5 Django - add static files  
 * **put static file** 
 	* create directory for static files  
 	polls/static  
@@ -1754,7 +1754,7 @@ python manage.py test polls
 	}
 	``` 
 
-## 3.5 Django - customize admin form  
+## 3.6 Django - customize admin form  
 * **change Question input** 
 	* add Question admin page function  
 	polls/admin.py  
@@ -1862,16 +1862,128 @@ python manage.py test polls
 	* if need modify other template file  
 	index.html...  
 
-## 3.6 Django - Packaging your app  
-* **put static file**
-django_polls
-copy /polls to django_polls  
-add README.rst  
-add LICENSE  
-add setup.py  
-add MANIFEST.in - for include additional files  
-add docs directory - if need  
-python setup.py sdist - build your package  
+## 3.7 Django - Packaging your app  
+* **Packaging your app**
+    * move polls app  
+    create directory django_polls  
+    copy /polls to django_polls  
+    * add some file for package  
+    add file README.rst - example  
+    ```python 
+    # =====
+    # Polls
+    # =====
+    # Polls is a simple Django app to conduct Web-based polls. For each
+    # question, visitors can choose between a fixed number of answers.
+    # Detailed documentation is in the "docs" directory.
+    # Quick start
+    # 1. Add "polls" to your INSTALLED_APPS setting like this::
+    #     INSTALLED_APPS = [
+    #         ...
+    #         'polls',
+    #     ]
+    # 2. Include the polls URLconf in your project urls.py like this::
+    #     path('polls/', include('polls.urls')),
+    # 3. Run `python manage.py migrate` to create the polls models.
+    # 4. Start the development server and visit http://127.0.0.1:8000/admin/
+    #    to create a poll (you'll need the Admin app enabled).
+    # 5. Visit http://127.0.0.1:8000/polls/ to participate in the poll.
+    ```
+    add file LICENSE  
+    add file setup.py - example  
+    ```python
+    import os
+    from setuptools import find_packages, setup
+    with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
+        README = readme.read()
+    # allow setup.py to be run from any path
+    os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
+    setup(
+        name='django-polls',
+        version='0.1',
+        packages=find_packages(),
+        include_package_data=True,
+        license='BSD License',  # example license
+        description='A simple Django app to conduct Web-based polls.',
+        long_description=README,
+        url='https://www.example.com/',
+        author='Your Name',
+        author_email='yourname@example.com',
+        classifiers=[
+            'Environment :: Web Environment',
+            'Framework :: Django',
+            'Framework :: Django :: X.Y',  # replace "X.Y" as appropriate
+            'Intended Audience :: Developers',
+            'License :: OSI Approved :: BSD License',  # example license
+            'Operating System :: OS Independent',
+            'Programming Language :: Python',
+            'Programming Language :: Python :: 3.5',
+            'Programming Language :: Python :: 3.6',
+            'Topic :: Internet :: WWW/HTTP',
+            'Topic :: Internet :: WWW/HTTP :: Dynamic Content',
+        ],
+    )
+    ```
+    add file MANIFEST.in - for include additional files  
+    ```
+    include LICENSE
+    include README.rst
+    recursive-include polls/static *
+    recursive-include polls/templates *
+    ```
+
+    add docs directory - if need  
+    ```
+    recursive-include docs *
+    ```
+
+    * building to package  
+    python setup.py sdist  
+    generate to dist/django-polls-0.1.tar.gz  
+
+* **using polls app**
+    * install polls package(windows)  
+    pip install --user "django_polls/dist/django-polls-0.1.tar.gz"  
+    * uninstall polls package - if need  
+    pip uninstall django-polls  
+
+    * create project  
+    django-admin startproject mypoll  
+    cd mypoll  
+
+    * add polls app  
+    mypoll/settings.py  
+    ```python
+    INSTALLED_APPS = [
+        ....
+        'polls',
+    ]
+    ```
+
+    * add polls urls  
+    mypoll/urls.py  
+    ```python
+    from django.urls import path, include
+    urlpatterns = [
+        ....
+        path('polls/', include('polls.urls')),
+    ]
+    ```
+
+    * run migrate  
+    python manage.py migrate  
+
+    * add super user  
+    python manage.py createsuperuser  
+
+    * start server  
+    python manage.py runserver  
+
+    * run web admin add record  
+    http://127.0.0.1:8000/admin/  
+
+    * run polls  
+    http://127.0.0.1:8000/polls/  
 
 ## other.  
 * **some setting**  
