@@ -2045,6 +2045,16 @@ python manage.py test polls
 	]
 	```
 
+	* No translation files found for default language zh-TW.  
+	ISO 639 : zh 是語系 TW 是國家  
+	ISO 3166 : zh-Hant 代表中文-漢繁體(以取代ISO 639)  
+	```python
+	LANGUAGE_CODE = 'zh-TW'
+	to 
+	LANGUAGE_CODE = 'zh-Hant'
+	```
+
+
 django-xx : Django's app
 
 

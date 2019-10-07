@@ -230,6 +230,17 @@ ctrl+shift+p --> configure Display Language
 	 * C:\Users\win10\Anaconda3\condabin
 	```
 
+	* some code error indicate 
+	// select env
+	ctrl-shift-p --> Python: Select Interpreter
+
+	* class 'Post' has no 'objects' member pylint(no-member)
+	```
+	"python.linting.pylintArgs": [
+		"--load-plugins=pylint_django"
+	],
+	```
+
 ### Edit command  
 Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
 選擇多行-->shift+alt+(mouse-l) : 多行編輯  
