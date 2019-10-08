@@ -315,6 +315,82 @@ http://127.0.0.1:8000/admin/
 	```
 	> <a href="/">回首頁</a> : to main page  
 
+* **common template**  
+	* base.html  
+	```html
+	<!-- base.html -->
+	<!DOCTYPE html>
+	<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<title>
+			{% block  title %} {% endblock  %}
+		</title>
+	</head>
+	<body>
+		{% include "header.html" %}
+		{% block  headmessage %} {% endblock  %}
+		<hr>
+		{% block content %} {% endblock  %}
+		<hr>
+		{% include "footer.html" %}
+	</body>
+	</html>
+	```
+
+	* header.html  
+	```html
+	<!-- header.html -->
+	<h1>歡迎光臨 文學天地</h1>
+	```
+
+	* footer.html  
+	```html
+	<!-- footer.html -->
+	{% block footer %}
+		{% if now %}
+			<p>現在時刻:{{now}}</p>
+		{% else %}
+			<p>摘自網路...</p>
+		{% endif %}
+	{% endblock  %}
+	```
+
+	* index.html  
+	```html
+	<!-- index.html -->
+	{% extends "base.html" %}
+	{% block  title %} 歡迎光臨 {% endblock  %}
+	{% block  headmessage %}
+		<h3>文章列表</h3>
+	{% endblock  %}
+	{% block  content %}
+		{% for  post in  posts %}
+			<!-- 微軟正黑體 -->
+			<p style="font-family:DFKai-sb;font-size:16pt;font-weight:bold;">
+				<a href="post/{{post.pk}}">{{post.title}}</a>
+			</p>
+		{% endfor %}
+	{% endblock  %}
+	```
+
+	* post.html
+	```html
+	<!-- post.html -->
+	{% extends "base.html" %}
+	{% block  title %} 文學天地 {% endblock  %}
+	{% block  headmessage %}
+		<h3>{{post.title}}</h3>
+		<a href="/">回首頁</a>
+		<h3> 文章列表</h3>
+	{% endblock  %}
+	{% block  content %}
+		<p style="font-family:DFKai-sb;font-size:12pt;letter-spacing:2pt">{{post.body}}</p>
+	{% endblock  %}
+		```
+
 
 
 
