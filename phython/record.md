@@ -859,7 +859,7 @@ Django 的 URL 是一個 regular expression (regex)
     </div>
 	```
 
-## 3. Django - projrct/app create
+## 3. Django - project/app create
 * **create project**  
 django-admin startproject mysite  
 cd mysite  
@@ -1133,6 +1133,17 @@ INSTALLED_APPS = [
     ```
 
 ## 3.2 Django - add more view  
+* **change system url**  
+mysite/urls.py
+```python
+from django.contrib import admin
+from django.urls import path, include
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('polls/', include('polls.urls')),
+]
+```
+
 * **add view**  
 polls/views.py  
 ```python
