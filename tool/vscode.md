@@ -157,6 +157,7 @@
 		ctr-shift-l : open web side
 		ctl-shift-p : open side
 *	sublime keymap: plug for sublime key
+*	Highlight Matching Tag : highlight html tag
 
 
 ### configuration setting
