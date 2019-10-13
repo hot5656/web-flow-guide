@@ -121,6 +121,7 @@ http://127.0.0.1:8000/
 
 * **show DB list more field**  
 ```python
+from .models import Post
 class PostAdmin(admin.ModelAdmin):
 	list_display = ( 'title', 'slug', 'pub_date')
 admin.site.register(Post, PostAdmin)
@@ -526,6 +527,388 @@ http://127.0.0.1:8000/admin/
 	{{post.body | safe }}
 	```
 
+## 2. 中古手機專賣店  
+* **simple 1st**
+	* create project and app  
+	django-admin startproject sellphone  
+	cd sellphone  
+	python manage.py startapp secondphone  
+
+	* system setting  
+	sellphone/settings.py  
+	```python
+	INSTALLED_APPS = [
+	    'django.contrib.admin',
+	    'django.contrib.auth',
+	    'django.contrib.contenttypes',
+	    'django.contrib.sessions',
+	    'django.contrib.messages',
+	    'django.contrib.staticfiles',
+	    'secondphone.apps.SecondphoneConfig',
+	]
+	LANGUAGE_CODE = 'zh-Hant'
+	TIME_ZONE = 'Asia/Taipei'
+	```
+
+	* system urls  
+	sellphone/urls.py  
+	```python
+	from django.contrib import admin
+	from django.urls import path, include
+	urlpatterns = [
+	    path('', include('secondphone.urls')),
+	    path('admin/', admin.site.urls),
+	]
+	```
+
+	* app urls  
+	sellphone/urls.py  
+	```python
+	from django.urls import path, re_path
+	from . import views
+	urlpatterns = [
+	    path('', views.index, name='index'),
+			path('about/', views.about, name='about'),
+			path('list/', views.list, name='list'),
+			re_path(r'^list/(?P<pk>\d+)/$', views.detail, name='detail'),
+	]
+	```
+
+	* app models  
+	sellphone/models.py  
+	```python
+	from django.db import models
+	class Product(models.Model):
+		SIZES = (
+			('S', 'Small'),
+			('M', 'Medium'),
+			('L', 'Large'),
+		)
+		sku = models.CharField(max_length=5)
+		name = models.CharField(max_length=20)
+		price = models.PositiveIntegerField()
+		size = models.CharField(max_length=1, choices=SIZES)
+	```
+
+	* register models  
+	sellphone/admin.py  
+	```python
+	from django.contrib import admin
+	from .models import Product
+	admin.site.register(Product)
+	```
+
+	* add temple view  
+	sellphone/views.py  
+	```python
+	from django.shortcuts import render
+	from django.http import HttpResponse
+	def  index(request):
+		return HttpResponse("index...")
+	def  about(request):
+		return HttpResponse("about...")
+	def  list(request):
+		return HttpResponse("list...")
+	def  detail(request, pk):
+		return HttpResponse("detail...%s" % pk)
+	```
+
+	* migrate  
+	python manage.py makemigrations  
+	python manage.py migrate  
+
+	* create supersure then run server  
+	python manage.py createsuperuser  
+	python manage.py runserver  
+	http://127.0.0.1:8000/  
+	http://127.0.0.1:8000/admin/  
+	http://127.0.0.1:8000/about/  
+	http://127.0.0.1:8000/list/  
+	http://127.0.0.1:8000/list/10/  
+	http://127.0.0.1:8000/list/a/ - not accept  
+
+* **complete code**  
+	* basic vs code set for Django  
+	```json
+	{
+		"emmet.includeLanguages": {"django-html": "html"},
+		"python.linting.pylintArgs": [
+			"--load-plugins=pylint_django"
+		],
+	}
+	```
+
+	* common template  
+	sellphone/templates/base.html  
+	```html
+	<!DOCTYPE html>
+	<html >
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<title>
+			{% block title %} {% endblock  %}
+		</title>
+	</head>
+	<body>
+		{% include "header.html" %}
+		<hr>
+		{% block content %} {% endblock  %}
+		<hr>
+		{% include "footer.html" %}
+	  <!-- Optional JavaScript -->
+	  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+	  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+	</body>
+	</html>
+	```
+
+	sellphone/templates/header.html  
+	```html
+	<h1>中古機販賣專門店</h1>
+	```
+
+	sellphone/templates/footer.html  
+	```html
+	<p>我們的存在是為了你的需求.....</p>
+	```
+
+	sellphone/templates/index.html  
+	```html
+	<!--	index.html -->
+	{% extends "base.html" %}
+	{% block  title %}Welcome to sellphone{% endblock %} 
+	{% block content %}
+		<ul>
+			<li>
+				<a href="/list">中古機列表</a>
+			</li>
+			<li>
+				<a href="/about">關於我</a>
+			</li>
+		</ul>
+	{% endblock  %}
+	```
+
+	sellphone/templates/about.html  
+	```html
+	<!--	about.html -->
+	{% extends "base.html" %}
+	{% block  title %}About me{% endblock %} 
+	{% block content %}
+		<h2>Robaet Kao</h2>
+		<p>I am Robert Kao. Nice to meet you.</p>
+		<a href="/">回主頁</a>
+	{% endblock  %}
+	```
+
+	sellphone/templates/list.html  
+	```html
+	<!--	list.html -->
+	{% extends "base.html" %}
+	{% block  title %}中古手機列表{% endblock %} 
+	{% block content %}
+		<h2>本店中古手機列表</h2>
+		<table border=1 width=400 bgcolor="ccffcc">
+			<thead>
+				<tr>
+					<td>品名</td>
+					<td>售價</td>
+					<td>庫存量</td>
+				</tr>
+			</thead>
+			<tbody>
+				{% for p in products %}
+					<tr>
+						<td>
+						<a href="/list/{{p.pk}}">{{p.name}}</a>
+						</td>
+						<td>{{p.price}}</td>
+						<td>{{p.qty}}</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<a href="/">回主頁</a>
+	{% endblock  %}
+	```
+
+	sellphone/templates/detail.html  
+	```html
+	<!--	detail.html -->
+	{% extends "base.html" %}
+	{% block  title %}{{product.name}}{% endblock %} 
+	{% block content %}
+		<h2>{{product.name}}</h2>
+		<table border=1 width=400 bgcolor="ccffcc">
+			<tbody>
+					<tr>
+						<td>品項編號</td>
+						<td>{{product.sku}}</td>
+					</tr>
+					<tr>
+						<td>品項名稱</td>
+						<td>{{product.name}}</td>
+					</tr>
+					<tr>
+						<td>二手售價</td>
+						<td>{{product.price}}</td>
+					</tr>
+					<tr>
+						<td>庫存數量</td>
+						<td>{{product.qty}}</td>
+					</tr>
+			</tbody>
+		</table>
+		<a href="/">回主頁</a>
+	{% endblock  %}
+	```
+
+	* change app models - add qty  
+	sellphone/models.py  
+	```python
+	from django.db import models
+	class Product(models.Model):
+		# 品項編號
+		sku = models.CharField(max_length=5)
+		name = models.CharField(max_length=20)
+		price = models.PositiveIntegerField()
+		qty = models.PositiveIntegerField(default=0)
+	```
+
+	* admin for models show more field  
+	sellphone/admin.py  
+	```python
+	from django.contrib import admin
+	from .models import Product
+	#admin.site.register(Product)
+	# change Product admin list
+	class ProductAdmin(admin.ModelAdmin):
+		list_display = ( 'sku', 'name', 'price', 'qty')
+	admin.site.register(Product, ProductAdmin)
+	```
+
+	* update view  
+	sellphone/views.py  
+	```python
+	from django.shortcuts import render
+	from django.http import HttpResponse, Http404
+	from .models import Product
+	def  index(request):
+		return render(request, "index.html")
+	def  about(request):
+		return render(request, "about.html")
+	def  list(request):
+		products = Product.objects.all()
+		return render(request, 'list.html', { 'products' : products, })
+	def  detail(request, pk):
+		# add not found
+		try :
+			product = Product.objects.get(pk=pk)
+		except Product.DoesNotExist:
+			raise Http404('找不到指定項目')
+		return render(request, 'detail.html', { 'product' : product, })
+	```
+
+## 3. TV and car  
+django-admin startproject tvacar
+cd tvacar
+
+python manage.py startapp tvs
+python manage.py startapp car
+
+	* system setting  
+	tvacar/settings.py  
+	```python
+	INSTALLED_APPS = [
+	    'django.contrib.admin',
+	    'django.contrib.auth',
+	    'django.contrib.contenttypes',
+	    'django.contrib.sessions',
+	    'django.contrib.messages',
+	    'django.contrib.staticfiles',
+	    #'tvs',
+	    'tvs.apps.TvsConfig',
+	    'car.apps.CarConfig',
+	]
+	LANGUAGE_CODE = 'zh-Hant'
+	TIME_ZONE = 'Asia/Taipei'
+	```
+
+	* system urls  
+	tvacar/urls.py  
+	```python
+	from django.contrib import admin
+	from django.urls import path, include
+	urlpatterns = [
+	    path('admin/', admin.site.urls),
+	    path('car/', include('car.urls')),
+	    path('', include('tvs.urls')),
+	]
+	```
+
+	* app urls  
+	tvs/urls.py  
+	```python
+	from django.urls import path, re_path
+	from . import views
+	urlpatterns = [
+		path('', views.home ),
+		path('tvs/index', views.index ),
+	]
+	```
+
+	* app urls  
+	car/urls.py  
+	```python
+	from django.urls import path, re_path
+	from . import views
+	urlpatterns = [
+		path('index', views.index ),
+	]
+	```
+
+	tvs/views.py  
+	```python
+	from django.shortcuts import render
+	from django.http import HttpResponse
+	def home(request):
+		return HttpResponse("home...")
+	def index(request):
+		return HttpResponse("tvs index...")
+	```
+
+	car/views.py  
+	```python
+	from django.shortcuts import render
+	from django.http import HttpResponse
+	def index(request):
+		return HttpResponse("car index...")
+	```
+
+	python manage.py runserver
+	http://127.0.0.1:8000/
+	http://127.0.0.1:8000/tvs/index
+	http://127.0.0.1:8000/car/index
+	http://127.0.0.1:8000/admin
+
+* **..**
+	* TV embedded link  
+	```html
+	台視 <iframe width="560" height="315" src="https://www.youtube.com/embed/NbjI0cARzjQ" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	民視 <iframe width="560" height="315" src="https://www.youtube.com/embed/XxJKnDLYZz4" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	中天 <iframe width="560" height="315" src="https://www.youtube.com/embed/wUPPkSANpyo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	東森 <iframe width="560" height="315" src="https://www.youtube.com/embed/RaIJ767Bj_M" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	Sky <iframe width="560" height="315" src="https://www.youtube.com/embed/zg_YUu2JzEA" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	ABC <iframe width="560" height="315" src="https://www.youtube.com/embed/nu3iXDR7iXo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	DW <iframe width="560" height="315" src="https://www.youtube.com/embed/NvqKZHpKs-g" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	```
+
+
 ## .Django reference  
 * **[Built-in template tags and filters](https://docs.djangoproject.com/en/2.2/ref/templates/builtins/)**  
 ```
@@ -598,14 +981,72 @@ gt/gte/lt/lte : 大於/大於等於/小於/小於等於
 > 若找不到資料 filter會傳回一個空字串,get 會產生一個 DoesNotExist 例外,超過一個也會產生例外
 ```
 
-??? 
-urls.py  
-url  
-path
-re_path 
+* **[Regular expression operations](https://docs.python.org/3/library/re.html#re.MULTILINE)**  
 
+```python
+re_path(r'^bio/(?P<username>\w+)/$', views.bio, name='bio'),
+# -----
+r'' : re module(Regular expression operations)
+^ : Matches the start of the string, 在[]中表否定
+(?P<name>...) : Group names must be valid Python identifiers
++ : Causes the resulting RE to match 0 or more repetitions of the preceding RE
+\d : Matches any Unicode decimal digit, If the ASCII flag is used only [0-9] is matched.
+\w : Matches Unicode word characters, If the ASCII flag is used, only [a-zA-Z0-9_] is matched.
+$ : Matches the end of the string or just before the newline at the end of the string, foo matches both ‘foo’ and ‘foobar’, foo$ matches only ‘foo’
+. : 任何字元都符合
+\D : 非數字0~9
+\W : [a-zA-Z0-9_]  
+* : 出現 0 or 0 次以上
++ : 出現 1 or 1 次以上
+? : 出現 0 or 1 次 
+| : 任一種符合都可以
+(...) : 若符合,則取出成為一個參數
+[...] : 表示一個字元的格式
+{m} : 代表前一個字,可出現m次
+{m,n} : 代表前一個字,可出現m到n次
+# path ----
+path(route, view, kwargs=None, name=None)
+path('index/', views.index, name='main-view'),
+path('bio/<username>/', views.bio, name='bio'),
+path('weblog/', include('blog.urls')),
+# re_path ----
+re_path(route, view, kwargs=None, name=None)
+re_path(r'^index/$', views.index, name='index'),
+re_path(r'^bio/(?P<username>\w+)/$', views.bio, name='bio'),
+re_path(r'^weblog/', include('blog.urls')),
+```
+
+* **[Request and response objects](https://docs.djangoproject.com/en/2.2/ref/request-response/#django.http.HttpResponse)**  
 HttpResponse  
+```python
+from django.http import HttpResponse
+response = HttpResponse("Here's the text of the Web page.")
+response = HttpResponse("Text only, please.", content_type="text/plain")
+response = HttpResponse(b'Bytestrings are also accepted.')
+HttpResponse("you're looking at question %s." % question_id)
+# 2nd sample
+from django.template import loader
+from django.http import HttpResponse
+def index(request):
+  latest_question_list = Question.objects.order_by('-pub_date')[:5]
+  template = loader.get_template('polls/index.html')
+  content = {
+      'latest_question_list' : latest_question_list,
+  }
+  return HttpResponse(template.render(content, request))
+```
+
+* **[Django shortcut functions](https://docs.djangoproject.com/en/2.2/topics/http/shortcuts/)**  
 render  
+render(request, template_name, context=None, content_type=None, status=None, using=None)  
+```python
+from django.shortcuts import render
+def my_view(request):
+    # View code here...
+    return render(request, 'myapp/index.html', {
+        'foo': 'bar',
+    }, content_type='application/xhtml+xml')
+```
 
 * **some commad**
 	* show models migrate record  

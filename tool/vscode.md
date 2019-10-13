@@ -242,6 +242,9 @@ ctrl+shift+p --> configure Display Language
 	],
 	```
 
+	* IndentationError: unindent does not match any outer indentation level  
+	縮排不一致  
+
 ### Edit command  
 Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
 選擇多行-->shift+alt+(mouse-l) : 多行編輯  
