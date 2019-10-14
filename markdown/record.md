@@ -122,8 +122,13 @@ viverra nec, fringilla in, laoreet vitae, risus.
 2. Yahoo!奇摩股市
 
 ## 超連結
-```
+```html
 [goole](https://www.google.com/ "Google")
+<!-- md link to id-->
+[Django project](#django_project)  
+<a id="django_ref"></a>
+<!-- md link to top-->
+[[Home]](#)
 ```
 [goole](https://www.google.com/ "Google")
 
