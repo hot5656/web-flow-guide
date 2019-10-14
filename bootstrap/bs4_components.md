@@ -42,6 +42,9 @@
 ```
 
 * Center  
+<div class="alert alert-warning" role="alert">
+Active 高度不同-是 md(markdown) 的問題 - li+li  
+</div>
 <ul class="nav justify-content-center">
   <li class="nav-item">
     <a class="nav-link active" href="#">Active</a>
@@ -75,6 +78,9 @@
 ```
 
 * Right  
+<div class="alert alert-warning" role="alert">
+Active 高度不同-是 md(markdown) 的問題 - li+li  
+</div>
 <ul class="nav justify-content-end">
   <li class="nav-item">
     <a class="nav-link active" href="#">Active</a>
