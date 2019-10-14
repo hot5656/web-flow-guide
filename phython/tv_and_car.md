@@ -517,15 +517,72 @@
 	* system setting  
 	tvacar/settings.py  
 	```python
+	INSTALLED_APPS = [
+	    'django.contrib.admin',
+	    'django.contrib.auth',
+	    'django.contrib.contenttypes',
+	    'django.contrib.sessions',
+	    'django.contrib.messages',
+	    'django.contrib.staticfiles',
+	    # add humanize
+	    'django.contrib.humanize',
+	    #'tvs',
+	    'tvs.apps.TvsConfig',
+	    'car.apps.CarConfig',
+	]
 	```
 
 	* car views  
 	car/views.py  
 	```python
+	def list(request,makerindex='0'):
+		car_maker = [ 'Ford', 'Honda', 'Mazda']
+		car_list = [
+					[ 	{'model':'Fiesta','price':203500}, 
+						{'model':'Focus', 'price':605000}, 
+						{'model':'Medeo', 'price':900000}, 
+						{'model':'EccSport', 'price':4500000}, 
+					],
+					[	{'model':'Fit', 'price':150000}, 
+						{'model':'Odyssey', 'price':4500000}, 
+						{'model':'CR-V', 'price':12000000}, 
+					],
+					[	{'model':'Mazda3', 'price':329999}, 
+						{'model':'Mazda5', 'price':603000}, 
+						{'model':'Mazda6', 'price':850000}, 
+					],
+				]
+		makerindex = int(makerindex)
+		maker_name = car_maker[makerindex]
+		cars = car_list[makerindex]
+		return render(request, "car/list.html", locals())
 	```
 
 	* car list template  
 	car/template/list.html  
 	```html
+	{% load humanize %}
+	<table class="ml-2 mt-2" border=1 width=400 bgcolor="ccffcc">
+		<thead>
+			{% if cars %}
+				<tr>
+					<td>車廠</td>
+					<td>車款</td>
+					<td>車價</td>
+				</tr>
+			{% endif %}
+		</thead>
+		<tbody>
+			{% for c in cars %}
+				<tr>
+					<td>{{maker_name}}</td>
+					<td>{{c.model}}</td>
+					<td align='right'>NT${{c.price | floatformat:2 | intcomma}}</td>
+				</tr>
+			{% empty %}
+				<h3>車廠 {{ maker_name }} 目前無庫存</h3>
+			{% endfor %}
+		</tbody>
+	</table>
 	```
 

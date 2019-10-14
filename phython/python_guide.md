@@ -242,6 +242,17 @@ truncatechars|裁切成指定長度,並把最後3字元改為...	|{{msg｜trunca
 wordcount|計算字數	|{{msg｜wordcount}}
 yesno|依內容是True,false,None顯示有以意義內容	|{{value｜yesno:"是,否,可能吧"}}
 
+lorem  
+```html
+{% lorem [count] [method] [random] %}  
+count  : 數量
+method : w-文字, p-段落
+random : 有加即為亂數產生
+ex:
+  {% lorem %}
+  {% lorem 3 p %}
+  {% lorem 2 w random %}
+```
 
 * **human touch**  
 [django.contrib.humanize](https://docs.djangoproject.com/en/2.2/ref/contrib/humanize/)  
