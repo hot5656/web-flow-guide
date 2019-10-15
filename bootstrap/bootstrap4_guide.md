@@ -20,13 +20,19 @@
 </html>
 
 
+[Bootstrap](#bootstrap)  
+[Record something](#record_thing)  
 [Reference link](#ref_link)  
 
 
-<a id="django_project"></a>
+<a id="bootstrap"></a>
 ## Bootstrap [[Home]](#)  
 * [components](./bs4_components.md)
 
+<a id="record_thing"></a>
+## Record something [[Home]](#) 
+* container(固定寬度)/container-fluid(滿版)
+* 預設情況下，列印時 Navbar 是隱藏的，如果需要列印它可以加入 .d-print 在 .navbar 上
 
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
