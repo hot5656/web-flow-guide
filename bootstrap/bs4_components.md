@@ -1,12 +1,12 @@
 ## [Bootstrap 4 Guide](./bootstrap4_guide.md)
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Bootstrap 4.3.1</title>
+	<title>BS4 components</title>
 </head>
 <body>
 
@@ -32,6 +32,8 @@
 # .navbar_expand{-sm|-md|-lg|-xl} : 若小於指定則為變更為 "折疊漢堡" 顯示menu項目
 # fluid by default
 # 使用 <nav> 元素確保親和性，或者如果使用更通用的元素 或 <div>，在導覽列中添加一個 role="navigation"
+# 對於不需要折疊的導覽列，在導覽列中加入 .navbar-expand
+# 對於總是折疊的導覽列，不要加任何 .navbar-expand class。
 # ----------
 # .navbar-brand : 為公司，產品或專案名稱
 # .navbar-nav : 提供完整的高和輕便的導航（包括對下拉清單的支持）
@@ -42,27 +44,30 @@
 ```
 
 * Brand  
+	* Text
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="#">Brand</a>
+	</nav>
 
-<nav class="navbar navbar-light bg-light mb-2">
-	<a class="navbar-brand" href="#">Brand</a>
-</nav>
+	* Image
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<img src="flower.jpg" width="30" height="30" alt="">
+		</a>
+	</nav>
 
-<nav class="navbar navbar-light bg-light mb-2">
-	<a class="navbar-brand" href="#">
-		<img src="flower.jpg" width="30" height="30" alt="">
-	</a>
-</nav>
+	* Image+Text
+	<nav class="navbar navbar-light bg-light">
+		<a class="navbar-brand" href="#">
+			<img src="flower.jpg" width="30" height="30" alt="">
+			Brand
+		</a>
+	</nav>
 
-<nav class="navbar navbar-light bg-light mb-2">
-	<a class="navbar-brand" href="#">
-		<img src="flower.jpg" width="30" height="30" alt="">
-		Brand
-	</a>
-</nav>
-
-<nav class="navbar navbar-light bg-light mb-2">
-	<span class="navbar-brand mb-0 h1">Brand</span>
-</nav>
+	* Not link 
+	<nav class="navbar navbar-light bg-light">
+		<span class="navbar-brand mb-0 h1">Brand</span>
+	</nav>
 
 ```html
 <!-- As a link -->
@@ -89,95 +94,110 @@
 ```
 
 * Navbar 折疊漢堡  
-
-<!-- lg 以下變為摺疊漢堡 -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-	<!-- brand -->
-	<a class="navbar-brand" href="#">Navbar</a>
-	<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
-	<!-- data-target="#navbarNav" aria-controls="navbarNav" : control map id 	-->
-	<!-- data-toggle="collapse" : 觸發 collapse 															-->
-	<!-- aria-expanded="false" : 觸發開關 default off 												-->
-	<!-- aria-label="Toggle navigation" : 提供閱讀障礙使用者參考							-->
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-		<!-- set icon -->
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<!-- collapse navbar-collapse 指定隱藏內容 -->
-	<!-- navbarNav 對應摺疊漢堡 button 之 id -->
-	<div class="collapse navbar-collapse" id="navbarNav">
-		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Features</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Pricing</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link disabled" href="#">Disabled</a>
-			</li>
-		</ul>
-	</div>
-</nav>
-
-<!-- lg 以下變為摺疊漢堡 - remove ul-li -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-	<!-- brand -->
-	<a class="navbar-brand" href="#">Navbar</a>
-	<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
-	<!-- data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" : control map id 	-->
-	<!-- data-toggle="collapse" : 觸發 collapse 															-->
-	<!-- aria-expanded="false" : 觸發開關 default off 												-->
-	<!-- aria-label="Toggle navigation" : 提供閱讀障礙使用者參考							-->
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-		<!-- set icon -->
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<!-- collapse navbar-collapse 指定隱藏內容 -->
-	<!-- navbarNavAltMarkup 對應摺疊漢堡 button 之 id -->
-	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-		<div class="navbar-nav">
-			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
-			<a class="nav-item nav-link" href="#">Features</a>
-			<a class="nav-item nav-link" href="#">Pricing</a>
-			<a class="nav-item nav-link disabled" href="#">Disabled</a>
+	*	basic
+	<!-- lg 以下變為摺疊漢堡 -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
+		<!-- data-target="#navbarNav" aria-controls="navbarNav" : control map id 	-->
+		<!-- data-toggle="collapse" : 觸發 collapse 															-->
+		<!-- aria-expanded="false" : 觸發開關 default off 												-->
+		<!-- aria-label="Toggle navigation" : 提供閱讀障礙使用者參考							-->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+			<!-- set icon -->
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- collapse navbar-collapse 指定隱藏內容 -->
+		<!-- navbarNav 對應摺疊漢堡 button 之 id -->
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Features</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Pricing</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" href="#">Disabled</a>
+				</li>
+			</ul>
 		</div>
-	</div>
-</nav>
+	</nav>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
-	<a class="navbar-brand" href="#">Navbar</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-		<span class="navbar-toggler-icon"></span>
-	</button>
-	<div class="collapse navbar-collapse" id="navbarNavDropdown">
-		<ul class="navbar-nav">
-			<li class="nav-item active">
-				<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Features</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" href="#">Pricing</a>
-			</li>
-			<li class="nav-item dropdown">
-				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-					Dropdown link
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-					<a class="dropdown-item" href="#">Action</a>
-					<a class="dropdown-item" href="#">Another action</a>
-					<a class="dropdown-item" href="#">Something else here</a>
-				</div>
-			</li>
-		</ul>
-	</div>
-</nav>
+	[bootstrap4_example](bootstrap4_example.html)-NavbarBase
 
+	* remove ui-li
+	<!-- lg 以下變為摺疊漢堡 - remove ul-li -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
+		<!-- data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" : control map id 	-->
+		<!-- data-toggle="collapse" : 觸發 collapse 															-->
+		<!-- aria-expanded="false" : 觸發開關 default off 												-->
+		<!-- aria-label="Toggle navigation" : 提供閱讀障礙使用者參考							-->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<!-- set icon -->
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- collapse navbar-collapse 指定隱藏內容 -->
+		<!-- navbarNavAltMarkup 對應摺疊漢堡 button 之 id -->
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="#">Features</a>
+				<a class="nav-item nav-link" href="#">Pricing</a>
+				<a class="nav-item nav-link disabled" href="#">Disabled</a>
+			</div>
+		</div>
+	</nav>
+
+	* add dropdown menus
+	<!-- lg 以下變為摺疊漢堡 - add dropdown menus -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
+		<!-- data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" : control map id 	-->
+		<!-- data-toggle="collapse" : 觸發 collapse 															-->
+		<!-- aria-expanded="false" : 觸發開關 default off 												-->
+		<!-- aria-label="Toggle navigation" : 提供閱讀障礙使用者參考							-->
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+			<!-- set icon -->
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- collapse navbar-collapse 指定隱藏內容 -->
+		<!-- navbarNavDropdown 對應摺疊漢堡 button 之 id -->
+		<div class="collapse navbar-collapse" id="navbarNavDropdown">
+			<ul class="navbar-nav">
+				<li class="nav-item active">
+					<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Features</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#">Pricing</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+						Dropdown link
+					</a>
+					<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+						<a class="dropdown-item" href="#">Action</a>
+						<a class="dropdown-item" href="#">Another action</a>
+						<a class="dropdown-item" href="#">Something else here</a>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	[bootstrap4_example](bootstrap4_example.html)-NavbarDropdown
 
 ```html
 <!-- lg 以下變為摺疊漢堡 -->
@@ -213,7 +233,7 @@
 	</div>
 </nav>
 <!-- lg 以下變為摺疊漢堡 - remove ul-li -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<!-- brand -->
 	<a class="navbar-brand" href="#">Navbar</a>
 	<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
@@ -237,7 +257,7 @@
 	</div>
 </nav>
 <!-- lg 以下變為摺疊漢堡 - add dropdown menus -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<!-- brand -->
 	<a class="navbar-brand" href="#">Navbar</a>
 	<!-- class="navbar-toggler" : 摺疊漢堡 button															-->
@@ -262,6 +282,7 @@
 			<li class="nav-item">
 				<a class="nav-link" href="#">Pricing</a>
 			</li>
+			<!-- navbarDropdownMenuLink : dropdowm map id -->
 			<li class="nav-item dropdown">
 				<a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 					Dropdown link
@@ -277,6 +298,206 @@
 </nav>
 ```
 
+* Form  
+	* Search  
+	<nav class="navbar navbar-light bg-light">
+	  <form class="form-inline">
+	    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	  </form>
+	</nav>
+
+	* button  
+	<nav class="navbar navbar-light bg-light">
+	  <form class="form-inline">
+	    <button class="btn btn-outline-success" type="button">Main button</button>
+	    <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
+	  </form>
+	</nav>
+
+```html
+<-- Search -->
+<nav class="navbar navbar-light bg-light">
+	 <form class="form-inline">
+	   <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+	   <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+	 </form>
+</nav>
+<-- button -->
+<nav class="navbar navbar-light bg-light">
+	 <form class="form-inline">
+	   <button class="btn btn-outline-success" type="button">Main button</button>
+	   <button class="btn btn-sm btn-outline-secondary" type="button">Smaller button</button>
+	 </form>
+</nav>
+```
+
+* Text  
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    Navbar text with an inline element
+  </span>
+</nav>
+
+```html
+<nav class="navbar navbar-light bg-light">
+  <span class="navbar-text">
+    Navbar text with an inline element
+  </span>
+</nav>
+```
+
+* Color  
+	<nav class="navbar navbar-dark bg-dark">
+		<span class="navbar-brand mb-0 h1">Brand</span>
+		<a class="nav-link active" href="#">Home</a>
+		<a class="nav-link" href="#">Features</a>
+		<a class="nav-link" href="#">About</a>
+	</nav><br>
+	<!-- -->
+	<nav class="navbar navbar-dark bg-primary">
+		<span class="navbar-brand mb-0 h1">Brand</span>
+		<a class="nav-link active" href="#">Home</a>
+		<a class="nav-link" href="#">Features</a>
+		<a class="nav-link" href="#">About</a>
+	</nav><br>
+	<!-- -->
+	<nav class="navbar navbar-light" style="background-color: #e3f2fd;"">
+		<span class="navbar-brand mb-0 h1">Brand</span>
+		<a class="nav-link active" href="#">Home</a>
+		<a class="nav-link" href="#">Features</a>
+		<a class="nav-link" href="#">About</a>
+	</nav><br>
+
+```html
+<!-- bg-dark -->
+<nav class="navbar navbar-dark bg-dark">
+	<span class="navbar-brand mb-0 h1">Brand</span>
+	<a class="nav-link active" href="#">Home</a>
+	<a class="nav-link" href="#">Features</a>
+	<a class="nav-link" href="#">About</a>
+</nav><br>
+<!-- bg-dark/pick bg-color -->
+<nav class="navbar navbar-dark bg-primary">
+	<span class="navbar-brand mb-0 h1">Brand</span>
+	<a class="nav-link active" href="#">Home</a>
+	<a class="nav-link" href="#">Features</a>
+	<a class="nav-link" href="#">About</a>
+</nav><br>
+<!-- bg-loght/pick bg-color -->
+<nav class="navbar navbar-light" style="background-color: #e3f2fd;"">
+	<span class="navbar-brand mb-0 h1">Brand</span>
+	<a class="nav-link active" href="#">Home</a>
+	<a class="nav-link" href="#">Features</a>
+	<a class="nav-link" href="#">About</a>
+</nav><br>
+```
+
+* * Navbar 折疊漢堡 brand 位置  
+	* brand 隱藏  
+	<!-- brand 隱藏 -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<!-- brand -->
+			<a class="navbar-brand" href="#">Navbar</a>
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="#">Features</a>
+				<a class="nav-item nav-link" href="#">Pricing</a>
+				<a class="nav-item nav-link disabled" href="#">Disabled</a>
+			</div>
+		</div>
+	</nav>
+
+	* brand 置於左邊  
+	<!-- brand 置於左邊 -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="#">Features</a>
+				<a class="nav-item nav-link" href="#">Pricing</a>
+				<a class="nav-item nav-link disabled" href="#">Disabled</a>
+			</div>
+		</div>
+	</nav>
+
+	* brand 置於右變  
+	<!-- brand 置於右變 -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+				<a class="nav-item nav-link" href="#">Features</a>
+				<a class="nav-item nav-link" href="#">Pricing</a>
+				<a class="nav-item nav-link disabled" href="#">Disabled</a>
+			</div>
+		</div>
+	</nav>
+
+```html
+<!-- brand 隱藏 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<!-- brand -->
+		<a class="navbar-brand" href="#">Navbar</a>
+		<div class="navbar-nav">
+			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="#">Features</a>
+			<a class="nav-item nav-link" href="#">Pricing</a>
+			<a class="nav-item nav-link disabled" href="#">Disabled</a>
+		</div>
+	</div>
+</nav>
+<!-- brand 置於左邊 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<!-- brand -->
+	<a class="navbar-brand" href="#">Navbar</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="#">Features</a>
+			<a class="nav-item nav-link" href="#">Pricing</a>
+			<a class="nav-item nav-link disabled" href="#">Disabled</a>
+		</div>
+	</div>
+</nav>
+<!-- brand 置於右變 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	<!-- brand -->
+	<a class="navbar-brand" href="#">Navbar</a>
+	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+		<div class="navbar-nav">
+			<a class="nav-item nav-link active" href="#">Home <span class="sr-only">(current)</span></a>
+			<a class="nav-item nav-link" href="#">Features</a>
+			<a class="nav-item nav-link" href="#">Pricing</a>
+			<a class="nav-item nav-link disabled" href="#">Disabled</a>
+		</div>
+	</div>
+</nav>
+```
 
 <a id="navs"></a>
 ## Navs [[Home]](#) 

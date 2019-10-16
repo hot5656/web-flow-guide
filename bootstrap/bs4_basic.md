@@ -1,5 +1,4 @@
-# Bootstrap 4 Guide  
-
+## [Bootstrap 4 Guide](./bootstrap4_guide.md)
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta http-equiv="X-UA-Compatible" content="ie=edge">
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Bootstrap 4.3.1</title>
+	<title>BS4 basic</title>
 </head>
 <body>
 
@@ -19,23 +18,23 @@
 </body>
 </html>
 
+## BS4 basic
+* [Container](#Container)
+* [Grid](#Grid)
 
-[Bootstrap](#bootstrap)  
-[Record something](#record_thing)  
-[Reference link](#ref_link)  
+<a id="Container"></a>
+## Container [[Home]](#) 
+```html
+container : 1140px
+container-fluid : 依 screen 變化
+```
 
+<a id="Grid"></a>
+## Grid [[Home]](#) 
+xx    	|Extra small|Small |Medium|Large |Extra large
+--------|-----------|------|------|------|-----------
+  		|<576px		|≥576px|≥768px|≥992px|≥1200px
+Max container width|None (auto)|540px|	720px|960px|1140px
+Class prefix|.col-|.col-sm-|.col-md-|.col-lg-|.col-xl-
 
-<a id="bootstrap"></a>
-## Bootstrap [[Home]](#)  
-* [Container](./bs4_basic.md)
-* [components](./bs4_components.md)
-
-<a id="record_thing"></a>
-## Record something [[Home]](#) 
-* container(固定寬度)/container-fluid(滿版)
-* 預設情況下，列印時 Navbar 是隱藏的，如果需要列印它可以加入 .d-print 在 .navbar 上
-
-<a id="ref_link"></a>
-## Reference link  [[Home]](#) 
-* [Bootstrap 4](https://getbootstrap.com/)  
-* [Bootstrap 4 中文翻譯](https://bootstrap.hexschool.com/)
+Gutter width : 30px (15px on each side of a column)
