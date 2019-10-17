@@ -27,8 +27,8 @@
 
 <a id="bootstrap"></a>
 ## Bootstrap [[Home]](#)  
-* [Container](./bs4_basic.md)
-* [components](./bs4_components.md)
+* [Basic](./bs4_basic.md)
+* [Components](./bs4_components.md)
 
 <a id="record_thing"></a>
 ## Record something [[Home]](#) 
@@ -38,4 +38,7 @@
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
 * [Bootstrap 4](https://getbootstrap.com/)  
+* [Bootstrap 4 Tutorial(w3schools)](https://www.w3schools.com/bootstrap4/default.asp)
 * [Bootstrap 4 中文翻譯](https://bootstrap.hexschool.com/)
+* [Bootstrap 4 教程](https://www.runoob.com/bootstrap4/bootstrap4-tutorial.html)
+* [Fake images](https://fakeimg.pl/)

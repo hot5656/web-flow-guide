@@ -14,11 +14,21 @@
 		<ul>
 			<li><a href="#NavbarBase">NavbarBase</a></li>
 			<li><a href="#NavbarDropdown">NavbarDropdown</a></li>
+			<li><a href="#NavbarClose">NavbarClose</a></li>
 		</ul>
+		
 		<h2>Nav</h2>
+		<ul>
+			<li><a href="#NavDynamicTabbed">NavDynamicTabbed</a></li>
+			<li><a href="#NavDynamicTabbedVertical">NavDynamicTabbedVertical</a></li>
+		</ul>
 
+		<h2>Car</h2>
+		<ul>
+			<li><a href="#CarList">CarList</a></li>
+		</ul>
 
-		<h4 id="NavbarBase">NavbarBase</h4>
+		<h4 id="NavbarBase">NavbarBase - <a href="#">Home</a></h4>
 		<!-- lg 以下變為摺疊漢堡 -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
 			<!-- brand -->
@@ -52,8 +62,7 @@
 			</div>
 		</nav>
 
-
-		<h4 id="NavbarDropdown">NavbarDropdown</h4>
+		<h4 id="NavbarDropdown">NavbarDropdown - <a href="#">Home</a></h4>
 		<!-- lg 以下變為摺疊漢堡 - add dropdown menus -->
 		<nav class="navbar navbar-expand-lg navbar-light bg-light mb-2">
 			<!-- brand -->
@@ -93,8 +102,72 @@
 				</ul>
 			</div>
 		</nav>
+
+		<h4 id="NavbarClose">NavbarClose - <a href="#">Home</a></h4>
+		<!-- default 摺疊 - no add navbar-expand-xx -->
+		<nav class="navbar navbar-dark bg-dark">
+		  <div class="collapse navbar-collapse" id="navbarTogglerDemo04">
+		      <h5 class="text-white h4">Collapsed content</h5>
+		      <span class="text-muted">Toggleable via the navbar brand.</span>
+		  </div>
+		  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo04" aria-controls="navbarTogglerDemo04" aria-expanded="false" aria-label="Toggle navigation">
+		    <span class="navbar-toggler-icon"></span>
+		  </button>
+		</nav>
+
+		<h4 id="NavDynamicTabbed">NavDynamicTabbed - <a href="#">Home</a></h4>
+		<!-- Basic -->
+		<!-- id="nav-home-tab"  to   aria-labelledby="nav-home-tab" -->
+		<!-- href="#nav-home" to id="nav-home" -->
+		<nav>
+			<div class="nav nav-tabs" role="tablist">
+				<a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+				<a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+				<a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+			</div>
+		</nav>
+		<div class="tab-content">
+			<div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">home...</div>
+			<div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">profile...</div>
+			<div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">contact...</div>
+		</div>
+
+		<h4 id="NavDynamicTabbedVertical">NavDynamicTabbedVertical - <a href="#">Home</a></h4>
+		<!-- Vertical -->
+		<!-- id="nav-home-tab-v"  to   aria-labelledby="nav-home-tab-v" -->
+		<!-- href="#nav-home-v" to id="nav-home-v" -->
+		<div class="row">
+			<div class="col-3">
+				<div class="nav nav-pills flex-column"role="tablist">
+					<a class="nav-item nav-link active" id="nav-home-tab-v" data-toggle="tab" href="#nav-home-v" role="tab" aria-controls="nav-home" aria-selected="true">Home</a>
+					<a class="nav-item nav-link" id="nav-profile-tab-v" data-toggle="tab" href="#nav-profile-v" role="tab" aria-controls="nav-profile" aria-selected="false">Profile</a>
+					<a class="nav-item nav-link" id="nav-contact-tab-v" data-toggle="tab" href="#nav-contact-v" role="tab" aria-controls="nav-contact" aria-selected="false">Contact</a>
+				</div>
+			</div>
+			<div class="col-9">
+				<div class="tab-content">
+					<div class="tab-pane fade show active" id="nav-home-v" role="tabpanel" aria-labelledby="nav-home-tab-v">home Vertical...</div>
+					<div class="tab-pane fade" id="nav-profile-v" role="tabpanel" aria-labelledby="nav-profile-tab-v">profile Vertical...</div>
+					<div class="tab-pane fade" id="nav-contact-v" role="tabpanel" aria-labelledby="nav-contact-tab-v">contact Vertical...</div>
+				</div>
+			</div>
+		</div>
+
+		<h4 id="CarList">CarList - <a href="#">Home</a></h4>
+		<div class="card" style="width: 18rem;">
+		  <div class="card-header">
+		    Featured
+		  </div>
+		  <ul class="list-group list-group-flush">
+		    <li class="list-group-item">Cras justo odio</li>
+		    <li class="list-group-item">Dapibus ac facilisis in</li>
+		    <li class="list-group-item">Vestibulum at eros</li>
+		  </ul>
+		</div>
+
+
 	</div>
-	
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
