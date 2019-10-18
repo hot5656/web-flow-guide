@@ -668,7 +668,7 @@
 * flex aligment  
 
 <div class="alert alert-info" role="alert">
-	Don't check detail
+	Don't check detail yet
 </div>
 
 <nav class="nav nav-pills flex-column flex-sm-row">

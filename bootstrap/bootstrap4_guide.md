@@ -29,6 +29,13 @@
 ## Bootstrap [[Home]](#)  
 * [Basic](./bs4_basic.md)
 * [Components](./bs4_components.md)
+* [Utilities](./bs4_utilities.md)
+
+* Icons - tested 
+	* [Font Awesome](https://fontawesome.com/)
+	* [Iconic](https://github.com/iconic/open-iconic)
+	* [Octicons](https://octicons.github.com/)
+
 
 <a id="record_thing"></a>
 ## Record something [[Home]](#) 
