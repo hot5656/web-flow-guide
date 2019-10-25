@@ -18,9 +18,11 @@
 </body>
 </html>
 
+<link rel="stylesheet" href="bootstrap4_exaample.css">
 ## BS4 utilities
 * [Spacing-間隔](#Spacing)
 * [Color](#Color)
+* [Boards](#Boards)
 
 
 <a id="Spacing"></a>
@@ -158,4 +160,24 @@ margin 屬性可以使用負值（padding 不能） , n1~n5
 .bg-gradient-info
 .bg-gradient-light
 .bg-gradient-dark
+```
+
+
+<a id="Boards"></a>
+## Boards [[Home]](#)  
+
+* Border  
+
+<span class="border border-danger board-block"></span>
+<span class="border-top border-danger board-block"></span>
+<span class="border-right border-danger board-block"></span>
+<span class="border-bottom border-danger board-block"></span>
+<span class="border-left border-danger board-block"></span>
+
+```html
+<span class="border"></span>
+<span class="border-top"></span>
+<span class="border-right"></span>
+<span class="border-bottom"></span>
+<span class="border-left"></span>
 ```
