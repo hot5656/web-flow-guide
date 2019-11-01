@@ -41,6 +41,16 @@
 ## Record something [[Home]](#) 
 * container(固定寬度)/container-fluid(滿版)
 * 預設情況下，列印時 Navbar 是隱藏的，如果需要列印它可以加入 .d-print 在 .navbar 上
+* some bootstrap don't work in markdown  
+	.board css  
+	js function  
+	...
+* highlight.js - Syntax highlighting for the Web  
+* 字符實體引用(character entity reference) : 來表示特殊字符  
+* 使用 Sass 變數,可以透過更改_variables.scss  
+
+
+
 
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
@@ -50,3 +60,5 @@
 * [Bootstrap 4 教程](https://www.runoob.com/bootstrap4/bootstrap4-tutorial.html)
 * [Fake images](https://fakeimg.pl/)
 * [HTML 教程(w3schools)](https://www.w3school.com.cn/html/index.asp)
+* [hilite.me-線上程式碼上色](http://hilite.me/)
+* [HTML 4 Entity Names](https://www.w3schools.com/charsets/ref_html_entities_4.asp)

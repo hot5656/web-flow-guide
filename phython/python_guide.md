@@ -1,12 +1,15 @@
 # Python Guide  
 [Django project](#django_project)  
 [Django reference](#django_ref)  
+[Refference](#reference)  
+[Issue](#django_issue)  
 [Reference link](#ref_link)  
 
 <a id="django_project"></a>
 ## Django project  [[Home]](#) 
 *  [mblog](./mblog.md)
 *  [中古手機專賣店](./second_phone.md)
+*  [中古手機專賣店-myQSL](./second_phone_mysql.md)
 *  [TV and Car](./tv_and_car.md)
 
 <a id="django_ref"></a>
@@ -276,6 +279,85 @@ ordinal - 1 becomes 1st.
 	python manage.py sqlmigrate mainsite 0002  
 	```
 
+<a id="reference"></a>
+## Refference  [[Home]](#) 
+
+* sass  
+	* django-compressor install by conda  
+	conda install django-compressor
+	> conda can not inclue the package 
+
+	* pip install django-compressor  
+	pip install django-compressor  
+	> Failed building wheel for rcssmin
+
+	* complet django-compressor install  
+	pip install rcssmin --install-option="--without-c-extensions"  
+	pip install rjsmin  
+	pip install libsass django-compressor django-sass-processor  
+
+	* set settings.py  
+
+	```python
+	# set sass_processor
+	INSTALLED_APPS = [
+	    ...
+	    'sass_processor',
+	    ...
+	]
+
+	# set STATICFILES_FINDERS
+	STATICFILES_FINDERS = (
+	    'django.contrib.staticfiles.finders.FileSystemFinder',
+	    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+	    'sass_processor.finders.CssFinder',
+	)
+
+	# set SASS_PRECISION ( default 5)  
+	SASS_PRECISION = 8
+
+	# set STATIC_ROOT  
+	STATIC_ROOT = os.path.join(BASE_DIR, 'common_static')
+	```
+
+	* set Django templates
+
+	```html
+	{% load sass_tags %}
+	<link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
+	```
+
+	* add scss file - example  
+	app_dir\static\scss\style.scss 
+	```css
+	.navbar {
+		.active {
+			background-color: #b4b4b4 ;
+		}
+	}
+
+	a {
+		color: black;
+	}
+	```
+
+
+
+
+
+<a id="django_issue"></a>
+## Django issue  [[Home]](#) 
+
+* TypeError: 'NoneType' object is not subscriptable  
+似乎是DB server 回應太慢  
+settings.py  
+```py
+DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
+```
+
+
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
 * [imgur-圖片上傳空間](https://imgur.com/)  
+* [django-sass-processor](https://github.com/jrief/django-sass-processor)  
+* [Django documentation](https://docs.djangoproject.com/en/2.2/)

@@ -51,6 +51,11 @@ font-weight:bold;
 }
 </style>
 
+## record 
+	* db for image - hoe to save
+	1cjSpetZYS
+	 DBpWHXrrfy
+
 ## reference 
 * **Machine Learning**  
 
