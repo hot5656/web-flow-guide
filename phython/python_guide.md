@@ -2,6 +2,7 @@
 [Django project](#django_project)  
 [Django reference](#django_ref)  
 [Package install](#package_install)  
+[Debug](#debug)  
 [Command](#command)  
 [Refference](#reference)  
 [Issue](#django_issue)  
@@ -13,6 +14,7 @@
 *  [中古手機專賣店](./second_phone.md)
 *  [中古手機專賣店-MySQL](./second_phone_mysql.md)
 *  [TV and Car](./tv_and_car.md)
+*  [Form example](./form_ex.md)
 
 
 <a id="django_ref"></a>
@@ -291,6 +293,15 @@ for link MySQL
 conda install mysqlclient  
 ```
 
+<a id="debug"></a>
+## Debug  [[Home]](#)  
+
+* VS code rune debug  
+	Python Interpreter  
+	```
+	Ctrl+Shift+P -->  Python: Select Interpreter  
+	F5 --> Python --> Django  
+	```
 
 
 <a id="command"></a>
@@ -299,10 +310,10 @@ conda install mysqlclient
 * VS code set for Django  
 ```python
 {
-  "emmet.includeLanguages": {"django-html": "html"},
-  "python.linting.pylintArgs": [
-      "--load-plugins=pylint_django"
-  ],
+	"emmet.includeLanguages": {"django-html": "html"},
+	"python.linting.pylintArgs": [
+		"--load-plugins=pylint_django"
+	],
 }
 ```
 
@@ -329,7 +340,7 @@ INSTALLED_APPS = [
 ]
 # set language and time zone
 LANGUAGE_CODE = 'zh-Hant'
-TIME_ZONE = 'Asia/Taipei
+TIME_ZONE = 'Asia/Taipei'
 ```
 
 * set for MySQL  
@@ -436,14 +447,30 @@ http://127.0.0.1:8000/admin/
 ```
 
 * system urls  
-```python
-from django.contrib import admin
-from django.urls import path, include
-urlpatterns = [
-	path('', include('secondphone.urls')),
-	path('admin/', admin.site.urls),
-]
+	point to app's urls  
+	```python
+	from django.contrib import admin
+	from django.urls import path, include
+	urlpatterns = [
+		path('', include('secondphone.urls')),
+		path('admin/', admin.site.urls),
+	]
+	```
+
+	no use app's urls  
+	```python
+	from django.contrib import admin
+	from django.urls import path, re_path
+	from trips.views import hello_world, home, post_detail
+
+	urlpatterns = [
+		path('admin/', admin.site.urls),
+		path('hello/', hello_world),
+		path('', home),
+		re_path(r'^post/(?P<pk>\d+)/$', post_detail, name='post_detail'),
+	]
 ```
+
 
 * app urls  
 ```python
@@ -456,26 +483,34 @@ urlpatterns = [
 ```
 
 * add app view  
-secondphone/views.py  
-from .models import PPhoto  
-> 亦可寫成 from secondphone import models  
-	使用 models.PPhoto  
-```python
-from django.shortcuts import render
-from django.http import HttpResponse
-from .models import Product
-from .models import PPhoto
-def  index(request):
-	products = Product.objects.all()
-	return render(request, 'second/index.html', locals())
-def  detail(request, id):
-	try :
-		product = Product.objects.get(id=id)
-		image = PPhoto.objects.filter(product=product)
-	except :
-		pass
-	return render(request, 'second/detail.html', locals())
-```
+	secondphone/views.py  
+	from .models import PPhoto  
+	> 亦可寫成 from secondphone import models  
+		使用 models.PPhoto  
+
+	```python
+	from django.shortcuts import render
+	from django.http import HttpResponse
+	from .models import Product
+	from .models import PPhoto
+	def  index(request):
+		products = Product.objects.all()
+		return render(request, 'second/index.html', locals())
+	def  detail(request, id):
+		try :
+			product = Product.objects.get(id=id)
+			image = PPhoto.objects.filter(product=product)
+		except :
+			pass
+		return render(request, 'second/detail.html', locals())
+	```
+
+	simple return string  
+	```python
+	from django.http import HttpResponse
+	def  index(request):
+		return HttpResponse("index...")
+	```
 
 * add template  
 	template/second/base.html  
@@ -511,6 +546,7 @@ def  detail(request, id):
 
 	template/second/detail.html  
 	```html
+	<!-- detail.html -->
 	{% extends "second/base.html" %}
 	{% block  title %}中古機賣場{% endblock %} 
 	{% block content %}
@@ -631,8 +667,92 @@ def  detail(request, id):
 	<link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
 	```
 
+* Form  
+	* html  
+	label : 對應 input 之說明  
+	id : maping label and input 
+	name : 提供運算之名稱  
+	method : 指定 form 執行 POST or GET  
+	action : submit 後 資料要被送到哪裡,一般指定 PHP or JS 的一個函數,Django 只到要處理的網址即可  
+	value : 指定 input 的 default 值  
+	submit : input 之特殊元素,就是 "送出資料" 的按鈕, value 設定按鈕文字  
+	reset : input 之特殊元素,就是 "清除表單所有輸入值" 的按鈕, value 設定按鈕文字  
+	type="password" : 密碼輸入  
+	```html
+	<form name='my_form' action="/" method='GET'>
+		<label for="user_id">Your ID:</label>
+		<input id='user_id' type="text" name='user_id'>
+		<label for="user_pass">Your Passwrod:</label>
+		<input id='user_pass' type="password" name='user_pass'>
+		<input type="submit" value='登入'>
+		<input type="reset" value='清除重填'>
+	</form>
+	```
 
+	* views process form  
+	```html
+	from django.template.loader import get_template
+	from django.http import HttpResponse 
 
+	def index(request):
+		template = get_template('index.html')
+		try :
+			urid = request.GET['user_id']
+			urpass = request.GET['user_pass']
+		except:
+			urid = None 
+		if urid != None and  urpass == '12345':
+			verified = True
+		else :
+			verified = False
+		print(urid, verified)
+		return HttpResponse( template.render(locals()))
+	```
+
+	* check form data  
+	```html
+	Your ID:{{ urid | default:"未輸入ID" }}<br>
+	{% if verified %}
+		<em>你通過驗證</em>	
+	{% else %}
+		<em>帳號或密碼錯誤</em>		
+	{% endif %}
+	```
+
+	* 常用元件  
+	```html
+	<!-- 下拉式選單 select -->
+	<br>
+	<label for="first">最喜歡水果</label>
+	<select name="first" id="first">
+		<option value="0">Apple</option>
+		<option value="1">Banana</option>
+		<option value="2">Cherry</option>
+	</select>
+	<br>
+	<!-- 單選按鈕 radio -->
+	<!-- checked 表勾選 -->
+	最喜歡顏色(單選)<br>
+	<input type="radio" name='fcolor' value='Green' checked>Green<br>
+	<input type="radio" name='fcolor' value='Blue'>Blue<br>
+	<input type="radio" name='fcolor' value='Red'>Red<br>
+	<input type="radio" name='fcolor' value='Black'>Black<br>
+	<!-- 核取方塊(多選) checkbox-->
+	<!-- checked 表勾選 -->
+	最喜歡顏色(多選)<br>
+	<input type="checkbox" name='fcolor' value='Green' checked>Green<br>
+	<input type="checkbox" name='fcolor' value='Blue'>Blue<br>
+	<input type="checkbox" name='fcolor' value='Red'>Red<br>
+	<input type="checkbox" name='fcolor' value='Black'>Black<br>
+	<!-- 隱藏欄位 hidden -->
+	<input type="hidden" name='hidevalue' value='hidevalue'>
+	<!-- 多列文字 textarea -->
+	<textarea name="message" id="" cols=20 rows=5>
+	Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quidem saepe facilis aut nobis libero accusamus quaerat quam labore similique dolorem quasi obcaeca optio sed, quos voluptatum explicabo consequatur iure quisquam?
+	</textarea><br>
+	<!-- 自定按紐 button -->
+	<input type="button" value='Google' onclick ='localtion.href="https://google.com"'>
+	```
 
 <a id="reference"></a>
 ## Refference  [[Home]](#) 
@@ -662,17 +782,19 @@ def  detail(request, id):
 	]
 
 	# set STATICFILES_FINDERS
-	STATICFILES_FINDERS = (
+	STATICFILES_FINDERS = [
 	    'django.contrib.staticfiles.finders.FileSystemFinder',
 	    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 	    'sass_processor.finders.CssFinder',
-	)
+	]
 
 	# set SASS_PRECISION ( default 5)  
 	SASS_PRECISION = 8
 
 	# set STATIC_ROOT  
 	STATIC_ROOT = os.path.join(BASE_DIR, 'common_static')
+	# use SASS_PROCESSOR_ROOT also ok
+	# SASS_PROCESSOR_ROOT = os.path.join(BASE_DIR,'common_static')
 	```
 
 	* set Django templates
@@ -708,6 +830,9 @@ settings.py
 ```py
 DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 ```
+
+* sass processor no generate css  
+非使用 .scss 使用 .css  
 
 
 <a id="ref_link"></a>

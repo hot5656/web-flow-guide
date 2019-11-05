@@ -769,6 +769,26 @@
 </div>
 ```
 
+* othre example  
+	* brand + left nav  
+
+	<nav class="navbar navbar-light bg-light d-flex justify-content-start mb-2">
+	    <!-- brand -->
+	    <a class="navbar-brand" href="/">中古機賣場</a>
+	    <a class="nav-item nav-link active" href="/" style="background-color: #b4b4b4 ; color: black;">Home</a>
+	    <a class="nav-item nav-link" href="/admin/" style="color: black;">後臺管理</a>
+	</nav>
+
+	```html
+	<nav class="navbar navbar-light bg-light d-flex justify-content-start">
+	    <!-- brand -->
+	    <a class="navbar-brand" href="/">中古機賣場</a>
+	    <a class="nav-item nav-link active" href="/">Home</a>
+	    <a class="nav-item nav-link" href="/admin/">後臺管理</a>
+	</nav>
+	```
+
+
 <a id="Card"></a>
 ## Card [[Home]](#) 
 ```
