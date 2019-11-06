@@ -754,6 +754,43 @@ urlpatterns = [
 	<input type="button" value='Google' onclick ='localtion.href="https://google.com"'>
 	```
 
+	* example  
+		* year 下拉式選單  
+		views  
+		```python
+		# year select
+		year = range(1956,2020)
+		```
+
+		html  
+		```html
+		<!-- year select -->
+		<label for="byear">出生年:</label>
+		<select name="byear" id="byear">
+			{% for y in year %}
+				<option value="{{ y }}">{{ y }}</option>
+			{% endfor %}
+		</select>
+		```
+
+		* checkbox process  
+		views  
+		```python
+		# get checkbox 
+		urfcolor = request.GET.getlist('cfcolor')
+		```
+
+		html  
+		```html
+		顏色喜好 : 
+		<!-- get checkbox --> 
+		{% for c in urfcolor %}
+			{{ c }}
+		{% empty %}
+			not selected
+		{% endfor %}
+		```
+
 <a id="reference"></a>
 ## Refference  [[Home]](#) 
 
