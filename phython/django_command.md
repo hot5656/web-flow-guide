@@ -381,6 +381,62 @@ urlpatterns = [
 	<!-- loas sass-->
 	{% load sass_tags %}
 	<link href="{% sass_src 'scss/style.scss' %}" rel="stylesheet" type="text/css" />
+	<!-- comment -->
+	{% comment "Optional note" %}
+		<p>Commented out text with {{ create_date|date:"c" }}</p>
+	{% endcomment %}
+	<!-- cycle string : 1st 'row1' , 2nd 'row2', 3th 'row1'...-->
+	{% for o in some_list %}
+		<tr class="{% cycle 'row1' 'row2' %}">
+			...
+		</tr>
+	{% endfor %}
+	<!-- cycle variable -->
+	{% for o in some_list %}
+		<tr class="{% cycle rowvalue1 rowvalue2 %}">
+			...
+		</tr>
+	{% endfor %}
+	<!-- cycle disable auto-escaping(轉義內容 disabel) -->
+	{% for o in some_list %}
+		<tr class="{% autoescape off %}{% cycle rowvalue1 rowvalue2 %}{% endautoescape %}">
+			...
+		</tr>
+	{% endfor %}
+	<!-- cycle variable and string -->
+	{% for o in some_list %}
+		<tr class="{% cycle 'row1' rowvalue2 'row3' %}">
+			...
+		</tr>
+	{% endfor %}
+	<!-- cycle 引用下一個值 -->
+	{% cycle 'row1' 'row2' as rowcolors %}
+	<tr>
+		<td class="{% cycle 'row1' 'row2' as rowcolors %}">...</td> 下次遇到 cycle 'row2' 代替 rowcolors  
+		<td class="{{ rowcolors }}">...</td>
+	</tr>
+	<tr>
+		<td class="{% cycle rowcolors %}">...</td>
+		<td class="{{ rowcolors }}">...</td>
+	</tr>
+	to 
+	<tr>
+		<td class="row1">...</td>
+		<td class="row1">...</td>
+	</tr>
+	<tr>
+		<td class="row2">...</td>
+		<td class="row2">...</td>
+	</tr>
+	<!-- cycle 隱藏 -->
+	{% for obj in some_list %}
+		{% cycle 'row1' 'row2' as rowcolors silent %}
+		<tr class="{{ rowcolors }}">{% include "subtemplate.html" %}</tr>
+	{% endfor %}
+	to 
+	{% cycle reset %}
+	<!-- cycle reset -->
+	You can use the resetcycle tag to make a {% cycle %} tag restart from its first value 
 	```
 
 * Form  
