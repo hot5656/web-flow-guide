@@ -30,7 +30,7 @@
 * [Basic](./bs4_basic.md)
 * [Components](./bs4_components.md)
 * [Utilities](./bs4_utilities.md)
-
+* [example](./bs4_example.md)
 * Icons - tested 
 	* [Font Awesome](https://fontawesome.com/)
 	* [Iconic](https://github.com/iconic/open-iconic)
