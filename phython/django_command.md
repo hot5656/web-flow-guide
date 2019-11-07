@@ -439,6 +439,140 @@ urlpatterns = [
 	You can use the resetcycle tag to make a {% cycle %} tag restart from its first value 
 	```
 
+	* filter  
+	```htlm
+	<!-- otutpt low case -->
+	{% filter force_escape|lower %}
+		This text will be HTML-escaped, and will appear in all lowercase.
+	{% endfilter %}
+	```
+
+	* if  
+	 operators ==, !=, <, >, <=, >=, in, not in, is, and is not  
+	```htlm
+	<!-- multiple -->
+	{% if var1 %}
+		{{ var1 }}
+	{% elif var2 %}
+		{{ var2 }}
+	{% elif var3 %}
+		{{ var3 }}
+	{% endif %}
+	<!-- Boolean operators -->
+	{% if athlete_list and coach_list %}
+	Both athletes and coaches are available.
+	{% endif %}
+	{% if not athlete_list %}
+	There are no athletes.
+	{% endif %}
+	{% if athlete_list or coach_list %}
+	There are some athletes or some coaches.
+	{% endif %}
+	{% if not athlete_list or coach_list %}
+	There are no athletes or there are some coaches.
+	{% endif %}
+	{% if athlete_list and not coach_list %}
+	There are some athletes and absolutely no coaches.
+	{% endif %}
+	<!-- Use of both and and or clauses within the same tag is allowed, with and having higher precedence than or -->
+	{% if athlete_list and coach_list or cheerleader_list %}
+	as -->  if (athlete_list and coach_list) or cheerleader_list
+	<!-- in -->
+	{% if "bc" in "abcdef" %}
+		This appears since "bc" is a substring of "abcdef"
+	{% endif %}
+	{% if "hello" in greetings %}
+		If greetings is a list or set, one element of which is the string
+		"hello", this will appear.
+	{% endif %}
+	{% if user in users %}
+		If users is a QuerySet, this will appear if user is an
+		instance that belongs to the QuerySet.
+	{% endif %}
+	<!-- is -->
+	{% if somevar is True %}
+		This appears if and only if somevar is True.
+	{% endif %}
+	{% if somevar is None %}
+		This appears if somevar is None, or if somevar is not found in the context.
+	{% endif %}
+	```
+
+	* for  
+	```html
+	<!-- reverse for -->
+	{% for obj in list reversed %}
+	<!-- for 2 維  -->
+	{% for x, y in points %}
+		There is a point at {{ x }},{{ y }}
+	{% endfor %}
+	<!-- access dictionary  -->
+	{% for key, value in data.items %}
+		{{ key }}: {{ value }}
+	{% endfor %}
+	<!-- for's variable -->
+	forloop.counter			: The current iteration of the loop (1-indexed)
+	forloop.counter0		: The current iteration of the loop (0-indexed)
+	forloop.revcounter	: The number of iterations from the end of the loop (1-indexed)
+	forloop.revcounter0	: The number of iterations from the end of the loop (0-indexed)
+	forloop.first	True	: if this is the first time through the loop
+	forloop.last	True	: if this is the last time through the loop
+	forloop.parentloop	: For nested loops, this is the loop surrounding the current one
+	<!-- empty -->
+	{% for athlete in athlete_list %}
+		<li>{{ athlete.name }}</li>
+	{% empty %}
+		<li>Sorry, no athletes in this list.</li>
+	{% endfor %}
+	```
+
+	* ifchanged  
+	```html
+	<!-- value change -->
+	{% for date in days %}
+		{% ifchanged %}<h3>{{ date|date:"F" }}</h3>{% endifchanged %}
+		<a href="{{ date|date:"M/d"|lower }}/">{{ date|date:"j" }}</a>
+	{% endfor %}
+	<!-- more variable -->
+	{% for date in days %}
+		{% ifchanged date.date %} {{ date.date }} {% endifchanged %}
+		{% ifchanged date.hour date.date %}
+			{{ date.hour }}
+		{% endifchanged %}
+	{% endfor %}
+	<!-- else -->
+	{% for match in matches %}
+		<div style="background-color:
+		{% ifchanged match.ballot_id %}
+			{% cycle "red" "blue" %}
+		{% else %}
+			gray
+		{% endifchanged %}
+		">{{ match }}</div>
+	{% endfor %}
+	```
+
+	* now  
+	Displays the current date and/or time, using a format according to the given string  
+	DATE_FORMAT, DATETIME_FORMAT, SHORT_DATE_FORMAT or SHORT_DATETIME_FORMAT 
+	```python
+	It is {% now "jS F Y H:i" %}
+	It is the {% now "jS \o\f F" %} : no show year
+	It is {% now "SHORT_DATETIME_FORMAT" %}
+	```
+
+	* lorem  
+	Displays random “lorem ipsum” Latin text  
+	> count	 : A number (or variable) containing the number of paragraphs or words to generate (default is 1).  
+		method : Either w for words, p for HTML paragraphs or b for plain-text paragraph blocks (default is b).  
+		random : The word random, which if given, does not use the common paragraph (“Lorem ipsum dolor sit amet…”) when generating text.  
+	```html
+	{% lorem [count] [method] [random] %}
+	{% lorem %} : output the common “lorem ipsum” paragraph.
+	{% lorem 3 p %} : output the common “lorem ipsum” paragraph and two random paragraphs each wrapped in HTML <p> tags.
+	{% lorem 2 w random %} : output two random Latin words.
+	```
+
 * Form  
 	* html  
 	label : 對應 input 之說明  
@@ -526,39 +660,27 @@ urlpatterns = [
 	<input type="button" value='Google' onclick ='localtion.href="https://google.com"'>
 	```
 
-	* example  
-		* year 下拉式選單  
-		views  
-		```python
-		# year select
-		year = range(1956,2020)
-		```
+	* form called by views command  
+	```python
+	urid = request.GET['user_id']
+	# get checkbox 
+	urfcolor = request.GET.getlist('cfcolor')
+	```
 
-		html  
-		```html
-		<!-- year select -->
-		<label for="byear">出生年:</label>
-		<select name="byear" id="byear">
-			{% for y in year %}
-				<option value="{{ y }}">{{ y }}</option>
-			{% endfor %}
-		</select>
-		```
-
-		* checkbox process  
-		views  
-		```python
-		# get checkbox 
-		urfcolor = request.GET.getlist('cfcolor')
-		```
-
-		html  
-		```html
-		顏色喜好 : 
-		<!-- get checkbox --> 
-		{% for c in urfcolor %}
-			{{ c }}
-		{% empty %}
-			not selected
-		{% endfor %}
-		```
+* DB access  
+```python
+products = Product.objects.all()
+product = Product.objects.get(id=id)
+image = PPhoto.objects.filter(product=product)
+posts = Post.objects.filter(enable=True).order_by('-pub_time')[:30]
+postsub = posts.count() % 3
+# save DB  
+mood = Mood.objects.get(status=user_mood)
+post = Post.objects.create( 
+	mood = mood,
+	nickname = user_id,
+	del_pass = user_pass,
+	message = user_post
+	)
+post.save()
+```

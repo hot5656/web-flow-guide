@@ -33,3 +33,52 @@
 	<div class="align-self-center mx-auto"><h3>～～心情休息站～～</h4></div>
 </div>
 ```
+
+* col 加間隔, 但不適合RWD(響應式網頁)  
+
+<div class="row px-3 mt-2 pb-3">
+	<div class="col card border border-primary px-0 ">
+		<div class="card-header bg-primary text-white">Bill 開心</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:35</div>	
+	</div>
+	<div class="col card border border-primary px-0 mx-4">
+		<div class="card-header bg-primary text-white">訪客 生氣</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:37</div>	
+	</div>
+	<div class="col card border border-primary px-0 ">
+		<div class="card-header bg-primary text-white">阿良 開心</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:38</div>	
+	</div>
+</div>
+
+```html
+<div class="row px-3 mt-2">
+	<div class="col card border border-primary px-0 ">
+		<div class="card-header bg-primary text-white">Bill 開心</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:35</div>	
+	</div>
+	<div class="col card border border-primary px-0 mx-4">
+		<div class="card-header bg-primary text-white">訪客 生氣</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:37</div>	
+	</div>
+	<div class="col card border border-primary px-0 ">
+		<div class="card-header bg-primary text-white">阿良 開心</div>
+		<div class="card-body">渭城朝雨邑輕塵，客舍青青柳色新。勸君更盡一杯酒，西出陽關無故人。</div>
+		<div class="card-footer text-right">2019年11月6日 19:38</div>	
+	</div>
+</div>
+```
+
+
+* alert  
+
+<div class="alert alert-warning">warning message...</div>
+
+```html
+<div class="alert alert-warning">warning message...</div>
+```
