@@ -371,9 +371,6 @@ conda install mysqlclient
 	```
 
 
-
-
-
 <a id="django_issue"></a>
 ## Django issue  [[Home]](#) 
 

@@ -33,6 +33,7 @@
 * [example](./bs4_example.md)
 * Icons - tested 
 	* [Font Awesome](https://fontawesome.com/)
+	* [Font Awesome 4.7](https://fontawesome.com/v4.7.0/)
 	* [Iconic](https://github.com/iconic/open-iconic)
 	* [Octicons](https://octicons.github.com/)
 
@@ -54,9 +55,9 @@
 
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
-* [Bootstrap 4](https://getbootstrap.com/)  
+* [Bootstrap 4](https://getbootstrap.com/docs/4.3/getting-started/introduction/)  
 * [Bootstrap 4 Tutorial(w3schools)](https://www.w3schools.com/bootstrap4/default.asp)
-* [Bootstrap 4 中文翻譯](https://bootstrap.hexschool.com/)
+* [Bootstrap 4 中文翻譯](https://bootstrap.hexschool.com/docs/4.2/getting-started/introduction/)
 * [Bootstrap 4 教程](https://www.runoob.com/bootstrap4/bootstrap4-tutorial.html)
 * [Fake images](https://fakeimg.pl/)
 * [HTML 教程(w3schools)](https://www.w3school.com.cn/html/index.asp)

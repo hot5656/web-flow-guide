@@ -71,3 +71,16 @@ posts = Post.objects.filter(enable=True).order_by('-pub_time')[:4]
 		not selected
 	{% endfor %}
 	```
+
+* include local js  
+```html
+{% load static %}
+<!-- local js -->
+<script src="{% static 'js/all.js' %}"></script>
+```
+
+* load local image  
+```html
+{% load static %}
+<img src="{% static 'images/flower.jpg' %}" alt="" height="64" width="64">
+```

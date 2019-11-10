@@ -187,6 +187,19 @@ http://127.0.0.1:8000/admin/
 	]
 ```
 
+	no use app's urls-2  
+	```python
+	from django.contrib import admin
+	from django.urls import path, re_path
+	from mainapp.views import index
+
+	urlpatterns = [
+	    path('', index),
+	    re_path(r'^(\d+)/(\w+)/$', index),
+	    path('admin/', admin.site.urls),
+	]
+	```
+
 
 * app urls  
 ```python
@@ -219,6 +232,17 @@ urlpatterns = [
 		except :
 			pass
 		return render(request, 'second/detail.html', locals())
+	```
+
+	views-2  
+	```pythom
+	def index(request, pid=None, del_pass=None):
+		template = get_template('index.html')
+		
+		moods = Mood.objects.all()
+		posts = Post.objects.filter(enable=True).order_by('-pub_time')[:30]
+		postsub = posts.count() % 3
+		......
 	```
 
 	simple return string  
@@ -599,7 +623,6 @@ urlpatterns = [
 	```html
 	from django.template.loader import get_template
 	from django.http import HttpResponse 
-
 	def index(request):
 		template = get_template('index.html')
 		try :
@@ -668,6 +691,11 @@ urlpatterns = [
 	```
 
 * DB access  
+.objects.all()  
+.objects.get(id=id)  
+.objects.filter(product=product)  
+.objects.create  
+posts.count() - gist size  
 ```python
 products = Product.objects.all()
 product = Product.objects.get(id=id)
@@ -683,4 +711,22 @@ post = Post.objects.create(
 	message = user_post
 	)
 post.save()
+# deleted DB record  
+try:
+	post = Post.objects.get(id=pid)
+except :
+	post = None
+if post:
+	if post.del_pass == del_pass:
+		post.delete()
+		message = '資料刪除成功'
+	else:
+		message = '密碼錯誤'
 ```
+
+* icon  
+	* font awesome 4  
+	```css
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<i class="fa fa-trash" aria-hidden="true"></i>
+	```
