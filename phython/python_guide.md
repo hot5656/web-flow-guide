@@ -384,6 +384,49 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 * sass processor no generate css  
 非使用 .scss 使用 .css  
 
+* context must be a dict rather than RequestContext  
+
+	```python
+	def posting(request):
+		template = get_template('posting.html')
+		moods = Mood.objects.all()
+		message = '如要張貼訊息,每個欄位都要填...'
+		request_context = RequestContext(request)
+		request_context.push(locals())
+		html = template.render(request_context)
+
+		return HttpResponse(html)
+
+	to --> 
+
+	def posting(request):
+		template = get_template('posting.html')
+		moods = Mood.objects.all()
+		message = '如要張貼訊息,每個欄位都要填...'
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
+	```
+
+* 防止 CSFR(Cross Site Request Forgery), 故無法正常回應  
+
+	.html form 之後 add {% csrf_token %}  
+	```html
+	<form name='my_form' action="/" method='POST'>
+	{% csrf_token %}
+		.....
+	</form>
+	```
+
+	views modify  
+	```py
+	def posting(request):
+		template = get_template('posting.html')
+		moods = Mood.objects.all()
+		message = '如要張貼訊息,每個欄位都要填...'
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
+	```
+
 
 <a id="ref_link"></a>
 ## Reference link  [[Home]](#) 
