@@ -730,3 +730,268 @@ if post:
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<i class="fa fa-trash" aria-hidden="true"></i>
 	```
+
+* from GET  
+	GET方法則能漂亮的提供一個查詢相同頁面的URL  
+	* form html  
+	```html
+		<form name='my_form' action="/" method='GET'>
+			<label for="">現在的心情:</label><br>
+			{% for m in  moods %}
+				<input type="radio" name='mood' value='{{ m.status }}'>{{ m.status }}
+			{% endfor %}
+			<br>
+			<label for="message">心情留言板:</label><br>
+			<textarea name="user_post" id="message" cols=80 rows=4></textarea><br>
+			<label for="user_name">你的暱稱:</label>
+			<input id='user_name' type="text" name='user_name'>
+			<label for="user_pass">張貼/刪除密碼:</label>
+			<input id='user_pass' type="password" name='user_pass'><br>
+			<input type="submit" value='張貼'>
+			<input type="reset" value='清除重填'>
+		</form>
+	```
+
+	* views  
+	```python
+	from django.template.loader import get_template
+	from django.http import HttpResponse 
+	from django.template import RequestContext
+	from .models import Mood
+	from .models import Post
+	from mainapp import forms
+	#
+	def index(request, pid=None, del_pass=None):
+		template = get_template('index.html')
+	#
+		moods = Mood.objects.all()
+		posts = Post.objects.filter(enable=True).order_by('-pub_time')[:30]
+		postsub = posts.count() % 3
+	#
+		try :
+			user_id   = request.GET['user_name']
+			user_pass = request.GET['user_pass']
+			user_post = request.GET['user_post']
+			user_mood = request.GET['mood']
+			if not user_id or not user_pass or not user_post :
+				raise ValueError('empty string')
+		except:
+			user_id = None 
+			message = '如要張貼訊息,每個欄位都要填...'
+	#
+		if del_pass and pid:
+			try:
+				post = Post.objects.get(id=pid)
+			except :
+				post = None
+			if post:
+				if post.del_pass == del_pass:
+					post.delete()
+					# 調整 row col 數
+					posts = Post.objects.filter(enable=True).order_by('-pub_time')[:30]
+					postsub = posts.count() % 3
+					message = '資料刪除成功'
+				else:
+					message = '密碼錯誤'
+		elif user_id != None :
+			mood = Mood.objects.get(status=user_mood)
+			post = Post.objects.create( 
+				mood = mood,
+				nickname = user_id,
+				del_pass = user_pass,
+				message = user_post
+				)
+			post.save()
+			message = '輸入成功請記得你的編輯密碼,訊息經審查後才會張貼...'
+		return HttpResponse( template.render(locals()))
+	```
+
+	* urls  
+	```python
+	from django.contrib import admin
+	from django.urls import path, re_path
+	from mainapp.views import index, listing, posting, contact
+	#
+	urlpatterns = [
+	    path('', index),
+	    path('list/', listing),
+	    path('post/', posting),
+	    path('contact/', contact),
+	    re_path(r'^(\d+)/(\w+)/$', index),
+	    path('admin/', admin.site.urls),
+	]
+	```
+
+	* del html  
+	```html
+	<div class="card-footer text-right">{{ p.pub_time }}
+		<span class="post_del" onclick=del_post({{ p.id }})><i class="fa fa-trash" aria-hidden="true"></i></span>
+	</div>	
+	```
+
+	* del js  
+	```js
+	function del_post(id) {
+		var user_pass = document.getElementById('user_pass').value
+		if (user_pass!="") {
+			var usr = '/' + id + '/' + user_pass;
+			window.location = usr;
+		}
+		console.log("del_post")
+	}
+	```
+
+* form POST  
+	POST方法適合拿來做資訊需隱密的請求  
+	* form html  
+	```html
+	<form name='my_form' action="." method='POST'>
+	{% csrf_token %}
+		<label for="">現在的心情:</label><br>
+		{% for m in  moods %}
+			<input type="radio" name='mood' value='{{ m.status }}'>{{ m.status }}
+		{% endfor %}
+		<br>
+		<label for="message">心情留言板:</label><br>
+		<textarea name="user_post" id="message" cols=80 rows=4></textarea><br>
+		<label for="user_name">你的暱稱:</label>
+		<input id='user_name' type="text" name='user_name'>
+		<label for="user_pass">張貼/刪除密碼:</label>
+		<input id='user_pass' type="password" name='user_pass'><br>
+		<input type="submit" value='張貼'>
+		<input type="reset" value='清除重填'>
+	</form>
+	```
+
+	* views  
+	```python
+	def posting(request):
+		template = get_template('posting.html')
+		moods = Mood.objects.all()
+		if request.method == "POST":
+			try :
+				user_id   = request.POST['user_name']
+				user_pass = request.POST['user_pass']
+				user_post = request.POST['user_post']
+				user_mood = request.POST['mood']
+				if not user_id or not user_pass or not user_post :
+					raise ValueError('empty string')
+			except:
+				user_id = None 
+				message = '如要張貼訊息,每個欄位都要填...'
+	#
+			if user_id != None :
+				mood = Mood.objects.get(status=user_mood)
+				post = Post.objects.create( 
+					mood = mood,
+					nickname = user_id,
+					del_pass = user_pass,
+					message = user_post
+					)
+				post.save()
+				message = '輸入成功請記得你的編輯密碼,訊息經審查後才會張貼...'
+		else :
+			message = '請張貼訊息...'
+	#
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
+	```
+
+	* urls  
+	```python
+	urlpatterns = [
+		path('post/', posting),
+	]
+	```
+
+
+* Django Form  
+	* form'py(from.py)  
+	```python
+	from django import forms
+	#
+	class ContactForm(forms.Form) :
+		CITY = [
+			['TP', 'Taipei'],
+			['TY', 'Taiyuang'],
+			['TC', 'Taichung'],
+			['TN', 'Tainan'],
+			['KS', 'Kaoshiung'],
+			['NA', 'Others'],
+		]
+	#
+		user_name = forms.CharField( label='你的姓名', max_length=50, initial='李大仁')
+		user_city = forms.ChoiceField( label='居住城市', choices=CITY)
+		user_school = forms.BooleanField( label='是否在學', required=False)
+		user_email = forms.EmailField(label='電子郵件' )
+		user_message = forms.CharField(label='你的意見', widget=forms.Textarea)
+	```
+
+	* html  
+	form 可選格式 {{ form.as_p }}, {{ form.as_table }}, {{ form.as_ul }}  
+	若選 {{ form.as_table }} 要加 < table>< /table>  
+	```html
+	<div class="container-fluid">
+		{% if message %}
+			<p class='bg-warning p-3 mt-3'>{{ message }}</p>
+			{{ user_name }}<br>
+			{{ user_city }}<br>
+			{{ user_school }}<br>
+			{{ user_email }}<br>
+			{{ user_message }}<br>
+		{% endif %}
+	<!-- -->
+		<div class="card">
+			<div class="card-header">
+				<form name="my form" action='.' method='POST'>
+				{% csrf_token %}
+				<h3>寫信給管理員</h3>
+			</div>
+			<div class="crad-body">
+				<!--
+				{{ form.as_p }}
+				-->
+				<table>
+					{{ form.as_table }}
+				</table>
+				<!--
+				{{ form.as_ul }}
+				-->
+			</div>
+			<div class="card footer">
+				<input type="submit" value='送出'>
+				</form>
+			</div>
+		</div>
+	</div>
+	```
+
+	* views  
+	```python
+	def contact(request):
+		if request.method == 'POST' :
+			form = forms.ContactForm(request.POST)
+			if form.is_valid() :
+				message = '感謝你的來信.'
+				# 取出資料
+				user_name = form.cleaned_data['user_name']
+				user_city = form.cleaned_data['user_city']
+				user_school = form.cleaned_data['user_school']
+				user_email = form.cleaned_data['user_email']
+				user_message = form.cleaned_data['user_message']
+			else :
+				message = '請檢查輸日是否正確!'
+		else :
+			form = forms.ContactForm()
+	#
+		template = get_template('contact.html')
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
+	```
+
+	* urls  
+	```python
+	urlpatterns = [
+		path('contact/', contact),
+	]
+	```

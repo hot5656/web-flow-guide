@@ -15,7 +15,6 @@
 *  [中古手機專賣店](./second_phone.md)
 *  [中古手機專賣店-MySQL](./second_phone_mysql.md)
 *  [TV and Car](./tv_and_car.md)
-*  [Form example](./form_ex.md)
 
 
 <a id="django_ref"></a>
@@ -433,4 +432,5 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 * [imgur-圖片上傳空間](https://imgur.com/)  
 * [django-sass-processor](https://github.com/jrief/django-sass-processor)  
 * [Django documentation](https://docs.djangoproject.com/en/2.2/)
-* [Dstackoverflow](https://stackoverflow.com/)
+* [Stackoverflow](https://stackoverflow.com/)
+* [Remote MySQL-free](https://remotemysql.com/)
