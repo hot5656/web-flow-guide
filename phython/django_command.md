@@ -995,3 +995,81 @@ if post:
 		path('contact/', contact),
 	]
 	```
+
+* send mail by mailgun  
+	* install django-mailgun  
+	```
+	pip install django-mailgun
+	```
+
+	* setting.py-SMPT  
+	```python
+	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+	EMAIL_HOST = 'in-v3.mailjet.com'
+	EMAIL_USE_TLS = True
+	EMAIL_PORT = 587
+	EMAIL_HOST_USER = '34f724e77da918cf1cxxf2c0025a11bcf0'
+	EMAIL_HOST_PASSWORD = '0ca36a1a154b1exx8eb901290b052ebe46'
+	```
+
+	* views.py-SMPT  
+	```python
+	# send mail
+	from django.core.mail import send_mail
+	send_mail('Subject here6', 'Here is the message.6', 'kyp001@gmail.com',
+			['kyp001@yahoo.com.tw'], fail_silently=False)
+	```
+
+* send mail by mailjet  
+	* install  
+	```
+	pip install django-mailjet
+	```
+
+	* setting.py-API  
+	```python
+	# mail-API 
+	EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
+	# MAILJET_API_KEY = 'API-KEY'
+	# MAILJET_API_SECRET = 'API-SECRET'
+	MAILJET_API_KEY = '34f724e77da918xxcf1cf2c0025a11bcf0'
+	MAILJET_API_SECRET = '0ca36a1a154xxb1e8eb901290b052ebe46'
+	```
+
+	* views.py-API  
+	```python
+	# get variable from setting
+	from django.conf import settings
+	# send mail-SMTP
+	from django.core.mail import send_mail
+	# mail API
+	from mailjet_rest import Client
+	import os
+	# api_key = os.environ['MJ_APIKEY_PUBLIC']
+	# api_secret = os.environ['MJ_APIKEY_PRIVATE']
+	api_key =  settings.MAILJET_API_KEY
+	api_secret = settings.MAILJET_API_SECRET
+	mailjet = Client(auth=(api_key, api_secret), version='v3.1')
+	data = {
+	'Messages': [
+					{
+							"From": {
+									"Email": "kyp001@gmail.com",
+									"Name": "Mailjet Pilot"
+							},
+							"To": [
+									{
+											"Email": "kyp001@yahoo.com.tw",
+											"Name": "passenger 1"
+									}
+							],
+							"Subject": "Your email flight plan!_2",
+							"TextPart": "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
+							"HTMLPart": "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!"
+					}
+			]
+	}
+	result = mailjet.send.create(data=data)
+	# print(result.status_code)
+	# print(result.json())
+	```

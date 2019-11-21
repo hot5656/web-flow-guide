@@ -434,3 +434,4 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 * [Django documentation](https://docs.djangoproject.com/en/2.2/)
 * [Stackoverflow](https://stackoverflow.com/)
 * [Remote MySQL-free](https://remotemysql.com/)
+* [mail-mailjet-@xmx](https://app.mailjet.com/)
