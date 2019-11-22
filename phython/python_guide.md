@@ -293,6 +293,24 @@ for link MySQL
 conda install mysqlclient  
 ```
 
+* **mailgun**
+```
+pip install django-mailgun
+```
+
+* **mailjet**
+```
+pip install django-mailjet
+```
+
+* **get variable from setting**
+```python
+# get variable from setting
+from django.conf import settings
+api_key =  settings.MAILJET_API_KEY
+api_secret = settings.MAILJET_API_SECRET
+```
+
 <a id="debug"></a>
 ## Debug  [[Home]](#)  
 
@@ -435,4 +453,5 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 * [Stackoverflow](https://stackoverflow.com/)
 * [Remote MySQL-free](https://remotemysql.com/)
 * [mail-mailjet-@xmx](https://app.mailjet.com/)
-* [mail-mailgun-mxmx](https://www.mailgun.com/)
+* [mail-mailgun-@xmx](https://www.mailgun.com/)
+* [python3 document](https://docs.python.org/3/)

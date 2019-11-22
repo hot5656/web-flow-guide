@@ -1002,37 +1002,36 @@ if post:
 	pip install django-mailgun
 	```
 
-	* setting.py-SMPT  
-	```python
-	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-	EMAIL_HOST = 'in-v3.mailjet.com'
-	EMAIL_USE_TLS = True
-	EMAIL_PORT = 587
-	EMAIL_HOST_USER = '34f724e77da918cf1cxxf2c0025a11bcf0'
-	EMAIL_HOST_PASSWORD = '0ca36a1a154b1exx8eb901290b052ebe46'
-	```
-
-	* views.py-SMPT  
-	```python
-	# send mail
-	from django.core.mail import send_mail
-	send_mail('Subject here6', 'Here is the message.6', 'kyp001@gmail.com',
-			['kyp001@yahoo.com.tw'], fail_silently=False)
-	```
-
 * send mail by mailjet  
 	* install  
 	```
 	pip install django-mailjet
 	```
 
+	* setting.py-SMPT  
+	```python
+	# mailjet send mail -SMTP 
+	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+	EMAIL_HOST = 'in-v3.mailjet.com'
+	EMAIL_USE_TLS = True
+	# or 465
+	EMAIL_PORT = 587
+	EMAIL_HOST_USER = '34f724e77da918cxxf1cf2c0025a11bcf0'
+	EMAIL_HOST_PASSWORD = '0ca36a1a154xxb1e8eb901290b052ebe46'
+	```
+
+	* views.py-SMPT  
+	```python
+	# mailjet send mail-SMTP
+	send_mail('Subject here10', 'Here is the message.9', 'kyp001@gmail.com',
+ 			['kyp001@yahoo.com.tw'], fail_silently=False)
+	```
+
 	* setting.py-API  
 	```python
-	# mail-API 
+	# mailjet send mail-API
 	EMAIL_BACKEND = 'django_mailjet.backends.MailjetBackend'
-	# MAILJET_API_KEY = 'API-KEY'
-	# MAILJET_API_SECRET = 'API-SECRET'
-	MAILJET_API_KEY = '34f724e77da918xxcf1cf2c0025a11bcf0'
+	MAILJET_API_KEY = '34f724e77da918cxxf1cf2c0025a11bcf0'
 	MAILJET_API_SECRET = '0ca36a1a154xxb1e8eb901290b052ebe46'
 	```
 
@@ -1044,9 +1043,6 @@ if post:
 	from django.core.mail import send_mail
 	# mail API
 	from mailjet_rest import Client
-	import os
-	# api_key = os.environ['MJ_APIKEY_PUBLIC']
-	# api_secret = os.environ['MJ_APIKEY_PRIVATE']
 	api_key =  settings.MAILJET_API_KEY
 	api_secret = settings.MAILJET_API_SECRET
 	mailjet = Client(auth=(api_key, api_secret), version='v3.1')
@@ -1072,4 +1068,126 @@ if post:
 	result = mailjet.send.create(data=data)
 	# print(result.status_code)
 	# print(result.json())
+	```
+
+	```python
+	# get variable from setting
+	from django.conf import settings
+	# send mail
+	from django.core.mail import send_mail
+	# mailjet send mail-API
+	from mailjet_rest import Client
+	api_key =  settings.MAILJET_API_KEY
+	api_secret = settings.MAILJET_API_SECRET
+	mailjet = Client(auth=(api_key, api_secret), version='v3.1')
+	data = {
+	'Messages': [
+					{
+							"From": {
+									"Email": "kyp001@gmail.com",
+									"Name": "Mailjet Pilot"
+							},
+							"To": [
+									{
+											"Email": "kyp001@yahoo.com.tw",
+											"Name": "passenger 1"
+									}
+							],
+							"Subject": "Your email flight plan!_5",
+							"TextPart": "Dear passenger 1, welcome to Mailjet! May the delivery force be with you!",
+							"HTMLPart": "<h3>Dear passenger 1, welcome to <a href='https://www.mailjet.com/'>Mailjet</a>!</h3><br />May the delivery force be with you!"
+					}
+			]
+	}
+	data['Messages'][0]['To'][0]['Name'] = user_name
+	data['Messages'][0]['To'][0]['Email'] = user_email
+	data['Messages'][0]['Subject'] = 'Form ex 網友意見'
+	data['Messages'][0]['TextPart'] = '網友姓名:{}\n 居住城市:{}\n 是否在學:{}\n 反映意見:\n {}'.format(user_name, user_city, user_school, user_message) 
+	data['Messages'][0]['HTMLPart'] = ''
+	result = mailjet.send.create(data=data)
+	```
+
+* Model Form  
+	* urls  
+	```python
+	from mainapp.views import index, listing, posting, contact, post2db
+	# modelForm
+	path('post2db/', post2db),
+	```
+
+	* form.py
+	```python
+	# add model form
+	from .models import Post
+	#add model form
+	class PostForm(forms.ModelForm):
+		class Meta :
+			# reference models
+			model = Post
+			# access field
+			fields = [ 'mood', 'nickname', 'message', 'del_pass']
+
+		def __init__(self, *args, **kwarges ):
+			super(PostForm, self).__init__(*args, **kwarges )
+			self.fields['mood'].label = '現在心情'
+			self.fields['nickname'].label = '你的暱稱'
+			self.fields['message'].label = '心情留言'
+			self.fields['del_pass'].label = '設定密碼'
+	```
+
+	* views
+	```python
+	def post2db(request):
+		template = get_template('post2db.html')
+		# form type
+		post_form = forms.PostForm()
+		moods = Mood.objects.all()
+		message = '如要張貼,每一欄位都要填.....'
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
+	```
+
+	* html(post2db.html)  
+	```html
+	<!-- post2db.html -->
+	{% extends "base.html" %}
+	{% block  title %}Post2DB{% endblock %} 
+	{% block content %}
+		<div class="container-fluid">
+			{% if message %}
+				<p class='bg-warning p-3 mt-3'>{{ message }}</p>
+			{% endif %}
+
+			<form name='my form' action="." method='POST'>
+				{% csrf_token %}
+				<table>
+				{{ post_form.as_table }}
+				</table>
+				<input type="submit" value='張貼'>
+				<input type="reset" value='清除重填'>
+			</form>
+		</div>
+	{% endblock  %}
+	```
+
+	* views-check input then save  
+	```python
+	def post2db(request):
+		if request.method == "POST":
+			post_form = forms.PostForm(request.POST)
+			if post_form.is_valid():
+				message = '輸入成功請記得你的編輯密碼,訊息經審查後才會張貼...'
+				# save DB
+				post_form.save()
+			else:
+				message = '如要張貼訊息,每個欄位都要填...'
+		else:
+			# form type
+			post_form = forms.PostForm()
+			message = '如要張貼,每一欄位都要填.....'
+
+		template = get_template('post2db.html')
+		moods = Mood.objects.all()
+		html = template.render(context=locals(), request=request)
+		return HttpResponse(html)
 	```
