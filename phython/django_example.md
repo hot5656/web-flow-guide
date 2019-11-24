@@ -84,3 +84,13 @@ posts = Post.objects.filter(enable=True).order_by('-pub_time')[:4]
 {% load static %}
 <img src="{% static 'images/flower.jpg' %}" alt="" height="64" width="64">
 ```
+
+* Redirection  
+```python
+# Redirection 
+# from django.http import HttpResponseRedirect
+from django.shortcuts import redirect
+# Redirection 
+# return HttpResponseRedirect(reverse('list/')) - not work
+return redirect('/list/')
+```

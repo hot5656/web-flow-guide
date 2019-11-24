@@ -1126,7 +1126,7 @@ if post:
 			model = Post
 			# access field
 			fields = [ 'mood', 'nickname', 'message', 'del_pass']
-
+	#
 		def __init__(self, *args, **kwarges ):
 			super(PostForm, self).__init__(*args, **kwarges )
 			self.fields['mood'].label = '現在心情'
@@ -1157,7 +1157,6 @@ if post:
 			{% if message %}
 				<p class='bg-warning p-3 mt-3'>{{ message }}</p>
 			{% endif %}
-
 			<form name='my form' action="." method='POST'>
 				{% csrf_token %}
 				<table>
@@ -1185,9 +1184,15 @@ if post:
 			# form type
 			post_form = forms.PostForm()
 			message = '如要張貼,每一欄位都要填.....'
-
+		#
 		template = get_template('post2db.html')
 		moods = Mood.objects.all()
 		html = template.render(context=locals(), request=request)
 		return HttpResponse(html)
+	```
+
+* 防機器人驗證機制
+	* install package  
+	```
+	pip install django-simple-captcha  
 	```
