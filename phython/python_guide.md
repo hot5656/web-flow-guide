@@ -311,6 +311,12 @@ api_key =  settings.MAILJET_API_KEY
 api_secret = settings.MAILJET_API_SECRET
 ```
 
+* **django-simple-captcha(驗證碼)**
+```
+pip install django-simple-captcha  
+	make sure pillow also installed
+```
+
 <a id="debug"></a>
 ## Debug  [[Home]](#)  
 
@@ -320,8 +326,6 @@ api_secret = settings.MAILJET_API_SECRET
 	Ctrl+Shift+P -->  Python: Select Interpreter  
 	F5 --> Python --> Django  
 	```
-
-
 
 
 <a id="reference"></a>

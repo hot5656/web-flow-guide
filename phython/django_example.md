@@ -94,3 +94,16 @@ from django.shortcuts import redirect
 # return HttpResponseRedirect(reverse('list/')) - not work
 return redirect('/list/')
 ```
+
+* Add app  
+```python
+# add app 
+INSTALLED_APPS = [
+	....
+	# add for app
+	'mainapp.apps.MainappConfig',
+]
+# set language and time zone
+LANGUAGE_CODE = 'zh-Hant'
+TIME_ZONE = 'Asia/Taipei'
+```

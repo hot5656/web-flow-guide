@@ -906,7 +906,7 @@ if post:
 
 
 * Django Form  
-	* form'py(from.py)  
+	* form'py(forms.py)  
 	```python
 	from django import forms
 	#
@@ -968,6 +968,8 @@ if post:
 
 	* views  
 	```python
+	# forms
+	from mainapp import forms
 	def contact(request):
 		if request.method == 'POST' :
 			form = forms.ContactForm(request.POST)
@@ -1000,6 +1002,24 @@ if post:
 	* install django-mailgun  
 	```
 	pip install django-mailgun
+	```
+
+	* setting.py-SMPT  
+	```
+	# mailgun send mail -SMTP 
+	EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+	EMAIL_HOST = 'smtp.mailgun.org'
+	EMAIL_USE_TLS = True
+	EMAIL_PORT = 587
+	EMAIL_HOST_USER = 'postmaster@sandbox0fd01b2ae4cxx44ae8835131a053f97dcc.mailgun.org'
+	EMAIL_HOST_PASSWORD = 'ee2ba59a112f89ae45ed813b2xx0c795ea-09001d55-8de0f963'
+	```
+
+	* views.py-SMPT  
+	```python
+	# mailjet/mailgun send mail-SMTP
+	send_mail('Subject here_02', 'Here is the message.02', 'kyp001@gmail.com',
+			['kyp001@yahoo.com.tw'], fail_silently=False)
 	```
 
 * send mail by mailjet  
@@ -1192,7 +1212,56 @@ if post:
 	```
 
 * 防機器人驗證機制
-	* install package  
+	* install package - make sure pillow also installed  
 	```
 	pip install django-simple-captcha  
 	```
+
+	* setting.py  
+	```python
+	INSTALLED_APPS = [
+		....
+		# django-simple-captcha
+		'captcha',
+	]
+	...
+	# django-simple-captcha
+	# django_simple_captcha 驗證碼配置其他配置項檢視文件
+	# 預設格式
+	CAPTCHA_OUTPUT_FORMAT = '%(image)s %(text_field)s %(hidden_field)s '
+	CAPTCHA_NOISE_FUNCTIONS = ('captcha.helpers.noise_null', # 沒有樣式
+	# 'captcha.helpers.noise_arcs', # 線
+	# 'captcha.helpers.noise_dots', # 點
+	)
+	# 圖片中的文字為隨機英文字母，如 mdsh
+	# CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.random_char_challenge'
+	# 圖片中的文字為數字表示式，如2 2=
+	CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge' 
+	# 超時(minutes)
+	# CAPTCHA_TIMEOUT = 1 
+	```
+
+	* urls.py  
+	```python
+	# django-simple-captcha
+	from django.urls import path, re_path, include
+	urlpatterns = [
+		....
+		# django-simple-captcha
+		path('captcha/', include('captcha.urls')),
+	]
+	```
+
+	* form.py  
+	```python
+	# django-simple-captcha
+	from captcha.fields import CaptchaField
+	# django-simple-captcha(for model form)
+	self.fields['captcha'].label = '確定你不是機器人'
+	```
+
+	* .html  
+	```html
+	{{ form.captcha }}
+	```
+
