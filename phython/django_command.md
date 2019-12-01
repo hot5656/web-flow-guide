@@ -999,6 +999,7 @@ if post:
 	```
 
 * send mail by mailgun  
+	sandbox need to add Authorized Recipients and verified  
 	* install django-mailgun  
 	```
 	pip install django-mailgun
@@ -1020,6 +1021,31 @@ if post:
 	# mailjet/mailgun send mail-SMTP
 	send_mail('Subject here_02', 'Here is the message.02', 'kyp001@gmail.com',
 			['kyp001@yahoo.com.tw'], fail_silently=False)
+	```
+
+	* setting.py-API  
+	```python
+	# mailgun send mail-API 
+	EMAIL_BACKEND = 'django_mailgun.MailgunBackend'
+	MAILGUN_ACCESS_KEY = 'key-4476f02b6033178xx53837efb7ef39bc6c'
+	MAILGUN_SERVER_NAME = 'sandbox0fd01b2ae4cxx44ae8835131a053f97dcc.mailgun.org'
+	```
+
+	* views.py-API  
+	```python
+	# mailgun send mail-API
+	from django.core.mail import EmailMessage
+	mail_body=u'''
+			网友姓名：{}
+			居住城市：{}
+			是否在学校：{}
+			反馈意见：{}
+			'''.format(user_name,user_city,user_school,user_message)
+	email=EmailMessage('Form ex 網友意見',
+			mail_body,
+			'kyp001@gmail.com',
+			[user_email])#接受邮件的邮箱地址
+	email.send()
 	```
 
 * send mail by mailjet  
