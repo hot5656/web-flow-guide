@@ -110,7 +110,8 @@
 		 view file history
 		 view line history
 
-*	Live Server
+*	Live Server : 網頁自動更新 --> run Go Live
+*	VS Live Share : 兩個人同時編輯
 
 *	Live Sass Compiler : sass watch
 *	Indent-Rainbow : 縮排採紅色條
@@ -187,7 +188,8 @@ ctrl+shift+p --> configure Display Language
    locale 中的 en 改成 zh-TW
 從新啟動
 ```
-* liveSassCompile settings autoprefix
+
+* liveSassCompile settings autoprefix  
 ```
     "liveSassCompile.settings.autoprefix": [
       "> 1%",
@@ -199,6 +201,13 @@ ctrl+shift+p --> configure Display Language
     ]
 ```
 
+* 自動換行  
+```
+Editor: Word Wrap(控制如何換行)
+>> "editor.wordWrap": "on",  
+```
+
+### Other  
 * run Django  
 	* Python Interpreter  
 	Ctrl+Shift+P -->  Python: Select Interpreter  
@@ -248,4 +257,7 @@ ctrl+shift+p --> configure Display Language
 ### Edit command  
 Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
 選擇多行-->shift+alt+(mouse-l) : 多行編輯  
+alt+(mouse-l) : 選擇多行編輯  
+
+
 

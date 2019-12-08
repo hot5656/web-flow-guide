@@ -133,6 +133,9 @@ viverra nec, fringilla in, laoreet vitae, risus.
 [goole](https://www.google.com/ "Google")
 
 ## 圖片
+一個驚嘆號!  
+接著一個方括號，裡面放上圖片的替代文字  
+接著一個普通括號，裡面放上圖片的網址，最後還可以用引號包住並加上 選擇性的’title’文字。  
 ```
 ![flower](flower.jpeg "pic title")
 ```
