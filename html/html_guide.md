@@ -85,6 +85,8 @@ figcaption : 說明
 <html lang="en">
 <head>
 	....
+	<title>Document</title>
+	<link rel="stylesheet" href="style.css">
 	<style>
 		p {
 			color: red;
@@ -94,7 +96,8 @@ figcaption : 說明
 	</style>
 </head>
 <body>
-	....
+	<!-- inline style -->
+	<p style="color:red;">...</p>
 </body>
 </html>
 ```
@@ -104,15 +107,33 @@ figcaption : 說明
 /* .... */ 
 ```
 
-* type 
-```html
-tag {
-
+* type  
+```
+p {
+	....
 }
 .class {
-
+	....
+}
+＊ {
+	....
 }
 ```
+
+* css items 
+```css
+	margin: 0;
+	margin-bottom: 30px;
+	padding: 0;
+	color: #fa0;
+	font-size: 60px;
+	text-align: center; - 文字位置
+	text-decoration: none; - 文字修飾(無底線,刪除)
+	display: inline-block; 
+	padding: 6px 20px;
+	// css3
+	transition: 1s; - 轉換速率
+	```
 
 
 <a id="javascript"></a>
@@ -175,6 +196,10 @@ style : set attribute
 	<p style="color:red;">...</p>
 	```
 
+	* XMind: ZEN(心智圖)  
+	* Evernote
+	* Notion
+	* OneNote 
 
 
 <a id="ref_link"></a>

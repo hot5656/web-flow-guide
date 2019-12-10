@@ -254,6 +254,16 @@ Editor: Word Wrap(控制如何換行)
 	* IndentationError: unindent does not match any outer indentation level  
 	縮排不一致  
 
+	* Go Live not found(found after update vscode)  
+	```
+	>> live serevr also cannot uninstall 
+	>> remove live serevr directory then install
+	C:\Users\<USERNAME>\.vscode\extensions
+	>> close vscode --> run vscode
+	instlall live server
+	```
+
+
 ### Edit command  
 Alt + ↑ 或 Alt + ↓ 快速移動整行程式碼  
 選擇多行-->shift+alt+(mouse-l) : 多行編輯  
