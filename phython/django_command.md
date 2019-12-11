@@ -310,7 +310,7 @@ urlpatterns = [
 	```
 
 * static  
-	secondphone/static/scss/style.css
+	secondphone/static/scss/style.scss
 	```css
 	.navbar {
 		.active {

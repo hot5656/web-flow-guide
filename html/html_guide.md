@@ -58,13 +58,6 @@ figcaption : 說明
 		<td>data</td>
 		<td>data</td>
 	</tr>
-		<td>data</td>
-		<td>data</td>
-		<td>data</td>
-		<td>data</td>
-		<td>data</td>
-	<tr>
-	</tr>
 </table>
 
 <strong></strong> : 強調(粗體)
