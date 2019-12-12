@@ -1291,3 +1291,12 @@ if post:
 	{{ form.captcha }}
 	```
 
+
+https://github.com/rdegges/django-clear-cache
+pip install django-clear-cache
+INSTALLED_APPS = [
+		......
+    # add cache
+    'clear_cache',
+]
+python manage.py clear_cache

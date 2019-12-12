@@ -204,3 +204,5 @@ style : set attribute
 * [網頁色彩碼](http://csscoke.com/2015/01/01/rgb-hsl-hex/)  
 * [假圖 Fake images please](https://fakeimg.pl/)  
 * [假圖 picsum](https://picsum.photos/)  
+* [Can I use](https://caniuse.com/)  
+* [Emmet doc](https://docs.emmet.io/cheat-sheet/)  
