@@ -1292,11 +1292,9 @@ if post:
 	```
 
 
-https://github.com/rdegges/django-clear-cache
-pip install django-clear-cache
-INSTALLED_APPS = [
-		......
-    # add cache
-    'clear_cache',
-]
-python manage.py clear_cache
+CSRF 全名 Cross-Site Request Forgery，中文常翻為跨站請求攻擊或跨站偽造請求，
+這是利用 Web 應用程式在設計 HTTP 請求時，因為考量不周全造成的漏洞，從而進行攻擊的手法，
+通常是在 Web 應用程式站外的其他頁面中，包括惡意程式碼或鏈結，當使用者已通過驗證且會話（Session）未過期時，瀏覽該頁面或點選該惡意鏈結，就會造成攻擊成功的可能性。
+
+當你瀏覽表單時，{% csrf_token %} 會產生隱藏欄位，當中包括了一組安全代碼
+Django 應用程式接受請求時，必須同時在請求中找到這組安全代碼，從而確認請求是來自於同一站上的表單。
