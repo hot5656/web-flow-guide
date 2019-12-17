@@ -453,9 +453,11 @@ DATA_UPLOAD_MAX_NUMBER_FIELDS = 1000
 ## Reference link  [[Home]](#) 
 * [imgur-圖片上傳空間](https://imgur.com/)  
 * [django-sass-processor](https://github.com/jrief/django-sass-processor)  
-* [Django documentation](https://docs.djangoproject.com/en/2.2/)
+* [Django - how to use session](https://docs.djangoproject.com/en/2.2/topics/http/sessions/)
+* [python3 document](https://docs.python.org/3/)
+* [Python Tutorial](https://www.tutorialspoint.com/python/index.htm)
 * [Stackoverflow](https://stackoverflow.com/)
 * [Remote MySQL-free](https://remotemysql.com/)
 * [mail-mailjet-@xmx](https://app.mailjet.com/)
 * [mail-mailgun-@xmx](https://www.mailgun.com/)
-* [python3 document](https://docs.python.org/3/)
+
