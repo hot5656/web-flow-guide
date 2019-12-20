@@ -214,5 +214,7 @@ style : set attribute
 * [HTML5 Structural Elements](https://www.dwuser.com/education/content/an-introduction-to-the-html5-structural-elements/)  
 * [裝置解析度查詢](http://csscoke.com/webq/index.html)  
 * [Bootstrap](https://getbootstrap.com/)  
+* [jQuery](https://jquery.com/)  
+* [Google Hosted Libraries](https://developers.google.com/speed/libraries)  
 
 
