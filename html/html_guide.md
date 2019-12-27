@@ -217,5 +217,6 @@ style : set attribute
 * [jQuery](https://jquery.com/)  
 * [Google Hosted Libraries](https://developers.google.com/speed/libraries)  
 * [Google Fonts](https://fonts.google.com/)  
+* [html & css is hard](https://internetingishard.com/html-and-css/)  
 
 
