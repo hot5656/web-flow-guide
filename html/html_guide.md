@@ -218,5 +218,7 @@ style : set attribute
 * [Google Hosted Libraries](https://developers.google.com/speed/libraries)  
 * [Google Fonts](https://fonts.google.com/)  
 * [html & css is hard](https://internetingishard.com/html-and-css/)  
+* [W3C-Leading the web to its full potential](https://www.w3.org/)  
+* [W3C > All Standards and Drafts](https://www.w3.org/TR/)  
 
 
